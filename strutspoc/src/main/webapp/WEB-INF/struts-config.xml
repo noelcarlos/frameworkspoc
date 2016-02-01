@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+                               "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<!-- Beans de formulario -->
+	<!-- Form Bean utilizado por el Sistema de AutenticaciÃƒÂ³n Local -->
+	<form-beans>
+		<form-bean name="genericForm" type="org.apache.struts.validator.LazyValidatorForm" />
+	</form-beans>
+
+	<!-- Excepciones globales -->
+	<global-exceptions>
+
+	</global-exceptions>
+
+	<!-- ReenvÃ­os globales -->
+	<global-forwards>
+		<!-- Forward utilizado en Local cuando una peticiÃ³n no estÃ¡ autenticada -->
+		<forward name="logon" path="/arq_resources/jsp/Logon.jsp" />
+	</global-forwards>
+
+	<!-- Correlaciones de acciones -->
+	<action-mappings>
+		<action path="/help" type="es.generali.arq.struts.genernet.control.service.GenericHelpServiceAction"></action>
+		<action path="/simpleProcess" type="es.generali.arq.struts.genernet.control.ProcessInitAction"></action>
+		
+		<action path="/fileCompressionViewer" type="es.generali.arq.struts.genernet.control.service.filecompressionV3.FileCompressionV3Viewer" parameter="tarea" name="tratarFileCompressionAppletForm" scope="session"></action>
+		<action path="/DocumentoGestionFileCompression" type="es.generali.red.anexarDocClient.control.DocumentoFileCompressionAction" name="tratarFileCompressionAppletForm" scope="session" parameter="tarea"></action>	
+		
+		<!-- action path="/DocumentoGestionFileCompressionFatca" type="es.generali.red.anexarFatca.control.DocumentoFileCompressionFatcaAction" name="tratarFileFatcaCompressionAppletForm" scope="session" parameter="tarea"></action-->	
+		
+		<!-- PROCESS -->
+		
+		<action path="/init" type="es.generali.strutspoc.controllers.InitAction" 
+			name="genericForm" scope="session" validate="false" parameter="method" >
+  			<forward name="app.init" path="app.init" /> 
+		</action>
+				
+	</action-mappings>
+
+	<!-- ===================================== Controller Configuration -->
+	<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" inputForward="true" />
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+		<set-property property="moduleAware" value="true" />
+		<set-property property="definitions-parser-validate" value="true" />
+	</plug-in>
+
+	<!-- end comment if struts1.0.x -->
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn"></plug-in>
+</struts-config>

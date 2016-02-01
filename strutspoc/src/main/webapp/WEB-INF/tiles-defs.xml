@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+      "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+      "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+
+	<!-- Base Tiles Definition -->
+	<definition name="base.definition" path="/WEB-INF/layout/default.jsp" >
+		<put name="header" value="/WEB-INF/layout/header.jsp" />
+		<put name="footer" value="/WEB-INF/layout/footer.jsp" />
+	</definition>
+
+	<definition name="app.init" extends="base.definition">
+		<put name="body" value="/WEB-INF/views/init.jsp" />
+	</definition>
+	
+	
+</tiles-definitions>
