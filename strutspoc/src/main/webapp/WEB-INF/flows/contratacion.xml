@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow>
+	<steps>
+		<step name="s1" description="Tipo de tomador">
+			<!-- Particular/Empresa -->
+		</step>
+		<step name="s1" description="Tipo de seguro">
+			<!-- Hogar/Salud/Vida -->
+		</step>
+	</step>
+</flow>
