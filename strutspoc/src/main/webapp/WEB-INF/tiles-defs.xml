@@ -15,5 +15,8 @@
 		<put name="body" value="/WEB-INF/views/init.jsp" />
 	</definition>
 	
+	<definition name="seguroHogar.queQuieresProteger" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/queQuieresProteger.jsp" />
+	</definition>
 	
 </tiles-definitions>

@@ -37,6 +37,11 @@
 			name="genericForm" scope="session" validate="false" parameter="method" >
   			<forward name="app.init" path="app.init" /> 
 		</action>
+		
+		<action path="/seguroHogar" type="es.generali.strutspoc.controllers.SeguroHogarFlowAction" 
+			name="genericForm" scope="session" validate="false" parameter="method" >
+  			<forward name="seguroHogar.queQuieresProteger" path="seguroHogar.queQuieresProteger" /> 
+		</action>
 				
 	</action-mappings>
 
