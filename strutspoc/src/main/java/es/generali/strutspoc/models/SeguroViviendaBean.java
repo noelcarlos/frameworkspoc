@@ -3,81 +3,95 @@ package es.generali.strutspoc.models;
 import java.util.Date;
 import java.util.HashMap;
 
-public class SeguroViviendaBean extends HashMap<String, Object>{
+import javax.validation.constraints.NotNull;
+
+import org.apache.struts.action.ActionForm;
+
+public class SeguroViviendaBean extends ActionForm {
+	HashMap<String, Object> map = new HashMap<String, Object>(); 
+	
 	private static final long serialVersionUID = 705547732312798668L;
 	
 	/* Que quieres proteger */
-	public Integer getTipoDeUsoVivienda() {
-		return (Integer)get("tipoDeUsoVivienda");
+	
+	@NotNull
+	public Integer getTipoDeUsoViviendaId() {
+		return (Integer)map.get("tipoDeUsoViviendaId");
 	}
 	public void setTipoDeUsoViviendaId(Integer tipoDeUsoViviendaId) {
-		put("tipoDeUsoViviendaId", tipoDeUsoViviendaId);
+		map.put("tipoDeUsoViviendaId", tipoDeUsoViviendaId);
 	}
-	public Integer getNumPersonasQueVivenEnLaViviendaId() {
-		return (Integer)get("numPersonasQueVivenEnLaViviendaId");
+	
+	@NotNull
+	public Integer getNumPersonasQueVivenEnLaVivienda() {
+		return (Integer)map.get("numPersonasQueVivenEnLaVivienda");
 	}
 	public void setNumPersonasQueVivenEnLaVivienda(Integer numPersonasQueVivenEnLaVivienda) {
-		put("numPersonasQueVivenEnLaVivienda", numPersonasQueVivenEnLaVivienda);
+		map.put("numPersonasQueVivenEnLaVivienda", numPersonasQueVivenEnLaVivienda);
 	}
 	
 	/* Localizacion */
+	
+	@NotNull
 	public Integer getProvinciaId() {
-		return (Integer)get("provinciaId");
+		return (Integer)map.get("provinciaId");
 	}
 	public void setProvinciaId(Integer provinciaId) {
-		put("provinciaId", provinciaId);
+		map.put("provinciaId", provinciaId);
 	}
+	
+	@NotNull
 	public Integer getLocalizacionId() {
-		return (Integer)get("localizacionId");
+		return (Integer)map.get("localizacionId");
 	}
 	public void setLocalizacionId(Integer localizacionId) {
-		put("localizacionId", localizacionId);
+		map.put("localizacionId", localizacionId);
 	}
 	
 	/* Sobre la construcción */
 	public Integer getTipoDeConstruccionId() {
-		return (Integer)get("tipoDeConstruccionId");
+		return (Integer)map.get("tipoDeConstruccionId");
 	}
 	public void setTipoDeConstruccionId(Integer tipoDeConstruccionId) {
-		put("tipoDeConstruccionId", tipoDeConstruccionId);
+		map.put("tipoDeConstruccionId", tipoDeConstruccionId);
 	}
 	public Integer getCalidadDeLaConstruccionId() {
-		return (Integer)get("calidadDeLaConstruccionId");
+		return (Integer)map.get("calidadDeLaConstruccionId");
 	}
 	public void setCalidadDeLaConstruccionId(Integer calidadDeLaConstruccionId) {
-		put("calidadDeLaConstruccionId", calidadDeLaConstruccionId);
+		map.put("calidadDeLaConstruccionId", calidadDeLaConstruccionId);
 	}
 	public Integer getTipologiaDeLaViviendaId() {
-		return (Integer)get("tipologiaDeLaViviendaId");
+		return (Integer)map.get("tipologiaDeLaViviendaId");
 	}
 	public void setTipologiaDeLaViviendaId(Integer tipologiaDeLaViviendaId) {
-		put("tipologiaDeLaViviendaId", tipologiaDeLaViviendaId);
+		map.put("tipologiaDeLaViviendaId", tipologiaDeLaViviendaId);
 	}
 	
 	/* Datos de la vivienda */
 	public Double getMetrosCuadradosConstruidos() {
-		return (Double)get("metrosCuadradosConstruidos");
+		return (Double)map.get("metrosCuadradosConstruidos");
 	}
 	public void setMetrosCuadradosConstruidos(Double metrosCuadradosConstruidos) {
-		put("metrosCuadradosConstruidos", metrosCuadradosConstruidos);
+		map.put("metrosCuadradosConstruidos", metrosCuadradosConstruidos);
 	}
 	public Integer getNumeroDeDormitorios() {
-		return (Integer)get("numeroDeDormitorios");
+		return (Integer)map.get("numeroDeDormitorios");
 	}
 	public void setNumeroDeDormitorios(Integer numeroDeDormitorios) {
-		put("numeroDeDormitorios", numeroDeDormitorios);
+		map.put("numeroDeDormitorios", numeroDeDormitorios);
 	}
 	public Integer getAnyoDeConstruccion() {
-		return (Integer)get("anyoDeConstruccion");
+		return (Integer)map.get("anyoDeConstruccion");
 	}
 	public void setAnyoDeConstruccion(Integer anyoDeConstruccion) {
-		put("anyoDeConstruccion", anyoDeConstruccion);
+		map.put("anyoDeConstruccion", anyoDeConstruccion);
 	}
 	public Integer getAnyoDeLaUltimaRehabilitacion() {
-		return (Integer)get("anyoDeLaUltimaRehabilitacion");
+		return (Integer)map.get("anyoDeLaUltimaRehabilitacion");
 	}
 	public void setAnyoDeLaUltimaRehabilitacion(Integer anyoDeLaUltimaRehabilitacion) {
-		put("anyoDeLaUltimaRehabilitacion", anyoDeLaUltimaRehabilitacion);
+		map.put("anyoDeLaUltimaRehabilitacion", anyoDeLaUltimaRehabilitacion);
 	}
 	
 	/* Medidas de seguridad de tu vivienda */
@@ -86,169 +100,169 @@ public class SeguroViviendaBean extends HashMap<String, Object>{
 	
 	/* Datos del titular */
 	public String getNombre() {
-		return (String)get("nombre");
+		return (String)map.get("nombre");
 	}
 	public void setNombre(String nombre) {
-		put("nombre", nombre);
+		map.put("nombre", nombre);
 	}
 	public String getApellido1() {
-		return (String)get("apellido1");
+		return (String)map.get("apellido1");
 	}
 	public void setApellido1(String apellido1) {
-		put("apellido1", apellido1);
+		map.put("apellido1", apellido1);
 	}
 	public String getApellido2() {
-		return (String)get("apellido2");
+		return (String)map.get("apellido2");
 	}
 	public void setApellido2(String apellido2) {
-		put("apellido2", apellido2);
+		map.put("apellido2", apellido2);
 	}
 	public Integer getTipoDeDocumentoDeIdentidadId() {
-		return (Integer)get("tipoDeDocumentoDeIdentidadId");
+		return (Integer)map.get("tipoDeDocumentoDeIdentidadId");
 	}
 	public void setTipoDeDocumentoDeIdentidadId(Integer tipoDeDocumentoDeIdentidadId) {
-		put("tipoDeDocumentoDeIdentidadId", tipoDeDocumentoDeIdentidadId);
+		map.put("tipoDeDocumentoDeIdentidadId", tipoDeDocumentoDeIdentidadId);
 	}
 	public String getDocumentoIdentidad() {
-		return (String)get("documentoIdentidad");
+		return (String)map.get("documentoIdentidad");
 	}
 	public void setDocumentoIdentidad(String documentoIdentidad) {
-		put("documentoIdentidad", documentoIdentidad);
+		map.put("documentoIdentidad", documentoIdentidad);
 	}
 	public Date getFechaDeNacimiento() {
-		return (Date)get("fechaDeNacimiento");
+		return (Date)map.get("fechaDeNacimiento");
 	}
 	public void setFechaDeNacimiento(Date fechaDeNacimiento) {
-		put("fechaDeNacimiento", fechaDeNacimiento);
+		map.put("fechaDeNacimiento", fechaDeNacimiento);
 	}
 	public Integer getSexoId() {
-		return (Integer)get("sexoId");
+		return (Integer)map.get("sexoId");
 	}
 	public void setSexoId(Integer sexoId) {
-		put("sexoId", sexoId);
+		map.put("sexoId", sexoId);
 	}
 	public String getTelefonoMovil() {
-		return (String)get("telefonoMovil");
+		return (String)map.get("telefonoMovil");
 	}
 	public void setTelefonoMovil(String telefonoMovil) {
-		put("telefonoMovil", telefonoMovil);
+		map.put("telefonoMovil", telefonoMovil);
 	}
 	public String getEmail() {
-		return (String)get("email");
+		return (String)map.get("email");
 	}
 	public void setEmail(String email) {
-		put("email", email);
+		map.put("email", email);
 	}
 	public Integer getTipoDeVíaTitularId() {
-		return (Integer)get("tipoDeVíaTitularId");
+		return (Integer)map.get("tipoDeVíaTitularId");
 	}
 	public void setTipoDeVíaTitularId(Integer tipoDeVíaTitularId) {
-		put("tipoDeVíaTitularId", tipoDeVíaTitularId);
+		map.put("tipoDeVíaTitularId", tipoDeVíaTitularId);
 	}
 	public String getDomicilioTitular() {
-		return (String)get("domicilioTitular");
+		return (String)map.get("domicilioTitular");
 	}
 	public void setDomicilioTitular(String domicilioTitular) {
-		put("domicilioTitular", domicilioTitular);
+		map.put("domicilioTitular", domicilioTitular);
 	}
 	public String getNumeroYPisoTitular() {
-		return (String)get("numeroYPisoTitular");
+		return (String)map.get("numeroYPisoTitular");
 	}
 	public void setNumeroYPisoTitular(String numeroYPisoTitular) {
-		put("numeroYPisoTitular", numeroYPisoTitular);
+		map.put("numeroYPisoTitular", numeroYPisoTitular);
 	}
 	public String getCodigoPostalTitular() {
-		return (String)get("codigoPostalTitular");
+		return (String)map.get("codigoPostalTitular");
 	}
 	public void setCodigoPostalTitular(String codigoPostalTitular) {
-		put("codigoPostalTitular", codigoPostalTitular);
+		map.put("codigoPostalTitular", codigoPostalTitular);
 	}
 	public String getLocalidadTitular() {
-		return (String)get("localidadTitular");
+		return (String)map.get("localidadTitular");
 	}
 	public void setLocalidadTitular(String localidadTitular) {
-		put("localidadTitular", localidadTitular);
+		map.put("localidadTitular", localidadTitular);
 	}
 	public Integer getProvinciaTitularId() {
-		return (Integer)get("provinciaTitularId");
+		return (Integer)map.get("provinciaTitularId");
 	}
 	public void setProvinciaTitularId(Integer provinciaTitularId) {
-		put("provinciaTitularId", provinciaTitularId);
+		map.put("provinciaTitularId", provinciaTitularId);
 	}
 	
 	/* Vivienda a asegurar */
 	public Integer getTipoDeVíaViviendaId() {
-		return (Integer)get("tipoDeVíaViviendaId");
+		return (Integer)map.get("tipoDeVíaViviendaId");
 	}
 	public void setTipoDeVíaViviendaId(Integer tipoDeVíaViviendaId) {
-		put("tipoDeVíaViviendaId", tipoDeVíaViviendaId);
+		map.put("tipoDeVíaViviendaId", tipoDeVíaViviendaId);
 	}
 	public String getDomicilioVivienda() {
-		return (String)get("domicilioVivienda");
+		return (String)map.get("domicilioVivienda");
 	}
 	public void setDomicilioVivienda(String domicilioVivienda) {
-		put("domicilioVivienda", domicilioVivienda);
+		map.put("domicilioVivienda", domicilioVivienda);
 	}
 	public String getNumeroYPisoVivienda() {
-		return (String)get("numeroYPisoVivienda");
+		return (String)map.get("numeroYPisoVivienda");
 	}
 	public void setNumeroYPisoVivienda(String numeroYPisoVivienda) {
-		put("numeroYPisoVivienda", numeroYPisoVivienda);
+		map.put("numeroYPisoVivienda", numeroYPisoVivienda);
 	}
 	public String getCodigoPostalVivienda() {
-		return (String)get("codigoPostalVivienda");
+		return (String)map.get("codigoPostalVivienda");
 	}
 	public void setCodigoPostalVivienda(String codigoPostalVivienda) {
-		put("codigoPostalVivienda", codigoPostalVivienda);
+		map.put("codigoPostalVivienda", codigoPostalVivienda);
 	}
 	public String getLocalidadVivienda() {
-		return (String)get("localidadVivienda");
+		return (String)map.get("localidadVivienda");
 	}
 	public void setLocalidadVivienda(String localidadVivienda) {
-		put("localidadVivienda", localidadVivienda);
+		map.put("localidadVivienda", localidadVivienda);
 	}
 	public Integer getProvinciaViviendaId() {
-		return (Integer)get("provinciaViviendaId");
+		return (Integer)map.get("provinciaViviendaId");
 	}
 	public void setProvinciaViviendaId(Integer provinciaViviendaId) {
-		put("provinciaViviendaId", provinciaViviendaId);
+		map.put("provinciaViviendaId", provinciaViviendaId);
 	}
 	
 	/* Datos de pago */
 	public Date getFechaDeEfecto() {
-		return (Date)get("fechaDeEfecto");
+		return (Date)map.get("fechaDeEfecto");
 	}
 	public void setFechaDeEfecto(Date fechaDeEfecto) {
-		put("fechaDeEfecto", fechaDeEfecto);
+		map.put("fechaDeEfecto", fechaDeEfecto);
 	}
 	public String getCuentaIBAN() {
-		return (String)get("cuentaIBAN");
+		return (String)map.get("cuentaIBAN");
 	}
 	public void setCuentaIBAN(String cuentaIBAN) {
-		put("cuentaIBAN", cuentaIBAN);
+		map.put("cuentaIBAN", cuentaIBAN);
 	}
 	public String getCuentaEntidad() {
-		return (String)get("cuentaEntidad");
+		return (String)map.get("cuentaEntidad");
 	}
 	public void setCuentaEntidad(String cuentaEntidad) {
-		put("cuentaEntidad", cuentaEntidad);
+		map.put("cuentaEntidad", cuentaEntidad);
 	}
 	public String getCuentaOficina() {
-		return (String)get("cuentaOficina");
+		return (String)map.get("cuentaOficina");
 	}
 	public void setCuentaOficina(String cuentaOficina) {
-		put("cuentaOficina", cuentaOficina);
+		map.put("cuentaOficina", cuentaOficina);
 	}
 	public String getCuentaDigitoControl() {
-		return (String)get("cuentaDigitoControl");
+		return (String)map.get("cuentaDigitoControl");
 	}
 	public void setCuentaDigitoControl(String cuentaDigitoControl) {
-		put("cuentaDigitoControl", cuentaDigitoControl);
+		map.put("cuentaDigitoControl", cuentaDigitoControl);
 	}
 	public String getCuentaNumero() {
-		return (String)get("cuentaNumero");
+		return (String)map.get("cuentaNumero");
 	}
 	public void setCuentaNumero(String cuentaNumero) {
-		put("cuentaNumero", cuentaNumero);
+		map.put("cuentaNumero", cuentaNumero);
 	}
 }

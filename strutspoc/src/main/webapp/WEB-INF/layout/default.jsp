@@ -30,7 +30,14 @@
 	    <script src="${pageContext.request.contextPath}/static/jquery-1.11.3/jquery-1.11.3.min.js"></script>
 	    
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
-	    <script src="${pageContext.request.contextPath}/static/bootstrap-3.3.6/js/bootstrap.min.js"></script>	
+	    <script src="${pageContext.request.contextPath}/static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+	    
+	    <SCRIPT type="text/javascript">
+	    	function sendEvent(eventName) {
+	    		flowForm.flowEvent.value = eventName;
+	    		flowForm.submit();
+	    	}
+	    </SCRIPT>	
 	
 	</head>
 

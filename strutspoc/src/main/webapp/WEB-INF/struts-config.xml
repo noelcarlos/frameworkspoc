@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
-                               "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+	"http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
 
 <struts-config>
 
-	<!-- Beans de formulario -->
-	<!-- Form Bean utilizado por el Sistema de AutenticaciÃƒÂ³n Local -->
 	<form-beans>
-		<form-bean name="genericForm" type="org.apache.struts.validator.LazyValidatorForm" />
+		<form-bean name="flowForm" type="es.generali.strutspoc.support.LazyValidatorForm" />
 	</form-beans>
 
 	<!-- Excepciones globales -->
@@ -23,23 +21,15 @@
 
 	<!-- Correlaciones de acciones -->
 	<action-mappings>
-		<action path="/help" type="es.generali.arq.struts.genernet.control.service.GenericHelpServiceAction"></action>
-		<action path="/simpleProcess" type="es.generali.arq.struts.genernet.control.ProcessInitAction"></action>
-		
-		<action path="/fileCompressionViewer" type="es.generali.arq.struts.genernet.control.service.filecompressionV3.FileCompressionV3Viewer" parameter="tarea" name="tratarFileCompressionAppletForm" scope="session"></action>
-		<action path="/DocumentoGestionFileCompression" type="es.generali.red.anexarDocClient.control.DocumentoFileCompressionAction" name="tratarFileCompressionAppletForm" scope="session" parameter="tarea"></action>	
-		
-		<!-- action path="/DocumentoGestionFileCompressionFatca" type="es.generali.red.anexarFatca.control.DocumentoFileCompressionFatcaAction" name="tratarFileFatcaCompressionAppletForm" scope="session" parameter="tarea"></action-->	
-		
 		<!-- PROCESS -->
 		
 		<action path="/init" type="es.generali.strutspoc.controllers.InitAction" 
-			name="genericForm" scope="session" validate="false" parameter="method" >
+			name="flowForm" scope="session" validate="true" parameter="method" >
   			<forward name="app.init" path="app.init" /> 
 		</action>
 		
 		<action path="/seguroHogar" type="es.generali.strutspoc.controllers.SeguroHogarFlowAction" 
-			name="genericForm" scope="session" validate="false" parameter="method" >
+			name="flowForm" scope="session" validate="true" parameter="method" >
   			<forward name="seguroHogar.queQuieresProteger" path="seguroHogar.queQuieresProteger" /> 
 		</action>
 				
