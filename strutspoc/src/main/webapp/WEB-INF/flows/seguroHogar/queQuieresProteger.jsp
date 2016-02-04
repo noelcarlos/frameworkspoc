@@ -6,74 +6,39 @@
 
 <jsp:include page="flowMenu.jsp" />
 
-<div class="row">
-	<div class="col-md-6">
-		<html:form action="/seguroHogar?method=onSubmit">
-			<html:errors />
-			
-			AHHAHA
-			
-			<logic:present name="org.apache.struts.action.ERROR" >
-				<ul id="errors">
-						%{requestScope['org.apache.struts.action.ERROR']}
-					<logic:iterate id="error" name="org.apache.struts.action.ERROR" >
-						<li>ASAS %{error}</li>
-					</logic:iterate>
-				</ul>
-			</logic:present>
-			
-			<html:messages id="error" property="errors">
-	            <li>ASAS<bean:write name="error"/></li>
-	        </html:messages>
-        
-			<!-- errors coming from form validation -->
-<logic:messagesPresent property="errors">
-    <ul id="errors">
-        <html:messages id="error" property="errors" >
-            <li>ASAS<bean:write name="error"/></li>
-        </html:messages>
-    </ul>
-</logic:messagesPresent>
-<!-- errors coming from actions -->
-<logic:messagesPresent message="true" property="errors">
-    <ul id="errors">
-        <html:messages id="error" message="true" property="errors">
-            <li><bean:write name="error"/></li>
-        </html:messages>
-    </ul>
-</logic:messagesPresent>
-<!-- messages coming from actions -->
-<logic:messagesPresent message="true" property="messages">
-    <ul id="messages">
-        <html:messages id="message" message="true" property="messages">
-            <li><bean:write name="message"/></li>
-        </html:messages>
-    </ul>
-</logic:messagesPresent>
+<html:form action="/seguroHogar?method=onSubmit">
+	<input type="hidden" name="flowEvent" />
 
-			<logic:messagesPresent message="true">
-			    <html:messages id="aMsg" message="true">
-			        <logic:present name="aMsg">
-			            <!-- Messages -->
+	<div class="row">
+		<div class="col-md-12">
+			<c:if test="${requestScope.get('org.apache.struts.action.ERROR').size() > 0}">
+				<div class="alert alert-danger">
+					<div class="h3" style="margin-top:0px;">Han ocurrido errores al validar los datos de esta pantalla</div>
+			    	<html:messages id="aMsg" message="false">
 			            <div class="messages">
-			                <bean:write name="aMsg" filter="false" />
+			                <bean:write name="aMsg" filter="true" />
 			            </div>
-			        </logic:present>
-			    </html:messages>
-			</logic:messagesPresent>
+			    	</html:messages>
+			    </div>
+			</c:if>
 			
-			<logic:messagesPresent message="false">
-			    <html:messages id="aMsg" message="false">
-			        <logic:present name="aMsg">
-			            <!-- Warnings-->
-			            <div class="warnings">
-			                <bean:write name="aMsg" filter="false" />
-			            </div>
-			        </logic:present>
-			    </html:messages>
+			<logic:messagesPresent message="true">
+				<div class="alert alert-warning">
+					<div class="h3" style="margin-top:0px;">Mensajes</div>
+			    	<html:messages id="aError" message="true">
+				        <logic:present name="aError">
+				            <div class="messages">
+				                <bean:write name="aError" filter="false" />
+				            </div>
+				        </logic:present>
+			    	</html:messages>
+			    </div>
 			</logic:messagesPresent>
-
-			<input type="hidden" name="flowEvent" />
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-6">
 			<div class="form-group">
 				<label class="control-label" for="tipoDeUsoViviendaId">Tipo de uso de la vivienda:</label>
 				<html:select property="tipoDeUsoViviendaId" styleClass="form-control">
@@ -86,9 +51,9 @@
 				<html:text property="numPersonasQueVivenEnLaVivienda" styleClass="form-control"></html:text>
 			</div>			
 	
-		</html:form>
-	</div>	
-</div>
+		</div>	
+	</div>
+</html:form>
  
 <jsp:include page="flowButtons.jsp" />
  

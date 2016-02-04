@@ -100,8 +100,8 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		        	try {
 		        		setter.invoke(model, ConvertUtils.convert(strValue, type));
 		        	} catch (Exception exp) {
-		        		errors.add(name, new ActionError("Error de conversion:" + exp.getMessage()));
-		        		messages.add(name, new ActionMessage("Error de conversion:" + exp.getMessage()));
+		        		errors.add(name, new ActionError("error.literal", "ERR:" + exp.getMessage()));
+		        		//messages.add(name, new ActionMessage("error.literal", "MSG:" + exp.getMessage()));
 		        	}
 		        }
 	        }
@@ -126,6 +126,11 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		session.setAttribute("flow", DocumentHelper.parseText(FileUtils.readFileToString(new File(xml), "UTF-8")));
 		
 		response.sendRedirect(request.getContextPath() + "/seguroHogar.do?method=onStep&step=1");
+		
+		saveErrors(request, null);
+		saveMessages(request, null);
+		session.removeAttribute("pageErrors");
+		session.removeAttribute("pageMessages");
 		
 		return null;
 	}
@@ -160,13 +165,13 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		
 		LazyValidatorForm frm = (LazyValidatorForm)form;
 		
-		if (session.getAttribute("pageErrors") != null) {
-			saveErrors(request, (ActionErrors)session.getAttribute("pageErrors"));
-		}
 		if (session.getAttribute("pageMessages") != null) {
 			saveMessages(request, (ActionMessages)session.getAttribute("pageMessages"));
 		}
-
+		if (session.getAttribute("pageErrors") != null) {
+			saveErrors(request, (ActionErrors)session.getAttribute("pageErrors"));
+		}
+		
 		return mapping.findForward(flowName + "." + view);
 	}
 	

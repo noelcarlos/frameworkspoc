@@ -35,8 +35,11 @@
 				
 	</action-mappings>
 
+	<message-resources parameter="ApplicationResources" />
+
 	<!-- ===================================== Controller Configuration -->
 	<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" inputForward="true" />
+	
 	<plug-in className="org.apache.struts.tiles.TilesPlugin">
 		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
 		<set-property property="moduleAware" value="true" />
@@ -45,4 +48,5 @@
 
 	<!-- end comment if struts1.0.x -->
 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn"></plug-in>
+	
 </struts-config>
