@@ -20,4 +20,12 @@ public class LookupService {
 		 return jdbcTemplate.queryForList("SELECT * FROM lk_tipos_usos_viviendas", new HashMap<String, Object>());
 	}
 	
+	public List<Map<String, Object>> getProvincias() {
+		 return jdbcTemplate.queryForList("SELECT * FROM lk_provincias", new HashMap<String, Object>());
+	}
+
+	public List<Map<String, Object>> getLocalizacionesViviendas() {
+		 return jdbcTemplate.queryForList("SELECT * FROM lk_localizaciones_viviendas", new HashMap<String, Object>());
+	}
+	
 }

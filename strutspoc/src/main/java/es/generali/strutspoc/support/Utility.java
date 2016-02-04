@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -290,5 +291,14 @@ public class Utility {
 			strText = strText.replaceAll("\\$\\{" + entry.getKey() + "\\}", strValue);
 		}
 		return strText;
+	}
+	
+	public static Method findFirst(Class<?> cl, String name) {
+		Method[] methods = cl.getMethods();
+		for (Method method : methods) {
+			if (method.getName().equals(name))
+				return method;
+		} 
+		return null;
 	}
 }

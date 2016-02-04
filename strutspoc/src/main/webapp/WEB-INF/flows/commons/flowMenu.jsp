@@ -7,9 +7,10 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="separator-sm"></div>
-		<div class="btn-group" role="group" aria-label="...">
+		<div class="btn-group" role="group" aria-label="..."> 
 			<c:forEach var="result" items="${sessionScope.get('flow').selectNodes('//flow/step')}">
-			<button type="button" class="btn ${ sessionScope.get('currentStep').equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}">
+			<button type="button" class="btn ${ sessionScope.get('currentStep').toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}"
+				onClick="sendEvent('go-${ sessionScope.get('currentStep').toString()}');">
 				${result.valueOf("@menu")}
 			</button>
 			</c:forEach>
@@ -19,3 +20,4 @@
 		<div class="separator-sm"></div>
 	</div>
 </div>
+

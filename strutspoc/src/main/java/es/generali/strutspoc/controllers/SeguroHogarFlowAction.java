@@ -11,7 +11,6 @@ import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.NotNull;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
@@ -23,7 +22,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -35,6 +33,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import es.generali.strutspoc.models.SeguroViviendaBean;
 import es.generali.strutspoc.services.LookupService;
 import es.generali.strutspoc.support.LazyValidatorForm;
+import es.generali.strutspoc.support.Utility;
 
 public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAction {
 	WebApplicationContext context;
@@ -98,9 +97,13 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		        	setter.invoke(model, new Object[]{null});
 		        else {
 		        	try {
-		        		setter.invoke(model, ConvertUtils.convert(strValue, type));
+		        		if (StringUtils.isEmpty(strValue) && !setter.getParameterTypes()[0].isInstance(String.class)) {
+				        	setter.invoke(model, new Object[]{null});
+		        		} else {
+		        			setter.invoke(model, ConvertUtils.convert(strValue, type));
+		        		}
 		        	} catch (Exception exp) {
-		        		errors.add(name, new ActionError("error.literal", "ERR:" + exp.getMessage()));
+		        		errors.add(name, new ActionError("error.literal", exp.getMessage()));
 		        		//messages.add(name, new ActionMessage("error.literal", "MSG:" + exp.getMessage()));
 		        	}
 		        }
@@ -115,11 +118,6 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		session.setAttribute("currentStep", "1");
 
 		SeguroViviendaBean model = new SeguroViviendaBean();
-		
-		model.setNumPersonasQueVivenEnLaVivienda(1);
-		model.setTipoDeUsoViviendaId(1);
-		
-		modelToForm(model, (LazyValidatorForm)form);
 		session.setAttribute("model", model);
 		
 		String xml = request.getServletContext().getRealPath("/WEB-INF/flows/seguroHogar/contratacion.xml");
@@ -163,7 +161,15 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		request.setAttribute("currentPageTitle", title);
 		request.setAttribute("currentPageNumber", currentStep);
 		
-		LazyValidatorForm frm = (LazyValidatorForm)form;
+		String preActionClass = node.valueOf("on-entry");
+		
+		Class<?> cl = Class.forName(preActionClass);
+		Object action = cl.newInstance();
+		Method m = Utility.findFirst(cl, "execute");
+		ActionForm model = (ActionForm)session.getAttribute("model");
+		m.invoke(action, context, model, request, response);
+		
+		modelToForm(model, (LazyValidatorForm)form);
 		
 		if (session.getAttribute("pageMessages") != null) {
 			saveMessages(request, (ActionMessages)session.getAttribute("pageMessages"));
@@ -195,17 +201,26 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		ActionMessages messages = new ActionMessages();
 		convertAndValidate((LazyValidatorForm)form, model, errors, messages);
 		
+		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
+
+		Document flow = (Document)session.getAttribute("flow");
+		Node node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+		
+		String postActionClass = node.valueOf("on-exit");
+
+		Class<?> cl = Class.forName(postActionClass);
+		Object action = cl.newInstance();
+		Method m = Utility.findFirst(cl, "execute");
+		
+		m.invoke(action, context, model, request, response, errors);
+		
+		if (errors.size() > 0) {
+			flowEvent = "";
+		}
+		
 		session.setAttribute("pageErrors", errors);
 		session.setAttribute("pageMessages", messages);
 		
-		model.getTipoDeUsoViviendaId();
-		model.getNumPersonasQueVivenEnLaVivienda();
-		
-		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
-		
-		Document flow = (Document)session.getAttribute("flow");
-		
-		Node node = flow.selectSingleNode("//flow");
 		String flowName = node.valueOf("@name");
 		
 		int lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
@@ -228,27 +243,12 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		String view = node.valueOf("@view");
 		String title = node.valueOf("@title");
 		request.setAttribute("currentPageTitle", title);
-		request.setAttribute("currentPageNumber", currentStep);		
+		request.setAttribute("currentPageNumber", currentStep);
+		
+		session.setAttribute("currentStep", currentStep); 
 		
 		response.sendRedirect(request.getContextPath() + "/seguroHogar.do?method=onStep&step=" + currentStep);		
 		
 		return null;
-	}
-	
-	void onStep1Before(SeguroViviendaBean model, HttpServletRequest request, HttpServletResponse response) {
-		LookupService lookupService = new LookupService(context);
-		
-		request.setAttribute("tiposUsosViviendas", lookupService.getTiposUsosViviendas());
-		//localizacionesViviendas
-	}
-	
-	void onStep1After(SeguroViviendaBean model, HttpServletRequest request, HttpServletResponse response) {
-		if (model.getNumPersonasQueVivenEnLaVivienda() > 0) {
-			
-		}
-		LookupService lookupService = new LookupService(context);
-		
-		request.setAttribute("tiposUsosViviendas", lookupService.getTiposUsosViviendas());
-		//localizacionesViviendas
 	}
 }

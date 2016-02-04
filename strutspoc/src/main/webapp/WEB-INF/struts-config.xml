@@ -30,7 +30,8 @@
 		
 		<action path="/seguroHogar" type="es.generali.strutspoc.controllers.SeguroHogarFlowAction" 
 			name="flowForm" scope="session" validate="true" parameter="method" >
-  			<forward name="seguroHogar.queQuieresProteger" path="seguroHogar.queQuieresProteger" /> 
+  			<forward name="seguroHogar.queQuieresProteger" path="seguroHogar.queQuieresProteger" />
+  			<forward name="seguroHogar.localizacion" path="seguroHogar.localizacion" /> 
 		</action>
 				
 	</action-mappings>

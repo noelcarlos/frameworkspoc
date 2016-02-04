@@ -19,4 +19,8 @@
 		<put name="body" value="/WEB-INF/flows/seguroHogar/queQuieresProteger.jsp" />
 	</definition>
 	
+	<definition name="seguroHogar.localizacion" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/localizacion.jsp" />
+	</definition>
+	
 </tiles-definitions>
