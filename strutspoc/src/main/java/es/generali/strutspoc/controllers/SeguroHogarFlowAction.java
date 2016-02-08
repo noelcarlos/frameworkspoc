@@ -26,6 +26,13 @@ import es.generali.strutspoc.support.Utility;
 
 public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAction {
 	
+	public String getFlowDirectory() {
+		String className = getClass().getCanonicalName();
+		String flowDirectory = StringUtils.removeEnd(className, "FlowAction");
+		flowDirectory = StringUtils.uncapitalize(StringUtils.substringAfterLast(flowDirectory, "."));
+		return flowDirectory;
+	}
+	
 	public ActionForward onEntry(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
@@ -35,10 +42,7 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 
 		SeguroViviendaBean model = new SeguroViviendaBean();
 		
-		String className = getClass().getCanonicalName();
-		
-		String flowDirectory = StringUtils.removeEnd(className, "FlowAction");
-		flowDirectory = StringUtils.uncapitalize(StringUtils.substringAfterLast(flowDirectory, "."));
+		String flowDirectory = getFlowDirectory();
 		
 		String xml = request.getServletContext().getRealPath("/WEB-INF/flows/" + flowDirectory + "/contratacion.xml");
 		session.setAttribute("flow", DocumentHelper.parseText(FileUtils.readFileToString(new File(xml), "UTF-8")));
@@ -123,6 +127,12 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		HttpSession session = request.getSession();
 
 		Document flow = (Document)session.getAttribute("flow");
+		
+		if (session.isNew() || flow == null) {
+			response.sendRedirect(request.getContextPath() + "/" + getFlowDirectory() + ".do?method=onEntry");
+			return null;
+		}
+		
 		Node node = flow.selectSingleNode("//flow");
 		String flowName = node.valueOf("@name");
 		

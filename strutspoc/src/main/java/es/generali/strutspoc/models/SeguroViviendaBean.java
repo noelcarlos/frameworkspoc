@@ -96,7 +96,100 @@ public class SeguroViviendaBean extends ActionForm {
 	
 	/* Medidas de seguridad de tu vivienda */
 	
+	public Boolean getRejasEnVentanasOSimilares() {
+		return (Boolean)map.get("rejasEnVentanasOSimilares");
+	}
+	public void setRejasEnVentanasOSimilares(Boolean rejasEnVentanasOSimilares) {
+		map.put("rejasEnVentanasOSimilares", rejasEnVentanasOSimilares);
+	}
+	public Boolean getPuertaDeSeguridad() {
+		return (Boolean)map.get("puertaDeSeguridad");
+	}
+	public void setPuertaDeSeguridad(Boolean puertaDeSeguridad) {
+		map.put("puertaDeSeguridad", puertaDeSeguridad);
+	}
+	public Boolean getAlarmaConectada() {
+		return (Boolean)map.get("alarmaConectada");
+	}
+	public void setAlarmaConectada(Boolean alarmaConectada) {
+		map.put("alarmaConectada", alarmaConectada);
+	}
+	public Boolean getCajaFuerte() {
+		return (Boolean)map.get("cajaFuerte");
+	}
+	public void setCajaFuerte(Boolean cajaFuerte) {
+		map.put("cajaFuerte", cajaFuerte);
+	}
+	
 	/* Personalizar paquete */
+	
+	public Integer getCapitalAseguradoVivienda() {
+		return (Integer)map.get("capitalAseguradoVivienda");
+	}
+	public void setCapitalAseguradoVivienda(Integer capitalAseguradoVivienda) {
+		map.put("capitalAseguradoVivienda", capitalAseguradoVivienda);
+	}
+	public Integer getCapitalAseguradoEnseres() {
+		return (Integer)map.get("capitalAseguradoEnseres");
+	}
+	public void setCapitalAseguradoEnseres(Integer capitalAseguradoEnseres) {
+		map.put("capitalAseguradoEnseres", capitalAseguradoEnseres);
+	}
+	public Integer getValorResponsabilidadCivil() {
+		return (Integer)map.get("valorResponsabilidadCivil");
+	}
+	public void setValorResponsabilidadCivil(Integer valorResponsabilidadCivil) {
+		map.put("valorResponsabilidadCivil", valorResponsabilidadCivil);
+	}
+	
+	public Boolean getOpcionRotura() {
+		return (Boolean)map.get("opcionRotura");
+	}
+	public void setOpcionRotura(Boolean opcionRotura) {
+		map.put("opcionRotura", opcionRotura);
+	}
+	public Boolean getOpcionRobo() {
+		return (Boolean)map.get("opcionRobo");
+	}
+	public void setOpcionRobo(Boolean opcionRobo) {
+		map.put("opcionRobo", opcionRobo);
+	}
+	public Boolean getOpcionDefensaJuridica() {
+		return (Boolean)map.get("opcionDefensaJuridica");
+	}
+	public void setOpcionDefensaJuridica(Boolean opcionDefensaJuridica) {
+		map.put("opcionDefensaJuridica", opcionDefensaJuridica);
+	}
+	public Boolean getOpcionInhabilidad() {
+		return (Boolean)map.get("opcionInhabilidad");
+	}
+	public void setOpcionInhabilidad(Boolean opcionInhabilidad) {
+		map.put("opcionInhabilidad", opcionInhabilidad);
+	}
+	public Boolean getOpcionAsistenciaInformatica() {
+		return (Boolean)map.get("opcionAsistenciaInformatica");
+	}
+	public void setOpcionAsistenciaInformatica(Boolean opcionAsistenciaInformatica) {
+		map.put("opcionAsistenciaInformatica", opcionAsistenciaInformatica);
+	}
+	public Integer getCapitalAseguradoJoyas() {
+		return (Integer)map.get("capitalAseguradoJoyas");
+	}
+	public void setCapitalAseguradoJoyas(Integer capitalAseguradoJoyas) {
+		map.put("capitalAseguradoJoyas", capitalAseguradoJoyas);
+	}
+	public Integer getCapitalAseguradoObjetosDeValor() {
+		return (Integer)map.get("capitalAseguradoObjetosDeValor");
+	}
+	public void setCapitalAseguradoObjetosDeValor(Integer capitalAseguradoObjetosDeValor) {
+		map.put("capitalAseguradoObjetosDeValor", capitalAseguradoObjetosDeValor);
+	}
+	public Integer getCapitalAseguradoRecomposicionEstetica() {
+		return (Integer)map.get("capitalAseguradoRecomposicionEstetica");
+	}
+	public void setCapitalAseguradoRecomposicionEstetica(Integer capitalAseguradoRecomposicionEstetica) {
+		map.put("capitalAseguradoRecomposicionEstetica", capitalAseguradoRecomposicionEstetica);
+	}
 	
 	/* Datos del titular */
 	public String getNombre() {
