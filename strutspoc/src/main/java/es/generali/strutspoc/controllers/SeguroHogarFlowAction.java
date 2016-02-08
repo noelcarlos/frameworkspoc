@@ -1,23 +1,13 @@
 package es.generali.strutspoc.controllers;
 
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.ConvertUtilsBean;
-import org.apache.commons.beanutils.Converter;
-import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.io.FileUtils;
-import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -26,8 +16,6 @@ import org.apache.struts.action.ActionMessages;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
-import org.springframework.util.StringUtils;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import es.generali.strutspoc.models.SeguroViviendaBean;
@@ -36,80 +24,6 @@ import es.generali.strutspoc.support.LazyValidatorForm;
 import es.generali.strutspoc.support.Utility;
 
 public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAction {
-	WebApplicationContext context;
-	
-	protected void modelToForm(Object model, LazyValidatorForm frm) throws IntrospectionException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-	    BeanInfo info = Introspector.getBeanInfo(model.getClass(), Object.class);
-	    PropertyDescriptor[] props = info.getPropertyDescriptors();
-	    
-	    ConvertUtilsBean convert = new ConvertUtilsBean();
-	    
-	    for (PropertyDescriptor pd : props) {
-	        String name = pd.getName();
-	        Method getter = pd.getReadMethod();
-	        /*Class<?> type = pd.getPropertyType();*/
-
-	        if (getter == null) {
-	        	continue;
-	        }
-	        
-		    Object value = getter.invoke(model);
-		    String strValue = convert.convert(value);
-		    frm.set(name, strValue);
-	    }
-	}
-	
-	protected void convertAndValidate(LazyValidatorForm frm, Object model, ActionErrors errors, ActionMessages messages) 
-			throws IntrospectionException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-	    BeanInfo info = Introspector.getBeanInfo(model.getClass(), Object.class);
-	    PropertyDescriptor[] props = info.getPropertyDescriptors();
-	    
-	    Converter myConverter = new IntegerConverter();
-	    
-	    ConvertUtils.register(myConverter, Integer.TYPE);    // Native type
-	    ConvertUtils.register(myConverter, Integer.class);   // Wrapper class	    
-	    
-	    for (PropertyDescriptor pd : props) {
-	        String name = pd.getName();
-	        Method getter = pd.getReadMethod();
-	        Method setter = pd.getWriteMethod();
-	        Class<?> type = pd.getPropertyType();
-
-	        if (getter == null) {
-	        	continue;
-	        }
-
-	        Object value = getter.invoke(model);
-	        //System.out.println(name + " = " + value + "; type = " + type);
-
-	        if (frm.getMap().containsKey(name) && setter != null) {
-		        String strValue = (String)frm.get(name);
-		        
-//		        NotNull notNull = getter.getAnnotation(NotNull.class);
-//		        if (notNull != null) {
-//		        	
-//		        	if (StringUtils.isEmpty(strValue)) {
-//		        		System.out.println(name + " @@@ NOT NULL ");
-//		        	}
-//		        }
-		        
-		        if (strValue == null)
-		        	setter.invoke(model, new Object[]{null});
-		        else {
-		        	try {
-		        		if (StringUtils.isEmpty(strValue) && !setter.getParameterTypes()[0].isInstance(String.class)) {
-				        	setter.invoke(model, new Object[]{null});
-		        		} else {
-		        			setter.invoke(model, ConvertUtils.convert(strValue, type));
-		        		}
-		        	} catch (Exception exp) {
-		        		errors.add(name, new ActionError("error.literal", exp.getMessage()));
-		        		//messages.add(name, new ActionMessage("error.literal", "MSG:" + exp.getMessage()));
-		        	}
-		        }
-	        }
-	    }
-	}
 	
 	public ActionForward onEntry(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -261,14 +175,14 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		}
 		
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
-		String view = node.valueOf("@view");
+		/*String view = node.valueOf("@view");*/
 		String title = node.valueOf("@title");
 		request.setAttribute("currentPageTitle", title);
 		request.setAttribute("currentPageNumber", currentStep);
 		
 		session.setAttribute("currentStep", currentStep); 
 		
-		response.sendRedirect(request.getContextPath() + "/seguroHogar.do?method=onStep&step=" + currentStep);		
+		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
 		
 		return null;
 	}

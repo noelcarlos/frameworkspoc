@@ -120,9 +120,9 @@ import java.util.Map;
  * @since Struts 1.2.6
  */
 public class LazyValidatorForm extends BeanValidatorForm {
-    // ------------------- Constructors ----------------------------------
+	private static final long serialVersionUID = -5060510492317909467L;
 
-    /**
+	/**
      * Default Constructor which creates a <code>LazyDynaBean</code> to
      * <i>back</i> this form.
      */
@@ -174,7 +174,8 @@ public class LazyValidatorForm extends BeanValidatorForm {
      *
      * <p>Provided so that properties can be access using JSTL.</p>
      */
-    public Map getMap() {
+    @SuppressWarnings("rawtypes")
+	public Map getMap() {
         return ((LazyDynaBean) dynaBean).getMap();
     }
 

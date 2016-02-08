@@ -136,7 +136,8 @@ public class BeanValidatorForm extends ValidatorForm implements DynaBean, Serial
     /**
      * <p>Return the size of an indexed or mapped property.</p>
      */
-    public int size(String name) {
+    @SuppressWarnings("rawtypes")
+	public int size(String name) {
         Object value = dynaBean.get(name);
 
         if (value == null) {
