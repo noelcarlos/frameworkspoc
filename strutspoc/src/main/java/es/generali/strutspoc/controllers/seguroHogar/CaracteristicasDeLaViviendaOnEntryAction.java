@@ -7,7 +7,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import es.generali.strutspoc.models.SeguroViviendaBean;
 
-public class DatosDeLaViviendaOnEntryAction {
+public class CaracteristicasDeLaViviendaOnEntryAction {
 
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -48,4 +48,16 @@ public class LookupService {
 		 return jdbcTemplate.queryForList("SELECT * FROM lk_periodos_contrataciones", new HashMap<String, Object>());
 	}
 	
+	public List<Map<String, Object>> getSexos() {
+		 return jdbcTemplate.queryForList("SELECT * FROM lk_sexos", new HashMap<String, Object>());
+	}
+	
+	public List<Map<String, Object>> getTiposDeDocumentosDeIndentidad() {
+		 return jdbcTemplate.queryForList("SELECT * FROM lk_tipos_documentos_identidad", new HashMap<String, Object>());
+	}
+	
+	public List<Map<String, Object>> getTiposDeVias() {
+		 return jdbcTemplate.queryForList("SELECT * FROM lk_tipos_vias", new HashMap<String, Object>());
+	}
+	
 }

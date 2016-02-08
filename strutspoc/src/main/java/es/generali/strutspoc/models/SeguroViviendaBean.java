@@ -142,6 +142,13 @@ public class SeguroViviendaBean extends ActionForm {
 		map.put("valorResponsabilidadCivil", valorResponsabilidadCivil);
 	}
 	
+	public Double getPrecio() {
+		return (Double)map.get("precio");
+	}
+	public void setPrecio(Double precio) {
+		map.put("precio", precio);
+	}
+	
 	public Boolean getOpcionRotura() {
 		return (Boolean)map.get("opcionRotura");
 	}
@@ -281,6 +288,12 @@ public class SeguroViviendaBean extends ActionForm {
 	}
 	public void setProvinciaTitularId(Integer provinciaTitularId) {
 		map.put("provinciaTitularId", provinciaTitularId);
+	}
+	public Boolean getLaViviendaAsegurarCoincideConLaDelTitular() {
+		return (Boolean)map.get("laViviendaAsegurarCoincideConLaDelTitular");
+	}
+	public void setLaViviendaAsegurarCoincideConLaDelTitular(Boolean laViviendaAsegurarCoincideConLaDelTitular) {
+		map.put("laViviendaAsegurarCoincideConLaDelTitular", laViviendaAsegurarCoincideConLaDelTitular);
 	}
 	
 	/* Vivienda a asegurar */

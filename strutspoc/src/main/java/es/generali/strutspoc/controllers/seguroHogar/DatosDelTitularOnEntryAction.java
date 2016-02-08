@@ -13,10 +13,12 @@ public class DatosDelTitularOnEntryAction {
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		/*LookupService lookupService = new LookupService(context);
+		LookupService lookupService = new LookupService(context);
 		
+		request.setAttribute("tiposDeDocumentosDeIndentidad", lookupService.getTiposDeDocumentosDeIndentidad());
+		request.setAttribute("sexos", lookupService.getSexos());
+		request.setAttribute("tiposDeVias", lookupService.getTiposDeVias());
 		request.setAttribute("provincias", lookupService.getProvincias());
-		request.setAttribute("localizacionesViviendas", lookupService.getLocalizacionesViviendas());*/
 		
 	}
 }

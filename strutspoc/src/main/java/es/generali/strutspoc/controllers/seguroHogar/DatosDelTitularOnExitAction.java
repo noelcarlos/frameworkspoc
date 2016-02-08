@@ -3,7 +3,6 @@ package es.generali.strutspoc.controllers.seguroHogar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.springframework.web.context.WebApplicationContext;
 

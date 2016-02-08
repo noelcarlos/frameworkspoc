@@ -14,9 +14,9 @@
 		<on-entry>es.generali.strutspoc.controllers.seguroHogar.SobreLaConstruccionOnEntryAction</on-entry>
 		<on-exit>es.generali.strutspoc.controllers.seguroHogar.SobreLaConstruccionOnExitAction</on-exit>
 	</step>
-	<step name="4" view="datosDeLaVivienda" menu="Datos de la vivienda" title="Datos de la vivienda" >
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.DatosDeLaViviendaOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.DatosDeLaViviendaOnExitAction</on-exit>
+	<step name="4" view="caracteristicasDeLaVivienda" menu="Características" title="Caracteristicas de la vivienda" >
+		<on-entry>es.generali.strutspoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnEntryAction</on-entry>
+		<on-exit>es.generali.strutspoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnExitAction</on-exit>
 	</step>
 	<step name="5" view="medidasDeSeguridadDeTuVivienda" menu="Medidas de seguridad" title="Medidas de seguridad">
 		<on-entry>es.generali.strutspoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnEntryAction</on-entry>

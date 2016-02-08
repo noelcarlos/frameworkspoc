@@ -13,10 +13,10 @@ public class DatosDeLaViviendaAAsegurarOnEntryAction {
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		/*LookupService lookupService = new LookupService(context);
+		LookupService lookupService = new LookupService(context);
 		
+		request.setAttribute("tiposDeVias", lookupService.getTiposDeVias());
 		request.setAttribute("provincias", lookupService.getProvincias());
-		request.setAttribute("localizacionesViviendas", lookupService.getLocalizacionesViviendas());*/
 		
 	}
 }

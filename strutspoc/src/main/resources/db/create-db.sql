@@ -43,3 +43,18 @@ CREATE TABLE lk_periodos_contrataciones (
   id INTEGER PRIMARY KEY,
   nombre VARCHAR(64)
 );
+
+CREATE TABLE lk_sexos (
+  id INTEGER PRIMARY KEY,
+  nombre VARCHAR(64)
+);
+
+CREATE TABLE lk_tipos_documentos_identidad (
+  id INTEGER PRIMARY KEY,
+  nombre VARCHAR(64)
+);
+
+CREATE TABLE lk_tipos_vias (
+  id INTEGER PRIMARY KEY,
+  nombre VARCHAR(64)
+);

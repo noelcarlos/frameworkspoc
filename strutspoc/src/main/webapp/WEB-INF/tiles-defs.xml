@@ -27,8 +27,8 @@
 		<put name="body" value="/WEB-INF/flows/seguroHogar/sobreLaConstruccion.jsp" />
 	</definition>
 	
-	<definition name="seguroHogar.datosDeLaVivienda" extends="base.definition">
-		<put name="body" value="/WEB-INF/flows/seguroHogar/datosDeLaVivienda.jsp" />
+	<definition name="seguroHogar.caracteristicasDeLaVivienda" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/caracteristicasDeLaVivienda.jsp" />
 	</definition>
 	
 	<definition name="seguroHogar.medidasDeSeguridadDeTuVivienda" extends="base.definition">

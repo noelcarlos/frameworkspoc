@@ -33,7 +33,7 @@
   			<forward name="seguroHogar.queQuieresProteger" path="seguroHogar.queQuieresProteger" />
   			<forward name="seguroHogar.localizacion" path="seguroHogar.localizacion" /> 
   			<forward name="seguroHogar.sobreLaConstruccion" path="seguroHogar.sobreLaConstruccion" /> 
-  			<forward name="seguroHogar.datosDeLaVivienda" path="seguroHogar.datosDeLaVivienda" /> 
+  			<forward name="seguroHogar.caracteristicasDeLaVivienda" path="seguroHogar.caracteristicasDeLaVivienda" /> 
   			<forward name="seguroHogar.medidasDeSeguridadDeTuVivienda" path="seguroHogar.medidasDeSeguridadDeTuVivienda" /> 
   			<forward name="seguroHogar.personalizarPaquete" path="seguroHogar.personalizarPaquete" /> 
   			<forward name="seguroHogar.datosDelTitular" path="seguroHogar.datosDelTitular" /> 

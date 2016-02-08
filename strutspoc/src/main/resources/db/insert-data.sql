@@ -39,3 +39,26 @@ INSERT INTO lk_periodos_contrataciones VALUES (1, 'Anual');
 INSERT INTO lk_periodos_contrataciones VALUES (2, 'Bienal');
 INSERT INTO lk_periodos_contrataciones VALUES (3, 'Trienal');
 
+INSERT INTO lk_sexos VALUES (1, 'Masculino');
+INSERT INTO lk_sexos VALUES (2, 'Femenino');
+
+INSERT INTO lk_tipos_documentos_identidad VALUES (1, 'DNI');
+INSERT INTO lk_tipos_documentos_identidad VALUES (2, 'NIE');
+INSERT INTO lk_tipos_documentos_identidad VALUES (3, 'Pasaporte');
+
+INSERT INTO lk_tipos_vias VALUES (1, 'Avenida');
+INSERT INTO lk_tipos_vias VALUES (2, 'Barrio');
+INSERT INTO lk_tipos_vias VALUES (3, 'Calle');
+INSERT INTO lk_tipos_vias VALUES (4, 'Camino');
+INSERT INTO lk_tipos_vias VALUES (5, 'Carretera');
+INSERT INTO lk_tipos_vias VALUES (6, 'Pasaje');
+INSERT INTO lk_tipos_vias VALUES (7, 'Paseo');
+INSERT INTO lk_tipos_vias VALUES (8, 'Plaza');
+INSERT INTO lk_tipos_vias VALUES (9, 'Poblado');
+INSERT INTO lk_tipos_vias VALUES (10, 'Polígono');
+INSERT INTO lk_tipos_vias VALUES (11, 'Rambla');
+INSERT INTO lk_tipos_vias VALUES (12, 'Ronda');
+INSERT INTO lk_tipos_vias VALUES (13, 'Travesía');
+INSERT INTO lk_tipos_vias VALUES (14, 'Urbanización');
+INSERT INTO lk_tipos_vias VALUES (15, 'Vía');
+
