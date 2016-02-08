@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -34,19 +35,25 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 
 		SeguroViviendaBean model = new SeguroViviendaBean();
 		
-		String xml = request.getServletContext().getRealPath("/WEB-INF/flows/seguroHogar/contratacion.xml");
-		session.setAttribute("flow", DocumentHelper.parseText(FileUtils.readFileToString(new File(xml), "UTF-8")));
+		String className = getClass().getCanonicalName();
 		
-		response.sendRedirect(request.getContextPath() + "/seguroHogar.do?method=onStep&step=1");
+		String flowDirectory = StringUtils.removeEnd(className, "FlowAction");
+		flowDirectory = StringUtils.uncapitalize(StringUtils.substringAfterLast(flowDirectory, "."));
+		
+		String xml = request.getServletContext().getRealPath("/WEB-INF/flows/" + flowDirectory + "/contratacion.xml");
+		session.setAttribute("flow", DocumentHelper.parseText(FileUtils.readFileToString(new File(xml), "UTF-8")));
+
+		Document flow = (Document)session.getAttribute("flow");
+		Node node = flow.selectSingleNode("//flow");
+		String flowName = node.valueOf("@name");
+		
+		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=1");
 		
 		saveErrors(request, null);
 		saveMessages(request, null);
 		session.removeAttribute("pageErrors");
 		session.removeAttribute("pageMessages");
 
-		Document flow = (Document)session.getAttribute("flow");
-		
-		Node node = flow.selectSingleNode("//flow");
 		String onEntryClass = node.valueOf("on-entry");
 		
 		Class<?> cl = Class.forName(onEntryClass);
@@ -67,11 +74,6 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		
 		HttpSession session = request.getSession();
 		
-		if (session.isNew() || session.getAttribute("currentStep") == null) {
-			response.sendRedirect(request.getContextPath() + "/seguroHogar.do?method=onEntry");
-			return null;
-		}
-		
 		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
 		
 		request.setAttribute("tiposUsosViviendas", lookupService.getTiposUsosViviendas());
@@ -81,6 +83,12 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		
 		Node node = flow.selectSingleNode("//flow");
 		String flowName = node.valueOf("@name");
+		
+		if (session.isNew() || session.getAttribute("currentStep") == null) {
+			response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onEntry");
+			return null;
+		}
+		
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		String view = node.valueOf("@view");
 		String title = node.valueOf("@title");
@@ -113,9 +121,13 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
 		
 		HttpSession session = request.getSession();
+
+		Document flow = (Document)session.getAttribute("flow");
+		Node node = flow.selectSingleNode("//flow");
+		String flowName = node.valueOf("@name");
 		
 		if (session.isNew() || session.getAttribute("currentStep") == null) {
-			response.sendRedirect(request.getContextPath() + "/seguroHogar.do?method=onEntry");
+			response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onEntry");
 			return null;
 		}
 		
@@ -131,9 +143,6 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		
 		ActionErrors errors = new ActionErrors();
 		ActionMessages messages = new ActionMessages();
-		Document flow = (Document)session.getAttribute("flow");
-		Node node = flow.selectSingleNode("//flow");
-		String flowName = node.valueOf("@name");
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		
 		if ((nextStep != null && nextStep > currentStep) || flowEvent.equals("goNext") || flowEvent.equals("goLast")) {
