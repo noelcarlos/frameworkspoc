@@ -4,7 +4,7 @@
 <%@ taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<input type="hidden" name="flowEvent" />
+<input id="_flowEvent" type="hidden" name="_flowEvent" />
 
 <div class="row">
 	<div class="col-md-12">

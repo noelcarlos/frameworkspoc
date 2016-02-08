@@ -34,7 +34,7 @@
 	    
 	    <SCRIPT type="text/javascript">
 	    	function sendEvent(eventName) {
-	    		flowForm.flowEvent.value = eventName;
+	    		$('#_flowEvent').val(eventName);
 	    		flowForm.submit();
 	    	}
 	    </SCRIPT>	

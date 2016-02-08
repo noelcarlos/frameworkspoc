@@ -13,10 +13,9 @@ public class QueQuieresProtegerOnEntryAction {
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		model.setNumPersonasQueVivenEnLaVivienda(1);
-		model.setTipoDeUsoViviendaId(1);
-
 		LookupService lookupService = new LookupService(context);
 		request.setAttribute("tiposUsosViviendas", lookupService.getTiposUsosViviendas());
+		
 	}
+	
 }

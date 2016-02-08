@@ -113,12 +113,12 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 	
 	public ActionForward onEntry(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("currentStep", "1");
 
 		SeguroViviendaBean model = new SeguroViviendaBean();
-		session.setAttribute("model", model);
 		
 		String xml = request.getServletContext().getRealPath("/WEB-INF/flows/seguroHogar/contratacion.xml");
 		session.setAttribute("flow", DocumentHelper.parseText(FileUtils.readFileToString(new File(xml), "UTF-8")));
@@ -129,6 +129,18 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		saveMessages(request, null);
 		session.removeAttribute("pageErrors");
 		session.removeAttribute("pageMessages");
+
+		Document flow = (Document)session.getAttribute("flow");
+		
+		Node node = flow.selectSingleNode("//flow");
+		String onEntryClass = node.valueOf("on-entry");
+		
+		Class<?> cl = Class.forName(onEntryClass);
+		Object action = cl.newInstance();
+		Method m = Utility.findFirst(cl, "execute");
+		m.invoke(action, context, model, request, response);
+
+		session.setAttribute("model", model);
 		
 		return null;
 	}
@@ -193,26 +205,33 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 			return null;
 		}
 		
-		String flowEvent = request.getParameter("flowEvent").toString();
+		String flowEvent = request.getParameter("_flowEvent").toString();
+		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
+		Integer nextStep = null;
+		
+		if (flowEvent.startsWith("go-")) {
+			nextStep = Integer.parseInt(flowEvent.substring(3));
+		}
 
 		SeguroViviendaBean model = (SeguroViviendaBean) session.getAttribute("model");
 		
 		ActionErrors errors = new ActionErrors();
 		ActionMessages messages = new ActionMessages();
-		convertAndValidate((LazyValidatorForm)form, model, errors, messages);
-		
-		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
-
 		Document flow = (Document)session.getAttribute("flow");
 		Node node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		
-		String postActionClass = node.valueOf("on-exit");
+		if (nextStep == null || currentStep < nextStep || flowEvent.equals("goNext") || flowEvent.equals("goLast")) {
+			convertAndValidate((LazyValidatorForm)form, model, errors, messages);
+			
+			String postActionClass = node.valueOf("on-exit");
 
-		Class<?> cl = Class.forName(postActionClass);
-		Object action = cl.newInstance();
-		Method m = Utility.findFirst(cl, "execute");
+			Class<?> cl = Class.forName(postActionClass);
+			Object action = cl.newInstance();
+			Method m = Utility.findFirst(cl, "execute");
+			
+			m.invoke(action, context, model, request, response, errors);
+		}
 		
-		m.invoke(action, context, model, request, response, errors);
 		
 		if (errors.size() > 0) {
 			flowEvent = "";
@@ -237,6 +256,8 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 			}
 		} else 	if (flowEvent.equals("goLast")) {
 			currentStep = lastPageNumber;
+		} else if (flowEvent.startsWith("go-")) {
+			currentStep = nextStep;
 		}
 		
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");

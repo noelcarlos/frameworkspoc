@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow name="seguroHogar">
+	<on-entry>es.generali.strutspoc.controllers.seguroHogar.InitFlowAction</on-entry>
+	
 	<step name="1" view="queQuieresProteger" menu="Que quieres proteger" title="¿Que quieres proteger?">
 		<on-entry>es.generali.strutspoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction</on-entry>
 		<on-exit>es.generali.strutspoc.controllers.seguroHogar.QueQuieresProtegerOnExitAction</on-exit>
@@ -39,5 +41,6 @@
 	<step name="10" view="resumen" menu="Resumen" title="Resumen del producto contratado" >
 		<on-entry>es.generali.strutspoc.controllers.seguroHogar.ResumenOnEntryAction</on-entry>
 		<on-exit>es.generali.strutspoc.controllers.seguroHogar.ResumenOnExitAction</on-exit>
-	</step>				
+	</step>
+					
 </flow>
