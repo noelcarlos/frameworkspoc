@@ -23,4 +23,36 @@
 		<put name="body" value="/WEB-INF/flows/seguroHogar/localizacion.jsp" />
 	</definition>
 	
+	<definition name="seguroHogar.sobreLaConstruccion" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/sobreLaConstruccion.jsp" />
+	</definition>
+	
+	<definition name="seguroHogar.datosDeLaVivienda" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/datosDeLaVivienda.jsp" />
+	</definition>
+	
+	<definition name="seguroHogar.medidasDeSeguridadDeTuVivienda" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/medidasDeSeguridadDeTuVivienda.jsp" />
+	</definition>
+	
+	<definition name="seguroHogar.personalizarPaquete" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/personalizarPaquete.jsp" />
+	</definition>
+	
+	<definition name="seguroHogar.datosDelTitular" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/datosDelTitular.jsp" />
+	</definition>
+	
+	<definition name="seguroHogar.datosDeLaViviendaAAsegurar" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/datosDeLaViviendaAAsegurar.jsp" />
+	</definition>
+	
+	<definition name="seguroHogar.datosDePago" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/datosDePago.jsp" />
+	</definition>
+
+	<definition name="seguroHogar.resumen" extends="base.definition">
+		<put name="body" value="/WEB-INF/flows/seguroHogar/resumen.jsp" />
+	</definition>
+	
 </tiles-definitions>

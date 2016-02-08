@@ -132,9 +132,11 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		ActionErrors errors = new ActionErrors();
 		ActionMessages messages = new ActionMessages();
 		Document flow = (Document)session.getAttribute("flow");
-		Node node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+		Node node = flow.selectSingleNode("//flow");
+		String flowName = node.valueOf("@name");
+		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		
-		if (nextStep == null || currentStep < nextStep || flowEvent.equals("goNext") || flowEvent.equals("goLast")) {
+		if ((nextStep != null && nextStep > currentStep) || flowEvent.equals("goNext") || flowEvent.equals("goLast")) {
 			convertAndValidate((LazyValidatorForm)form, model, errors, messages);
 			
 			String postActionClass = node.valueOf("on-exit");
@@ -153,8 +155,6 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		
 		session.setAttribute("pageErrors", errors);
 		session.setAttribute("pageMessages", messages);
-		
-		String flowName = node.valueOf("@name");
 		
 		int lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
 		

@@ -14,7 +14,7 @@
 			<button type="button" class="btn btn-default" onclick="sendEvent('goPrevious');">
 				Anterior
 			</button>
-			<button type="button" class="btn btn-default" onclick="sendEvent('goNext');">
+			<button type="button" class="btn btn-success" onclick="sendEvent('goNext');">
 				Siguiente
 			</button>
 			<button type="button" class="btn btn-default" onclick="sendEvent('goLast');">
