@@ -39,7 +39,7 @@
 				</div>
 				<div class="form-group col-md-4">
 					<label class="control-label" for="fechaDeNacimiento">Fecha de nacimiento:</label>
-					<html:text property="fechaDeNacimiento" styleClass="form-control"></html:text>
+					<html:text property="fechaDeNacimiento" styleClass="form-control date-picker"></html:text>
 				</div>
 				<div class="form-group col-md-3">
 					<label class="control-label" for="sexoId">Sexo:</label>
@@ -94,9 +94,10 @@
 		</div>	
 		<div class="row col-md-12">
 			<div class="form-group col-md-12">
-				<label><html:checkbox property="laViviendaAsegurarCoincideConLaDelTitular"></html:checkbox>
-					La vivienda a asegurar coincide con la del titular
-				</label>
+				<div class="checkbox checkbox-primary">
+					<html:checkbox property="laViviendaAsegurarCoincideConLaDelTitular" styleId="laViviendaAsegurarCoincideConLaDelTitular"></html:checkbox>
+					<label for="laViviendaAsegurarCoincideConLaDelTitular">La vivienda a asegurar coincide con la del titular</label>
+				</div>
 			</div>
 		</div>
 		

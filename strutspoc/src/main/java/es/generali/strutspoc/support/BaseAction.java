@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.Converter;
+import org.apache.commons.beanutils.LazyDynaBean;
 import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
@@ -82,8 +83,7 @@ public class BaseAction extends DispatchAction {
 
 	        /*Object value = getter.invoke(model);*/
 	        //System.out.println(name + " = " + value + "; type = " + type);
-
-	        if (frm.getMap().containsKey(name) && setter != null) {
+	        if (frm.getMap().keySet().contains(name) && setter != null) {
 		        String strValue = (String)frm.get(name);
 		        
 //		        NotNull notNull = getter.getAnnotation(NotNull.class);
@@ -106,6 +106,46 @@ public class BaseAction extends DispatchAction {
 		        	} catch (Exception exp) {
 		        		errors.add(name, new ActionError("error.literal", exp.getMessage()));
 		        		//messages.add(name, new ActionMessage("error.literal", "MSG:" + exp.getMessage()));
+		        	}
+		        }
+	        }
+	    }
+	}
+	
+	protected void convertAndValidate(HttpServletRequest request, Object model, ActionErrors errors, ActionMessages messages) 
+			throws IntrospectionException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	    BeanInfo info = Introspector.getBeanInfo(model.getClass(), Object.class);
+	    PropertyDescriptor[] props = info.getPropertyDescriptors();
+	    
+	    Converter myConverter = new IntegerConverter();
+	    
+	    ConvertUtils.register(myConverter, Integer.TYPE);    // Native type
+	    ConvertUtils.register(myConverter, Integer.class);   // Wrapper class	    
+	    
+	    for (PropertyDescriptor pd : props) {
+	        String name = pd.getName();
+	        Method getter = pd.getReadMethod();
+	        Method setter = pd.getWriteMethod();
+	        Class<?> type = pd.getPropertyType();
+
+	        if (getter == null) {
+	        	continue;
+	        }
+
+	        if (request.getParameter(name) != null && setter != null) {
+		        String strValue = (String)request.getParameter(name);
+		        
+		        if (strValue == null)
+		        	setter.invoke(model, new Object[]{null});
+		        else {
+		        	try {
+		        		if (StringUtils.isEmpty(strValue) && !setter.getParameterTypes()[0].isInstance(String.class)) {
+				        	setter.invoke(model, new Object[]{null});
+		        		} else {
+		        			setter.invoke(model, ConvertUtils.convert(strValue, type));
+		        		}
+		        	} catch (Exception exp) {
+		        		errors.add(name, new ActionError("error.literal", exp.getMessage()));
 		        	}
 		        }
 	        }

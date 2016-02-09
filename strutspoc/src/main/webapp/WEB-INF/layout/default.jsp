@@ -15,6 +15,8 @@
 		
 	    <link href="${pageContext.request.contextPath}/static/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="${pageContext.request.contextPath}/static/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+		<link href="${pageContext.request.contextPath}/static/plugins/awesome-bootstrap/awesome-bootstrap-checkbox.css" rel="stylesheet" />
+		<link href="${pageContext.request.contextPath}/static/plugins/bootstrap-datepicker-1.5.1/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
 		
 	 	<!-- App Style -->
 		<link href="${pageContext.request.contextPath}/static/style.css" rel="stylesheet" />
@@ -31,12 +33,34 @@
 	    
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 	    <script src="${pageContext.request.contextPath}/static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+	    <script src="${pageContext.request.contextPath}/static/plugins/bootstrap-datepicker-1.5.1/js/bootstrap-datepicker.min.js"></script>
 	    
 	    <SCRIPT type="text/javascript">
 	    	function sendEvent(eventName) {
 	    		$('#_flowEvent').val(eventName);
 	    		flowForm.submit();
 	    	}
+	    	
+	    	function setupEvent(eventName) {
+	    		$('#_setupEvent').val(eventName);
+	    		setupForm.submit();
+	    	}
+	    	
+	    	function selectAllSetupChecks() {
+    			$( ".chkComponent" ).each(function() {
+	    			if ($("#all").is(':checked')) {
+	    			 	$(this).prop('checked', true);
+	    			} else {
+	    			  	$(this).prop('checked', false);
+	    			}
+	    		});
+	    	}
+	    	
+	    	$(function() {
+		    	$('input.date-picker').datepicker({
+		    	    language: "es"
+		    	});
+	    	});
 	    </SCRIPT>	
 	
 	</head>

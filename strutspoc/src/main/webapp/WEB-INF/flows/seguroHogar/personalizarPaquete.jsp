@@ -26,20 +26,25 @@
 					
 			<div class="form-group">
 				<label class="control-label">Opciones</label>
-				<div class="checkbox">
-					<label><html:checkbox property="opcionRotura"></html:checkbox>Rotura</label>
+				<div class="checkbox checkbox-primary">
+					<html:checkbox styleId="opcionRotura" property="opcionRotura"></html:checkbox>
+					<label for="opcionRotura">Rotura</label>
 				</div>
-				<div class="checkbox">
-					<label><html:checkbox property="opcionRobo"></html:checkbox>Robo</label>
+				<div class="checkbox checkbox-primary">
+					<html:checkbox styleId="opcionRobo" property="opcionRobo"></html:checkbox>
+					<label for="opcionRobo">Robo</label>
 				</div>
-				<div class="checkbox">
-					<label><html:checkbox property="opcionDefensaJuridica"></html:checkbox>Defensa juridica</label>
+				<div class="checkbox checkbox-primary">
+					<html:checkbox styleId="opcionDefensaJuridica" property="opcionDefensaJuridica"></html:checkbox>
+					<label for="opcionDefensaJuridica">Defensa juridica</label>
 				</div>
-				<div class="checkbox">
-					<label><html:checkbox property="opcionInhabilidad"></html:checkbox>Inhabilidad</label>
+				<div class="checkbox checkbox-primary">
+					<html:checkbox styleId="opcionInhabilidad" property="opcionInhabilidad"></html:checkbox>
+					<label for="opcionInhabilidad">Inhabilidad</label>
 				</div>
-				<div class="checkbox">
-					<label><html:checkbox property="opcionAsistenciaInformatica"></html:checkbox>Asistencia informática</label>
+				<div class="checkbox checkbox-primary">
+					<html:checkbox styleId="opcionAsistenciaInformatica" property="opcionAsistenciaInformatica"></html:checkbox>
+					<label for="opcionAsistenciaInformatica">Asistencia informática</label>
 				</div>
 			</div>	
 			

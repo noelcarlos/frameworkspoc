@@ -371,4 +371,13 @@ public class SeguroViviendaBean extends ActionForm {
 	public void setCuentaNumero(String cuentaNumero) {
 		map.put("cuentaNumero", cuentaNumero);
 	}
+	
+	/* Entra */
+	
+	public String getContrato() {
+		return (String)map.get("contrato");
+	}
+	public void setContrato(String contrato) {
+		map.put("contrato", contrato);
+	}
 }

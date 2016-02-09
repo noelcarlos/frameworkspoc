@@ -13,17 +13,21 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				<label class="control-label">Caracteristicas</label>
-				<div class="checkbox">
-					<label><html:checkbox property="rejasEnVentanasOSimilares"></html:checkbox>Rejas en ventanas o similares</label>
+				<div class="checkbox checkbox-primary">
+					<html:checkbox styleId="rejasEnVentanasOSimilares" property="rejasEnVentanasOSimilares"></html:checkbox>
+					<label for="rejasEnVentanasOSimilares">Rejas en ventanas o similares</label>
 				</div>
-				<div class="checkbox">
-					<label><html:checkbox property="puertaDeSeguridad"></html:checkbox>Puerta de seguridad</label>
+				<div class="checkbox checkbox-primary">
+					<html:checkbox styleId="puertaDeSeguridad" property="puertaDeSeguridad"></html:checkbox>
+					<label for="puertaDeSeguridad">Puerta de seguridad</label>
 				</div>
-				<div class="checkbox">
-					<label><html:checkbox property="alarmaConectada"></html:checkbox>Alarma conectada a central de seguridad o vigilancia 24h</label>
+				<div class="checkbox checkbox-primary">
+					<html:checkbox styleId="alarmaConectada" property="alarmaConectada"></html:checkbox>
+					<label for="alarmaConectada">Alarma conectada a central de seguridad o vigilancia 24h</label>
 				</div>
-				<div class="checkbox">
-					<label><html:checkbox property="cajaFuerte"></html:checkbox>Caja fuerte</label>
+				<div class="checkbox checkbox-primary">
+					<html:checkbox styleId="cajaFuerte" property="cajaFuerte"></html:checkbox>
+					<label for="cajaFuerte">Caja fuerte</label>
 				</div>
 			</div>			
 		</div>	

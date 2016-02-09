@@ -19,6 +19,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import es.generali.strutspoc.models.ConfiguracionBean;
 import es.generali.strutspoc.models.SeguroViviendaBean;
 import es.generali.strutspoc.services.LookupService;
 import es.generali.strutspoc.support.LazyValidatorForm;
@@ -39,6 +40,9 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("currentStep", "1");
+		
+		ConfiguracionBean config = new ConfiguracionBean();
+		session.setAttribute("config", config);
 
 		SeguroViviendaBean model = new SeguroViviendaBean();
 		
@@ -66,6 +70,8 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		m.invoke(action, context, model, request, response);
 
 		session.setAttribute("model", model);
+		int lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
+		session.setAttribute("lastPageNumber", "" + lastPageNumber);
 		
 		return null;
 	}
@@ -78,12 +84,14 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		
 		HttpSession session = request.getSession();
 		
-		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
-		
 		request.setAttribute("tiposUsosViviendas", lookupService.getTiposUsosViviendas());
-		/*request.setAttribute("model", session.getAttribute("model"));*/
 		
 		Document flow = (Document)session.getAttribute("flow");
+		
+		if (session.isNew() || session.getAttribute("currentStep") == null) {
+			response.sendRedirect(request.getContextPath() + "/" + getFlowDirectory() + ".do?method=onEntry");
+			return null;
+		}		
 		
 		Node node = flow.selectSingleNode("//flow");
 		String flowName = node.valueOf("@name");
@@ -93,11 +101,13 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 			return null;
 		}
 		
+		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
+
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		String view = node.valueOf("@view");
 		String title = node.valueOf("@title");
 		request.setAttribute("currentPageTitle", title);
-		request.setAttribute("currentPageNumber", currentStep);
+		request.setAttribute("currentPageNumber", "" + currentStep);
 		
 		String preActionClass = node.valueOf("on-entry");
 		
@@ -197,12 +207,41 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		/*String view = node.valueOf("@view");*/
 		String title = node.valueOf("@title");
 		request.setAttribute("currentPageTitle", title);
-		request.setAttribute("currentPageNumber", currentStep);
+		request.setAttribute("currentPageNumber", "" + currentStep);
 		
-		session.setAttribute("currentStep", currentStep); 
+		session.setAttribute("currentStep", "" + currentStep); 
 		
 		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
 		
 		return null;
 	}
+	
+	public ActionForward onSetup(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+		
+		HttpSession session = request.getSession();
+		
+		ActionErrors errors = new ActionErrors();
+		ActionMessages messages = new ActionMessages();
+		convertAndValidate(request, session.getAttribute("config"), errors, messages);
+		
+		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
+		
+		Document flow = (Document)session.getAttribute("flow");
+		Node node = flow.selectSingleNode("//flow");
+		String flowName = node.valueOf("@name");
+		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+		String title = node.valueOf("@title");
+		request.setAttribute("currentPageTitle", title);
+		request.setAttribute("currentPageNumber", "" + currentStep);
+		
+		session.setAttribute("currentStep", "" + currentStep); 
+		
+		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
+		
+		return null;
+	}
+
 }

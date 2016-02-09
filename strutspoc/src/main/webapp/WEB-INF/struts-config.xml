@@ -24,7 +24,7 @@
 		<!-- PROCESS -->
 		
 		<action path="/init" type="es.generali.strutspoc.controllers.InitAction" 
-			name="flowForm" scope="session" validate="true" parameter="method" >
+			name="flowForm" scope="request" validate="true" parameter="method" >
   			<forward name="app.init" path="app.init" /> 
 		</action>
 		
