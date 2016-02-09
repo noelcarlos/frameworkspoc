@@ -225,6 +225,7 @@ public class SeguroHogarFlowAction extends es.generali.strutspoc.support.BaseAct
 		
 		ActionErrors errors = new ActionErrors();
 		ActionMessages messages = new ActionMessages();
+		
 		convertAndValidate(request, session.getAttribute("config"), errors, messages);
 		
 		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
