@@ -24,7 +24,7 @@ public class ConfiguracionBean {
 		datosDeLaViviendaAAsegurar = false;
 		datosDePago = false;
 		resumen = false;
-		kbContrato = 100*1024;
+		kbContrato = 100;
 	}
 	
 	public Boolean getQueQuieresProteger() {

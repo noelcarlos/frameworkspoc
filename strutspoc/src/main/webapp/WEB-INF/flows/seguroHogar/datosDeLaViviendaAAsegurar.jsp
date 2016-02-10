@@ -13,31 +13,31 @@
 		<div class="col-md-12">
 			<div class="row clearfix">
 				<div class="form-group col-md-2">
-					<label class="control-label" for="tipoDeVíaTitularId">Tipo de via:</label>
-					<html:select property="tipoDeVíaTitularId" styleClass="form-control">
+					<label class="control-label" for="tipoDeVíaViviendaId">Tipo de via:</label>
+					<html:select property="tipoDeVíaViviendaId" styleClass="form-control">
 						<html:option value="" ></html:option>
 						<html:options collection="tiposDeVias" property="id" labelProperty="nombre" />
 					</html:select>
 				</div>
 				<div class="form-group col-md-2">
-					<label class="control-label" for="domicilioTitular">Domicilio:</label>
-					<html:text property="domicilioTitular" styleClass="form-control"></html:text>
+					<label class="control-label" for="domicilioVivienda">Domicilio:</label>
+					<html:text property="domicilioVivienda" styleClass="form-control"></html:text>
 				</div>
 				<div class="form-group col-md-2">
-					<label class="control-label" for="numeroYPisoTitular">Número y piso:</label>
-					<html:text property="numeroYPisoTitular" styleClass="form-control"></html:text>
+					<label class="control-label" for="numeroYPisoVivienda">Número y piso:</label>
+					<html:text property="numeroYPisoVivienda" styleClass="form-control"></html:text>
 				</div>
 				<div class="form-group col-md-2">
-					<label class="control-label" for="codigoPostalTitular">Código postal:</label>
-					<html:text property="codigoPostalTitular" styleClass="form-control"></html:text>
+					<label class="control-label" for="codigoPostalVivienda">Código postal:</label>
+					<html:text property="codigoPostalVivienda" styleClass="form-control"></html:text>
 				</div>
 				<div class="form-group col-md-2">
-					<label class="control-label" for="localidadTitular">Localidad:</label>
-					<html:text property="localidadTitular" styleClass="form-control"></html:text>
+					<label class="control-label" for="localidadVivienda">Localidad:</label>
+					<html:text property="localidadVivienda" styleClass="form-control"></html:text>
 				</div>
 				<div class="form-group col-md-2">
-					<label class="control-label" for="provinciaTitularId">Provincia:</label>
-					<html:select property="provinciaTitularId" styleClass="form-control">
+					<label class="control-label" for="provinciaViviendaId">Provincia:</label>
+					<html:select property="provinciaViviendaId" styleClass="form-control">
 						<html:option value="" ></html:option>
 						<html:options collection="provincias" property="id" labelProperty="nombre" />
 					</html:select>

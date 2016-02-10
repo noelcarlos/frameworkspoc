@@ -37,7 +37,7 @@
 			<div class="row clearfix">
 				<div class="form-group col-md-4">
 					<label class="control-label" for="fechaDeEfecto">Fecha de efecto:</label>
-					<html:text property="fechaDeEfecto" styleClass="form-control"></html:text>
+					<html:text property="fechaDeEfecto" styleClass="form-control date-picker"></html:text>
 				</div>			
 			</div>
 			

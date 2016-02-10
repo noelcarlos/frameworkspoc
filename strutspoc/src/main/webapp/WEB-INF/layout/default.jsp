@@ -34,6 +34,7 @@
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 	    <script src="${pageContext.request.contextPath}/static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
 	    <script src="${pageContext.request.contextPath}/static/plugins/bootstrap-datepicker-1.5.1/js/bootstrap-datepicker.min.js"></script>
+	    <script src="${pageContext.request.contextPath}/static/plugins/bootstrap-datepicker-1.5.1/locales/bootstrap-datepicker.es.min.js"></script>
 	    
 	    <SCRIPT type="text/javascript">
 	    	function sendEvent(eventName) {

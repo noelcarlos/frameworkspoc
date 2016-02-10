@@ -6,23 +6,31 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.Converter;
-import org.apache.commons.beanutils.LazyDynaBean;
+import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.IntegerConverter;
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.actions.DispatchAction;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
  
 public class BaseAction extends DispatchAction {
 	protected WebApplicationContext context;
+	
+	public String getFlowDirectory() {
+		String className = getClass().getCanonicalName();
+		String flowDirectory = StringUtils.removeEnd(className, "FlowAction");
+		flowDirectory = StringUtils.uncapitalize(StringUtils.substringAfterLast(flowDirectory, "."));
+		return flowDirectory;
+	}
 	
 	protected Object getSessionBeanProperty(HttpServletRequest request, String beanName, String key, Object value) {
 		Record rec = (Record)request.getSession().getAttribute(beanName);
@@ -44,7 +52,7 @@ public class BaseAction extends DispatchAction {
 	    BeanInfo info = Introspector.getBeanInfo(model.getClass(), Object.class);
 	    PropertyDescriptor[] props = info.getPropertyDescriptors();
 	    
-	    ConvertUtilsBean convert = new ConvertUtilsBean();
+	    initConverters();
 	    
 	    for (PropertyDescriptor pd : props) {
 	        String name = pd.getName();
@@ -56,7 +64,7 @@ public class BaseAction extends DispatchAction {
 	        }
 	        
 		    Object value = getter.invoke(model);
-		    String strValue = convert.convert(value);
+		    String strValue = (String)ConvertUtils.convert(value, String.class);
 		    frm.set(name, strValue);
 	    }
 	}
@@ -66,10 +74,7 @@ public class BaseAction extends DispatchAction {
 	    BeanInfo info = Introspector.getBeanInfo(model.getClass(), Object.class);
 	    PropertyDescriptor[] props = info.getPropertyDescriptors();
 	    
-	    Converter myConverter = new IntegerConverter();
-	    
-	    ConvertUtils.register(myConverter, Integer.TYPE);    // Native type
-	    ConvertUtils.register(myConverter, Integer.class);   // Wrapper class	    
+	    initConverters();
 	    
 	    for (PropertyDescriptor pd : props) {
 	        String name = pd.getName();
@@ -82,7 +87,6 @@ public class BaseAction extends DispatchAction {
 	        }
 
 	        /*Object value = getter.invoke(model);*/
-	        //System.out.println(name + " = " + value + "; type = " + type);
 	        if (frm.getMap().keySet().contains(name) && setter != null) {
 		        String strValue = (String)frm.get(name);
 		        
@@ -117,10 +121,7 @@ public class BaseAction extends DispatchAction {
 	    BeanInfo info = Introspector.getBeanInfo(model.getClass(), Object.class);
 	    PropertyDescriptor[] props = info.getPropertyDescriptors();
 	    
-	    Converter myConverter = new IntegerConverter();
-	    
-	    ConvertUtils.register(myConverter, Integer.TYPE);    // Native type
-	    ConvertUtils.register(myConverter, Integer.class);   // Wrapper class	    
+	    initConverters();
 	    
 	    for (PropertyDescriptor pd : props) {
 	        String name = pd.getName();
@@ -150,5 +151,17 @@ public class BaseAction extends DispatchAction {
 		        }
 	        }
 	    }
+	}
+
+	private void initConverters() {
+	    Converter myConverter = new IntegerConverter();
+
+	    DateConverter dateConverter = new DateConverter();
+	    dateConverter.setLocale(new Locale("es", "es"));
+	    dateConverter.setPattern("dd/MM/yyyy");
+	    
+	    ConvertUtils.register(myConverter, Integer.TYPE);    // Native type
+	    ConvertUtils.register(myConverter, Integer.class);   // Wrapper class
+	    ConvertUtils.register(dateConverter, Date.class);   // Wrapper class
 	}
 }
