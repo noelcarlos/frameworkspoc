@@ -88,4 +88,14 @@ public class Record extends HashMap<String, Object> {
 		}
 		return r;
 	}
+	
+	public Record set(String fieldname, Object value) {
+		put(fieldname, value);
+		return this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public<T> T get(String fieldname) {
+		return (T)super.get(fieldname);
+	}
 }

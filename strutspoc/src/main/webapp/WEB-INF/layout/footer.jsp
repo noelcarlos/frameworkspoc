@@ -68,7 +68,7 @@
 		<div class="form-group">
 			<div class="col-md-6">
 				<button type="button" class="btn btn-default" onClick="setupEvent('pg-${ result.valueOf('@name')}');">
-					Actualizar
+					Aplicar
 				</button>
 			</div>
 		</div>

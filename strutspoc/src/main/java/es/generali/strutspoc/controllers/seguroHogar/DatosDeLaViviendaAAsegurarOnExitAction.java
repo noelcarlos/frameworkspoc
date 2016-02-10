@@ -8,21 +8,26 @@ import org.apache.struts.action.ActionErrors;
 import org.springframework.web.context.WebApplicationContext;
 
 import es.generali.strutspoc.models.SeguroViviendaBean;
+import es.generali.strutspoc.support.Validator;
 
 public class DatosDeLaViviendaAAsegurarOnExitAction {
 
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
 			HttpServletRequest request, HttpServletResponse response, ActionErrors errors) throws Exception {
 		
-		/*
-		if (model.getProvinciaId() == null) {
-    		errors.add("provinciaId", new ActionError("error.literal", "Debe de seleccionar una provincia"));
-		}
+		new Validator()
+			.model(model)
+			.mandatory("tipoDeVíaViviendaId")
+			.mandatory("domicilioVivienda")
+			.mandatory("numeroYPisoVivienda")
+			.mandatory("codigoPostalVivienda")
+			.mandatory("localidadVivienda")
+			.mandatory("provinciaViviendaId")
+			.validate(request, (fieldName, message)-> {
+	    		errors.add(fieldName, new ActionError("error.literal", message));
+			}
+		);
 		
-		if (model.getLocalizacionId() == null) {
-    		errors.add("localizacionId", new ActionError("error.literal", "Seleccione en que lugar se encuentra la vivienda"));
-		}
-		*/
 	}
 	
 }
