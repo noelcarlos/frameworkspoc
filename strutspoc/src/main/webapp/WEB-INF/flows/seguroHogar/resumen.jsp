@@ -11,11 +11,22 @@
 	<jsp:include page="../commons/flowFormErrors.jsp" />
 	
 	<div class="row">
-		<div class="col-md-12">
-			<span class="h2">PRECIO FINAL</span>
-			<span class="price-xl text-success">
-			 	<fmt:formatNumber type="number" maxFractionDigits="2" value="${model.precio}" ></fmt:formatNumber>
-			</span>	
+		<div class="col-md-4">
+			<div class="panel dark-green-border">
+               <div class="panel-heading green-back white-color">
+                   <h3 class="panel-title">PRECIO FINAL</h3>
+               </div>
+               <ul class="panel-body list-group">
+                   <li class="list-group-item">
+						<span class="price-xl text-success">
+						 	<center><fmt:formatNumber type="number" maxFractionDigits="2" value="${model.precio}" ></fmt:formatNumber> €</center>
+						</span>	
+                   </li>
+                   <li class="list-group-item">
+                         <center>Lea atentamente su contrato</center>
+                   </li>
+               </ul>
+           </div>
 		</div>
 	</div>
 	

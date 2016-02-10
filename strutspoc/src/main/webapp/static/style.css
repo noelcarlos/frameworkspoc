@@ -187,6 +187,13 @@ h3 {
   border: solid 1px #EC407A;
 }
 
+.white-color {
+  color: #fff;
+}
+.black-color {
+  color: #000;
+}
+
 .line-box .list-group-item {
 	border-top: 0px none #ddd;
 	border-right: 0px none #ddd;

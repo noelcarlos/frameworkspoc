@@ -18,6 +18,15 @@
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
+	
+	<filter>
+		<filter-name>SessionCacheWebFilter</filter-name>
+		<filter-class>es.generali.strutspoc.support.SessionCacheWebFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionCacheWebFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>	
 	 
 	<!-- Action Servlet Configuration -->
 	<servlet>
