@@ -164,14 +164,12 @@ public class SeguroHogarFlowAction extends BaseAction {
 			convertAndValidate((LazyValidatorForm)form, model, errors, messages);
 			
 			String postActionClass = node.valueOf("on-exit");
-
 			Class<?> cl = Class.forName(postActionClass);
 			Object action = cl.newInstance();
 			Method m = Utility.findFirst(cl, "execute");
-			
 			m.invoke(action, context, model, request, response, errors);
+			
 		}
-		
 		
 		if (errors.size() > 0) {
 			flowEvent = "";
@@ -195,11 +193,37 @@ public class SeguroHogarFlowAction extends BaseAction {
 		} else 	if (flowEvent.equals("goLast")) {
 			currentStep = lastPageNumber;
 		} else if (flowEvent.startsWith("go-")) {
-			currentStep = nextStep;
+			if (currentStep < nextStep) {
+				currentStep++;
+
+				while (currentStep < nextStep) {
+					node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+					
+					String preActionClass = node.valueOf("on-entry");
+					Class<?> cl = Class.forName(preActionClass);
+					Object action = cl.newInstance();
+					Method m = Utility.findFirst(cl, "execute");
+					ActionForm formModel = (ActionForm)session.getAttribute("model");
+					m.invoke(action, context, formModel, request, response);
+					
+					String postActionClass = node.valueOf("on-exit");
+					cl = Class.forName(postActionClass);
+					action = cl.newInstance();
+					m = Utility.findFirst(cl, "execute");
+					m.invoke(action, context, model, request, response, errors);
+					
+					if (errors.size() > 0) {
+						break;
+					}
+					
+					currentStep++;
+				}
+			} else {
+				currentStep = nextStep;
+			}
 		}
 		
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
-		/*String view = node.valueOf("@view");*/
 		String title = node.valueOf("@title");
 		request.setAttribute("currentPageTitle", title);
 		request.setAttribute("currentPageNumber", "" + currentStep);

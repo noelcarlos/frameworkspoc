@@ -109,7 +109,6 @@ public class BaseAction extends DispatchAction {
 		        		}
 		        	} catch (Exception exp) {
 		        		errors.add(name, new ActionError("error.literal", exp.getMessage()));
-		        		//messages.add(name, new ActionMessage("error.literal", "MSG:" + exp.getMessage()));
 		        	}
 		        }
 	        }
