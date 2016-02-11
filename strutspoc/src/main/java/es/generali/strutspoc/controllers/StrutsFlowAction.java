@@ -68,11 +68,8 @@ public abstract class StrutsFlowAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
-		LookupService lookupService = new LookupService(context);
 		
 		HttpSession session = request.getSession();
-		
-		request.setAttribute("tiposUsosViviendas", lookupService.getTiposUsosViviendas());
 		
 		Document flow = (Document)session.getAttribute("flow");
 		
@@ -106,6 +103,8 @@ public abstract class StrutsFlowAction extends BaseAction {
 		m.invoke(action, context, model, request, response);
 		
 		modelToForm(model, (LazyValidatorForm)form);
+
+		session.setAttribute("model", model);
 		
 		if (session.getAttribute("pageMessages") != null) {
 			saveMessages(request, (ActionMessages)session.getAttribute("pageMessages"));
@@ -155,21 +154,19 @@ public abstract class StrutsFlowAction extends BaseAction {
 		
 		if ((nextStep != null && nextStep > currentStep) || flowEvent.equals("goNext") || flowEvent.equals("goLast")) {
 			convertAndValidate((LazyValidatorForm)form, model, errors, messages);
+			session.setAttribute("model", model);
 			
 			String postActionClass = node.valueOf("on-exit");
 			Class<?> cl = Class.forName(postActionClass);
 			Object action = cl.newInstance();
 			Method m = Utility.findFirst(cl, "execute");
 			m.invoke(action, context, model, request, response, errors);
-			
+			session.setAttribute("model", model);
 		}
 		
 		if (errors.size() > 0) {
 			flowEvent = "";
 		}
-		
-		session.setAttribute("pageErrors", errors);
-		session.setAttribute("pageMessages", messages);
 		
 		int lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
 		
@@ -198,12 +195,14 @@ public abstract class StrutsFlowAction extends BaseAction {
 					Method m = Utility.findFirst(cl, "execute");
 					ActionForm formModel = (ActionForm)session.getAttribute("model");
 					m.invoke(action, context, formModel, request, response);
+					session.setAttribute("model", formModel);
 					
 					String postActionClass = node.valueOf("on-exit");
 					cl = Class.forName(postActionClass);
 					action = cl.newInstance();
 					m = Utility.findFirst(cl, "execute");
 					m.invoke(action, context, model, request, response, errors);
+					session.setAttribute("model", formModel);
 					
 					if (errors.size() > 0) {
 						break;
@@ -220,8 +219,10 @@ public abstract class StrutsFlowAction extends BaseAction {
 		String title = node.valueOf("@title");
 		request.setAttribute("currentPageTitle", title);
 		request.setAttribute("currentPageNumber", "" + currentStep);
-		
 		session.setAttribute("currentStep", "" + currentStep); 
+
+		session.setAttribute("pageErrors", errors);
+		session.setAttribute("pageMessages", messages);
 		
 		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
 		

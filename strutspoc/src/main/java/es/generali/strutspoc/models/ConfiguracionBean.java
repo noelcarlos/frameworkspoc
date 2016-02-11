@@ -1,6 +1,10 @@
 package es.generali.strutspoc.models;
 
-public class ConfiguracionBean {
+import java.io.Serializable;
+
+public class ConfiguracionBean implements Serializable {
+	private static final long serialVersionUID = 6707938793386834406L;
+	
 	Boolean queQuieresProteger;
 	Boolean localizacion;
 	Boolean sobreLaConstruccion;

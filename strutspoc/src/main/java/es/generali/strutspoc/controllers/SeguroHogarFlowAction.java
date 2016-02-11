@@ -41,9 +41,13 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 		ActionErrors errors = new ActionErrors();
 		ActionMessages messages = new ActionMessages();
 		
-		convertAndValidate(request, session.getAttribute("config"), errors, messages);
+		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
+		convertAndValidate(request, config, errors, messages);
+		session.setAttribute("config", config);
 		
-		setup((SeguroViviendaBean) session.getAttribute("model"), (ConfiguracionBean)session.getAttribute("config"));
+		SeguroViviendaBean model = (SeguroViviendaBean)session.getAttribute("model");
+		setup(model, (ConfiguracionBean)session.getAttribute("config"));
+		session.setAttribute("model", model);
 		
 		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
 		
@@ -63,7 +67,6 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 	}
 	
 	void setup(SeguroViviendaBean model, ConfiguracionBean config) {
-		
 		if (config.getQueQuieresProteger()) {
 			model.setTipoDeUsoViviendaId(1);
 			model.setNumPersonasQueVivenEnLaVivienda(4);

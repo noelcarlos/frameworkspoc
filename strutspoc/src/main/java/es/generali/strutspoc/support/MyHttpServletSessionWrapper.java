@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSessionContext;
 
 public class MyHttpServletSessionWrapper implements HttpSession {
 	HttpSession delegate;
+	//static IPersistenceDataStore dataStore = new HashMapPersistenceDataStore();
+	static IPersistenceDataStore dataStore = new RedistPersistenceDataStore();
 	
 	public MyHttpServletSessionWrapper(HttpSession original) {
 		delegate = original;
@@ -42,11 +44,13 @@ public class MyHttpServletSessionWrapper implements HttpSession {
 	}
 
 	public Object getAttribute(String name) {
-		return delegate.getAttribute(name);
+		return dataStore.getAttribute(getId(), name);
+		//return delegate.getAttribute(name);
 	}
 
 	public Object getValue(String name) {
-		return delegate.getValue(name);
+		return dataStore.getAttribute(getId(), name);
+		//return delegate.getValue(name);
 	}
 
 	public Enumeration<String> getAttributeNames() {
@@ -58,21 +62,23 @@ public class MyHttpServletSessionWrapper implements HttpSession {
 	}
 
 	public void setAttribute(String name, Object value) {
-		System.out.println("setAttribute:" + name + "=" + value + " on:" + getId());
-		delegate.setAttribute(name, value);
+		System.out.println("setAttribute:" + name + "=" + value + " on:" + getId());	
+		dataStore.setAttribute(getId(), name, value);
 	}
 
 	public void putValue(String name, Object value) {
 		System.out.println("putAttribute:" + name + "=" + value + " on:" + getId());
-		delegate.putValue(name, value);
+		dataStore.setAttribute(getId(), name, value);
 	}
 
 	public void removeAttribute(String name) {
-		delegate.removeAttribute(name);
+		dataStore.removeAttribute(getId(), name);
+		//delegate.removeAttribute(name);
 	}
 
 	public void removeValue(String name) {
-		delegate.removeValue(name);
+		dataStore.removeAttribute(getId(), name);
+		//delegate.removeValue(name);
 	}
 
 	public void invalidate() {
