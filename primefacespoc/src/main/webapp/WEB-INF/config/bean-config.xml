@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:faces="http://www.springframework.org/schema/faces"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       	http://www.springframework.org/schema/faces http://www.springframework.org/schema/faces/spring-faces-2.2.xsd">
+
+	<!-- For global mail service configuration 
+	<bean id="mailService" class="org.gen4gen.showcase.util.mail.EMailServiceDBImpl" />
+	
+	<bean id="cryptographyService" class="org.esmartpoint.jsfkarma.mail.CryptographyService">
+		<property name="encryptionKey" value="whATheHe2893AmDnABOUetUbunw2N03LH3rn4nd3Zdb4genshowcase" />
+	</bean>
+
+	<bean id="configuration" class="org.esmartpoint.jsfkarma.service.ConfigurationService">
+		<property name="fileName" value="/webappsconfig/db4genshowcase/conf.xml" />
+	</bean>
+
+	<bean id="templateService" class="org.esmartpoint.jsfkarma.service.TemplateService">
+		<property name="templatePath" value="WEB-INF://templates/" />
+	</bean>
+	
+	<bean id="namedQueryLoaderService" class="org.esmartpoint.jsfkarma.service.NamedQueryLoaderService">
+		<property name="fileName" value="WEB-INF://queries/globalQueries.xml" />
+		<property name="dialect" value="postgresql" />
+	</bean>
+	
+	<bean id="globalController" class="org.gen4gen.showcase.controller.core.GlobalController" />	
+
+	<bean id="schemaUpgradeController" class="org.gen4gen.showcase.controller.core.SchemaUpgradeController" />
+	-->
+</beans>

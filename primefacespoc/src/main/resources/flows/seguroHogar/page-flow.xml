@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	
+	<var name="initFlowAction" class="es.generali.primefacespoc.controllers.seguroHogar.InitFlowAction"/>
+	
+	<on-start>
+		<set name="" value=""></set>
+		<evaluate expression="initFlowAction.execute();" />
+	</on-start>
+	
+	<view-state id="queQuieresProteger">
+	
+	
+	</view-state>
+	
+</flow>

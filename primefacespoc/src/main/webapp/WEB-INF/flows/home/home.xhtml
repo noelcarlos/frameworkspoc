@@ -1,0 +1,317 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+                xmlns:sf="http://www.springframework.org/tags/faces"
+				template="../../layouts/standard.xhtml">
+
+<ui:define name="stripe">
+	<div class="teal-green-back"  style="padding-left:20px;padding-right:20px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>#{msg['core.home.title']}<br/>
+					<small>#{msg['core.home.subtitle']}</small>
+					</h1>
+				</div>
+			</div> 
+			<div class="separator" />
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card orange-border" style="min-height:90px;">
+						<center>
+				            <a href="http://www.springframework.org">
+				                <img src="${request.contextPath}/images/logos/powered-by-spring.png" alt="Powered by Spring" />
+				            </a>
+			            </center>
+			        </div>
+				</div>
+				<div class="col-md-4">
+			        <div class="card orange-border" style="min-height:90px;">
+						<center>
+				            <a href="http://www.primefaces.org">
+				                <img src="${request.contextPath}/images/logos/primefaces.gif" alt="Powered by primefaces" />
+				            </a>
+				        </center>
+			        </div>
+				</div>
+				<div class="col-md-4">
+			        <div class="card orange-border" style="min-height:90px;">
+						<center>
+				            <a href="http://www.hibernate.org">
+				                <img src="${request.contextPath}/images/logos/hibernate.gif" alt="Powered by hibernate" />
+				            </a>
+				        </center>
+			        </div>
+				</div>
+			</div> 
+			<div class="separator-sm" />
+			<div class="row">
+				<div class="col-md-4">
+			        <div class="card orange-border" style="min-height:90px;">
+						<center>
+				            <a href="http://www.hibernate.org">
+				                <img src="${request.contextPath}/images/logos/html5-css3.png" alt="HTML5 &amp; CS3" height="60" />
+				            </a>
+				        </center>
+			        </div>
+				</div>
+				<div class="col-md-4">
+			        <div class="card orange-border" style="min-height:90px;">
+						<center>
+				            <a href="http://www.hibernate.org">
+				                <img src="${request.contextPath}/images/logos/bootstrap.png" alt="Bootstrap" height="60" />
+				            </a>
+				        </center>
+			        </div>
+				</div>
+				<div class="col-md-4">
+			        <div class="card orange-border" style="min-height:90px;">
+						<center>
+				            <a href="http://commons.apache.org">
+				                <img src="${request.contextPath}/images/logos/apache-commons.png" alt="Powered by Apache Commons" width="175" height="50"/>
+				            </a>
+				        </center>
+			        </div>
+		        </div>
+		    </div>
+			<div class="separator" />
+		</div>
+	</div>	
+</ui:define>
+
+<ui:define name="content">
+	<!-- PAGE:STATIC:Home -->
+	<div class="separator-sm" />
+	<div class="row">
+		<div class="col-md-3">
+			<div class="separator-sm" />
+			<div class="panel panel-primary">
+			  <div class="panel-heading">
+			  	<h3>#{msg['core.home.panel1.title1']}</h3>
+			  </div>
+			  <div class="panel-body">
+			  	<ul class="list-group clear-list line-box">
+					<li class="list-group-item">
+#{msg['core.home.panel1.element1']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element2']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element3']}
+						<span class="label label-danger pull-right">#{msg['core.home.no']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element4']}
+						<span class="label label-danger pull-right">#{msg['core.home.no']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element5']}
+						<span class="label label-danger pull-right">#{msg['core.home.no']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element6']}
+						<span class="label label-danger pull-right">#{msg['core.home.no']}</span>
+					</li>
+					<li class="list-group-item last-item">
+#{msg['core.home.panel1.element7']}
+						<span class="label label-danger pull-right">#{msg['core.home.no']}</span>
+					</li>
+				</ul>
+			  </div>
+			  <div class="panel-footer">
+			  	<h1>#{msg['core.home.panel1.footer11']} <small>#{msg['core.home.panel1.footer12']}</small></h1>
+			  </div>
+			</div>
+		</div>	
+		<div class="col-md-3">
+			<div class="panel panel-success">
+			  <div class="panel-heading">
+			  	<h3>#{msg['core.home.panel1.title2']}</h3>
+			  	<h5>(El más vendido)</h5>
+			  </div>
+			  <div class="panel-body">
+			  	<ul class="list-group clear-list line-box">
+					<li class="list-group-item">
+#{msg['core.home.panel1.element1']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element2']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element3']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element4']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element5']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element6']}
+						<span class="label label-danger pull-right">#{msg['core.home.no']}</span>
+					</li>
+					<li class="list-group-item last-item">
+#{msg['core.home.panel1.element7']}
+						<span class="label label-danger pull-right">#{msg['core.home.no']}</span>
+					</li>
+				</ul>
+			  </div>
+			  <div class="panel-footer">
+			  	<h1>#{msg['core.home.panel1.footer21']} <small>#{msg['core.home.panel1.footer22']}</small></h1>
+			  </div>
+			</div>
+		</div>	
+		<div class="col-md-3">
+			<div class="separator-sm" />
+			<div class="panel panel-primary">
+			  <div class="panel-heading">
+			  	<h3>#{msg['core.home.panel1.title3']}</h3>
+			  </div>
+			  <div class="panel-body">
+			  	<ul class="list-group clear-list line-box">
+					<li class="list-group-item">
+#{msg['core.home.panel1.element1']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element2']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element3']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element4']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element5']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item">
+#{msg['core.home.panel1.element6']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+					<li class="list-group-item last-item">
+#{msg['core.home.panel1.element7']}
+						<span class="label label-success pull-right">#{msg['core.home.yes']}</span>
+					</li>
+				</ul>
+			  </div>
+			  <div class="panel-footer">
+			  	<h1>#{msg['core.home.panel1.footer31']} <small>#{msg['core.home.panel1.footer32']}</small></h1>
+			  </div>
+			</div>
+		</div>	
+		<div class="col-md-3">
+			<h1>#{msg['core.home.panel2.title']}</h1>
+			<h3>#{msg['core.home.panel2.subtitle']}</h3>
+			<p>#{msg['core.home.panel2.text']}</p>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h3>#{msg['core.home.panel3.footer1']}&nbsp;&nbsp;<small>#{msg['core.home.panel3.footer2']}</small></h3>
+		</div>
+	</div>
+	
+	<div class="separator-sm" />
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card orange-border">
+				<h2>#{msg['core.home.panel4.header']}</h2>
+				<ul class="list-group clear-list m-t no-box">
+					<li class="list-group-item fist-item">
+						<span class="label label-success">1</span>
+						&nbsp;#{msg['core.home.panel4.text1']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">2</span>
+						&nbsp;#{msg['core.home.panel4.text2']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">3</span>
+						&nbsp;#{msg['core.home.panel4.text3']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">4</span>
+						&nbsp;#{msg['core.home.panel4.text4']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">5</span>
+						&nbsp;#{msg['core.home.panel4.text5']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">6</span>
+						&nbsp;#{msg['core.home.panel4.text6']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">7</span>
+						&nbsp;#{msg['core.home.panel4.text7']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">8</span>
+						&nbsp;#{msg['core.home.panel4.text8']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">9</span>
+						&nbsp;#{msg['core.home.panel4.text9']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">10</span>
+						&nbsp;#{msg['core.home.panel4.text10']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">11</span>
+						&nbsp;#{msg['core.home.panel4.text11']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">12</span>
+						&nbsp;#{msg['core.home.panel4.text12']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">13</span>
+						&nbsp;#{msg['core.home.panel4.text13']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">14</span>
+						&nbsp;#{msg['core.home.panel4.text14']}
+						<span class="pull-right">1.01</span>
+					</li>
+					<li class="list-group-item">
+						<span class="label label-success">15</span>
+						&nbsp;#{msg['core.home.panel4.text15']}
+						<span class="pull-right">1.01</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+       xmlns:faces="http://www.springframework.org/schema/faces"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd
+           http://www.springframework.org/schema/faces http://www.springframework.org/schema/faces/spring-faces-2.2.xsd">
+
+	<!-- Executes flows: the central entry point into the Spring Web Flow system -->
+	<webflow:flow-executor id="flowExecutor">
+		<webflow:flow-execution-listeners>
+			<webflow:listener ref="facesContextListener"/>
+			<!-- 
+			<webflow:listener ref="jpaFlowExecutionListener" />
+			 -->
+		</webflow:flow-execution-listeners>
+		<webflow:flow-execution-attributes>
+        	<!-- without execution param -->
+        	<webflow:always-redirect-on-pause value="false" />
+    	</webflow:flow-execution-attributes>
+	</webflow:flow-executor>
+	
+	<!-- The registry of executable flow definitions -->
+	
+	<webflow:flow-registry id="sharedFlowRegistry" flow-builder-services="facesFlowBuilderServices"  base-path="classpath*:/sharedFlows">
+		<webflow:flow-location-pattern value="/**/*-flow.xml" />
+	</webflow:flow-registry>
+	
+	<webflow:flow-registry id="flowRegistry" flow-builder-services="facesFlowBuilderServices"  base-path="classpath*:/flows" parent="sharedFlowRegistry">
+		<webflow:flow-location-pattern value="/**/*-flow.xml" />
+	</webflow:flow-registry>
+	
+	<!-- Configures the Spring Web Flow JSF integration -->
+	<faces:flow-builder-services id="facesFlowBuilderServices" development="true" />
+	
+	<!-- Installs a listener that creates and releases the FacesContext for each request. -->
+	<bean id="facesContextListener" class="org.springframework.faces.webflow.FlowFacesContextLifecycleListener"/>
+
+	<!-- Installs a listener that manages JPA persistence contexts for flows that require them 
+	<bean id="jpaFlowExecutionListener" class="org.springframework.webflow.persistence.JpaFlowExecutionListener">
+		<constructor-arg ref="entityManagerFactory" />
+		<constructor-arg ref="transactionManager" />
+	</bean>
+	-->
+	
+	<!-- Install global exception handler 
+	<bean id="customFlowExceptionHandler" class="org.esmartpoint.jsfkarma.web.CustomFlowExceptionHandler" />
+	-->
+</beans>

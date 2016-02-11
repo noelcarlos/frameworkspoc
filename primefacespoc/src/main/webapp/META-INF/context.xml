@@ -1,0 +1,4 @@
+<!-- DEVELOPMENT -->	
+<Context path="/primefacespoc" crossContext="false" reloadable="false" >
+	<ResourceLink global='jdbc/primefacespoc' name='jdbc/primefacespoc' type="javax.sql.Datasource"/>
+</Context>

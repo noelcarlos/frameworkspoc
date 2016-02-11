@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+     xmlns="http://java.sun.com/xml/ns/javaee"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+     
+	<display-name>strutspoc</display-name>
+	
+	<context-param>
+		<description>
+			If enabled, the runtime will check for the existence of a resource library before checking for the resource itself.  
+			If not found, an appropriate error message will be included in the log and in the view if ProjectStage is Development.
+		</description>
+		<param-name>com.sun.faces.enableMissingResourceLibraryDetection</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	
+	<!-- To load flows and pages from JARs, use this resolver --> 
+	<context-param>
+	      <param-name>facelets.RESOURCE_RESOLVER</param-name>
+	      <param-value>org.esmartpoint.jsfkarma.web.ClassPathResourceResolver</param-value>
+	</context-param>
+		
+    <context-param>
+		<description>
+			State saving method: "client" or "server" (= default) See JSF Specification 2.5.3
+			Recomended: server
+		</description>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+
+    <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6LfwZwoAAAAAAEhRyntKF1PBzysAJLzqp2v-GMRR</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6LfwZwoAAAAAAI-oUHpdvRnkMfu9fXQHxc0P7IBu</param-value>
+    </context-param>
+	
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
+    
+	<!-- The master configuration file for this Spring web application -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/config/web-application-config.xml
+		</param-value>
+	</context-param>
+	
+	<!-- Use JSF view templates saved as *.xhtml, for use with Facelets -->
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+	
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+	    <location>/static/404.xhtml</location>
+	</error-page>
+  
+    <!-- MigrateDB at startup 
+	<filter>
+        <filter-name>StartupFilter</filter-name>
+        <filter-class>org.esmartpoint.jsfkarma.web.StartupFilter</filter-class>
+    </filter>
+	
+    <filter-mapping>
+      <filter-name>StartupFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+      <dispatcher>FORWARD</dispatcher>
+      <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+     -->
+     
+	<!-- Enables special Facelets debug output during development -->
+  	<context-param>
+  		<description>
+  			Development, Production
+  		</description>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+   		<param-value>Development</param-value>
+  	</context-param>
+  	
+  	<!-- Causes Facelets to refresh templates during development -->
+  	<context-param>
+  		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+  		<param-value>1</param-value>
+  	</context-param>
+  	
+  	<context-param>
+		<description>
+			Only applicable if state saving method is "server" (= default) and if
+			org.apache.myfaces.SERIALIZE_STATE_IN_SESSION is true (=default) 
+			If true (default) the serialized state will be compressed before it is 
+			written to the session. If false the state will not be compressed.
+			You should always balanced cpu/memory usage.
+			Recomended:(Compressing state cost CPU but spare memory...obvious)
+		</description>
+		<param-name>
+		  org.apache.myfaces.COMPRESS_STATE_IN_SESSION
+		</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<context-param>
+		<description>
+			Only applicable if state saving method is "server" (= default). 
+			If true (default) the state will be serialized to a byte stream before it is written to  
+			the session. If false the state will not be serialized to a byte stream.
+			Recomended: Compressing data save memory bytes on server at the cost of more computational power.
+		</description>
+		<param-name>
+			 org.apache.myfaces.SERIALIZE_STATE_IN_SESSION
+		</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	
+	<context-param>
+		<description>
+			Number of back button. Default is 20. far too much. reducing this value decrease memory size.
+		</description>
+		<param-name>
+			org.apache.myfaces.NUMBER_OF_VIEWS_IN_SESSION
+		</param-name>
+		<param-value>5</param-value>
+	</context-param>
+	
+	<context-param>
+		<description>
+			The buffer size to set on the response when the  ResponseWriter is generated.
+			By default the value is -1, which will not assign a buffer size on the response.
+			Recomended: Try to set the buffer size to the most common page size.
+		</description>
+		<param-name>facelets.FACELETS_BUFFER_SIZE</param-name>
+		<param-value>65536</param-value>
+	</context-param>  
+	
+	<context-param>
+		<description>
+			Recomended: In production, no need to let comment in rendered code
+		</description>
+		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	
+	<context-param>
+		<description>
+			If true, rendered HTML code will be formatted, so that it is "human readable". 
+			i.e. additional line separators and whitespace will be written, that do 
+			not influence the HTML code. Default: "true".
+			Recomended: Cpu waste in production. Beautify your code in eclipse. 
+			Consider instead using Firefox source chart plugin which always 
+			beautify and color the source source
+		</description>
+		<param-name>org.apache.myfaces.PRETTY_HTML</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<context-param>
+		<description>
+			Validate managed beans, navigation rules and ensure that forms are not nested.
+			Recomended: Can be turned off in production, if you have a good testing team 
+			and many deployment stage This kind of errors should not go un noticed.
+		</description>
+		<param-name>org.apache.myfaces.VALIDATE</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<!--
+		Uncomment this to disable partial state saving when using Apache MyFaces 2 !!
+	<context-param>
+		<param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	-->
+
+    
+  	<!--  -->
+  	<context-param>
+	    <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+	    <param-value>true</param-value>
+	</context-param>
+    
+	<filter>
+	 	<filter-name>PrimeFaces FileUpload Filter</filter-name>
+	 	<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+		<init-param>
+		  <description>Set the expected charset for text field parameters which come together with binary data, default is UTF-8.</description>
+		  <param-name>parameterCharset</param-name>
+		  <param-value>UTF-8</param-value>
+		</init-param>
+	 	<!-- 
+	 	<init-param>
+	  		<param-name>thresholdSize</param-name>
+	  		<param-value>2097152</param-value>
+	 	</init-param>
+	 	<init-param>
+		 	<param-name>uploadDirectory</param-name>
+		 	<param-value>C:/tmp/fileUpload</param-value>
+		</init-param>    
+ 	 	-->   
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>*</servlet-name>
+	</filter-mapping>	
+
+    <!-- Enforce UTF-8 Character Encoding -->
+    <filter>
+        <filter-name>charEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>charEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    
+    <!-- For hibernate use in nos SWF Controller -->
+    
+    <filter>
+		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+		<url-pattern>/en/*</url-pattern>
+      	<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+		<url-pattern>/es/*</url-pattern>
+      	<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+	<!-- 
+	<filter>
+		<filter-name>OpenTransactionFilter</filter-name>
+		<filter-class>org.esmartpoint.jsfkarma.web.OpenTransactionFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>OpenTransactionFilter</filter-name>
+		<url-pattern>/en/*</url-pattern>
+      	<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>OpenTransactionFilter</filter-name>
+		<url-pattern>/es/*</url-pattern>
+      <dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	 -->
+
+	<!-- Loads the Spring web application context -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- Serves static resource content from .jar files such as spring-faces.jar -->
+  	
+	<!-- The front controller of this Spring Web application, responsible for handling all application requests -->
+	<servlet>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+		
+	<!-- Map all /spring requests to the Dispatcher Servlet for handling -->
+	<servlet-mapping>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Just here so the JSF implementation can initialize, *not* used at runtime -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<!-- Just here so the JSF implementation can initialize -->
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+</web-app>
