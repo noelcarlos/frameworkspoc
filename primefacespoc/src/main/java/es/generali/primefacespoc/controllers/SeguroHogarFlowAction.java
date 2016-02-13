@@ -14,21 +14,28 @@ import org.apache.struts.action.ActionMessages;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.ConfiguracionBean;
 import es.generali.primefacespoc.models.SeguroViviendaBean;
 import es.generali.primefacespoc.support.GeneratorHelper;
 
 public class SeguroHogarFlowAction extends StrutsFlowAction {
-	
+	private ConfiguracionBean config;
+	private SeguroViviendaBean model;
+
+	public void onInit(RequestContext requestContext) throws Exception {
+		config = new ConfiguracionBean();
+		model = new SeguroViviendaBean();
+		
+		model.setNumPersonasQueVivenEnLaVivienda(23);
+	}
+
 	public void onEntry(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 
-		ConfiguracionBean config = new ConfiguracionBean();
-		session.setAttribute("config", config);
-
-		SeguroViviendaBean model = new SeguroViviendaBean();
-		session.setAttribute("model", model);
+		session.setAttribute("config", getConfig());
+		session.setAttribute("model", getModel());
 	}
 	
 	public ActionForward onSetup(ActionMapping mapping, ActionForm form,
@@ -137,5 +144,21 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 		
 		model.setContrato(new GeneratorHelper().randomText(config.getKbContrato()*1024, config.getKbContrato()*1024, "\r\n\r\n", 256, 1024,
 				50, 200, 2, 10));
+	}
+
+	public ConfiguracionBean getConfig() {
+		return config;
+	}
+
+	public void setConfig(ConfiguracionBean config) {
+		this.config = config;
+	}
+
+	public SeguroViviendaBean getModel() {
+		return model;
+	}
+
+	public void setModel(SeguroViviendaBean model) {
+		this.model = model;
 	}
 }

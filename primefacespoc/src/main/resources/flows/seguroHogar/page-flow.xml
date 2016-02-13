@@ -3,16 +3,20 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	
-	<var name="initFlowAction" class="es.generali.primefacespoc.controllers.seguroHogar.InitFlowAction"/>
+	<var name="seguroHogarFlowAction" class="es.generali.primefacespoc.controllers.SeguroHogarFlowAction"/>
+	<var name="queQuieresProtegerOnEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction"/>
 	
 	<on-start>
-		<set name="" value=""></set>
-		<evaluate expression="initFlowAction.execute();" />
+		<evaluate expression="seguroHogarFlowAction.onInit(flowRequestContext)" />
 	</on-start>
 	
+	<action-state id="preQueQuieresProteger">
+		<evaluate expression="queQuieresProtegerOnEntryAction.execute(flowRequestContext)" />
+		<transition to="queQuieresProteger" />		
+	</action-state>
+	
 	<view-state id="queQuieresProteger">
-	
-	
+		
 	</view-state>
 	
 </flow>

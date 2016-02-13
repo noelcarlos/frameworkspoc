@@ -38,6 +38,9 @@ public class CustomFlowHandlerMapping extends FlowHandlerMapping {
 		if (acceptedLocales == null) {
 			acceptedLocales = "";
 			HandlerInterceptor[] list = this.getAdaptedInterceptors();
+			if (list == null) {
+				return null;
+			}
 			for (HandlerInterceptor handlerInterceptor : list) {
 				if (handlerInterceptor instanceof LocaleChangeFromURLInterceptor) {
 					acceptedLocales = ((LocaleChangeFromURLInterceptor)handlerInterceptor).getAcceptedLocales();

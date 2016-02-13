@@ -4,6 +4,7 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -22,7 +23,9 @@ import org.apache.struts.action.ActionMessages;
 import org.apache.struts.actions.DispatchAction;
 import org.springframework.web.context.WebApplicationContext;
  
-public class BaseAction extends DispatchAction {
+public class BaseAction extends DispatchAction implements Serializable {
+	private static final long serialVersionUID = 1582038792765689505L;
+	
 	protected WebApplicationContext context;
 	
 	public String getFlowDirectory() {

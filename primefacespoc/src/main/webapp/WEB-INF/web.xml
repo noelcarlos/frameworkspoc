@@ -61,7 +61,7 @@
 	
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
-	    <location>/static/404.xhtml</location>
+	    <location>/web/static/404.xhtml</location>
 	</error-page>
   
     <!-- MigrateDB at startup 
@@ -232,7 +232,7 @@
     </filter-mapping>
 
     
-    <!-- For hibernate use in nos SWF Controller -->
+    <!-- For hibernate use in nos SWF Controller 
     
     <filter>
 		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
@@ -250,6 +250,7 @@
 		<url-pattern>/es/*</url-pattern>
       	<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
+	-->
 	
 	<!-- 
 	<filter>
@@ -291,7 +292,7 @@
 	<!-- Map all /spring requests to the Dispatcher Servlet for handling -->
 	<servlet-mapping>
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/web/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- Just here so the JSF implementation can initialize, *not* used at runtime -->

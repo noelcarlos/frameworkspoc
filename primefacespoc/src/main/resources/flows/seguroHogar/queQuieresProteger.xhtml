@@ -1,0 +1,39 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<ui:include src="../../commons/flowMenu.xhtml" />
+	
+	<h:form action="/seguroHogar?method=onSubmit">
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label" for="tipoDeUsoViviendaId">Tipo de uso de la vivienda:</label>
+					<h:selectOneMenu property="tipoDeUsoViviendaId" styleClass="form-control">
+						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
+						<f:selectItems value="#{tiposUsosViviendas}" var="item" itemLabel="#{item.NOMBRE}" itemValue="#{item.ID}" ></f:selectItems>
+					</h:selectOneMenu>
+				</div>			 
+				<div class="form-group">
+					<label class="control-label" for="numPersonasQueVivenEnLaVivienda">Número de personas que viven en la vivienda:</label>
+					<h:inputText value="#{seguroHogarFlowAction.model.numPersonasQueVivenEnLaVivienda}" styleClass="form-control" ></h:inputText>
+				</div>			
+		
+			</div>	
+		</div>
+		
+	</h:form>
+	
+	<ui:include src="../../commons/flowButtons.xhtml" />
+	
+</ui:define>
+
+</ui:composition>	 
