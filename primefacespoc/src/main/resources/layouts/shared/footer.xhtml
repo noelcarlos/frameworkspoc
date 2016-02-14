@@ -12,7 +12,7 @@
 		</div>
 	</div>
 	
-	<form name="setupForm" action="${pageContext.request.contextPath}/seguroHogar.do?method=onSetup" method="post">
+	<h:form id="setupForm">
 		<input id="_setupEvent" type="hidden" name="_setupEvent" />
 		<div class="row">
 			<div class="col-md-6">
@@ -23,34 +23,26 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<div class="col-md-6">
-						<ui:remove>
-						<forEach var="result" items="${sessionScope.get('flow').selectNodes('//flow/step')}" varStatus="iter">
-							<if test='${result.valueOf("@name") lte 5}'>
+						<ui:repeat var="result" value="#{seguroHogarFlowAction.flow.selectNodes('//flow/step')}" varStatus="iter">
+							<ui:fragment rendered='#{result.valueOf("@name") lt 6}'>
 								<div class="checkbox checkbox-primary">
-									<input type="checkbox" id='${result.valueOf("@view")}' value="on"
-										class="chkComponent" name='${result.valueOf("@view")}'>
-									</input>
-									<label for='${result.valueOf("@view")}'>${result.valueOf("@name")} - ${result.valueOf("@menu")}</label>
-									<input type="hidden" value="false" name='${result.valueOf("@view")}' />
+									<h:selectBooleanCheckbox value="#{seguroHogarFlowAction.config[result.valueOf('@view')]}"
+										styleClass="chkComponent" />
+									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
 								</div>
-							</if>
-						</forEach>
-						</ui:remove>
+							</ui:fragment>
+						</ui:repeat>
 					</div>
 					<div class="col-md-6">
-						<ui:remove>
-						<forEach var="result" items="${sessionScope.get('flow').selectNodes('//flow/step')}" varStatus="iter">
-							<if test='${result.valueOf("@name") gt 5}'>
+						<ui:repeat var="result" value="#{seguroHogarFlowAction.flow.selectNodes('//flow/step')}" varStatus="iter">
+							<ui:fragment rendered='#{!(result.valueOf("@name") lt 6)}'>
 								<div class="checkbox checkbox-primary">
-									<input type="checkbox" id='${result.valueOf("@view")}' value="on"
-										class="chkComponent" name='${result.valueOf("@view")}'>
-									</input>
-									<label for='${result.valueOf("@view")}'>${result.valueOf("@name")} - ${result.valueOf("@menu")}</label>
-									<input type="hidden" value="false" name='${result.valueOf("@view")}' />
+									<h:selectBooleanCheckbox value="#{seguroHogarFlowAction.config[result.valueOf('@view')]}"
+										styleClass="chkComponent" />
+									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
 								</div>
-							</if>
-						</forEach>
-						</ui:remove>
+							</ui:fragment>
+						</ui:repeat>
 					</div>
 				</div>
 				<div class="form-group">
@@ -62,21 +54,21 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-2">
 				<label for="kbContrato">Longitud del contrato en KB:</label>
-				<input type="text" id="kbContrato" name="kbContrato" style="color:#000;" 
-					value="${sessionScope.config.kbContrato}"></input>
+				<p:inputText id="kbContrato" style="color:#000;" value="#{seguroHogarFlowAction.config.kbContrato}" 
+					styleClass="form-control" label="Longitud del contrato en KB"/>	
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group">
 				<div class="col-md-6">
-					<button type="button" class="btn btn-default" onClick="setupEvent('pg-${ result.valueOf('@name')}');">
+					<p:commandLink action="#{seguroHogarFlowAction.setup()}" styleClass="btn btn-default" style="color:#000;" ajax="false">
 						Aplicar
-					</button>
+					</p:commandLink>
 				</div>
 			</div>
 		</div>
 		<div class="separator-sm"></div>
-	</form>
+	</h:form>
 </html>	

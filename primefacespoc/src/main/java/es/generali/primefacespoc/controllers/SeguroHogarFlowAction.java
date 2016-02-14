@@ -95,42 +95,42 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 		return null; /*node.valueOf("@view");*/
 	}
 	
-	public ActionForward onSetup(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
-		
-		HttpSession session = request.getSession();
-		
-		ActionErrors errors = new ActionErrors();
-		ActionMessages messages = new ActionMessages();
-		
-		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
-		convertAndValidate(request, config, errors, messages);
-		session.setAttribute("config", config);
-		
-		SeguroViviendaBean model = (SeguroViviendaBean)session.getAttribute("model");
-		setup(model, (ConfiguracionBean)session.getAttribute("config"));
-		session.setAttribute("model", model);
-		
-		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
-		
-		Document flow = (Document)session.getAttribute("flow");
-		Node node = flow.selectSingleNode("//flow");
-		String flowName = node.valueOf("@name");
-		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
-		String title = node.valueOf("@title");
-		request.setAttribute("currentPageTitle", title);
-		request.setAttribute("currentPageNumber", "" + currentStep);
-		
-		session.setAttribute("currentStep", "" + currentStep); 
-		
-		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
-		
-		return null;
-	}
+//	public ActionForward onSetup(ActionMapping mapping, ActionForm form,
+//			HttpServletRequest request, HttpServletResponse response) throws Exception {
+//
+//		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+//		
+//		HttpSession session = request.getSession();
+//		
+//		ActionErrors errors = new ActionErrors();
+//		ActionMessages messages = new ActionMessages();
+//		
+//		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
+//		convertAndValidate(request, config, errors, messages);
+//		session.setAttribute("config", config);
+//		
+//		SeguroViviendaBean model = (SeguroViviendaBean)session.getAttribute("model");
+//		setup(model, (ConfiguracionBean)session.getAttribute("config"));
+//		session.setAttribute("model", model);
+//		
+//		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
+//		
+//		Document flow = (Document)session.getAttribute("flow");
+//		Node node = flow.selectSingleNode("//flow");
+//		String flowName = node.valueOf("@name");
+//		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+//		String title = node.valueOf("@title");
+//		request.setAttribute("currentPageTitle", title);
+//		request.setAttribute("currentPageNumber", "" + currentStep);
+//		
+//		session.setAttribute("currentStep", "" + currentStep); 
+//		
+//		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
+//		
+//		return null;
+//	}
 	
-	void setup(SeguroViviendaBean model, ConfiguracionBean config) {
+	public void setup() {
 		if (config.getQueQuieresProteger()) {
 			model.setTipoDeUsoViviendaId(1);
 			model.setNumPersonasQueVivenEnLaVivienda(4);

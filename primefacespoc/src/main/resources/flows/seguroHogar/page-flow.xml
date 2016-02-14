@@ -56,4 +56,8 @@
 		</transition>
 	</view-state>
 	
+	<global-transitions>
+		<transition on="setup" />
+	</global-transitions>
+	
 </flow>
