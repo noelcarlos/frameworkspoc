@@ -4,19 +4,56 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	
 	<var name="seguroHogarFlowAction" class="es.generali.primefacespoc.controllers.SeguroHogarFlowAction"/>
+	
 	<var name="queQuieresProtegerOnEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction"/>
+	<var name="queQuieresProtegerOnExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnExitAction"/>
+	
+	<var name="localizacionOnEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.LocalizacionOnEntryAction"/>
+	<var name="localizacionOnExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.LocalizacionOnExitAction"/>
 	
 	<on-start>
 		<evaluate expression="seguroHogarFlowAction.onInit(flowRequestContext)" />
 	</on-start>
 	
-	<action-state id="preQueQuieresProteger">
-		<evaluate expression="queQuieresProtegerOnEntryAction.execute(flowRequestContext)" />
-		<transition to="queQuieresProteger" />		
-	</action-state>
-	
 	<view-state id="queQuieresProteger">
+		<on-entry>
+			<evaluate expression="seguroHogarFlowAction.onUpdateState(flowRequestContext)" />
+			<evaluate expression="queQuieresProtegerOnEntryAction.execute(flowRequestContext)" />
+		</on-entry>
 		
+		<transition on-exception="es.generali.primefacespoc.support.ControlledExit" to="localizacion">
+			<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, 'goNext')" />
+		</transition>
+		
+		<transition on="#{currentEvent.id.startsWith('gobackward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
+		
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="queQuieresProtegerOnExitAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
+		
+	</view-state>
+
+	<view-state id="localizacion">
+		<on-entry>
+			<evaluate expression="seguroHogarFlowAction.onUpdateState(flowRequestContext)" />
+			<evaluate expression="localizacionOnEntryAction.execute(flowRequestContext)" />
+		</on-entry>
+
+		<transition on-exception="es.generali.primefacespoc.support.ControlledExit" to="localizacion">
+			<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, 'goNext')" />
+		</transition>
+		
+		<transition on="#{currentEvent.id.startsWith('gobackward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
+
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="localizacionOnExitAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
 	</view-state>
 	
 </flow>

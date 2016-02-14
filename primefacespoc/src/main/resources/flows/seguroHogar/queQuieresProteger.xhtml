@@ -8,31 +8,34 @@
 
 <ui:define name="content">
 
-	<ui:include src="../../commons/flowMenu.xhtml" />
-	
-	<h:form action="/seguroHogar?method=onSubmit">
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
 		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>  
 		
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label" for="tipoDeUsoViviendaId">Tipo de uso de la vivienda:</label>
-					<h:selectOneMenu property="tipoDeUsoViviendaId" styleClass="form-control">
+					<h:selectOneMenu id="tipoDeUsoViviendaId" value="#{seguroHogarFlowAction.model.tipoDeUsoViviendaId}" 
+						label="Tipo de uso de la vivienda" styleClass="form-control">
 						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
-						<f:selectItems value="#{tiposUsosViviendas}" var="item" itemLabel="#{item.NOMBRE}" itemValue="#{item.ID}" ></f:selectItems>
+						<f:selectItems value="#{tiposUsosViviendas}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
 					</h:selectOneMenu>
 				</div>			 
 				<div class="form-group">
-					<label class="control-label" for="numPersonasQueVivenEnLaVivienda">Número de personas que viven en la vivienda:</label>
-					<h:inputText value="#{seguroHogarFlowAction.model.numPersonasQueVivenEnLaVivienda}" styleClass="form-control" ></h:inputText>
+					<h:outputLabel for="numPersonasQueVivenEnLaVivienda" styleClass="control-label">
+						Número de personas que viven en la vivienda: <span class="glyphicon glyphicon-mandatory" />
+					</h:outputLabel>
+					<p:inputText id="numPersonasQueVivenEnLaVivienda" value="#{seguroHogarFlowAction.model.numPersonasQueVivenEnLaVivienda}" 
+						styleClass="form-control" label="Número de personas que viven en la vivienda"/>	
 				</div>			
-		
 			</div>	
 		</div>
 		
+		<ui:include src="../../commons/flowButtons.xhtml" />
 	</h:form>
-	
-	<ui:include src="../../commons/flowButtons.xhtml" />
 	
 </ui:define>
 

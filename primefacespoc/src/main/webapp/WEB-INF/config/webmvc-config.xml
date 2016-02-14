@@ -28,9 +28,7 @@
 		</property>
 		<property name="interceptors">
             <list>
-            	<!-- 
              	<ref bean="localeChangeInterceptor" />
-             	 -->
           	</list>
         </property>	    		
 	</bean>

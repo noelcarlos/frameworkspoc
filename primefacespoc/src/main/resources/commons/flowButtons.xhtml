@@ -5,29 +5,29 @@
 	  			xmlns:h="http://java.sun.com/jsf/html"
 	  			xmlns:p="http://primefaces.org/ui">
 
-	<div class="row">
-		<div class="col-md-12">
-			<div class="separator-sm"></div>
-			<div class="btn-group" role="group" aria-label="...">
-				<p:commandLink styleClass="btn btn-default" onclick="sendEvent('goFirst');"  
-					disabled="#{sessionScope.get('currentStep').equals('1')}">
-					Inicio
-				</p:commandLink>
-				<p:commandLink styleClass="btn btn-default" onclick="sendEvent('goPrevious');"
-					disabled="#{sessionScope.get('currentStep').equals('1')}">
-					Anterior
-				</p:commandLink>
-				<p:commandLink styleClass="btn btn-primary" onclick="sendEvent('goNext');"
-					disabled="#{sessionScope.get('currentStep').equals(sessionScope.get('lastPageNumber'))}">
-					Siguiente
-				</p:commandLink>
-				<p:commandLink styleClass="btn btn-default" onclick="sendEvent('goLast');"
-					disabled="#{sessionScope.get('currentStep').equals(sessionScope.get('lastPageNumber'))}">
-					Última
-				</p:commandLink>
-			</div>
-			<div class="separator-sm"></div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="separator-sm"></div>
+		<div class="btn-group" role="group" aria-label="...">
+			<p:commandLink action="gobackward-first" styleClass="btn btn-default" ajax="false"  
+				disabled="#{seguroHogarFlowAction.currentStep == 1}">
+				Inicio
+			</p:commandLink>
+			<p:commandLink action="gobackward-previous" styleClass="btn btn-default" ajax="false"
+				disabled="#{seguroHogarFlowAction.currentStep == 1}">
+				Anterior
+			</p:commandLink>
+			<p:commandLink action="goforward-next" styleClass="btn btn-primary" ajax="false"
+				disabled="#{seguroHogarFlowAction.currentStep == seguroHogarFlowAction.lastPageNumber}">
+				Siguiente
+			</p:commandLink>
+			<p:commandLink action="goforward-last" styleClass="btn btn-default" ajax="false"
+				disabled="#{seguroHogarFlowAction.currentStep == seguroHogarFlowAction.lastPageNumber}">
+				Última
+			</p:commandLink>
 		</div>
+		<div class="separator-sm"></div>
 	</div>
+</div>
 
 </ui:composition>

@@ -14,7 +14,6 @@ public class SeguroViviendaBean extends ActionForm {
 	
 	/* Que quieres proteger */
 	
-	@NotNull
 	public Integer getTipoDeUsoViviendaId() {
 		return (Integer)map.get("tipoDeUsoViviendaId");
 	}
@@ -22,7 +21,6 @@ public class SeguroViviendaBean extends ActionForm {
 		map.put("tipoDeUsoViviendaId", tipoDeUsoViviendaId);
 	}
 	
-	@NotNull
 	public Integer getNumPersonasQueVivenEnLaVivienda() {
 		return (Integer)map.get("numPersonasQueVivenEnLaVivienda");
 	}
@@ -32,7 +30,6 @@ public class SeguroViviendaBean extends ActionForm {
 	
 	/* Localizacion */
 	
-	@NotNull
 	public Integer getProvinciaId() {
 		return (Integer)map.get("provinciaId");
 	}
@@ -40,7 +37,6 @@ public class SeguroViviendaBean extends ActionForm {
 		map.put("provinciaId", provinciaId);
 	}
 	
-	@NotNull
 	public Integer getLocalizacionId() {
 		return (Integer)map.get("localizacionId");
 	}

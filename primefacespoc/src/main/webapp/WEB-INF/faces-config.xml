@@ -3,8 +3,11 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_1.xsd"
     version="2.1">        
 	<application> 
+		<locale-config>
+            <default-locale>es</default-locale>
+        </locale-config>	
+		<message-bundle id="main">MessageResources</message-bundle>
 		<!-- 
-		<message-bundle id="Dos">MessageResources</message-bundle>
    		<el-resolver>org.esmartpoint.jsfkarma.message.MessageSourcePropertyResolver</el-resolver>
    		 -->
    		<!-- <resource-handler>org.esmartpoint.jsfkarma.web.CustomResourceHandler</resource-handler> -->

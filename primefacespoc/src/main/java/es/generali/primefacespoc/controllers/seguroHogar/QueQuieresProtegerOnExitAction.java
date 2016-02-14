@@ -1,27 +1,35 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.Serializable;
 
-import org.apache.struts.action.ActionError;
-import org.apache.struts.action.ActionErrors;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.binding.message.MessageContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.SeguroViviendaBean;
 
-public class QueQuieresProtegerOnExitAction {
-
-	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
-			HttpServletRequest request, HttpServletResponse response, ActionErrors errors) throws Exception {
+@SuppressWarnings("serial")
+public class QueQuieresProtegerOnExitAction implements Serializable {
+	@Autowired protected transient ApplicationContext appContext;
+	
+	public boolean execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
+		MessageContext messageContext = requestContext.getMessageContext();
 		
 		if (model.getNumPersonasQueVivenEnLaVivienda() == null || model.getNumPersonasQueVivenEnLaVivienda() < 1) {
-    		errors.add("numPersonasQueVivenEnLaVivienda", new ActionError("error.literal", "El numero de personas que viven en la vivienda debe de ser mayor o igual a 1"));
+    		messageContext.addMessage(new MessageBuilder()
+				.error().code("error.literal").arg("El numero de personas que viven en la vivienda debe de ser mayor o igual a 1")
+				.build());
 		}
 		
 		if (model.getTipoDeUsoViviendaId() == null) {
-    		errors.add("tipoDeUsoViviendaId", new ActionError("error.literal", "El tipo de uso de la vivienda debe de estar informado"));
+    		messageContext.addMessage(new MessageBuilder()
+				.error().code("error.literal").arg("El tipo de uso de la vivienda debe de estar informado")
+				.build());
 		}
 		
+		return !messageContext.hasErrorMessages();
 	}
 	
 }

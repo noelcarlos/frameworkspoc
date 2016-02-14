@@ -1,22 +1,23 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.webflow.core.collection.MutableAttributeMap;
+import org.springframework.webflow.execution.RequestContext;
 
-import es.generali.primefacespoc.models.SeguroViviendaBean;
 import es.generali.primefacespoc.services.LookupService;
 
-public class LocalizacionOnEntryAction {
-	@Autowired LookupService lookupService;
+@SuppressWarnings("serial")
+public class LocalizacionOnEntryAction implements Serializable {
+	
+	@Autowired transient LookupService lookupService;
 
-	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void execute(RequestContext requestContext) throws Exception {
+		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope(); 
 		
-		request.setAttribute("provincias", lookupService.getProvincias());
-		request.setAttribute("localizacionesViviendas", lookupService.getLocalizacionesViviendas());
-		
+		flowScope.put("provincias", lookupService.getProvincias());
+		flowScope.put("localizacionesViviendas", lookupService.getLocalizacionesViviendas());
 	}
+	
 }

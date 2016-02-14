@@ -6,13 +6,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
 import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.webflow.execution.RequestContext;
 
@@ -23,19 +28,71 @@ import es.generali.primefacespoc.support.GeneratorHelper;
 public class SeguroHogarFlowAction extends StrutsFlowAction {
 	private ConfiguracionBean config;
 	private SeguroViviendaBean model;
+	private Document flow;
+	private int currentStep;
+	private int currentPageNumber;
+	private String currentPageTitle;
+	private int lastPageNumber;
+	
+	@Autowired transient ApplicationContext appContext;
 
 	public void onInit(RequestContext requestContext) throws Exception {
 		config = new ConfiguracionBean();
 		model = new SeguroViviendaBean();
+
+		Resource resource = appContext.getResource("contratacion.xml");
+		flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
+		currentStep = 1;
+		currentPageNumber = 1;
 		
-		model.setNumPersonasQueVivenEnLaVivienda(23);
+		lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
+		
+		Node node = flow.selectSingleNode("//flow");
+		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+		currentPageTitle = node.valueOf("@title");
+		
+		//model.setNumPersonasQueVivenEnLaVivienda(23);
 	}
-
-	public void onEntry(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-
-		session.setAttribute("config", getConfig());
-		session.setAttribute("model", getModel());
+	
+	public String onUpdateState(RequestContext requestContext) throws Exception {
+		Node node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+		currentPageNumber = currentStep;
+		currentPageTitle = node.valueOf("@title");
+		return node.valueOf("@view");
+	}
+	
+	public String onStep(RequestContext requestContext, String flowEvent) throws Exception {
+		Node node = flow.selectSingleNode("//flow");
+		
+		if (flowEvent.equals("gobackward-first")) {
+			currentStep = 1;
+		} else 	if (flowEvent.equals("goforward-next")) {
+			if (currentStep < lastPageNumber) {
+				currentStep++;
+			}
+		} else 	if (flowEvent.equals("gobackward-previous")) {
+			if (currentStep > 1) { 
+				currentStep--;
+			}
+		} else 	if (flowEvent.equals("goforward-last")) {
+			currentStep = lastPageNumber;
+		} else if (flowEvent.startsWith("goforward-")) { 
+			int nextStep = Integer.parseInt(flowEvent.substring(10));
+			currentStep = nextStep;
+		} else if (flowEvent.startsWith("gobackward-")) { 
+			int nextStep = Integer.parseInt(flowEvent.substring(11));
+			currentStep = nextStep;
+		}
+		
+		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+		currentPageNumber = currentStep;
+		currentPageTitle = node.valueOf("@title");
+		
+		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+		
+		requestContext.getViewScope().put("nextView", node.valueOf("@view"));
+		
+		return null; /*node.valueOf("@view");*/
 	}
 	
 	public ActionForward onSetup(ActionMapping mapping, ActionForm form,
@@ -160,5 +217,51 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 
 	public void setModel(SeguroViviendaBean model) {
 		this.model = model;
+	}
+
+	public Document getFlow() {
+		return flow;
+	}
+
+	public void setFlow(Document flow) {
+		this.flow = flow;
+	}
+
+	public Integer getCurrentStep() {
+		return currentStep;
+	}
+
+	public void setCurrentStep(Integer currentStep) {
+		this.currentStep = currentStep;
+	}
+
+	public Integer getCurrentPageNumber() {
+		return currentPageNumber;
+	}
+
+	public void setCurrentPageNumber(Integer currentPageNumber) {
+		this.currentPageNumber = currentPageNumber;
+	}
+
+	public String getCurrentPageTitle() {
+		return currentPageTitle;
+	}
+
+	public void setCurrentPageTitle(String currentPageTitle) {
+		this.currentPageTitle = currentPageTitle;
+	}
+
+	public Integer getLastPageNumber() {
+		return lastPageNumber;
+	}
+
+	public void setLastPageNumber(Integer lastPageNumber) {
+		this.lastPageNumber = lastPageNumber;
+	}
+
+	@Override
+	public void onEntry(HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }

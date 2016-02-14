@@ -5,21 +5,31 @@
 	  			xmlns:h="http://java.sun.com/jsf/html"
 	  			xmlns:p="http://primefaces.org/ui">
 
-	<div class="row">
-		<div class="col-md-12">
-			<div class="separator-sm"></div>
-			<div class="btn-group" role="group" aria-label="..."> 
-				<ui:repeat var="result" value="#{sessionScope.get('flow').selectNodes('//flow/step')}">
-				<button type="button" class="btn ${sessionScope.get('currentStep').toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}"
-					onClick="sendEvent('go-${ result.valueOf('@name')}');">
-					${result.valueOf("@menu")}
-				</button>
-				</ui:repeat>
-			</div>
-			<div class="separator-sm"></div>
-			<h2>${currentPageNumber} - ${currentPageTitle}</h2>
-			<div class="separator-sm"></div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="separator-sm"></div>
+		<div class="btn-group" role="group" aria-label="..."> 
+			<ui:repeat var="result" value="#{seguroHogarFlowAction.flow.selectNodes('//flow/step')}">
+				<ui:fragment rendered="#{!(seguroHogarFlowAction.currentStep lt result.valueOf('@name'))}" >
+					<p:commandLink action="#{'gobackward-'.concat(result.valueOf('@name'))}" 
+						styleClass="btn #{seguroHogarFlowAction.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}"
+						ajax="false">
+						#{result.valueOf("@menu")}
+					</p:commandLink>
+				</ui:fragment>
+				<ui:fragment rendered="#{seguroHogarFlowAction.currentStep lt result.valueOf('@name')}" >
+					<p:commandLink action="#{'goforward-'.concat(result.valueOf('@name'))}" 
+						styleClass="btn #{seguroHogarFlowAction.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}"
+						ajax="false">
+						#{result.valueOf("@menu")}
+					</p:commandLink>
+				</ui:fragment>			
+			</ui:repeat>
 		</div>
+		<div class="separator-sm"></div>
+		<h2>#{seguroHogarFlowAction.currentPageNumber} - #{seguroHogarFlowAction.currentPageTitle}</h2>
+		<div class="separator-sm"></div>
 	</div>
+</div>
 
 </ui:composition>
