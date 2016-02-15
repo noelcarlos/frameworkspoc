@@ -23,7 +23,11 @@
 	               <ul class="panel-body list-group">
 	                   <li class="list-group-item">
 							<span class="price-xl text-success">
-							 	<center><fmt:formatNumber type="number" maxFractionDigits="2" value="${model.precio}" ></fmt:formatNumber> €</center>
+							 	<center>
+							 		<h:outputText value="#{seguroHogarFlowAction.model.precio}">
+										<f:convertNumber pattern="#0.000" locale="es_ES" minFractionDigits="2"/>
+									</h:outputText> €
+							 	</center>
 							</span>	
 	                   </li>
 	                   <li class="list-group-item">
@@ -38,7 +42,9 @@
 			<div class="col-md-12">
 				<div class="h2">Contrato:  
 					<strong>
-				 		<fmt:formatNumber type="number" maxFractionDigits="0" value="${model.getContrato().length()/1024}" ></fmt:formatNumber> KB	
+				 		<h:outputText value="#{seguroHogarFlowAction.model.getContrato().length()/1024}">
+							<f:convertNumber pattern="#0.000" locale="es_ES" minFractionDigits="0"/>
+						</h:outputText> KB
 					</strong>
 				</div>
 			</div>
@@ -46,7 +52,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="code">
-					<pre><code>${model.getContrato().substring(0, 2000)} ...</code></pre>
+					<pre><code>#{seguroHogarFlowAction.model.getContrato().substring(0, 2000)} ...</code></pre>
 				</div>
 			</div>
 		</div>
