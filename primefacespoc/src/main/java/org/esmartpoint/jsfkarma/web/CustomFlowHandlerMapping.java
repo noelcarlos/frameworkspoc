@@ -25,7 +25,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
 import org.springframework.webflow.mvc.servlet.FlowHandler;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 
@@ -102,24 +101,6 @@ public class CustomFlowHandlerMapping extends FlowHandlerMapping {
 		}
 		return null;
 	}
-	
-	/**
-	 * Sets the registry of flows to query when this mapping is tested. Optional. If not set, this handler mapping will
-	 * look in the containing application context for a bean with id <code>flowRegistry</code>.
-	 * @param flowRegistry the flow definition registry
-	 */
-//	public void setFlowRegistry(FlowDefinitionRegistry flowRegistry) {
-//		super.setFlowRegistry(flowRegistry);
-//		alterRegistry(flowRegistry);
-//		
-//	}
-	
-    protected void alterRegistry(FlowDefinitionRegistry registry) {
-        for(String flowId : registry.getFlowDefinitionIds()) {
-//            ApplicationContext ctx = registry.getFlowDefinition(flowId).getApplicationContext();
-//            overrideResourceLoader((GenericApplicationContext) ctx, flowId);
-        }
-    }
     
     /**
     * Override the ResourceLoader:

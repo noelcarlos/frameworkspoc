@@ -32,24 +32,39 @@
 				<div class="form-group">
 					<label class="control-label">Opciones</label>
 					<div class="checkbox checkbox-primary">
-						<html:checkbox styleId="opcionRotura" property="opcionRotura"></html:checkbox>
-						<label for="opcionRotura">Rotura</label>
+						<h:selectBooleanCheckbox id="opcionRotura" 
+							value="#{seguroHogarFlowAction.model.opcionRotura}" />
+						<h:outputLabel for="opcionRotura" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.opcionRotura']}
+						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
-						<html:checkbox styleId="opcionRobo" property="opcionRobo"></html:checkbox>
-						<label for="opcionRobo">Robo</label>
+						<h:selectBooleanCheckbox id="opcionRobo" 
+							value="#{seguroHogarFlowAction.model.opcionRobo}" />
+						<h:outputLabel for="opcionRobo" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.opcionRobo']}
+						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
-						<html:checkbox styleId="opcionDefensaJuridica" property="opcionDefensaJuridica"></html:checkbox>
-						<label for="opcionDefensaJuridica">Defensa juridica</label>
+						<h:selectBooleanCheckbox id="opcionDefensaJuridica" 
+							value="#{seguroHogarFlowAction.model.opcionDefensaJuridica}" />
+						<h:outputLabel for="opcionDefensaJuridica" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.opcionDefensaJuridica']}
+						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
-						<html:checkbox styleId="opcionInhabilidad" property="opcionInhabilidad"></html:checkbox>
-						<label for="opcionInhabilidad">Inhabilidad</label>
+						<h:selectBooleanCheckbox id="opcionInhabilidad" 
+							value="#{seguroHogarFlowAction.model.opcionInhabilidad}" />
+						<h:outputLabel for="opcionInhabilidad" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.opcionInhabilidad']}
+						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
-						<html:checkbox styleId="opcionAsistenciaInformatica" property="opcionAsistenciaInformatica"></html:checkbox>
-						<label for="opcionAsistenciaInformatica">Asistencia inform�tica</label>
+						<h:selectBooleanCheckbox id="opcionAsistenciaInformatica" 
+							value="#{seguroHogarFlowAction.model.opcionAsistenciaInformatica}" />
+						<h:outputLabel for="opcionAsistenciaInformatica" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.opcionAsistenciaInformatica']}
+						</h:outputLabel>
 					</div>
 				</div>	
 				
