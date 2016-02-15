@@ -19,20 +19,32 @@
 				<div class="form-group">
 					<label class="control-label">Caracteristicas</label>
 					<div class="checkbox checkbox-primary">
-						<html:checkbox styleId="rejasEnVentanasOSimilares" property="rejasEnVentanasOSimilares"></html:checkbox>
-						<label for="rejasEnVentanasOSimilares">Rejas en ventanas o similares</label>
+						<h:selectBooleanCheckbox id="rejasEnVentanasOSimilares" 
+							value="#{seguroHogarFlowAction.model.rejasEnVentanasOSimilares}" />
+						<h:outputLabel for="rejasEnVentanasOSimilares" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.rejasEnVentanasOSimilares']}
+						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
-						<html:checkbox styleId="puertaDeSeguridad" property="puertaDeSeguridad"></html:checkbox>
-						<label for="puertaDeSeguridad">Puerta de seguridad</label>
+						<h:selectBooleanCheckbox id="puertaDeSeguridad" 
+							value="#{seguroHogarFlowAction.model.puertaDeSeguridad}" />
+						<h:outputLabel for="puertaDeSeguridad" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.puertaDeSeguridad']}
+						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
-						<html:checkbox styleId="alarmaConectada" property="alarmaConectada"></html:checkbox>
-						<label for="alarmaConectada">Alarma conectada a central de seguridad o vigilancia 24h</label>
+						<h:selectBooleanCheckbox id="alarmaConectada" 
+							value="#{seguroHogarFlowAction.model.alarmaConectada}" />
+						<h:outputLabel for="alarmaConectada" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.alarmaConectada']}
+						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
-						<html:checkbox styleId="cajaFuerte" property="cajaFuerte"></html:checkbox>
-						<label for="cajaFuerte">Caja fuerte</label>
+						<h:selectBooleanCheckbox id="cajaFuerte" 
+							value="#{seguroHogarFlowAction.model.cajaFuerte}" />
+						<h:outputLabel for="cajaFuerte" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cajaFuerte']}
+						</h:outputLabel>
 					</div>
 				</div>			
 			</div>	
