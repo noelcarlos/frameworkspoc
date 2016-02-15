@@ -1,14 +1,13 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionError;
-import org.apache.struts.action.ActionErrors;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.binding.message.MessageContext;
+import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.SeguroViviendaBean;
+import es.generali.primefacespoc.models.SeguroViviendaBean.CaracteristicasDeLaVivienda;
+import es.generali.primefacespoc.support.OnExitActionBase;
 
+/*
 public class CaracteristicasDeLaViviendaOnExitAction {
 
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
@@ -48,6 +47,19 @@ public class CaracteristicasDeLaViviendaOnExitAction {
 			}
 		}
 		
+	}
+	
+}*/
+
+public class CaracteristicasDeLaViviendaOnExitAction extends OnExitActionBase<SeguroViviendaBean> {
+	private static final long serialVersionUID = 1L;
+	
+	public boolean execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
+		MessageContext messageContext = requestContext.getMessageContext();
+		
+		validationService.validate(model, CaracteristicasDeLaVivienda.class);
+		
+		return !messageContext.hasErrorMessages();
 	}
 	
 }

@@ -3,12 +3,15 @@ package es.generali.primefacespoc.support;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.catalina.Globals;
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts.Globals;
-import org.apache.struts.util.MessageResources;
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.binding.message.MessageContext;
+import org.springframework.context.MessageSource;
 
 public class Validator {
 	Object model;
@@ -34,7 +37,7 @@ public class Validator {
 		return this;
 	}
 	
-	public boolean validate(HttpServletRequest request, ErrorFunction errorFn) throws Exception {
+	public boolean validate(MessageSource msg, ErrorFunction errorFn) throws Exception {
 		for (Record param : params) {
 			String type = param.get("type");
 			String fieldname = param.get("fieldname");
@@ -48,7 +51,7 @@ public class Validator {
 			    String key = className + ".field." + fieldname;
 			    		
 			    if (value == null || StringUtils.isEmpty(value.toString())) {
-					errorFn.onError(fieldname, "Debe de introducir el campo '" + getMessage(request, key) + "'");
+					errorFn.onError(fieldname, "Debe de introducir el campo '" + getMessage(msg, key) + "'");
 			    }
 			}
 		}
@@ -56,8 +59,10 @@ public class Validator {
 		return true;
 	}
 	
-	protected String getMessage(HttpServletRequest request, String resourceKey){
-		MessageResources messageResources = ((MessageResources) request.getAttribute(Globals.MESSAGES_KEY));
-		return messageResources.getMessage(Utility.getUserLocale(request, null), resourceKey);
+	//@Autowired
+	//protected MessageSource resource;
+	
+	protected String getMessage(MessageSource msg, String resourceKey) {
+		return msg.getMessage(resourceKey, null, new Locale("es", "es"));
 	}
 }

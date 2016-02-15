@@ -10,8 +10,8 @@
 
 	<faces:resources />
 	
-	<mvc:annotation-driven/>
- 	
+	<mvc:annotation-driven />
+	 
 	<mvc:resources mapping="/jquery/**" location="/jquery/" order="1" />
 	<mvc:resources mapping="/styles/**" location="/styles/" order="1" />
 	<mvc:resources mapping="/images/**" location="/images/" order="1" />

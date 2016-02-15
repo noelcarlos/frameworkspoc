@@ -18,18 +18,26 @@
 			<div class="col-md-6">
 				<input type="hidden" name="flowEvent" />
 				<div class="form-group">
-					<label class="control-label" for="provinciaId">Provincia:</label>
-					<h:selectOneMenu value="#{seguroHogarFlowAction.model.provinciaId}" styleClass="form-control">
+					<h:outputLabel for="provinciaId" styleClass="control-label">
+						#{msg['seguroViviendaBean.edit.provinciaId']}:
+						<span class="glyphicon glyphicon-mandatory" />
+					</h:outputLabel>
+					<h:selectOneMenu id="provinciaId" value="#{seguroHogarFlowAction.model.provinciaId}" 
+						label="#{msg['seguroViviendaBean.edit.provinciaId']}" styleClass="form-control">
 						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
-						<f:selectItems value="#{provincias}" var="item" itemLabel="#{item.NOMBRE}" itemValue="#{item.ID}" ></f:selectItems>
-					</h:selectOneMenu>
+						<f:selectItems value="#{provincias}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
+					</h:selectOneMenu>					
 				</div>	
 				<div class="form-group">
-					<label class="control-label" for="localizacionId">¿Donde se encuentra la vivienda?:</label>
-					<h:selectOneMenu value="#{seguroHogarFlowAction.model.localizacionId}" styleClass="form-control">
+					<h:outputLabel for="localizacionId" styleClass="control-label">
+						#{msg['seguroViviendaBean.edit.localizacionId']}:
+						<span class="glyphicon glyphicon-mandatory" />
+					</h:outputLabel>
+					<h:selectOneMenu id="localizacionId" value="#{seguroHogarFlowAction.model.localizacionId}" 
+						label="#{msg['seguroViviendaBean.edit.localizacionId']}" styleClass="form-control">
 						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
-						<f:selectItems value="#{localizacionesViviendas}" var="item" itemLabel="#{item.NOMBRE}" itemValue="#{item.ID}" ></f:selectItems>
-					</h:selectOneMenu>
+						<f:selectItems value="#{localizacionesViviendas}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
+					</h:selectOneMenu>					
 				</div>		
 			</div>	
 		</div>

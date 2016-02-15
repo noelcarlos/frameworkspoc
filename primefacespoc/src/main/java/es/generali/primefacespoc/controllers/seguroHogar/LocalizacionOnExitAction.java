@@ -1,34 +1,21 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import java.io.Serializable;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
-import org.springframework.context.ApplicationContext;
 import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.SeguroViviendaBean;
+import es.generali.primefacespoc.models.SeguroViviendaBean.Localizacion;
+import es.generali.primefacespoc.support.OnExitActionBase;
 
-@SuppressWarnings("serial")
-public class LocalizacionOnExitAction implements Serializable {
-	@Autowired protected transient ApplicationContext appContext;
+public class LocalizacionOnExitAction extends OnExitActionBase<SeguroViviendaBean> {
+	private static final long serialVersionUID = 1L;
 	
 	public boolean execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
 		MessageContext messageContext = requestContext.getMessageContext();
 		
-		if (model.getProvinciaId() == null) {
-    		messageContext.addMessage(new MessageBuilder()
-				.error().code("error.literal").arg("Debe de seleccionar una provincia")
-				.build());
-		}
-		
-		if (model.getLocalizacionId() == null) {
-    		messageContext.addMessage(new MessageBuilder()
-				.error().code("error.literal").arg("Seleccione en que lugar se encuentra la vivienda")
-				.build());
-		}		
+		validationService.validate(model, Localizacion.class);
 		
 		return !messageContext.hasErrorMessages();
 	}
+	
 }

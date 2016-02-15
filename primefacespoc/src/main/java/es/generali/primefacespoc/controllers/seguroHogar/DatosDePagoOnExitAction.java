@@ -1,28 +1,21 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionError;
-import org.apache.struts.action.ActionErrors;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.binding.message.MessageContext;
+import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.SeguroViviendaBean;
+import es.generali.primefacespoc.models.SeguroViviendaBean.DatosDePago;
+import es.generali.primefacespoc.support.OnExitActionBase;
 
-public class DatosDePagoOnExitAction {
-
-	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
-			HttpServletRequest request, HttpServletResponse response, ActionErrors errors) throws Exception {
+public class DatosDePagoOnExitAction extends OnExitActionBase<SeguroViviendaBean> {
+	private static final long serialVersionUID = 1L;
+	
+	public boolean execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
+		MessageContext messageContext = requestContext.getMessageContext();
 		
-		/*
-		if (model.getProvinciaId() == null) {
-    		errors.add("provinciaId", new ActionError("error.literal", "Debe de seleccionar una provincia"));
-		}
+		validationService.validate(model, DatosDePago.class);
 		
-		if (model.getLocalizacionId() == null) {
-    		errors.add("localizacionId", new ActionError("error.literal", "Seleccione en que lugar se encuentra la vivienda"));
-		}
-		*/
+		return !messageContext.hasErrorMessages();
 	}
 	
 }

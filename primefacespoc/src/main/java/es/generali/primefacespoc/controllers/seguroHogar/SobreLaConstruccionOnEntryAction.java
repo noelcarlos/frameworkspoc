@@ -1,23 +1,24 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.webflow.core.collection.MutableAttributeMap;
+import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.SeguroViviendaBean;
 import es.generali.primefacespoc.services.LookupService;
 
-public class SobreLaConstruccionOnEntryAction {
+@SuppressWarnings("serial")
+public class SobreLaConstruccionOnEntryAction implements Serializable  {
 	@Autowired LookupService lookupService;
 
-	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
+		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
 		
-		request.setAttribute("tiposDeConstrucciones", lookupService.getTiposDeConstrucciones());
-		request.setAttribute("calidadesDeLasConstrucciones", lookupService.getCalidadesDeLasConstrucciones());
-		request.setAttribute("tipologiasDeLasViviendas", lookupService.getTipologiasDeLasViviendas());
+		flowScope.put("tiposDeConstrucciones", lookupService.getTiposDeConstrucciones());
+		flowScope.put("calidadesDeLasConstrucciones", lookupService.getCalidadesDeLasConstrucciones());
+		flowScope.put("tipologiasDeLasViviendas", lookupService.getTipologiasDeLasViviendas());
 		
 	}
 }

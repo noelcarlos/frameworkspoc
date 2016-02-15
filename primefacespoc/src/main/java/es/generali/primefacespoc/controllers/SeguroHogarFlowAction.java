@@ -3,22 +3,14 @@ package es.generali.primefacespoc.controllers;
 import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessages;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.ConfiguracionBean;
@@ -259,9 +251,4 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 		this.lastPageNumber = lastPageNumber;
 	}
 
-	@Override
-	public void onEntry(HttpServletRequest request) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 }

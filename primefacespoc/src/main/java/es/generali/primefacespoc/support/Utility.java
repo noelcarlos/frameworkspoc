@@ -16,16 +16,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Locale;
+import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.Vector;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts.Globals;
-
-import java.util.Map.Entry;
 
 public class Utility {
 	static public String fileSizeToString(long size) {
@@ -308,27 +301,4 @@ public class Utility {
 		} 
 		return null;
 	}
-	
-	public static Locale getUserLocale(HttpServletRequest request, String locale) {
-
-        Locale userLocale = null;
-        HttpSession session = request.getSession(false);
-
-        if (locale == null) {
-            locale = Globals.LOCALE_KEY;
-        }
-
-        // Only check session if sessions are enabled
-        if (session != null) {
-            userLocale = (Locale) session.getAttribute(locale);
-        }
-
-        if (userLocale == null) {
-            // Returns Locale based on Accept-Language header or the server default
-            userLocale = request.getLocale();
-        }
-
-        return userLocale;
-
-    }
 }

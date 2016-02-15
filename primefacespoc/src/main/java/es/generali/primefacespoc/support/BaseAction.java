@@ -17,13 +17,9 @@ import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts.action.ActionError;
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionMessages;
-import org.apache.struts.actions.DispatchAction;
 import org.springframework.web.context.WebApplicationContext;
  
-public class BaseAction extends DispatchAction implements Serializable {
+public class BaseAction implements Serializable {
 	private static final long serialVersionUID = 1582038792765689505L;
 	
 	protected WebApplicationContext context;
@@ -51,6 +47,7 @@ public class BaseAction extends DispatchAction implements Serializable {
 		}
 	}
 	
+	/*
 	protected void modelToForm(Object model, LazyValidatorForm frm) throws IntrospectionException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 	    BeanInfo info = Introspector.getBeanInfo(model.getClass(), Object.class);
 	    PropertyDescriptor[] props = info.getPropertyDescriptors();
@@ -60,7 +57,6 @@ public class BaseAction extends DispatchAction implements Serializable {
 	    for (PropertyDescriptor pd : props) {
 	        String name = pd.getName();
 	        Method getter = pd.getReadMethod();
-	        /*Class<?> type = pd.getPropertyType();*/
 
 	        if (getter == null) {
 	        	continue;
@@ -70,7 +66,9 @@ public class BaseAction extends DispatchAction implements Serializable {
 		    String strValue = (String)ConvertUtils.convert(value, String.class);
 		    frm.set(name, strValue);
 	    }
-	}
+	}*/
+	
+	/*
 	
 	protected void convertAndValidate(LazyValidatorForm frm, Object model, ActionErrors errors, ActionMessages messages) 
 			throws IntrospectionException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -89,7 +87,6 @@ public class BaseAction extends DispatchAction implements Serializable {
 	        	continue;
 	        }
 
-	        /*Object value = getter.invoke(model);*/
 	        if (frm.getMap().keySet().contains(name) && setter != null) {
 		        String strValue = (String)frm.get(name);
 		        
@@ -153,7 +150,7 @@ public class BaseAction extends DispatchAction implements Serializable {
 		        }
 	        }
 	    }
-	}
+	}*/
 
 	private void initConverters() {
 	    Converter myConverter = new IntegerConverter();

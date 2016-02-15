@@ -1,33 +1,21 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionError;
-import org.apache.struts.action.ActionErrors;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.binding.message.MessageContext;
+import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.SeguroViviendaBean;
-import es.generali.primefacespoc.support.Validator;
+import es.generali.primefacespoc.models.SeguroViviendaBean.DatosDeLaViviendaAAsegurar;
+import es.generali.primefacespoc.support.OnExitActionBase;
 
-public class DatosDeLaViviendaAAsegurarOnExitAction {
-
-	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
-			HttpServletRequest request, HttpServletResponse response, ActionErrors errors) throws Exception {
+public class DatosDeLaViviendaAAsegurarOnExitAction extends OnExitActionBase<SeguroViviendaBean> {
+	private static final long serialVersionUID = 1L;
+	
+	public boolean execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
+		MessageContext messageContext = requestContext.getMessageContext();
 		
-		new Validator()
-			.model(model)
-			.mandatory("tipoDeVíaViviendaId")
-			.mandatory("domicilioVivienda")
-			.mandatory("numeroYPisoVivienda")
-			.mandatory("codigoPostalVivienda")
-			.mandatory("localidadVivienda")
-			.mandatory("provinciaViviendaId")
-			.validate(request, (fieldName, message)-> {
-	    		errors.add(fieldName, new ActionError("error.literal", message));
-			}
-		);
+		validationService.validate(model, DatosDeLaViviendaAAsegurar.class);
 		
+		return !messageContext.hasErrorMessages();
 	}
 	
 }

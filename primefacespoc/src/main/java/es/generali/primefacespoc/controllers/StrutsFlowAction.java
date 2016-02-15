@@ -1,30 +1,11 @@
 package es.generali.primefacespoc.controllers;
 
-import java.io.File;
-import java.lang.reflect.Method;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessages;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Node;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import es.generali.primefacespoc.services.LookupService;
 import es.generali.primefacespoc.support.BaseAction;
-import es.generali.primefacespoc.support.LazyValidatorForm;
-import es.generali.primefacespoc.support.Utility;
 
+@SuppressWarnings("serial")
 public abstract class StrutsFlowAction extends BaseAction {
 	
+	/*
 	abstract public void onEntry(HttpServletRequest request) throws Exception;
 		
 	public ActionForward onEntry(ActionMapping mapping, ActionForm form,
@@ -228,4 +209,5 @@ public abstract class StrutsFlowAction extends BaseAction {
 		
 		return null;
 	}
+	*/
 }

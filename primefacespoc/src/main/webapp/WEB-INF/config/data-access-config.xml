@@ -13,7 +13,6 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<context:component-scan base-package="es.generali.strutspoc" />
-	<mvc:annotation-driven /> 
 	
 	<!-- jdbc:hsqldb:mem:dataSource -->
 	<jdbc:embedded-database id="dataSource" type="H2">
