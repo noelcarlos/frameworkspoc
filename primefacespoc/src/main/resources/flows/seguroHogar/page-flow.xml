@@ -76,6 +76,90 @@
 		</transition>
 	</view-state>
 	
+	<view-state id="caracteristicasDeLaVivienda" >
+		<on-entry>
+			<evaluate expression="seguroHogarFlowAction.onUpdateState(flowRequestContext)" />
+			<evaluate expression="caracteristicasDeLaViviendaOnEntryAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		</on-entry>
+
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="caracteristicasDeLaViviendaOnExitAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
+	</view-state>
+	
+	<view-state id="medidasDeSeguridadDeTuVivienda" >
+		<on-entry>
+			<evaluate expression="seguroHogarFlowAction.onUpdateState(flowRequestContext)" />
+			<evaluate expression="medidasDeSeguridadDeTuViviendaOnEntryAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		</on-entry>
+
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="medidasDeSeguridadDeTuViviendaOnExitAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
+	</view-state>
+	
+	<view-state id="personalizarPaquete" >
+		<on-entry>
+			<evaluate expression="seguroHogarFlowAction.onUpdateState(flowRequestContext)" />
+			<evaluate expression="personalizarPaqueteOnEntryAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		</on-entry>
+
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="personalizarPaqueteOnExitAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
+	</view-state>
+	
+	<view-state id="datosDelTitular" >
+		<on-entry>
+			<evaluate expression="seguroHogarFlowAction.onUpdateState(flowRequestContext)" />
+			<evaluate expression="datosDelTitularOnEntryAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		</on-entry>
+
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="datosDelTitularOnExitAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
+	</view-state>
+	
+	<view-state id="datosDeLaViviendaAAsegurar" >
+		<on-entry>
+			<evaluate expression="seguroHogarFlowAction.onUpdateState(flowRequestContext)" />
+			<evaluate expression="datosDeLaViviendaAAsegurarOnEntryAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		</on-entry>
+
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="datosDeLaViviendaAAsegurarOnExitAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
+	</view-state>
+	
+	<view-state id="datosDePago" >
+		<on-entry>
+			<evaluate expression="seguroHogarFlowAction.onUpdateState(flowRequestContext)" />
+			<evaluate expression="datosDePagoOnEntryAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		</on-entry>
+
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="datosDePagoOnExitAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
+	</view-state>
+	
+	<view-state id="resumen" >
+		<on-entry>
+			<evaluate expression="seguroHogarFlowAction.onUpdateState(flowRequestContext)" />
+			<evaluate expression="resumenOnEntryAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		</on-entry>
+
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="resumenOnExitAction.execute(flowRequestContext, seguroHogarFlowAction.model)" />
+		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
+		</transition>
+	</view-state>
+	
 	<global-transitions>
 		<transition on="setup" />
 		

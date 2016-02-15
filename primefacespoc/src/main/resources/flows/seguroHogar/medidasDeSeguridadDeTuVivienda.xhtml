@@ -1,0 +1,47 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>
+	
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label">Caracteristicas</label>
+					<div class="checkbox checkbox-primary">
+						<html:checkbox styleId="rejasEnVentanasOSimilares" property="rejasEnVentanasOSimilares"></html:checkbox>
+						<label for="rejasEnVentanasOSimilares">Rejas en ventanas o similares</label>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<html:checkbox styleId="puertaDeSeguridad" property="puertaDeSeguridad"></html:checkbox>
+						<label for="puertaDeSeguridad">Puerta de seguridad</label>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<html:checkbox styleId="alarmaConectada" property="alarmaConectada"></html:checkbox>
+						<label for="alarmaConectada">Alarma conectada a central de seguridad o vigilancia 24h</label>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<html:checkbox styleId="cajaFuerte" property="cajaFuerte"></html:checkbox>
+						<label for="cajaFuerte">Caja fuerte</label>
+					</div>
+				</div>			
+			</div>	
+		</div>
+	
+		<ui:include src="../../commons/flowButtons.xhtml" />
+	</h:form>
+	
+</ui:define>
+
+</ui:composition>
+ 

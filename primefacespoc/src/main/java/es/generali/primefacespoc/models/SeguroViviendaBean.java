@@ -77,10 +77,10 @@ public class SeguroViviendaBean implements Serializable {
 		map.put("tipologiaDeLaViviendaId", tipologiaDeLaViviendaId);
 	}
 	
-	/* Datos de la vivienda */
+	/* Caracteristicas */
 	public interface CaracteristicasDeLaVivienda {};
 	
-	@NotEmpty(groups={CaracteristicasDeLaVivienda.class})
+	@NotNull(groups={CaracteristicasDeLaVivienda.class})
 	public Double getMetrosCuadradosConstruidos() {
 		return (Double)map.get("metrosCuadradosConstruidos");
 	}

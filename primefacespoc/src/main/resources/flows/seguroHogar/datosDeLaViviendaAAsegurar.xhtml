@@ -1,0 +1,59 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>
+	
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row clearfix">
+					<div class="form-group col-md-2">
+						<label class="control-label" for="tipoDeVÃ­aViviendaId">Tipo de via:</label>
+						<html:select property="tipoDeVÃ­aViviendaId" styleClass="form-control">
+							<html:option value="" ></html:option>
+							<html:options collection="tiposDeVias" property="id" labelProperty="nombre" />
+						</html:select>
+					</div>
+					<div class="form-group col-md-2">
+						<label class="control-label" for="domicilioVivienda">Domicilio:</label>
+						<html:text property="domicilioVivienda" styleClass="form-control"></html:text>
+					</div>
+					<div class="form-group col-md-2">
+						<label class="control-label" for="numeroYPisoVivienda">NÃºmero y piso:</label>
+						<html:text property="numeroYPisoVivienda" styleClass="form-control"></html:text>
+					</div>
+					<div class="form-group col-md-2">
+						<label class="control-label" for="codigoPostalVivienda">CÃ³digo postal:</label>
+						<html:text property="codigoPostalVivienda" styleClass="form-control"></html:text>
+					</div>
+					<div class="form-group col-md-2">
+						<label class="control-label" for="localidadVivienda">Localidad:</label>
+						<html:text property="localidadVivienda" styleClass="form-control"></html:text>
+					</div>
+					<div class="form-group col-md-2">
+						<label class="control-label" for="provinciaViviendaId">Provincia:</label>
+						<html:select property="provinciaViviendaId" styleClass="form-control">
+							<html:option value="" ></html:option>
+							<html:options collection="provincias" property="id" labelProperty="nombre" />
+						</html:select>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<ui:include src="../../commons/flowButtons.xhtml" />
+	</h:form>
+	
+</ui:define>
+
+</ui:composition>

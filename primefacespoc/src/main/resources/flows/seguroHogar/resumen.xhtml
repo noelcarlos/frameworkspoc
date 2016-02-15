@@ -1,0 +1,60 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel dark-green-border">
+	               <div class="panel-heading green-back white-color">
+	                   <h3 class="panel-title">PRECIO FINAL</h3>
+	               </div>
+	               <ul class="panel-body list-group">
+	                   <li class="list-group-item">
+							<span class="price-xl text-success">
+							 	<center><fmt:formatNumber type="number" maxFractionDigits="2" value="${model.precio}" ></fmt:formatNumber> €</center>
+							</span>	
+	                   </li>
+	                   <li class="list-group-item">
+	                         <center>Lea atentamente su contrato</center>
+	                   </li>
+	               </ul>
+	           </div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+				<div class="h2">Contrato:  
+					<strong>
+				 		<fmt:formatNumber type="number" maxFractionDigits="0" value="${model.getContrato().length()/1024}" ></fmt:formatNumber> KB	
+					</strong>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="code">
+					<pre><code>${model.getContrato().substring(0, 2000)} ...</code></pre>
+				</div>
+			</div>
+		</div>
+	
+		<ui:include src="../../commons/flowButtons.xhtml" />
+	</h:form>
+	
+</ui:define>
+
+</ui:composition>
+ 

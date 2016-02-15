@@ -1,0 +1,78 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>
+	
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label" for="capitalAseguradoVivienda">Capital asegurado para la vivienda:</label>
+					<html:text property="capitalAseguradoVivienda" styleClass="form-control"></html:text>
+				</div>			
+				<div class="form-group">
+					<label class="control-label" for="capitalAseguradoEnseres">Capital asegurado para enseres:</label>
+					<html:text property="capitalAseguradoEnseres" styleClass="form-control"></html:text>
+				</div>			
+				<div class="form-group">
+					<label class="control-label" for="valorResponsabilidadCivil">Valor de responsabilidad civil:</label>
+					<html:text property="valorResponsabilidadCivil" styleClass="form-control"></html:text>
+				</div>
+						
+				<div class="form-group">
+					<label class="control-label">Opciones</label>
+					<div class="checkbox checkbox-primary">
+						<html:checkbox styleId="opcionRotura" property="opcionRotura"></html:checkbox>
+						<label for="opcionRotura">Rotura</label>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<html:checkbox styleId="opcionRobo" property="opcionRobo"></html:checkbox>
+						<label for="opcionRobo">Robo</label>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<html:checkbox styleId="opcionDefensaJuridica" property="opcionDefensaJuridica"></html:checkbox>
+						<label for="opcionDefensaJuridica">Defensa juridica</label>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<html:checkbox styleId="opcionInhabilidad" property="opcionInhabilidad"></html:checkbox>
+						<label for="opcionInhabilidad">Inhabilidad</label>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<html:checkbox styleId="opcionAsistenciaInformatica" property="opcionAsistenciaInformatica"></html:checkbox>
+						<label for="opcionAsistenciaInformatica">Asistencia inform�tica</label>
+					</div>
+				</div>	
+				
+				<div class="form-group">
+					<label class="control-label" for="capitalAseguradoJoyas">Capital asegurado para joyas:</label>
+					<html:text property="capitalAseguradoJoyas" styleClass="form-control"></html:text>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="capitalAseguradoObjetosDeValor">Capital asegurado para objetos de valor:</label>
+					<html:text property="capitalAseguradoObjetosDeValor" styleClass="form-control"></html:text>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="capitalAseguradoRecomposicionEstetica">Capital asegurado para recomposici�n est�tica:</label>
+					<html:text property="capitalAseguradoRecomposicionEstetica" styleClass="form-control"></html:text>
+				</div>
+						
+			</div>	
+		</div>
+	
+		<ui:include src="../../commons/flowButtons.xhtml" />
+	</h:form>
+	
+</ui:define>
+
+</ui:composition>
+ 

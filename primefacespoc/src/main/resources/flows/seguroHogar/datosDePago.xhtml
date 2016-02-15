@@ -1,0 +1,57 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="/layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>
+	
+		<div class="row">
+			<div class="col-md-6">
+				<div class="row clearfix">
+					<div class="form-group col-md-2">
+						<label class="control-label" for="cuentaIBAN">IBAN:</label>
+						<html:text property="cuentaIBAN" styleClass="form-control"></html:text>
+					</div>	
+					<div class="form-group col-md-2">
+						<label class="control-label" for="cuentaEntidad">Entidad:</label>
+						<html:text property="cuentaEntidad" styleClass="form-control"></html:text>
+					</div>
+					<div class="form-group col-md-2">
+						<label class="control-label" for="cuentaOficina">Oficina:</label>
+						<html:text property="cuentaOficina" styleClass="form-control"></html:text>
+					</div>
+					<div class="form-group col-md-2">
+						<label class="control-label" for="cuentaDigitoControl">DC:</label>
+						<html:text property="cuentaDigitoControl" styleClass="form-control"></html:text>
+					</div>
+					<div class="form-group col-md-4">
+						<label class="control-label" for="cuentaNumero">NÃºmero:</label>
+						<html:text property="cuentaNumero" styleClass="form-control"></html:text>
+					</div>
+				</div>			
+				
+				<div class="row clearfix">
+					<div class="form-group col-md-4">
+						<label class="control-label" for="fechaDeEfecto">Fecha de efecto:</label>
+						<html:text property="fechaDeEfecto" styleClass="form-control date-picker"></html:text>
+					</div>			
+				</div>
+				
+			</div>	
+		</div>
+	
+		<ui:include src="../../commons/flowButtons.xhtml" />
+	</h:form>
+	
+</ui:define>
+
+</ui:composition> 
