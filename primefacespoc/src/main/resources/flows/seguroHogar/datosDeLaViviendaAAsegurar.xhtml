@@ -18,34 +18,54 @@
 			<div class="col-md-12">
 				<div class="row clearfix">
 					<div class="form-group col-md-2">
-						<label class="control-label" for="tipoDeVÃ­aViviendaId">Tipo de via:</label>
-						<html:select property="tipoDeVÃ­aViviendaId" styleClass="form-control">
-							<html:option value="" ></html:option>
-							<html:options collection="tiposDeVias" property="id" labelProperty="nombre" />
-						</html:select>
+						<h:outputLabel for="tipoDeViaViviendaId" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.tipoDeViaViviendaId']}:
+							<span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<h:selectOneMenu id="tipoDeViaViviendaId" value="#{seguroHogarFlowAction.model.tipoDeViaViviendaId}" 
+							label="#{msg['seguroViviendaBean.edit.tipoDeViaViviendaId']}" styleClass="form-control">
+							<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
+							<f:selectItems value="#{tiposDeVias}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
+						</h:selectOneMenu>
 					</div>
 					<div class="form-group col-md-2">
-						<label class="control-label" for="domicilioVivienda">Domicilio:</label>
-						<html:text property="domicilioVivienda" styleClass="form-control"></html:text>
+						<h:outputLabel for="domicilioVivienda" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.domicilioVivienda']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="domicilioVivienda" value="#{seguroHogarFlowAction.model.domicilioVivienda}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.domicilioVivienda']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<label class="control-label" for="numeroYPisoVivienda">NÃºmero y piso:</label>
-						<html:text property="numeroYPisoVivienda" styleClass="form-control"></html:text>
+						<h:outputLabel for="numeroYPisoVivienda" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.numeroYPisoVivienda']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="numeroYPisoVivienda" value="#{seguroHogarFlowAction.model.numeroYPisoVivienda}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.numeroYPisoVivienda']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<label class="control-label" for="codigoPostalVivienda">CÃ³digo postal:</label>
-						<html:text property="codigoPostalVivienda" styleClass="form-control"></html:text>
+						<h:outputLabel for="codigoPostalVivienda" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.codigoPostalVivienda']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="codigoPostalVivienda" value="#{seguroHogarFlowAction.model.codigoPostalVivienda}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.codigoPostalVivienda']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<label class="control-label" for="localidadVivienda">Localidad:</label>
-						<html:text property="localidadVivienda" styleClass="form-control"></html:text>
+						<h:outputLabel for="localidadVivienda" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.localidadVivienda']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="localidadVivienda" value="#{seguroHogarFlowAction.model.localidadVivienda}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.localidadVivienda']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<label class="control-label" for="provinciaViviendaId">Provincia:</label>
-						<html:select property="provinciaViviendaId" styleClass="form-control">
-							<html:option value="" ></html:option>
-							<html:options collection="provincias" property="id" labelProperty="nombre" />
-						</html:select>
+						<h:outputLabel for="provinciaViviendaId" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.provinciaViviendaId']}:
+							<span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<h:selectOneMenu id="provinciaViviendaId" value="#{seguroHogarFlowAction.model.provinciaViviendaId}" 
+							label="#{msg['seguroViviendaBean.edit.provinciaViviendaId']}" styleClass="form-control">
+							<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
+							<f:selectItems value="#{provincias}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
+						</h:selectOneMenu>
 					</div>
 				</div>
 			</div>

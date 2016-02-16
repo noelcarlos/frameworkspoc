@@ -167,7 +167,7 @@
 			<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, 'goNext')" />
 		</transition>
 		
-		<transition on="#{currentEvent.id.startsWith('gobackward-')}" to="#{viewScope.nextView}" bind="false">
+		<transition on="#{currentEvent.id.startsWith('gobackward-')}" to="#{viewScope.nextView}" bind="false" validate="false">
 		 	<evaluate expression="seguroHogarFlowAction.onStep(flowRequestContext, currentEvent.id)" />
 		</transition>
 

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class SeguroViviendaBean implements Serializable {
 	HashMap<String, Object> map = new HashMap<String, Object>(); 
@@ -263,6 +264,7 @@ public class SeguroViviendaBean implements Serializable {
 		map.put("documentoIdentidad", documentoIdentidad);
 	}
 	@NotNull(groups={DatosDelTitular.class})
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	public Date getFechaDeNacimiento() {
 		return (Date)map.get("fechaDeNacimiento");
 	}
@@ -291,11 +293,11 @@ public class SeguroViviendaBean implements Serializable {
 		map.put("email", email);
 	}
 	@NotNull(groups={DatosDelTitular.class})
-	public Integer getTipoDeVíaTitularId() {
-		return (Integer)map.get("tipoDeVíaTitularId");
+	public Integer getTipoDeViaTitularId() {
+		return (Integer)map.get("tipoDeViaTitularId");
 	}
-	public void setTipoDeVíaTitularId(Integer tipoDeVíaTitularId) {
-		map.put("tipoDeVíaTitularId", tipoDeVíaTitularId);
+	public void setTipoDeViaTitularId(Integer tipoDeViaTitularId) {
+		map.put("tipoDeViaTitularId", tipoDeViaTitularId);
 	}
 	@NotEmpty(groups={DatosDelTitular.class})
 	public String getDomicilioTitular() {
@@ -344,11 +346,11 @@ public class SeguroViviendaBean implements Serializable {
 	public interface DatosDeLaViviendaAAsegurar {};
 	
 	@NotNull(groups={DatosDeLaViviendaAAsegurar.class})
-	public Integer getTipoDeVíaViviendaId() {
-		return (Integer)map.get("tipoDeVíaViviendaId");
+	public Integer getTipoDeViaViviendaId() {
+		return (Integer)map.get("tipoDeViaViviendaId");
 	}
-	public void setTipoDeVíaViviendaId(Integer tipoDeVíaViviendaId) {
-		map.put("tipoDeVíaViviendaId", tipoDeVíaViviendaId);
+	public void setTipoDeViaViviendaId(Integer tipoDeViaViviendaId) {
+		map.put("tipoDeViaViviendaId", tipoDeViaViviendaId);
 	}
 	@NotEmpty(groups={DatosDeLaViviendaAAsegurar.class})
 	public String getDomicilioVivienda() {
@@ -391,6 +393,7 @@ public class SeguroViviendaBean implements Serializable {
 	public interface DatosDePago {};
 	
 	@NotNull(groups={DatosDePago.class})
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	public Date getFechaDeEfecto() {
 		return (Date)map.get("fechaDeEfecto");
 	}

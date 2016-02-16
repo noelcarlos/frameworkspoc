@@ -167,7 +167,7 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 			model.setSexoId(1);
 			model.setTelefonoMovil("932929212");
 			model.setEmail("neo.matrix@google.com");
-			model.setTipoDeVíaTitularId(5);
+			model.setTipoDeViaTitularId(5);
 			model.setDomicilioTitular("SION");
 			model.setNumeroYPisoTitular("9/11");
 			model.setCodigoPostalTitular("2001");
@@ -175,7 +175,7 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 			model.setProvinciaTitularId(2);
 		}
 		if (config.getDatosDeLaViviendaAAsegurar()) {
-			model.setTipoDeVíaViviendaId(4);
+			model.setTipoDeViaViviendaId(4);
 			model.setDomicilioVivienda("SION");
 			model.setNumeroYPisoVivienda("9/11");
 			model.setCodigoPostalVivienda("2001");
