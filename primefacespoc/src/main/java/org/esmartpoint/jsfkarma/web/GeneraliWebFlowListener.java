@@ -19,11 +19,14 @@ import org.apache.log4j.Logger;
 import org.springframework.webflow.core.collection.MutableAttributeMap;
 import org.springframework.webflow.definition.StateDefinition;
 import org.springframework.webflow.definition.TransitionDefinition;
+import org.springframework.webflow.execution.EnterStateVetoException;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.FlowExecutionListenerAdapter;
 import org.springframework.webflow.execution.FlowSession;
 import org.springframework.webflow.execution.RequestContext;
 import org.springframework.webflow.execution.View;
+
+import es.generali.primefacespoc.controllers.GeneraliWebFlowEngine;
 
 /**
  * Listener to handle breadcrumb navigation.
@@ -42,6 +45,8 @@ public class GeneraliWebFlowListener extends FlowExecutionListenerAdapter {
 
 	@Override
 	public void viewRendering(RequestContext context, final View view, final StateDefinition state) {
+		GeneraliWebFlowEngine generaliWebFlowEngine = (GeneraliWebFlowEngine)context.getFlowScope().get("generaliWebFlowEngine");
+		generaliWebFlowEngine.onUpdateState(context);
 		super.viewRendering(context, view, state);
 	}
 
@@ -59,6 +64,14 @@ public class GeneraliWebFlowListener extends FlowExecutionListenerAdapter {
 
 	public void transitionExecuting(RequestContext context, TransitionDefinition transition) {
 		super.transitionExecuting(context, transition);
+	}
+	
+	public void stateEntering(RequestContext context, StateDefinition state) {
+		super.stateEntering(context, state);
+	}
+
+	public void stateEntered(RequestContext context, StateDefinition previousState, StateDefinition newState) {
+		super.stateEntered(context, previousState, newState);
 	}
 
 }

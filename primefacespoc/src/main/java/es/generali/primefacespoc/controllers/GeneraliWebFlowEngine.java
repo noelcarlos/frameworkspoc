@@ -39,7 +39,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 		//model.setNumPersonasQueVivenEnLaVivienda(23);
 	}
 	
-	public String onUpdateState(RequestContext requestContext) throws Exception {
+	public String onUpdateState(RequestContext requestContext) throws ControlledExit {
 		Node node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		currentPageNumber = currentStep;
 		currentPageTitle = node.valueOf("@title");
