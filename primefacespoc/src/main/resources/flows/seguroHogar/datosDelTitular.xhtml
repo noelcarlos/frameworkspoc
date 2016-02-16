@@ -24,19 +24,30 @@
 						<p:inputText id="nombre" value="#{seguroHogarFlowAction.model.nombre}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.nombre']}"/>	
 					</div>			
-					<div class="form-group col-md-4">
+					<div class="form-group col-md-3">
 						<h:outputLabel for="apellido1" styleClass="control-label">
 							#{msg['seguroViviendaBean.edit.apellido1']}: <span class="glyphicon glyphicon-mandatory" />
 						</h:outputLabel>
 						<p:inputText id="apellido1" value="#{seguroHogarFlowAction.model.apellido1}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.apellido1']}"/>	
 					</div>	
-					<div class="form-group col-md-4">
+					<div class="form-group col-md-3">
 						<h:outputLabel for="apellido2" styleClass="control-label">
 							#{msg['seguroViviendaBean.edit.apellido2']}: 
 						</h:outputLabel>
 						<p:inputText id="apellido2" value="#{seguroHogarFlowAction.model.apellido2}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.apellido2']}"/>
+					</div>
+					<div class="form-group col-md-2">
+						<h:outputLabel for="sexoId" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.sexoId']}:
+							<span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<h:selectOneMenu id="sexoId" value="#{seguroHogarFlowAction.model.sexoId}" 
+							label="#{msg['seguroViviendaBean.edit.sexoId']}" styleClass="form-control">
+							<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
+							<f:selectItems value="#{sexos}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
+						</h:selectOneMenu>
 					</div>
 				</div>			
 				<div class="row clearfix">
@@ -58,7 +69,7 @@
 						<p:inputText id="documentoIdentidad" value="#{seguroHogarFlowAction.model.documentoIdentidad}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.documentoIdentidad']}"/>
 					</div>
-					<div class="form-group col-md-4">
+					<div class="form-group col-md-2">
 						<h:outputLabel for="fechaDeNacimiento" styleClass="control-label">
 							#{msg['seguroViviendaBean.edit.fechaDeNacimiento']}: <span class="glyphicon glyphicon-mandatory" />
 						</h:outputLabel>
@@ -66,27 +77,14 @@
 							value="#{seguroHogarFlowAction.model.fechaDeNacimiento}" pattern="dd/MM/yyyy" 
 							styleClass="form-control" />
 					</div>
-					<div class="form-group col-md-3">
-						<h:outputLabel for="sexoId" styleClass="control-label">
-							#{msg['seguroViviendaBean.edit.sexoId']}:
-							<span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
-						<h:selectOneMenu id="sexoId" value="#{seguroHogarFlowAction.model.sexoId}" 
-							label="#{msg['seguroViviendaBean.edit.sexoId']}" styleClass="form-control">
-							<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
-							<f:selectItems value="#{sexos}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
-						</h:selectOneMenu>
-					</div>
-				</div>
-				<div class="row clearfix">
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<h:outputLabel for="telefonoMovil" styleClass="control-label">
 							#{msg['seguroViviendaBean.edit.telefonoMovil']}: <span class="glyphicon glyphicon-mandatory" />
 						</h:outputLabel>
 						<p:inputText id="telefonoMovil" value="#{seguroHogarFlowAction.model.telefonoMovil}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.telefonoMovil']}"/>
 					</div>
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<h:outputLabel for="email" styleClass="control-label">
 							#{msg['seguroViviendaBean.edit.email']}: <span class="glyphicon glyphicon-mandatory" />
 						</h:outputLabel>

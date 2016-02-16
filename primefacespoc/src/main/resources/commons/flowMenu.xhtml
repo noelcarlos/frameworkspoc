@@ -13,7 +13,7 @@
 				<ui:fragment rendered="#{!(seguroHogarFlowAction.currentStep lt result.valueOf('@name'))}" >
 					<p:commandLink action="#{'gobackward-'.concat(result.valueOf('@name'))}" 
 						styleClass="btn #{seguroHogarFlowAction.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}"
-						ajax="false">
+						ajax="false" process="@this" immediate="true">
 						#{result.valueOf("@menu")}
 					</p:commandLink>
 				</ui:fragment>

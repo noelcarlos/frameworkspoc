@@ -607,6 +607,25 @@ input.range-md-5 {
     line-height: 1.42857143;
 } 
 
+span.form-control {
+	display: block;
+    width: 100%;
+    height: 34px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    padding: 0px 0px;
+    border: 0px none;
+}
+
+span.form-control input {
+	display: inline-block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+} 
+
 .form-control.ui-selectonemenu {
 	display: block;
     width: 100%;

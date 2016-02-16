@@ -15,34 +15,53 @@
 		<p:messages showDetail="false" showSummary="true"/>
 	
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-7">
 				<div class="row clearfix">
 					<div class="form-group col-md-2">
-						<label class="control-label" for="cuentaIBAN">IBAN:</label>
-						<html:text property="cuentaIBAN" styleClass="form-control"></html:text>
+						<h:outputLabel for="cuentaIBAN" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cuentaIBAN']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="cuentaIBAN" value="#{seguroHogarFlowAction.model.cuentaIBAN}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.cuentaIBAN']}"/>
 					</div>	
 					<div class="form-group col-md-2">
-						<label class="control-label" for="cuentaEntidad">Entidad:</label>
-						<html:text property="cuentaEntidad" styleClass="form-control"></html:text>
+						<h:outputLabel for="cuentaEntidad" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cuentaEntidad']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="cuentaEntidad" value="#{seguroHogarFlowAction.model.cuentaEntidad}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.cuentaEntidad']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<label class="control-label" for="cuentaOficina">Oficina:</label>
-						<html:text property="cuentaOficina" styleClass="form-control"></html:text>
+						<h:outputLabel for="cuentaOficina" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cuentaOficina']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="cuentaOficina" value="#{seguroHogarFlowAction.model.cuentaOficina}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.cuentaOficina']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<label class="control-label" for="cuentaDigitoControl">DC:</label>
-						<html:text property="cuentaDigitoControl" styleClass="form-control"></html:text>
+						<h:outputLabel for="cuentaDigitoControl" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cuentaDigitoControl']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="cuentaDigitoControl" value="#{seguroHogarFlowAction.model.cuentaDigitoControl}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.cuentaDigitoControl']}"/>
 					</div>
-					<div class="form-group col-md-4">
-						<label class="control-label" for="cuentaNumero">NÃºmero:</label>
-						<html:text property="cuentaNumero" styleClass="form-control"></html:text>
+					<div class="form-group col-md-3">
+						<h:outputLabel for="cuentaNumero" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cuentaNumero']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="cuentaNumero" value="#{seguroHogarFlowAction.model.cuentaNumero}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.cuentaNumero']}"/>
 					</div>
 				</div>			
 				
 				<div class="row clearfix">
 					<div class="form-group col-md-4">
-						<label class="control-label" for="fechaDeEfecto">Fecha de efecto:</label>
-						<html:text property="fechaDeEfecto" styleClass="form-control date-picker"></html:text>
+						<h:outputLabel for="fechaDeEfecto" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.fechaDeEfecto']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:calendar id="fechaDeEfecto" label="#{msg['seguroViviendaBean.edit.fechaDeEfecto']}"  
+							value="#{seguroHogarFlowAction.model.fechaDeEfecto}" pattern="dd/MM/yyyy" 
+							styleClass="form-control" />
 					</div>			
 				</div>
 				
