@@ -2,8 +2,6 @@ package es.generali.primefacespoc.controllers;
 
 import java.util.GregorianCalendar;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.io.IOUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -16,11 +14,12 @@ import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.ConfiguracionBean;
 import es.generali.primefacespoc.models.SeguroViviendaBean;
-import es.generali.primefacespoc.models.SeguroViviendaBean.CaracteristicasDeLaVivienda;
 import es.generali.primefacespoc.support.ControlledExit;
 import es.generali.primefacespoc.support.GeneratorHelper;
 
 public class SeguroHogarFlowAction extends StrutsFlowAction {
+	private static final long serialVersionUID = 6848148192857690277L;
+	
 	private ConfiguracionBean config;
 	private SeguroViviendaBean model;
 	private Document flow;
@@ -84,7 +83,11 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 					currentStep--;
 				}
 			} else 	if (flowEvent.equals("goforward-last")) {
-				currentStep = lastPageNumber;
+				int nextStep = lastPageNumber;
+				if (nextStep - currentStep > 1) {
+					requestContext.getFlowScope().put("_flowToView", nextStep);
+				}
+				currentStep++;
 			} else if (flowEvent.startsWith("goforward-")) { 
 				int nextStep = Integer.parseInt(flowEvent.substring(10));
 				if (nextStep - currentStep > 1) {
