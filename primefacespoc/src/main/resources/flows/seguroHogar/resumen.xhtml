@@ -24,7 +24,7 @@
 	                   <li class="list-group-item">
 							<span class="price-xl text-success">
 							 	<center>
-							 		<h:outputText value="#{seguroHogarFlowAction.model.precio}">
+							 		<h:outputText value="#{model.precio}">
 										<f:convertNumber pattern="#0.000" locale="es_ES" minFractionDigits="2"/>
 									</h:outputText> €
 							 	</center>
@@ -42,7 +42,7 @@
 			<div class="col-md-12">
 				<div class="h2">Contrato:  
 					<strong>
-				 		<h:outputText value="#{seguroHogarFlowAction.model.getContrato().length()/1024}">
+				 		<h:outputText value="#{model.getContrato().length()/1024}">
 							<f:convertNumber pattern="#0.000" locale="es_ES" minFractionDigits="0"/>
 						</h:outputText> KB
 					</strong>
@@ -52,7 +52,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="code">
-					<pre><code>#{seguroHogarFlowAction.model.getContrato().substring(0, 2000)} ...</code></pre>
+					<pre><code>#{model.getContrato().substring(0, 2000)} ...</code></pre>
 				</div>
 			</div>
 		</div>

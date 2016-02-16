@@ -20,21 +20,21 @@
 					<h:outputLabel for="capitalAseguradoVivienda" styleClass="control-label">
 						#{msg['seguroViviendaBean.edit.capitalAseguradoVivienda']}: <span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<p:inputText id="capitalAseguradoVivienda" value="#{seguroHogarFlowAction.model.capitalAseguradoVivienda}" 
+					<p:inputText id="capitalAseguradoVivienda" value="#{model.capitalAseguradoVivienda}" 
 						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.capitalAseguradoVivienda']}"/>	
 				</div>			
 				<div class="form-group">
 					<h:outputLabel for="capitalAseguradoEnseres" styleClass="control-label">
 						#{msg['seguroViviendaBean.edit.capitalAseguradoEnseres']}: <span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<p:inputText id="capitalAseguradoEnseres" value="#{seguroHogarFlowAction.model.capitalAseguradoEnseres}" 
+					<p:inputText id="capitalAseguradoEnseres" value="#{model.capitalAseguradoEnseres}" 
 						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.capitalAseguradoEnseres']}"/>	
 				</div>			
 				<div class="form-group">
 					<h:outputLabel for="valorResponsabilidadCivil" styleClass="control-label">
 						#{msg['seguroViviendaBean.edit.valorResponsabilidadCivil']}: <span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<p:inputText id="valorResponsabilidadCivil" value="#{seguroHogarFlowAction.model.valorResponsabilidadCivil}" 
+					<p:inputText id="valorResponsabilidadCivil" value="#{model.valorResponsabilidadCivil}" 
 						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.valorResponsabilidadCivil']}"/>	
 				</div>
 						
@@ -42,35 +42,35 @@
 					<label class="control-label">Opciones</label>
 					<div class="checkbox checkbox-primary">
 						<h:selectBooleanCheckbox id="opcionRotura" 
-							value="#{seguroHogarFlowAction.model.opcionRotura}" />
+							value="#{model.opcionRotura}" />
 						<h:outputLabel for="opcionRotura" styleClass="control-label">
 							#{msg['seguroViviendaBean.edit.opcionRotura']}
 						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
 						<h:selectBooleanCheckbox id="opcionRobo" 
-							value="#{seguroHogarFlowAction.model.opcionRobo}" />
+							value="#{model.opcionRobo}" />
 						<h:outputLabel for="opcionRobo" styleClass="control-label">
 							#{msg['seguroViviendaBean.edit.opcionRobo']}
 						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
 						<h:selectBooleanCheckbox id="opcionDefensaJuridica" 
-							value="#{seguroHogarFlowAction.model.opcionDefensaJuridica}" />
+							value="#{model.opcionDefensaJuridica}" />
 						<h:outputLabel for="opcionDefensaJuridica" styleClass="control-label">
 							#{msg['seguroViviendaBean.edit.opcionDefensaJuridica']}
 						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
 						<h:selectBooleanCheckbox id="opcionInhabilidad" 
-							value="#{seguroHogarFlowAction.model.opcionInhabilidad}" />
+							value="#{model.opcionInhabilidad}" />
 						<h:outputLabel for="opcionInhabilidad" styleClass="control-label">
 							#{msg['seguroViviendaBean.edit.opcionInhabilidad']}
 						</h:outputLabel>
 					</div>
 					<div class="checkbox checkbox-primary">
 						<h:selectBooleanCheckbox id="opcionAsistenciaInformatica" 
-							value="#{seguroHogarFlowAction.model.opcionAsistenciaInformatica}" />
+							value="#{model.opcionAsistenciaInformatica}" />
 						<h:outputLabel for="opcionAsistenciaInformatica" styleClass="control-label">
 							#{msg['seguroViviendaBean.edit.opcionAsistenciaInformatica']}
 						</h:outputLabel>
@@ -81,21 +81,21 @@
 					<h:outputLabel for="capitalAseguradoJoyas" styleClass="control-label">
 						#{msg['seguroViviendaBean.edit.capitalAseguradoJoyas']}: <span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<p:inputText id="capitalAseguradoJoyas" value="#{seguroHogarFlowAction.model.capitalAseguradoJoyas}" 
+					<p:inputText id="capitalAseguradoJoyas" value="#{model.capitalAseguradoJoyas}" 
 						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.capitalAseguradoJoyas']}"/>	
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="capitalAseguradoObjetosDeValor" styleClass="control-label">
 						#{msg['seguroViviendaBean.edit.capitalAseguradoObjetosDeValor']}: <span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<p:inputText id="capitalAseguradoObjetosDeValor" value="#{seguroHogarFlowAction.model.capitalAseguradoObjetosDeValor}" 
+					<p:inputText id="capitalAseguradoObjetosDeValor" value="#{model.capitalAseguradoObjetosDeValor}" 
 						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.capitalAseguradoObjetosDeValor']}"/>	
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="capitalAseguradoRecomposicionEstetica" styleClass="control-label">
 						#{msg['seguroViviendaBean.edit.capitalAseguradoRecomposicionEstetica']}: <span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<p:inputText id="capitalAseguradoRecomposicionEstetica" value="#{seguroHogarFlowAction.model.capitalAseguradoRecomposicionEstetica}" 
+					<p:inputText id="capitalAseguradoRecomposicionEstetica" value="#{model.capitalAseguradoRecomposicionEstetica}" 
 						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.capitalAseguradoRecomposicionEstetica']}"/>	
 				</div>
 						

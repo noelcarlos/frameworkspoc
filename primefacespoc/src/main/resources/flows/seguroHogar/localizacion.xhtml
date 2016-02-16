@@ -22,7 +22,7 @@
 						#{msg['seguroViviendaBean.edit.provinciaId']}:
 						<span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<h:selectOneMenu id="provinciaId" value="#{seguroHogarFlowAction.model.provinciaId}" 
+					<h:selectOneMenu id="provinciaId" value="#{model.provinciaId}" 
 						label="#{msg['seguroViviendaBean.edit.provinciaId']}" styleClass="form-control">
 						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
 						<f:selectItems value="#{provincias}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
@@ -33,7 +33,7 @@
 						#{msg['seguroViviendaBean.edit.localizacionId']}:
 						<span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<h:selectOneMenu id="localizacionId" value="#{seguroHogarFlowAction.model.localizacionId}" 
+					<h:selectOneMenu id="localizacionId" value="#{model.localizacionId}" 
 						label="#{msg['seguroViviendaBean.edit.localizacionId']}" styleClass="form-control">
 						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
 						<f:selectItems value="#{localizacionesViviendas}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />

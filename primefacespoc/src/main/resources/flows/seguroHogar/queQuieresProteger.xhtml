@@ -21,7 +21,7 @@
 						#{msg['seguroViviendaBean.edit.tipoDeUsoViviendaId']}:
 						<span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<h:selectOneMenu id="tipoDeUsoViviendaId" value="#{seguroHogarFlowAction.model.tipoDeUsoViviendaId}" 
+					<h:selectOneMenu id="tipoDeUsoViviendaId" value="#{model.tipoDeUsoViviendaId}" 
 						label="#{msg['seguroViviendaBean.edit.tipoDeUsoViviendaId']}" styleClass="form-control">
 						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
 						<f:selectItems value="#{tiposUsosViviendas}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
@@ -31,7 +31,7 @@
 					<h:outputLabel for="numPersonasQueVivenEnLaVivienda" styleClass="control-label">
 						#{msg['seguroViviendaBean.edit.numPersonasQueVivenEnLaVivienda']}: <span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<p:inputText id="numPersonasQueVivenEnLaVivienda" value="#{seguroHogarFlowAction.model.numPersonasQueVivenEnLaVivienda}" 
+					<p:inputText id="numPersonasQueVivenEnLaVivienda" value="#{model.numPersonasQueVivenEnLaVivienda}" 
 						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.numPersonasQueVivenEnLaVivienda']}"/>	
 				</div>			
 			</div>	

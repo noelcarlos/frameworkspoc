@@ -111,18 +111,18 @@ public class CustomFlowHandlerMapping extends FlowHandlerMapping {
     * 
     * @param ctx
     */
-        protected void overrideResourceLoader(GenericApplicationContext ctx, String flowId) {
-        	final ClassPathResource cpr = new ClassPathResource("flows/"+ flowId + "/");
+    protected void overrideResourceLoader(GenericApplicationContext ctx, String flowId) {
+    	final ClassPathResource cpr = new ClassPathResource("flows/"+ flowId + "/");
 
-        	ctx.setResourceLoader(new ResourceLoader() {
-            	
-            	public ClassLoader getClassLoader() {
-            		return cpr.getClassLoader();
-            	}
+    	ctx.setResourceLoader(new ResourceLoader() {
+        	
+        	public ClassLoader getClassLoader() {
+        		return cpr.getClassLoader();
+        	}
 
-            	public Resource getResource(String location) {
-            		return new CustomClassPathContextResource(cpr.getPath() + location, getClassLoader());
-            	}
-            });
-        }
+        	public Resource getResource(String location) {
+        		return new CustomClassPathContextResource(cpr.getPath() + location, getClassLoader());
+        	}
+        });
+    }
 }

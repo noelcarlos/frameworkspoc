@@ -21,7 +21,7 @@
 						#{msg['seguroViviendaBean.edit.tipoDeConstruccionId']}:
 						<span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<h:selectOneMenu id="tipoDeConstruccionId" value="#{seguroHogarFlowAction.model.tipoDeConstruccionId}" 
+					<h:selectOneMenu id="tipoDeConstruccionId" value="#{model.tipoDeConstruccionId}" 
 						label="#{msg['seguroViviendaBean.edit.tipoDeConstruccionId']}" styleClass="form-control">
 						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
 						<f:selectItems value="#{tiposDeConstrucciones}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
@@ -32,7 +32,7 @@
 						#{msg['seguroViviendaBean.edit.calidadDeLaConstruccionId']}:
 						<span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<h:selectOneMenu id="calidadDeLaConstruccionId" value="#{seguroHogarFlowAction.model.calidadDeLaConstruccionId}" 
+					<h:selectOneMenu id="calidadDeLaConstruccionId" value="#{model.calidadDeLaConstruccionId}" 
 						label="#{msg['seguroViviendaBean.edit.calidadDeLaConstruccionId']}" styleClass="form-control">
 						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
 						<f:selectItems value="#{calidadesDeLasConstrucciones}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
@@ -43,7 +43,7 @@
 						#{msg['seguroViviendaBean.edit.tipologiaDeLaViviendaId']}:
 						<span class="glyphicon glyphicon-mandatory" />
 					</h:outputLabel>
-					<h:selectOneMenu id="tipologiaDeLaViviendaId" value="#{seguroHogarFlowAction.model.tipologiaDeLaViviendaId}" 
+					<h:selectOneMenu id="tipologiaDeLaViviendaId" value="#{model.tipologiaDeLaViviendaId}" 
 						label="#{msg['seguroViviendaBean.edit.tipologiaDeLaViviendaId']}" styleClass="form-control">
 						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
 						<f:selectItems value="#{tipologiasDeLasViviendas}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
