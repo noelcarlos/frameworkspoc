@@ -16,7 +16,7 @@
 	<view-state id="queQuieresProteger">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnExitAction"/>
-	
+		
 		<on-entry>
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
 		</on-entry>

@@ -27,6 +27,9 @@ public class QueQuieresProtegerOnExitAction extends OnExitActionBase<SeguroVivie
 //				.build());
 //		}
 		
+		if (messageContext != null)
+			throw new es.generali.primefacespoc.support.ControlledExit("crka");
+		
 		return !messageContext.hasErrorMessages();
 	}
 	
