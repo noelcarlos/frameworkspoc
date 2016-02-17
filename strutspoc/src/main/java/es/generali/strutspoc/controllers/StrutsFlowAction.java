@@ -186,31 +186,33 @@ public abstract class StrutsFlowAction extends BaseAction {
 			if (currentStep < nextStep) {
 				currentStep++;
 
-				while (currentStep < nextStep) {
-					node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
-					
-					String preActionClass = node.valueOf("on-entry");
-					Class<?> cl = Class.forName(preActionClass);
-					Object action = cl.newInstance();
-					Method m = Utility.findFirst(cl, "execute");
-					Object formModel = session.getAttribute("model");
-					m.invoke(action, context, formModel, request, response);
-					
-					session.setAttribute("model", formModel);
-					model = session.getAttribute("model");
-					
-					String postActionClass = node.valueOf("on-exit");
-					cl = Class.forName(postActionClass);
-					action = cl.newInstance();
-					m = Utility.findFirst(cl, "execute");
-					m.invoke(action, context, model, request, response, errors);
-					session.setAttribute("model", formModel);
-					
-					if (errors.size() > 0) {
-						break;
+				try {
+					while (currentStep < nextStep) {
+						node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+						
+						String preActionClass = node.valueOf("on-entry");
+						Class<?> cl = Class.forName(preActionClass);
+						Object action = cl.newInstance();
+						Method m = Utility.findFirst(cl, "execute");
+						//model = session.getAttribute("model");
+						m.invoke(action, context, model, request, response);
+						
+						//session.setAttribute("model", formModel);
+						//model = session.getAttribute("model");
+						
+						String postActionClass = node.valueOf("on-exit");
+						cl = Class.forName(postActionClass);
+						action = cl.newInstance();
+						m = Utility.findFirst(cl, "execute");
+						m.invoke(action, context, model, request, response, errors);
+						
+						if (errors.size() > 0) {
+							break;
+						}
+						currentStep++;
 					}
-					
-					currentStep++;
+				} finally {
+					session.setAttribute("model", model);
 				}
 			} else {
 				currentStep = nextStep;
