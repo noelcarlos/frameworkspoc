@@ -195,7 +195,9 @@ public abstract class StrutsFlowAction extends BaseAction {
 					Method m = Utility.findFirst(cl, "execute");
 					Object formModel = session.getAttribute("model");
 					m.invoke(action, context, formModel, request, response);
+					
 					session.setAttribute("model", formModel);
+					model = session.getAttribute("model");
 					
 					String postActionClass = node.valueOf("on-exit");
 					cl = Class.forName(postActionClass);
