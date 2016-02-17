@@ -16,9 +16,10 @@
 	<view-state id="queQuieresProteger">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnExitAction"/>
-		
+	
 		<on-entry>
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 		</on-entry>
 		
 		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
@@ -38,6 +39,7 @@
 
 		<on-entry>
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 		</on-entry>
 		
 		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
@@ -57,6 +59,7 @@
 
 		<on-entry>
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 		</on-entry>
 		
 		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
@@ -76,6 +79,7 @@
 
 		<on-entry>
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 		</on-entry>
 		
 		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
@@ -94,8 +98,8 @@
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnExitAction"/>
 		
 		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 		</on-entry>
 		
 		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
@@ -115,6 +119,7 @@
 
 		<on-entry>
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 		</on-entry>
 		
 		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
@@ -134,6 +139,7 @@
 
 		<on-entry>
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 		</on-entry>
 		
 		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
@@ -153,6 +159,7 @@
 
 		<on-entry>
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 		</on-entry>
 		
 		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
@@ -172,6 +179,7 @@
 
 		<on-entry>
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 		</on-entry>
 		
 		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
@@ -191,6 +199,7 @@
 
 		<on-entry>
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onUpdateState(flowRequestContext)" />
 		</on-entry>
 		
 		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">

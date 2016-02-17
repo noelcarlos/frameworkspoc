@@ -58,8 +58,8 @@ public class GeneraliWebFlowListener extends FlowExecutionListenerAdapter {
 	public void viewRendering(RequestContext context, final View view, final StateDefinition state) {
 		super.viewRendering(context, view, state);
 
-		GeneraliWebFlowEngine generaliWebFlowEngine = (GeneraliWebFlowEngine)context.getFlowScope().get("generaliWebFlowEngine");
-		generaliWebFlowEngine.onUpdateState(context);
+//		GeneraliWebFlowEngine generaliWebFlowEngine = (GeneraliWebFlowEngine)context.getFlowScope().get("generaliWebFlowEngine");
+//		generaliWebFlowEngine.onUpdateState(context);
 		
 		//context.getViewScope().get("onEntryAction")
 		System.out.println("viewRendering");
