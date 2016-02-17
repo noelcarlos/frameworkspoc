@@ -13,8 +13,8 @@
 		<div class="col-md-12">
 			<div class="row clearfix">
 				<div class="form-group col-md-2">
-					<label class="control-label" for="tipoDeVíaViviendaId">Tipo de via:</label>
-					<html:select property="tipoDeVíaViviendaId" styleClass="form-control">
+					<label class="control-label" for="tipoDeViaViviendaId">Tipo de via:</label>
+					<html:select property="tipoDeViaViviendaId" styleClass="form-control">
 						<html:option value="" ></html:option>
 						<html:options collection="tiposDeVias" property="id" labelProperty="nombre" />
 					</html:select>

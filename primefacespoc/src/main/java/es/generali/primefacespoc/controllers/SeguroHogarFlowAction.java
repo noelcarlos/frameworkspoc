@@ -7,8 +7,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.ConfiguracionBean;
-import es.generali.primefacespoc.models.SeguroViviendaBean;
 import es.generali.primefacespoc.support.GeneratorHelper;
+import es.generali.segurohogar.models.SeguroViviendaBean;
 
 public class SeguroHogarFlowAction extends StrutsFlowAction {
 	private static final long serialVersionUID = 6848148192857690277L;

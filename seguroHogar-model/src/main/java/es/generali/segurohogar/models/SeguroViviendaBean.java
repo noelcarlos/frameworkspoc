@@ -1,4 +1,4 @@
-package es.generali.primefacespoc.models;
+package es.generali.segurohogar.models;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -5,8 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.context.WebApplicationContext;
 
-import es.generali.strutspoc.models.SeguroViviendaBean;
-import es.generali.strutspoc.services.LookupService;
+import es.generali.segurohogar.models.SeguroViviendaBean;
 
 public class DatosDePagoOnEntryAction {
 

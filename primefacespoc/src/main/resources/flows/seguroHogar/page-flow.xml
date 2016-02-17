@@ -4,7 +4,6 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	
 	<var name="generaliWebFlowEngine" class="es.generali.primefacespoc.controllers.GeneraliWebFlowEngine"/>
-
 	<var name="seguroHogarFlowAction" class="es.generali.primefacespoc.controllers.SeguroHogarFlowAction"/>
 	
 	<on-start>

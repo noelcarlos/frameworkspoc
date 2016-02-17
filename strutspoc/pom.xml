@@ -17,6 +17,13 @@
         <spring.version>4.1.6.RELEASE</spring.version>
 	</properties>
 	<dependencies>
+		<!-- BUSINESS DATA MODELS -->
+		<dependency>
+			<groupId>es.generali.dsi.model</groupId>
+			<artifactId>seguroHogar-model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	
 		<!-- Spring JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>

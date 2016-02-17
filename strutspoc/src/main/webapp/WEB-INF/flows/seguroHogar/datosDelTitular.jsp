@@ -61,8 +61,8 @@
 			</div>
 			<div class="row clearfix">
 				<div class="form-group col-md-2">
-					<label class="control-label" for="tipoDeVíaTitularId">Tipo de via:</label>
-					<html:select property="tipoDeVíaTitularId" styleClass="form-control">
+					<label class="control-label" for="tipoDeViaTitularId">Tipo de via:</label>
+					<html:select property="tipoDeViaTitularId" styleClass="form-control">
 						<html:option value="" ></html:option>
 						<html:options collection="tiposDeVias" property="id" labelProperty="nombre" />
 					</html:select>

@@ -7,7 +7,7 @@ import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.springframework.web.context.WebApplicationContext;
 
-import es.generali.strutspoc.models.SeguroViviendaBean;
+import es.generali.segurohogar.models.SeguroViviendaBean;
 import es.generali.strutspoc.support.Validator;
 
 public class DatosDelTitularOnExitAction {
@@ -28,7 +28,7 @@ public class DatosDelTitularOnExitAction {
 			.mandatory("sexoId")
 			.mandatory("telefonoMovil")
 			.mandatory("email")
-			.mandatory("tipoDeVíaTitularId")
+			.mandatory("tipoDeViaTitularId")
 			.mandatory("domicilioTitular")
 			.mandatory("numeroYPisoTitular")
 			.mandatory("codigoPostalTitular")

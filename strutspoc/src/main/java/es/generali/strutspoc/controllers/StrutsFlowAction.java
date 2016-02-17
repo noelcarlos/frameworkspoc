@@ -99,7 +99,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 		Class<?> cl = Class.forName(preActionClass);
 		Object action = cl.newInstance();
 		Method m = Utility.findFirst(cl, "execute");
-		ActionForm model = (ActionForm)session.getAttribute("model");
+		Object model = session.getAttribute("model");
 		m.invoke(action, context, model, request, response);
 		
 		modelToForm(model, (LazyValidatorForm)form);
@@ -193,7 +193,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 					Class<?> cl = Class.forName(preActionClass);
 					Object action = cl.newInstance();
 					Method m = Utility.findFirst(cl, "execute");
-					ActionForm formModel = (ActionForm)session.getAttribute("model");
+					Object formModel = session.getAttribute("model");
 					m.invoke(action, context, formModel, request, response);
 					session.setAttribute("model", formModel);
 					

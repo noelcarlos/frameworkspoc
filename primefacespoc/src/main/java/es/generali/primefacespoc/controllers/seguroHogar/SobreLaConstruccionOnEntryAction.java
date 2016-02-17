@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.webflow.core.collection.MutableAttributeMap;
 import org.springframework.webflow.execution.RequestContext;
 
-import es.generali.primefacespoc.models.SeguroViviendaBean;
 import es.generali.primefacespoc.services.LookupService;
+import es.generali.segurohogar.models.SeguroViviendaBean;
 
 @SuppressWarnings("serial")
 public class SobreLaConstruccionOnEntryAction implements Serializable  {
