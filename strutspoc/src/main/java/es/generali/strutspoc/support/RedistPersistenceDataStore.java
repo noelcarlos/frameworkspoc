@@ -1,5 +1,7 @@
 package es.generali.strutspoc.support;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,16 +27,17 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 		return instance;
 	}
 	
-	RedistPersistenceDataStore() {
+	private RedistPersistenceDataStore() {
 		client = RedisClient.create("redis://localhost:6379/0");
 		connection = client.connect();
 	}
 	
+	static int BUFFER_SIZE = 10*1024;
+	
 	public Object serializeFromString( String s ) throws IOException ,
 	 		ClassNotFoundException {
 		byte [] data = Base64.getDecoder().decode( s );
-		ObjectInputStream ois = new ObjectInputStream( 
-		new ByteArrayInputStream(  data ) );
+		ObjectInputStream ois = new ObjectInputStream( new BufferedInputStream(  new ByteArrayInputStream(  data ), BUFFER_SIZE ) );
 		Object o  = ois.readObject();
 		ois.close();
 		return o;
@@ -43,7 +46,7 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 	/** Write the object to a Base64 string. */
 	public String serializeToString( Serializable o ) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ObjectOutputStream oos = new ObjectOutputStream( baos );
+		ObjectOutputStream oos = new ObjectOutputStream( new BufferedOutputStream (baos, BUFFER_SIZE ) );
 		oos.writeObject( o );
 		oos.close();
 		return Base64.getEncoder().encodeToString(baos.toByteArray()); 
@@ -57,6 +60,9 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 			return null;
 		}
 		try {
+			if (res.length() > 1024) {
+				System.out.println("GETTING Size = " + res.length());
+			}
 			return serializeFromString(res);
 		} catch(Exception e) {
 			throw new RuntimeException(e);
@@ -67,7 +73,11 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 	public void setAttribute(String id, String name, Object value) {
 		RedisCommands<String, String> syncCommands = connection.sync();
 		try {
-			syncCommands.set(id+":"+name, serializeToString((Serializable)value));
+			String encodedValue = serializeToString((Serializable)value);
+			if (encodedValue.length() > 1024) {
+				System.out.println("PUTTING Size = " + encodedValue.length());
+			}
+			syncCommands.set(id+":"+name, encodedValue);
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}

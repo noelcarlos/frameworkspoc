@@ -152,41 +152,40 @@ public abstract class StrutsFlowAction extends BaseAction {
 		ActionMessages messages = new ActionMessages();
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		
-		if ((nextStep != null && nextStep > currentStep) || flowEvent.equals("goNext") || flowEvent.equals("goLast")) {
-			convertAndValidate((LazyValidatorForm)form, model, errors, messages);
-			session.setAttribute("model", model);
+		try {
+			if ((nextStep != null && nextStep > currentStep) || flowEvent.equals("goNext") || flowEvent.equals("goLast")) {
+				convertAndValidate((LazyValidatorForm)form, model, errors, messages);
+				
+				String postActionClass = node.valueOf("on-exit");
+				Class<?> cl = Class.forName(postActionClass);
+				Object action = cl.newInstance();
+				Method m = Utility.findFirst(cl, "execute");
+				m.invoke(action, context, model, request, response, errors);
+				session.setAttribute("model", model);
+			}
 			
-			String postActionClass = node.valueOf("on-exit");
-			Class<?> cl = Class.forName(postActionClass);
-			Object action = cl.newInstance();
-			Method m = Utility.findFirst(cl, "execute");
-			m.invoke(action, context, model, request, response, errors);
-			session.setAttribute("model", model);
-		}
-		
-		if (errors.size() > 0) {
-			flowEvent = "";
-		}
-		
-		int lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
-		
-		if (flowEvent.equals("goFirst")) {
-			currentStep = 1;
-		} else 	if (flowEvent.equals("goNext")) {
-			if (currentStep < lastPageNumber) {
-				currentStep++;
+			if (errors.size() > 0) {
+				flowEvent = "";
 			}
-		} else 	if (flowEvent.equals("goPrevious")) {
-			if (currentStep > 1) { 
-				currentStep--;
-			}
-		} else 	if (flowEvent.equals("goLast")) {
-			currentStep = lastPageNumber;
-		} else if (flowEvent.startsWith("go-")) {
-			if (currentStep < nextStep) {
-				currentStep++;
+			
+			int lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
+			
+			if (flowEvent.equals("goFirst")) {
+				currentStep = 1;
+			} else 	if (flowEvent.equals("goNext")) {
+				if (currentStep < lastPageNumber) {
+					currentStep++;
+				}
+			} else 	if (flowEvent.equals("goPrevious")) {
+				if (currentStep > 1) { 
+					currentStep--;
+				}
+			} else 	if (flowEvent.equals("goLast")) {
+				currentStep = lastPageNumber;
+			} else if (flowEvent.startsWith("go-")) {
+				if (currentStep < nextStep) {
+					currentStep++;
 
-				try {
 					while (currentStep < nextStep) {
 						node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 						
@@ -211,12 +210,12 @@ public abstract class StrutsFlowAction extends BaseAction {
 						}
 						currentStep++;
 					}
-				} finally {
-					session.setAttribute("model", model);
+				} else {
+					currentStep = nextStep;
 				}
-			} else {
-				currentStep = nextStep;
 			}
+		} finally {
+			session.setAttribute("model", model);
 		}
 		
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
