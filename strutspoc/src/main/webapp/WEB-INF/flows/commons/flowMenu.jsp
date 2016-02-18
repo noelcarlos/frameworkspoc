@@ -9,10 +9,18 @@
 		<div class="separator-sm"></div>
 		<div class="btn-group" role="group" aria-label="..."> 
 			<c:forEach var="result" items="${sessionScope.get('flow').selectNodes('//flow/step')}">
-			<button type="button" class="btn ${sessionScope.get('currentStep').toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}"
-				onClick="sendEvent('go-${ result.valueOf('@name')}');">
-				${result.valueOf("@menu")}
-			</button>
+				<c:if test="${sessionScope.get('currentStep') > (result.valueOf('@name')+0)}">
+					<button type="button" class="btn ${sessionScope.get('currentStep').toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}"
+						onClick="sendEvent('go-${ result.valueOf('@name')}');">
+						${result.valueOf("@menu")}
+					</button>
+				</c:if>
+				<c:if test="${!(sessionScope.get('currentStep') > (result.valueOf('@name') + 0))}">
+					<button type="button" class="btn ${sessionScope.get('currentStep').toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}"
+						onClick="sendEvent('go-${ result.valueOf('@name')}');">
+						${result.valueOf("@menu")}
+					</button>
+				</c:if>
 			</c:forEach>
 		</div>
 		<div class="separator-sm"></div>

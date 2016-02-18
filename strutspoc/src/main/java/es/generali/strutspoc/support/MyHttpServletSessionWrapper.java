@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSessionContext;
 public class MyHttpServletSessionWrapper implements HttpSession {
 	HttpSession delegate;
 	static IPersistenceDataStore dataStore;
-	static boolean useDistributedCache = false;
+	static boolean useDistributedCache = true;
 	
 	public MyHttpServletSessionWrapper(HttpSession original) {
 		delegate = original;

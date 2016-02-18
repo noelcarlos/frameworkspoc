@@ -18,6 +18,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import es.generali.segurohogar.models.SeguroViviendaBean;
 import es.generali.strutspoc.models.ConfiguracionBean;
 import es.generali.strutspoc.support.GeneratorHelper;
+import es.generali.strutspoc.support.MyHttpServletSessionWrapper;
 
 public class SeguroHogarFlowAction extends StrutsFlowAction {
 	
@@ -61,7 +62,9 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 		
 		session.setAttribute("currentStep", "" + currentStep); 
 		
-		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
+		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);
+		
+		MyHttpServletSessionWrapper.setUseDistributedCache(config.getUseDistributedCache());
 		
 		return null;
 	}
