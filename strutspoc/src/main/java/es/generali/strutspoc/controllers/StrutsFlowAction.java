@@ -73,7 +73,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 		
 		Document flow = (Document)session.getAttribute("flow");
 		
-		if (session.isNew() || session.getAttribute("currentStep") == null) {
+		if (session.getAttribute("currentStep") == null) {
 			response.sendRedirect(request.getContextPath() + "/" + getFlowDirectory() + ".do?method=onEntry");
 			return null;
 		}		
@@ -81,7 +81,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 		Node node = flow.selectSingleNode("//flow");
 		String flowName = node.valueOf("@name");
 		
-		if (session.isNew() || session.getAttribute("currentStep") == null) {
+		if (session.getAttribute("currentStep") == null) {
 			response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onEntry");
 			return null;
 		}
@@ -125,7 +125,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 
 		Document flow = (Document)session.getAttribute("flow");
 		
-		if (session.isNew() || flow == null) {
+		if (flow == null) {
 			response.sendRedirect(request.getContextPath() + "/" + getFlowDirectory() + ".do?method=onEntry");
 			return null;
 		}
@@ -133,7 +133,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 		Node node = flow.selectSingleNode("//flow");
 		String flowName = node.valueOf("@name");
 		
-		if (session.isNew() || session.getAttribute("currentStep") == null) {
+		if (session.getAttribute("currentStep") == null) {
 			response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onEntry");
 			return null;
 		}

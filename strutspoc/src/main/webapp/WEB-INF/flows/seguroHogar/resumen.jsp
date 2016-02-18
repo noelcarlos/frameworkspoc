@@ -42,7 +42,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="code">
-				<pre><code>${model.getContrato().substring(0, 2000)} ...</code></pre>
+				<pre><code>${model.getContrato().substring(0, (model.getContrato().length() < 2000) ? model.getContrato().length(): 2000)} ...</code></pre>
 			</div>
 		</div>
 	</div>

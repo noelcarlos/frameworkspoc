@@ -59,9 +59,23 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<label for="kbContrato">Longitud del contrato en KB:</label>
-			<input type="text" id="kbContrato" name="kbContrato" style="color:#000;" 
-				value="${sessionScope.config.kbContrato}"></input>
+			<div class="form-group">
+				<label for="kbContrato">Longitud del contrato en KB:</label>
+				<input type="text" id="kbContrato" name="kbContrato" style="color:#000;" 
+					value="${sessionScope.config.kbContrato}"></input>
+			</div>
+				
+			<div class="form-group">	
+				<div class="checkbox checkbox-primary">
+					<input type="checkbox" id='useDistributedCache' value="on"
+						class="chkComponent" name='useDistributedCache'
+						${sessionScope.config.useDistributedCache ? "checked='checked'" : ""} >
+					</input>
+					<label for='useDistributedCache'>Usar cache distribuido</label>
+					<input type="hidden" value="false" name='useDistributedCache' />
+				</div>
+			</div>
+		
 		</div>
 	</div>
 	<div class="row">

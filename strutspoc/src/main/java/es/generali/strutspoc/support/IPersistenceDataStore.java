@@ -8,4 +8,6 @@ public interface IPersistenceDataStore {
 
 	void removeAttribute(String id, String name);
 
+	boolean isNew(String id);
+
 }

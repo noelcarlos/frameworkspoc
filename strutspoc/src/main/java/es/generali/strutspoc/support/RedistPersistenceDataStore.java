@@ -39,7 +39,6 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 		oos.close();
 		return Base64.getEncoder().encodeToString(baos.toByteArray()); 
 	}
-	
 
 	@Override
 	public Object getAttribute(String id, String name) {
@@ -73,5 +72,10 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public boolean isNew(String id) {
+		return false;
 	}
 }

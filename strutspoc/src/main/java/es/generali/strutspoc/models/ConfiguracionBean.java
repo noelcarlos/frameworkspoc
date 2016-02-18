@@ -16,6 +16,7 @@ public class ConfiguracionBean implements Serializable {
 	Boolean datosDePago;
 	Boolean resumen;
 	Integer kbContrato;
+	Boolean useDistributedCache;
 	
 	public ConfiguracionBean() {
 		queQuieresProteger = false;
@@ -29,6 +30,7 @@ public class ConfiguracionBean implements Serializable {
 		datosDePago = false;
 		resumen = false;
 		kbContrato = 100;
+		useDistributedCache = true;
 	}
 	
 	public Boolean getQueQuieresProteger() {
@@ -96,5 +98,13 @@ public class ConfiguracionBean implements Serializable {
 	}
 	public void setKbContrato(Integer kbContrato) {
 		this.kbContrato = kbContrato;
+	}
+
+	public Boolean getUseDistributedCache() {
+		return useDistributedCache;
+	}
+
+	public void setUseDistributedCache(Boolean useDistributedCache) {
+		this.useDistributedCache = useDistributedCache;
 	}
 }

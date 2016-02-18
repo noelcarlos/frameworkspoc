@@ -6,13 +6,19 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
+@SuppressWarnings("deprecation")
 public class MyHttpServletSessionWrapper implements HttpSession {
 	HttpSession delegate;
-	//static IPersistenceDataStore dataStore = new HashMapPersistenceDataStore();
-	static IPersistenceDataStore dataStore = new RedistPersistenceDataStore();
+	static IPersistenceDataStore dataStore;
+	static boolean useDistributedCache = false;
 	
 	public MyHttpServletSessionWrapper(HttpSession original) {
 		delegate = original;
+		if (useDistributedCache) {
+			dataStore = new RedistPersistenceDataStore();
+		} else {
+			dataStore = new HashMapPersistenceDataStore();
+		}
 	}
 
 	public long getCreationTime() {
@@ -39,6 +45,7 @@ public class MyHttpServletSessionWrapper implements HttpSession {
 		return delegate.getMaxInactiveInterval();
 	}
 
+	@SuppressWarnings("deprecation")
 	public HttpSessionContext getSessionContext() {
 		return delegate.getSessionContext();
 	}
@@ -57,6 +64,7 @@ public class MyHttpServletSessionWrapper implements HttpSession {
 		return delegate.getAttributeNames();
 	}
 
+	@SuppressWarnings("deprecation")
 	public String[] getValueNames() {
 		return delegate.getValueNames();
 	}
@@ -86,7 +94,15 @@ public class MyHttpServletSessionWrapper implements HttpSession {
 	}
 
 	public boolean isNew() {
-		return delegate.isNew();
+		return dataStore.isNew(getId());
+	}
+
+	static public boolean isUseDistributedCache() {
+		return useDistributedCache;
+	}
+
+	static public void setUseDistributedCache(boolean useDistributedCache) {
+		MyHttpServletSessionWrapper.useDistributedCache = useDistributedCache;
 	}
 	
 }

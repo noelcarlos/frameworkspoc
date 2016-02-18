@@ -3,10 +3,9 @@ package es.generali.strutspoc.support;
 import java.util.HashMap;
 
 public class HashMapPersistenceDataStore implements IPersistenceDataStore {
-	HashMap<String, Object> mapa; 
+	static HashMap<String, Object> mapa = new HashMap<String, Object>(); 
 	
 	public HashMapPersistenceDataStore() {
-		mapa = new HashMap<String, Object>();
 	}
 
 	@Override
@@ -22,5 +21,10 @@ public class HashMapPersistenceDataStore implements IPersistenceDataStore {
 	@Override
 	public void removeAttribute(String id, String name) {
 		mapa.remove(id+":"+name);
+	}
+
+	@Override
+	public boolean isNew(String id) {
+		return false;
 	}
 }
