@@ -16,7 +16,16 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 	RedisClient client;
 	StatefulRedisConnection<String, String> connection; 
 	
-	public RedistPersistenceDataStore() {
+	static RedistPersistenceDataStore instance = null;
+	
+	public static RedistPersistenceDataStore getInstance() {
+		if (instance == null) {
+			instance = new RedistPersistenceDataStore();
+		}
+		return instance;
+	}
+	
+	RedistPersistenceDataStore() {
 		client = RedisClient.create("redis://localhost:6379/0");
 		connection = client.connect();
 	}

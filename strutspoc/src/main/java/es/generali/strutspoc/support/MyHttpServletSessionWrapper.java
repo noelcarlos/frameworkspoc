@@ -15,7 +15,7 @@ public class MyHttpServletSessionWrapper implements HttpSession {
 	public MyHttpServletSessionWrapper(HttpSession original) {
 		delegate = original;
 		if (useDistributedCache) {
-			dataStore = new RedistPersistenceDataStore();
+			dataStore = RedistPersistenceDataStore.getInstance();
 		} else {
 			dataStore = new HashMapPersistenceDataStore();
 		}
