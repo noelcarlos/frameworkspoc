@@ -15,6 +15,8 @@ import com.lambdaworks.redis.api.StatefulRedisConnection;
 import com.lambdaworks.redis.api.sync.RedisCommands;
 
 public class RedistPersistenceDataStore implements IPersistenceDataStore {
+	static int BUFFER_SIZE = 10*1024;
+
 	RedisClient client;
 	StatefulRedisConnection<String, String> connection; 
 	
@@ -31,8 +33,6 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 		client = RedisClient.create("redis://localhost:6379/0");
 		connection = client.connect();
 	}
-	
-	static int BUFFER_SIZE = 10*1024;
 	
 	public Object serializeFromString( String s ) throws IOException ,
 	 		ClassNotFoundException {

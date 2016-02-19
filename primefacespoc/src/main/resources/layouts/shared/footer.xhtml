@@ -13,7 +13,6 @@
 	</div>
 	
 	<h:form id="setupForm">
-		<input id="_setupEvent" type="hidden" name="_setupEvent" />
 		<div class="row">
 			<div class="col-md-6">
 				<h3>Información inicial</h3>
@@ -23,10 +22,10 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<div class="col-md-6">
-						<ui:repeat var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
+						<ui:repeat id="checkLeft" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
 							<ui:fragment rendered='#{result.valueOf("@name") lt 6}'>
 								<div class="checkbox checkbox-primary">
-									<h:selectBooleanCheckbox value="#{seguroHogarFlowAction.config[result.valueOf('@view')]}"
+									<h:selectBooleanCheckbox id="menu" value="#{seguroHogarFlowAction.config[result.valueOf('@view')]}"
 										styleClass="chkComponent" />
 									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
 								</div>
@@ -34,10 +33,10 @@
 						</ui:repeat>
 					</div>
 					<div class="col-md-6">
-						<ui:repeat var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
+						<ui:repeat id="checkRight" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
 							<ui:fragment rendered='#{!(result.valueOf("@name") lt 6)}'>
 								<div class="checkbox checkbox-primary">
-									<h:selectBooleanCheckbox value="#{seguroHogarFlowAction.config[result.valueOf('@view')]}"
+									<h:selectBooleanCheckbox id="menu" value="#{seguroHogarFlowAction.config[result.valueOf('@view')]}"
 										styleClass="chkComponent" />
 									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
 								</div>
@@ -63,7 +62,8 @@
 		<div class="row">
 			<div class="form-group">
 				<div class="col-md-6">
-					<p:commandLink action="#{seguroHogarFlowAction.setup()}" styleClass="btn btn-default" style="color:#000;" ajax="false">
+					<p:commandLink id="performSetup" action="#{seguroHogarFlowAction.setup()}" 
+						styleClass="btn btn-default" style="color:#000;" ajax="false">
 						Aplicar
 					</p:commandLink>
 				</div>

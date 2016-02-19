@@ -35,19 +35,8 @@
     
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="${request.contextPath}/web/resources/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-    <script src="${request.contextPath}/web/resources/plugins/bootstrap-datepicker-1.5.1/js/bootstrap-datepicker.min.js"></script>
 
 	<SCRIPT type="text/javascript">
-    	function sendEvent(eventName) {
-    		$('#_flowEvent').val(eventName);
-    		flowForm.submit();
-    	}
-    	
-    	function setupEvent(eventName) {
-    		$('#_setupEvent').val(eventName);
-    		setupForm.submit();
-    	}
-    	
     	function selectAllSetupChecks() {
    			$( ".chkComponent" ).each(function() {
     			if ($("#all").is(':checked')) {
@@ -57,7 +46,6 @@
     			}
     		});
     	}
-    	
     </SCRIPT>	
 	
 </h:head>
