@@ -18,7 +18,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import es.generali.segurohogar.models.SeguroViviendaBean;
 import es.generali.strutspoc.models.ConfiguracionBean;
 import es.generali.strutspoc.support.GeneratorHelper;
-import es.generali.strutspoc.support.MyHttpServletSessionWrapper;
+import es.generali.strutspoc.support.cache.MyHttpServletSessionWrapper;
 
 public class SeguroHogarFlowAction extends StrutsFlowAction {
 	

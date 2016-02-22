@@ -1,4 +1,4 @@
-package es.generali.strutspoc.support;
+package es.generali.primefacespoc.support.cache;
 
 public interface IPersistenceDataStore {
 

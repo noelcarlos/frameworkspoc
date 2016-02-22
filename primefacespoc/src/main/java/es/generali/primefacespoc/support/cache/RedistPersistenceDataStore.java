@@ -1,4 +1,4 @@
-package es.generali.strutspoc.support;
+package es.generali.primefacespoc.support.cache;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -18,7 +18,7 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 	static int BUFFER_SIZE = 10*1024;
 
 	RedisClient client;
-	StatefulRedisConnection<String, String> connection; 
+	StatefulRedisConnection<String, String> connection;
 	
 	static RedistPersistenceDataStore instance = null;
 	
@@ -26,6 +26,7 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 		if (instance == null) {
 			instance = new RedistPersistenceDataStore();
 		}
+		
 		return instance;
 	}
 	
@@ -60,7 +61,7 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 			return null;
 		}
 		try {
-			if (res.length() > 1024) {
+			if (res.length() > 1024*1024) {
 				System.out.println("GETTING Size = " + res.length());
 			}
 			return serializeFromString(res);
@@ -74,9 +75,9 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 		RedisCommands<String, String> syncCommands = connection.sync();
 		try {
 			String encodedValue = serializeToString((Serializable)value);
-			if (encodedValue.length() > 1024) {
-				System.out.println("PUTTING Size = " + encodedValue.length());
-			}
+//			if (encodedValue.length() > 1024*1024) {
+//				System.out.println("PUTTING Size = " + encodedValue.length());
+//			}
 			syncCommands.set(id+":"+name, encodedValue);
 		} catch(Exception e) {
 			throw new RuntimeException(e);

@@ -1,4 +1,4 @@
-package es.generali.strutspoc.support;
+package es.generali.strutspoc.support.cache;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +19,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpUpgradeHandler;
@@ -284,6 +283,7 @@ public class MyHttpServletRequestWrapper implements HttpServletRequest {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public String getRealPath(String path) {
 		return delegate.getRealPath(path);
 	}
@@ -340,6 +340,7 @@ public class MyHttpServletRequestWrapper implements HttpServletRequest {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean isRequestedSessionIdFromUrl() {
 		return delegate.isRequestedSessionIdFromUrl();
 	}

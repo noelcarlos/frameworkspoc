@@ -1,4 +1,4 @@
-package es.generali.strutspoc.support;
+package es.generali.strutspoc.support.cache;
 
 import java.io.BufferedReader;
 import java.io.IOException;

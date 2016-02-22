@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.generali.strutspoc.support;
+package es.generali.primefacespoc.support.cache;
 
 import java.io.IOException;
 
@@ -47,10 +47,16 @@ public class SessionCacheWebFilter implements Filter {
 		
 		// Wrap request
 		HttpServletRequest hsrConvertedParamRequest = new MyHttpServletRequestWrapper(hsrHttpServletRequest);
+		((MyHttpServletSessionWrapper)hsrConvertedParamRequest.getSession()).createSecondCache();
 		
 		// Continue filter chain with filtered request
 		HttpServletResponse httpResponse = (HttpServletResponse) resp;
-		chain.doFilter(hsrConvertedParamRequest, httpResponse);
+		
+		try {
+			chain.doFilter(hsrConvertedParamRequest, httpResponse);
+		} finally {
+			((MyHttpServletSessionWrapper)hsrConvertedParamRequest.getSession()).releaseSecondCache();
+		}
 	}
 	
 	public void destroy() {
