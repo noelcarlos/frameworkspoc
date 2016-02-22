@@ -62,22 +62,22 @@ public class GeneraliWebFlowListener extends FlowExecutionListenerAdapter {
 //		generaliWebFlowEngine.onUpdateState(context);
 		
 		//context.getViewScope().get("onEntryAction")
-		System.out.println("viewRendering");
+		//System.out.println("viewRendering");
 	}
 
 	public void requestSubmitted(final RequestContext context) {
 		super.requestSubmitted(context);
-		System.out.println("requestSubmitted");
+		//System.out.println("requestSubmitted");
 	}
 
 	public void requestProcessed(final RequestContext context) {
 		super.requestProcessed(context);
-		System.out.println("requestProcessed");
+		//System.out.println("requestProcessed");
 	}
 	
 	public void eventSignaled(RequestContext context, Event event) {
 		super.eventSignaled(context, event);
-		System.out.println("eventSignaled");
+		//System.out.println("eventSignaled");
 	}
 
 	public void transitionExecuting(RequestContext context, TransitionDefinition transition) {
@@ -99,17 +99,17 @@ public class GeneraliWebFlowListener extends FlowExecutionListenerAdapter {
 			txCriteriaChain.add(criteria);
 		}
 		
-		System.out.println("transitionExecuting");
+		//System.out.println("transitionExecuting");
 	}
 	
 	public void stateEntering(RequestContext context, StateDefinition state) {
 		super.stateEntering(context, state);
-		System.out.println("stateEntering");
+		//System.out.println("stateEntering");
 	}
 
 	public void stateEntered(RequestContext context, StateDefinition previousState, StateDefinition newState) {
 		super.stateEntered(context, previousState, newState);
-		System.out.println("stateEntered");
+		//System.out.println("stateEntered");
 	}
 
 }

@@ -53,7 +53,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 				requestContext.getFlowScope().remove("_flowToView");
 			}
 		}
-		System.out.println("Starting on:" + node.valueOf("@view"));
+		//System.out.println("Starting on:" + node.valueOf("@view"));
 		return node.valueOf("@view");
 	}
 	
@@ -99,7 +99,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 		
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		
-		System.out.println("Next view:" + node.valueOf("@view"));
+		//System.out.println("Next view:" + node.valueOf("@view"));
 		requestContext.getViewScope().put("nextView", node.valueOf("@view"));
 		
 		return null; 

@@ -84,13 +84,13 @@
   			Development, Production
   		</description>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-   		<param-value>Development</param-value>
+   		<param-value>Production</param-value>
   	</context-param>
   	
   	<!-- Causes Facelets to refresh templates during development -->
   	<context-param>
   		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
-  		<param-value>1</param-value>
+  		<param-value>-1</param-value>
   	</context-param>
   	
   	<context-param>
@@ -270,6 +270,15 @@
       <dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	 -->
+	 
+	<filter>
+		<filter-name>SessionCacheWebFilter</filter-name>
+		<filter-class>es.generali.primefacespoc.support.cache.SessionCacheWebFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionCacheWebFilter</filter-name>
+		<url-pattern>/web/*</url-pattern>
+	</filter-mapping>	
 
 	<!-- Loads the Spring web application context -->
 	<listener>
