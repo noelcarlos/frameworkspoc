@@ -5,12 +5,27 @@
 	
 	<var name="generaliWebFlowEngine" class="es.generali.primefacespoc.controllers.GeneraliWebFlowEngine"/>
 	<var name="seguroHogarFlowAction" class="es.generali.primefacespoc.controllers.SeguroHogarFlowAction"/>
+	<var name="model" class="es.generali.segurohogar.models.SeguroViviendaBean" />
+	
+	<input name="_gotoState" />
+	<input name="_parentId" />
+	<input name="_flowToView" />
 	
 	<on-start>
 		<evaluate expression="generaliWebFlowEngine.onInit(flowRequestContext)" />
-		<evaluate expression="seguroHogarFlowAction.onInit(flowRequestContext)" />
-		<evaluate expression="seguroHogarFlowAction.model" result="flowScope.model" />
 	</on-start>
+	
+	<action-state id="startCheck">
+		<evaluate expression="generaliWebFlowEngine.bindInputParameters(flowRequestContext)" />
+		<transition on="#{flowScope._gotoState != null}" to="#{flowScope._gotoState}" />
+		<transition to="queQuieresProteger" />
+		<on-exit>
+			<evaluate expression="seguroHogarFlowAction.onInit(flowRequestContext)" />
+			<!-- 
+			<evaluate expression="seguroHogarFlowAction.model" result="flowScope.model" />
+			 -->
+		</on-exit>
+	</action-state>
 	
 	<view-state id="queQuieresProteger">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction"/>

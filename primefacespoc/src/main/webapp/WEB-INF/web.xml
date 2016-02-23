@@ -84,13 +84,13 @@
   			Development, Production
   		</description>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-   		<param-value>Production</param-value>
+   		<param-value>Development</param-value>
   	</context-param>
   	
   	<!-- Causes Facelets to refresh templates during development -->
   	<context-param>
   		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
-  		<param-value>-1</param-value>
+  		<param-value>1</param-value>
   	</context-param>
   	
   	<context-param>
@@ -278,7 +278,15 @@
 	<filter-mapping>
 		<filter-name>SessionCacheWebFilter</filter-name>
 		<url-pattern>/web/*</url-pattern>
-	</filter-mapping>	
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>SessionCacheWebFilter</filter-name>
+		<url-pattern>/es/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>SessionCacheWebFilter</filter-name>
+		<url-pattern>/en/*</url-pattern>
+	</filter-mapping>
 
 	<!-- Loads the Spring web application context -->
 	<listener>
@@ -302,6 +310,10 @@
 	<servlet-mapping>
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
 		<url-pattern>/web/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<url-pattern>/es/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- Just here so the JSF implementation can initialize, *not* used at runtime -->

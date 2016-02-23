@@ -4,6 +4,7 @@ import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.webflow.core.collection.MutableAttributeMap;
 import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.models.ConfiguracionBean;
@@ -19,8 +20,10 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 	@Autowired transient ApplicationContext appContext;
 
 	public void onInit(RequestContext requestContext) throws Exception {
+		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
+		
 		config = new ConfiguracionBean();
-		model = new SeguroViviendaBean();
+		model = (SeguroViviendaBean)flowScope.get("model");
 	}
 	
 	public void setup() {

@@ -11,14 +11,14 @@
 		<div class="btn-group" role="group" aria-label="..."> 
 			<ui:repeat var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}">
 				<ui:fragment rendered="#{!(generaliWebFlowEngine.currentStep lt result.valueOf('@name'))}" >
-					<p:commandLink action="#{'gobackward-'.concat(result.valueOf('@name'))}" 
+					<p:commandLink action="#{'gobackward-'.concat(result.valueOf('@view'))}" 
 						styleClass="btn #{generaliWebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}"
 						ajax="false" process="@this" immediate="true">
 						#{result.valueOf("@menu")}
 					</p:commandLink>
 				</ui:fragment>
 				<ui:fragment rendered="#{generaliWebFlowEngine.currentStep lt result.valueOf('@name')}" >
-					<p:commandLink action="#{'goforward-'.concat(result.valueOf('@name'))}" 
+					<p:commandLink action="#{'goforward-'.concat(result.valueOf('@view'))}" 
 						styleClass="btn #{generaliWebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}"
 						ajax="false">
 						#{result.valueOf("@menu")}

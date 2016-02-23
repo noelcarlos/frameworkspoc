@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
+import org.springframework.webflow.core.collection.MutableAttributeMap;
 import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.support.ControlledExit;
@@ -16,6 +17,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 	private static final long serialVersionUID = 6848148192857690277L;
 	
 	private Document flow;
+	private String currentView;
 	private int currentStep;
 	private int currentPageNumber;
 	private int lastPageNumber;
@@ -24,30 +26,23 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 	@Autowired transient ApplicationContext appContext;
 
 	public void onInit(RequestContext requestContext) throws Exception {
-
 		Resource resource = appContext.getResource("contratacion.xml");
 		flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
-		currentStep = 1;
-		currentPageNumber = 1;
-		
 		lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
-		
-		Node node = flow.selectSingleNode("//flow");
-		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
-		currentPageTitle = node.valueOf("@title");
-		
-		//model.setNumPersonasQueVivenEnLaVivienda(23);
+		currentStep = currentPageNumber = 1;
+		Node node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+		currentView = node.valueOf("@view");
 	}
 	
 	public String onUpdateState(RequestContext requestContext) throws ControlledExit {
-		Node node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
-		currentPageNumber = currentStep;
+		Node node = flow.selectSingleNode("//flow/step[@view='" + currentView + "']");
+		currentPageNumber = Integer.parseInt(node.valueOf("@name"));
 		currentPageTitle = node.valueOf("@title");
 		
-		Integer _flowToView = (Integer)requestContext.getFlowScope().get("_flowToView");
-		
+		String _flowToView = requestContext.getFlowScope().getString("_flowToView");
+
 		if (_flowToView != null) {
-			if (_flowToView != currentStep) {
+			if (!_flowToView.equals(node.valueOf("@view"))) {
 				throw new ControlledExit("flow to:" + _flowToView);
 			} else {
 				requestContext.getFlowScope().remove("_flowToView");
@@ -60,7 +55,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 	public String onStep(RequestContext requestContext, String flowEvent) throws Exception {
 		MessageContext messageContext = requestContext.getMessageContext();
 		Node node = flow.selectSingleNode("//flow");
-		Integer _flowToView = (Integer)requestContext.getFlowScope().get("_flowToView");
+		String _flowToView = requestContext.getFlowScope().getString("_flowToView");
 
 		if (flowEvent != null && !messageContext.hasErrorMessages()) {
 			if (flowEvent.equals("gobackward-first")) {
@@ -74,20 +69,16 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 					currentStep--;
 				}
 			} else 	if (flowEvent.equals("goforward-last")) {
-				int nextStep = lastPageNumber;
-				if (nextStep - currentStep > 1) {
-					requestContext.getFlowScope().put("_flowToView", nextStep);
-				}
+				String nextStep = flow.selectSingleNode("//flow/step[@name='" + lastPageNumber + "']").valueOf("@view");
+				requestContext.getFlowScope().put("_flowToView", nextStep);
 				currentStep++;
 			} else if (flowEvent.startsWith("goforward-")) { 
-				int nextStep = Integer.parseInt(flowEvent.substring(10));
-				if (nextStep - currentStep > 1) {
-					requestContext.getFlowScope().put("_flowToView", nextStep);
-				}
+				String nextStep = flowEvent.substring(10);
+				requestContext.getFlowScope().put("_flowToView", nextStep);
 				currentStep++;
 			} else if (flowEvent.startsWith("gobackward-")) { 
-				int nextStep = Integer.parseInt(flowEvent.substring(11));
-				currentStep = nextStep;
+				String nextView = flowEvent.substring(11);
+				currentStep = Integer.parseInt(flow.selectSingleNode("//flow/step[@view='" + nextView + "']").valueOf("@name"));
 			}
 		} else {
 			requestContext.getFlowScope().remove("_flowToView");
@@ -96,6 +87,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		currentPageNumber = currentStep;
 		currentPageTitle = node.valueOf("@title");
+		currentView = node.valueOf("@view");
 		
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		
@@ -113,12 +105,12 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 		this.flow = flow;
 	}
 
-	public Integer getCurrentStep() {
-		return currentStep;
+	public String getCurrentView() {
+		return currentView;
 	}
 
-	public void setCurrentStep(Integer currentStep) {
-		this.currentStep = currentStep;
+	public void setCurrentView(String currentView) {
+		this.currentView = currentView;
 	}
 
 	public Integer getCurrentPageNumber() {
@@ -143,6 +135,33 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 
 	public void setLastPageNumber(Integer lastPageNumber) {
 		this.lastPageNumber = lastPageNumber;
+	}
+	
+	public void bindInputParameters(RequestContext requestContext) throws Exception {
+		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
+		String gotoState = flowScope.getString("_gotoState");
+		if (gotoState != null) {
+			Node node = flow.selectSingleNode("//flow/step[@view='" + gotoState + "']");
+			currentPageNumber = Integer.valueOf(node.valueOf("@name"));
+			currentView = node.valueOf("@view");
+			currentPageTitle = node.valueOf("@title");
+
+			flowScope.asMap().forEach((key, value) -> {
+				Object v = getBeanFromCache(flowScope.getString("_parentId"), key);
+				if (v != null && value != null && v.getClass().isInstance(value)) {
+					requestContext.getFlowExecutionContext().getDefinition();
+					flowScope.put(key, v);
+				}
+			});
+		}
+	}
+
+	public int getCurrentStep() {
+		return currentStep;
+	}
+
+	public void setCurrentStep(int currentStep) {
+		this.currentStep = currentStep;
 	}
 
 }
