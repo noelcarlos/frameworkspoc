@@ -1,10 +1,11 @@
 package es.generali.primefacespoc.controllers;
 
-import es.generali.primefacespoc.support.BaseAction;
+import java.io.Serializable;
+
 import es.generali.primefacespoc.support.cache.RedistPersistenceDataStore;
 
 @SuppressWarnings("serial")
-public abstract class StrutsFlowAction extends BaseAction {
+public abstract class StrutsFlowAction implements Serializable {
 	
 	@SuppressWarnings("unchecked")
 	public<T> T getBeanFromCache(String sessionId, String key) {

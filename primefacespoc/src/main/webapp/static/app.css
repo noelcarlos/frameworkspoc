@@ -88,3 +88,20 @@ line height is 20px by default so add 30px top and bottom to equal the new .navb
 .code {
 	 
 }
+
+.external-step {
+  color: #E53935;
+  text-decoration: line-through;
+}
+
+btn-success.internal-step {
+  color: #fff;
+}
+
+btn-primary.internal-step {
+  color: #fff;
+}
+
+btn-default.internal-step {
+  color: #000;
+}

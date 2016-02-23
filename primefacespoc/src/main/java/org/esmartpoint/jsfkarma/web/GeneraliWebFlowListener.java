@@ -17,7 +17,6 @@ package org.esmartpoint.jsfkarma.web;
 
 import org.apache.log4j.Logger;
 import org.springframework.binding.expression.Expression;
-import org.springframework.binding.expression.spel.SpringELExpression;
 import org.springframework.binding.expression.support.FluentParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.webflow.action.EvaluateAction;
@@ -27,17 +26,13 @@ import org.springframework.webflow.definition.TransitionDefinition;
 import org.springframework.webflow.engine.Transition;
 import org.springframework.webflow.engine.support.ActionTransitionCriteria;
 import org.springframework.webflow.engine.support.TransitionCriteriaChain;
-import org.springframework.webflow.execution.Action;
 import org.springframework.webflow.execution.AnnotatedAction;
-import org.springframework.webflow.execution.EnterStateVetoException;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.FlowExecutionListenerAdapter;
 import org.springframework.webflow.execution.FlowSession;
 import org.springframework.webflow.execution.RequestContext;
 import org.springframework.webflow.execution.View;
 import org.springframework.webflow.expression.spel.WebFlowSpringELExpressionParser;
-
-import es.generali.primefacespoc.controllers.GeneraliWebFlowEngine;
 
 /**
  * Listener to handle breadcrumb navigation.

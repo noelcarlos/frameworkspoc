@@ -14,7 +14,10 @@
 	<input id="_setupEvent" type="hidden" name="_setupEvent" />
 	<div class="row">
 		<div class="col-md-6">
-			<h3>Información inicial</h3>
+			<h3>Datos a inicializar</h3>
+		</div>
+		<div class="col-md-6">
+			<h3>Pasos a externalizar</h3>
 		</div>
 	</div>
 	<div class="row">
@@ -24,12 +27,12 @@
 					<c:forEach var="result" items="${sessionScope.get('flow').selectNodes('//flow/step')}" varStatus="iter">
 						<c:if test='${result.valueOf("@name") <= 5}'>
 							<div class="checkbox checkbox-primary">
-								<input type="checkbox" id='${result.valueOf("@view")}' value="on"
-									class="chkComponent" name='${result.valueOf("@view")}'
-									${sessionScope.config[result.valueOf("@view")] ? "checked='checked'" : ""} >
+								<input type="checkbox" id='${result.valueOf("@view").concat('Inicializar')}' value="on"
+									class="chkComponent" name='${result.valueOf("@view").concat('Inicializar')}'
+									${sessionScope.config[result.valueOf("@view").concat('Inicializar')] ? "checked='checked'" : ""} >
 								</input>
-								<label for='${result.valueOf("@view")}'>${result.valueOf("@name")} - ${result.valueOf("@menu")}</label>
-								<input type="hidden" value="false" name='${result.valueOf("@view")}' />
+								<label for='${result.valueOf("@view").concat('Inicializar')}'>${result.valueOf("@name")} - ${result.valueOf("@menu")}</label>
+								<input type="hidden" value="false" name='${result.valueOf("@view").concat('Inicializar')}' />
 							</div>
 						</c:if>
 					</c:forEach>
@@ -38,12 +41,12 @@
 					<c:forEach var="result" items="${sessionScope.get('flow').selectNodes('//flow/step')}" varStatus="iter">
 						<c:if test='${result.valueOf("@name") > 5}'>
 							<div class="checkbox checkbox-primary">
-								<input type="checkbox" id='${result.valueOf("@view")}' value="on"
-									class="chkComponent" name='${result.valueOf("@view")}'
-									${sessionScope.config[result.valueOf("@view")] ? "checked='checked'" : ""} >
+								<input type="checkbox" id='${result.valueOf("@view").concat('Inicializar')}' value="on"
+									class="chkComponent" name='${result.valueOf("@view").concat('Inicializar')}'
+									${sessionScope.config[result.valueOf("@view").concat('Inicializar')] ? "checked='checked'" : ""} >
 								</input>
-								<label for='${result.valueOf("@view")}'>${result.valueOf("@name")} - ${result.valueOf("@menu")}</label>
-								<input type="hidden" value="false" name='${result.valueOf("@view")}' />
+								<label for='${result.valueOf("@view").concat('Inicializar')}'>${result.valueOf("@name")} - ${result.valueOf("@menu")}</label>
+								<input type="hidden" value="false" name='${result.valueOf("@view").concat('Inicializar')}' />
 							</div>
 						</c:if>
 					</c:forEach>
@@ -60,22 +63,63 @@
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
+				<div class="col-md-6">
+					<c:forEach var="result" items="${sessionScope.get('flow').selectNodes('//flow/step')}" varStatus="iter">
+						<c:if test='${result.valueOf("@name") <= 5}'>
+							<div class="checkbox checkbox-primary">
+								<input type="checkbox" id='${result.valueOf("@view").concat('Externo')}' value="on"
+									class="chkComponentExterno" name='${result.valueOf("@view").concat('Externo')}'
+									${sessionScope.config[result.valueOf("@view").concat('Externo')] ? "checked='checked'" : ""} >
+								</input>
+								<label for='${result.valueOf("@view").concat('Externo')}'>${result.valueOf("@name")} - ${result.valueOf("@menu")}</label>
+								<input type="hidden" value="false" name='${result.valueOf("@view").concat('Externo')}' />
+							</div>
+						</c:if>
+					</c:forEach>
+				</div>
+				<div class="col-md-6">
+					<c:forEach var="result" items="${sessionScope.get('flow').selectNodes('//flow/step')}" varStatus="iter">
+						<c:if test='${result.valueOf("@name") > 5}'>
+							<div class="checkbox checkbox-primary">
+								<input type="checkbox" id='${result.valueOf("@view").concat('Externo')}' value="on"
+									class="chkComponentExterno" name='${result.valueOf("@view").concat('Externo')}'
+									${sessionScope.config[result.valueOf("@view").concat('Externo')] ? "checked='checked'" : ""} >
+								</input>
+								<label for='${result.valueOf("@view").concat('Externo')}'>${result.valueOf("@name")} - ${result.valueOf("@menu")}</label>
+								<input type="hidden" value="false" name='${result.valueOf("@view").concat('Externo')}' />
+							</div>
+						</c:if>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-6">
+					<div class="checkbox checkbox-primary">
+						<input type="checkbox" id="allExterno" name="allExterno" onClick="selectAllSetupExternoChecks();"></input>
+						<label for="allExterno">TODO</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
 				<label for="kbContrato">Longitud del contrato en KB:</label>
 				<input type="text" id="kbContrato" name="kbContrato" style="color:#000;" 
 					value="${sessionScope.config.kbContrato}"></input>
 			</div>
-				
+		</div>
+		<div class="col-md-6">
 			<div class="form-group">	
 				<div class="checkbox checkbox-primary">
-					<input type="checkbox" id='useDistributedCache' value="on"
-						class="chkComponent" name='useDistributedCache'
+					<input type="checkbox" id='useDistributedCache' value="on" name='useDistributedCache'
 						${sessionScope.config.useDistributedCache ? "checked='checked'" : ""} >
 					</input>
 					<label for='useDistributedCache'>Usar cache distribuido</label>
 					<input type="hidden" value="false" name='useDistributedCache' />
 				</div>
 			</div>
-		
 		</div>
 	</div>
 	<div class="row">

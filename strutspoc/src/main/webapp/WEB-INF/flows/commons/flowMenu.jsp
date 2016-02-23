@@ -10,13 +10,15 @@
 		<div class="btn-group" role="group" aria-label="..."> 
 			<c:forEach var="result" items="${sessionScope.get('flow').selectNodes('//flow/step')}">
 				<c:if test="${sessionScope.get('currentStep') > (result.valueOf('@name')+0)}">
-					<button type="button" class="btn ${sessionScope.get('currentStep').toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}"
+					<button type="button" class="btn ${sessionScope.get('currentStep').toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}
+							${sessionScope.config[result.valueOf('@view').concat('Externo')] ? 'external-step' : 'internal-step'}"
 						onClick="sendEvent('go-${ result.valueOf('@name')}');">
 						${result.valueOf("@menu")}
 					</button>
 				</c:if>
 				<c:if test="${!(sessionScope.get('currentStep') > (result.valueOf('@name') + 0))}">
-					<button type="button" class="btn ${sessionScope.get('currentStep').toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}"
+					<button type="button" class="btn ${sessionScope.get('currentStep').toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}
+							${sessionScope.config[result.valueOf('@view').concat('Externo')] ? 'external-step' : 'internal-step'}"
 						onClick="sendEvent('go-${ result.valueOf('@name')}');">
 						${result.valueOf("@menu")}
 					</button>

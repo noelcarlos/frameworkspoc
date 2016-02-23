@@ -45,7 +45,6 @@ public class MyHttpServletSessionWrapper implements HttpSession {
 		return delegate.getMaxInactiveInterval();
 	}
 
-	@SuppressWarnings("deprecation")
 	public HttpSessionContext getSessionContext() {
 		return delegate.getSessionContext();
 	}
@@ -64,7 +63,6 @@ public class MyHttpServletSessionWrapper implements HttpSession {
 		return delegate.getAttributeNames();
 	}
 
-	@SuppressWarnings("deprecation")
 	public String[] getValueNames() {
 		return delegate.getValueNames();
 	}

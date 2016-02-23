@@ -28,7 +28,6 @@ import javax.servlet.http.Part;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.util.MultiValueMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -328,6 +327,7 @@ public class MyMultipartHttpServletRequestWrapper extends HttpServletRequestWrap
 		return new MyHttpServletSessionWrapper(source); 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public String getRealPath(String path) {
 		return delegate.getRealPath(path);
@@ -384,6 +384,7 @@ public class MyMultipartHttpServletRequestWrapper extends HttpServletRequestWrap
 		return delegate.isRequestedSessionIdFromURL();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isRequestedSessionIdFromUrl() {
 		return delegate.isRequestedSessionIdFromUrl();

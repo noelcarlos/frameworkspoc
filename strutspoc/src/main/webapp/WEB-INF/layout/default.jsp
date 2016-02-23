@@ -57,6 +57,16 @@
 	    		});
 	    	}
 	    	
+	    	function selectAllSetupExternoChecks() {
+    			$( ".chkComponentExterno" ).each(function() {
+	    			if ($("#allExterno").is(':checked')) {
+	    			 	$(this).prop('checked', true);
+	    			} else {
+	    			  	$(this).prop('checked', false);
+	    			}
+	    		});
+	    	}
+	    	
 	    	$(function() {
 		    	$('input.date-picker').datepicker({
 		    	    language: "es"

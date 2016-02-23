@@ -26,8 +26,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 /* This filter allows the mapping of SEA control flow variable 'action' to 
  * SWF control variable '_eventId' on request scope. With the help of this filter
  * we don't need to modify the JSP files that send this request variable using JavaScript,
