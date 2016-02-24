@@ -12,6 +12,7 @@ import org.springframework.webflow.core.collection.MutableAttributeMap;
 import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.support.ControlledExit;
+import es.generali.segurohogar.models.ConfiguracionBean;
 
 public class GeneraliWebFlowEngine extends StrutsFlowAction {
 	private static final long serialVersionUID = 6848148192857690277L;
@@ -22,11 +23,17 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 	private int currentPageNumber;
 	private int lastPageNumber;
 	private String currentPageTitle;
-	
+
 	@Autowired transient ApplicationContext appContext;
+	
+	private ConfiguracionBean config = new ConfiguracionBean();
+	
+	public GeneraliWebFlowEngine() {
+		
+	}
 
 	public void onInit(RequestContext requestContext) throws Exception {
-		Resource resource = appContext.getResource("contratacion.xml");
+		Resource resource = appContext.getResource("../seguroHogar/contratacion.xml");
 		flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
 		lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
 		currentStep = currentPageNumber = 1;
@@ -162,6 +169,14 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 
 	public void setCurrentStep(int currentStep) {
 		this.currentStep = currentStep;
+	}
+
+	public ConfiguracionBean getConfig() {
+		return config;
+	}
+
+	public void setConfig(ConfiguracionBean config) {
+		this.config = config;
 	}
 
 }
