@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -87,15 +88,23 @@ public abstract class StrutsFlowAction extends BaseAction {
 		}
 		
 		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
-
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		String view = node.valueOf("@view");
 		String title = node.valueOf("@title");
 		request.setAttribute("currentPageTitle", title);
 		request.setAttribute("currentPageNumber", "" + currentStep);
 		
-		String preActionClass = node.valueOf("on-entry");
+		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
+		String res = BeanUtils.getProperty(config, node.valueOf("@view") + "Externo");
 		
+		if (!(res == null || res.equals("false"))) {
+			String externalURL = flow.selectSingleNode("//flow/external-url").getText();
+			response.sendRedirect(externalURL + "?_gotoState=" + node.valueOf("@view")
+				+ "&_parentId=" + request.getSession().getId());
+			return null;
+		}		
+
+		String preActionClass = node.valueOf("on-entry");
 		Class<?> cl = Class.forName(preActionClass);
 		Object action = cl.newInstance();
 		Method m = Utility.findFirst(cl, "execute");
@@ -103,6 +112,13 @@ public abstract class StrutsFlowAction extends BaseAction {
 		m.invoke(action, context, model, request, response);
 		
 		modelToForm(model, (LazyValidatorForm)form);
+		
+		int code = response.getStatus();
+		if (code == 302) {
+			String url = response.getHeader("Location");
+			System.out.println("go to heaven" + url);
+			return null;
+		}
 
 		session.setAttribute("model", model);
 		
@@ -199,17 +215,26 @@ public abstract class StrutsFlowAction extends BaseAction {
 					while (currentStep < nextStep) {
 						node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 						
-						String preActionClass = node.valueOf("on-entry");
-						Class<?> cl = Class.forName(preActionClass);
-						Object action = cl.newInstance();
-						Method m = Utility.findFirst(cl, "execute");
-						//model = session.getAttribute("model");
-						m.invoke(action, context, model, request, response);
+						String res = BeanUtils.getProperty(config, node.valueOf("@view") + "Externo");
 						
-						int code = response.getStatus();
-						if (code == 302) {
-							String url = response.getHeader("Location");
-							System.out.println("go to heaven" + url);
+						if (res == null || res.equals("false")) {
+							String preActionClass = node.valueOf("on-entry");
+							Class<?> cl = Class.forName(preActionClass);
+							Object action = cl.newInstance();
+							Method m = Utility.findFirst(cl, "execute");
+							//model = session.getAttribute("model");
+							m.invoke(action, context, model, request, response);
+							
+							int code = response.getStatus();
+							if (code == 302) {
+								String url = response.getHeader("Location");
+								System.out.println("go to heaven" + url);
+								return null;
+							}
+						} else {
+							String flowToView = flow.selectSingleNode("//flow/step[@name='" + nextStep + "']").valueOf("@view");
+							response.sendRedirect(externalURL + "?_gotoState=" + node.valueOf("@view")
+								+ "&_parentId=" + request.getSession().getId() + "&_flowToView=" + flowToView);
 							return null;
 						}
 						
@@ -217,9 +242,9 @@ public abstract class StrutsFlowAction extends BaseAction {
 						//model = session.getAttribute("model");
 						
 						String postActionClass = node.valueOf("on-exit");
-						cl = Class.forName(postActionClass);
-						action = cl.newInstance();
-						m = Utility.findFirst(cl, "execute");
+						Class<?> cl = Class.forName(postActionClass);
+						Object action = cl.newInstance();
+						Method m = Utility.findFirst(cl, "execute");
 						m.invoke(action, context, model, request, response, errors);
 						
 						if (errors.size() > 0) {
