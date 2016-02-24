@@ -24,9 +24,10 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 	
 	public void onEntry(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
-
-		ConfiguracionBean config = new ConfiguracionBean();
-		session.setAttribute("config", config);
+		if (session.getAttribute("config") == null) {
+			ConfiguracionBean config = new ConfiguracionBean();
+			session.setAttribute("config", config);
+		}
 
 		SeguroViviendaBean model = new SeguroViviendaBean();
 		session.setAttribute("model", model);
@@ -43,6 +44,12 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 		ActionMessages messages = new ActionMessages();
 		
 		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
+		
+		if (session.getAttribute("config") == null) {
+			response.sendRedirect(request.getContextPath());
+			return null;
+		}
+		
 		convertAndValidate(request, config, errors, messages);
 		session.setAttribute("config", config);
 		

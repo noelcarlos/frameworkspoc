@@ -18,6 +18,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import es.generali.strutspoc.models.ConfiguracionBean;
 import es.generali.strutspoc.support.BaseAction;
 import es.generali.strutspoc.support.LazyValidatorForm;
 import es.generali.strutspoc.support.Utility;
@@ -161,6 +162,13 @@ public abstract class StrutsFlowAction extends BaseAction {
 				Method m = Utility.findFirst(cl, "execute");
 				m.invoke(action, context, model, request, response, errors);
 				session.setAttribute("model", model);
+				
+				int code = response.getStatus();
+				if (code == 302) {
+					String url = response.getHeader("Location");
+					System.out.println("go to heaven" + url);
+					return null;
+				}				
 			}
 			
 			if (errors.size() > 0) {
@@ -179,11 +187,14 @@ public abstract class StrutsFlowAction extends BaseAction {
 				if (currentStep > 1) { 
 					currentStep--;
 				}
-			} else 	if (flowEvent.equals("goLast")) {
-				currentStep = lastPageNumber;
-			} else if (flowEvent.startsWith("go-")) {
+			} else if (flowEvent.equals("goLast") || flowEvent.startsWith("go-")) {
+				if (flowEvent.equals("goLast")) {
+					nextStep = lastPageNumber;
+				}
 				if (currentStep < nextStep) {
 					currentStep++;
+					String externalURL = flow.selectSingleNode("//flow/external-url").getText();
+					ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
 
 					while (currentStep < nextStep) {
 						node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
@@ -194,6 +205,13 @@ public abstract class StrutsFlowAction extends BaseAction {
 						Method m = Utility.findFirst(cl, "execute");
 						//model = session.getAttribute("model");
 						m.invoke(action, context, model, request, response);
+						
+						int code = response.getStatus();
+						if (code == 302) {
+							String url = response.getHeader("Location");
+							System.out.println("go to heaven" + url);
+							return null;
+						}
 						
 						//session.setAttribute("model", formModel);
 						//model = session.getAttribute("model");

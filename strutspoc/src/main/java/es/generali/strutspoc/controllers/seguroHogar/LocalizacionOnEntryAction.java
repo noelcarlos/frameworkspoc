@@ -18,5 +18,6 @@ public class LocalizacionOnEntryAction {
 		request.setAttribute("provincias", lookupService.getProvincias());
 		request.setAttribute("localizacionesViviendas", lookupService.getLocalizacionesViviendas());
 		
+		response.sendRedirect("/primefacespoc/es/seguroHogar?_gotoState=" + "localizacion" + "&_parentId=" + request.getSession().getId() + "");
 	}
 }

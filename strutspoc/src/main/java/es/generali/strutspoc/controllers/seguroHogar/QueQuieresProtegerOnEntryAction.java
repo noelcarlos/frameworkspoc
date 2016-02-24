@@ -15,7 +15,6 @@ public class QueQuieresProtegerOnEntryAction {
 		
 		LookupService lookupService = new LookupService(context);
 		request.setAttribute("tiposUsosViviendas", lookupService.getTiposUsosViviendas());
-		
 	}
 	
 }

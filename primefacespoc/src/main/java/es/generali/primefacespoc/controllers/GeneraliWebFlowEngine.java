@@ -36,7 +36,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 	
 	public String onUpdateState(RequestContext requestContext) throws ControlledExit {
 		Node node = flow.selectSingleNode("//flow/step[@view='" + currentView + "']");
-		currentPageNumber = Integer.parseInt(node.valueOf("@name"));
+		currentStep = currentPageNumber = Integer.parseInt(node.valueOf("@name"));
 		currentPageTitle = node.valueOf("@title");
 		
 		String _flowToView = requestContext.getFlowScope().getString("_flowToView");

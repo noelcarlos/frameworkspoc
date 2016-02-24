@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow name="seguroHogar">
 	<on-entry>es.generali.strutspoc.controllers.seguroHogar.InitFlowAction</on-entry>
+	<external-url>/primefacespoc/es/seguroHogar</external-url>
 	
 	<step name="1" view="queQuieresProteger" menu="Que quieres proteger" title="¿Que quieres proteger?">
 		<on-entry>es.generali.strutspoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction</on-entry>
