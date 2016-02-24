@@ -13,7 +13,7 @@
 				<ui:fragment rendered="#{!(generaliWebFlowEngine.currentStep lt result.valueOf('@name'))}" >
 					<p:commandLink action="#{'gobackward-'.concat(result.valueOf('@view'))}" 
 						styleClass="btn #{generaliWebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}
-						 #{seguroHogarFlowAction.config[result.valueOf('@view').concat('Externo')] ? 'external-step' : 'internal-step'}"
+						 #{externalContext.sessionMap.config[result.valueOf('@view').concat('Externo')] ? 'external-step' : 'internal-step'}"
 						ajax="false" process="@this" immediate="true">
 						#{result.valueOf("@menu")}
 					</p:commandLink>
@@ -21,7 +21,7 @@
 				<ui:fragment rendered="#{generaliWebFlowEngine.currentStep lt result.valueOf('@name')}" >
 					<p:commandLink action="#{'goforward-'.concat(result.valueOf('@view'))}" 
 						styleClass="btn #{generaliWebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}
-						 #{seguroHogarFlowAction.config[result.valueOf('@view').concat('Externo')] ? 'external-step' : 'internal-step'}"
+						 #{externalContext.sessionMap.config[result.valueOf('@view').concat('Externo')] ? 'external-step' : 'internal-step'}"
 						ajax="false">
 						#{result.valueOf("@menu")}
 					</p:commandLink>
