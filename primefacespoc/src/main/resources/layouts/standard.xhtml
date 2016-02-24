@@ -37,9 +37,18 @@
     <script src="${request.contextPath}/web/resources/bootstrap-3.3.6/js/bootstrap.min.js"></script>
 
 	<SCRIPT type="text/javascript">
-    	function selectAllSetupChecks() {
-   			$( ".chkComponent" ).each(function() {
-    			if ($("#all").is(':checked')) {
+    	function selectAllSetupChecksInicializar() {
+   			$( ".chkComponentInicializar" ).each(function() {
+    			if ($("#allInicializar").is(':checked')) {
+    			 	$(this).prop('checked', true);
+    			} else {
+    			  	$(this).prop('checked', false);
+    			}
+    		});
+    	}
+    	function selectAllSetupChecksExterno() {
+   			$( ".chkComponentExterno" ).each(function() {
+    			if ($("#allExterno").is(':checked')) {
     			 	$(this).prop('checked', true);
     			} else {
     			  	$(this).prop('checked', false);

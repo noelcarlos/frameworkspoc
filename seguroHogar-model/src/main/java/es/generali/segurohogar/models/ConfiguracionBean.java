@@ -1,4 +1,4 @@
-package es.generali.strutspoc.models;
+package es.generali.segurohogar.models;
 
 import java.io.Serializable;
 

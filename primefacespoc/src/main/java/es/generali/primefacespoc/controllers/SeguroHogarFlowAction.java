@@ -7,8 +7,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.webflow.core.collection.MutableAttributeMap;
 import org.springframework.webflow.execution.RequestContext;
 
-import es.generali.primefacespoc.models.ConfiguracionBean;
 import es.generali.primefacespoc.support.GeneratorHelper;
+import es.generali.segurohogar.models.ConfiguracionBean;
 import es.generali.segurohogar.models.SeguroViviendaBean;
 
 public class SeguroHogarFlowAction extends StrutsFlowAction {
@@ -27,32 +27,32 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 	}
 	
 	public void setup() {
-		if (config.getQueQuieresProteger()) {
+		if (config.getQueQuieresProtegerInicializar()) {
 			model.setTipoDeUsoViviendaId(1);
 			model.setNumPersonasQueVivenEnLaVivienda(4);
 		}
-		if (config.getLocalizacion()) {
+		if (config.getLocalizacionInicializar()) {
 			model.setProvinciaId(2);
 			model.setLocalizacionId(1);
 		}
-		if (config.getSobreLaConstruccion()) {
+		if (config.getSobreLaConstruccionInicializar()) {
 			model.setTipoDeConstruccionId(1);
 			model.setCalidadDeLaConstruccionId(1);
 			model.setTipologiaDeLaViviendaId(1);
 		}
-		if (config.getCaracteristicasDeLaVivienda()) {
+		if (config.getCaracteristicasDeLaViviendaInicializar()) {
 			model.setMetrosCuadradosConstruidos(120.0);
 			model.setNumeroDeDormitorios(4);
 			model.setAnyoDeConstruccion(1990);
 			model.setAnyoDeLaUltimaRehabilitacion(2014);
 		}
-		if (config.getMedidasDeSeguridadDeTuVivienda()) {
+		if (config.getMedidasDeSeguridadDeTuViviendaInicializar()) {
 			model.setRejasEnVentanasOSimilares(true);
 			model.setPuertaDeSeguridad(true);
 			model.setAlarmaConectada(true);
 			model.setCajaFuerte(true);
 		}
-		if (config.getPersonalizarPaquete()) {
+		if (config.getPersonalizarPaqueteInicializar()) {
 			model.setOpcionRotura(true);
 			model.setOpcionRobo(true);
 			model.setOpcionAsistenciaInformatica(true);
@@ -62,7 +62,7 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 			model.setCapitalAseguradoObjetosDeValor(15000);
 			model.setCapitalAseguradoRecomposicionEstetica(10000);
 		}
-		if (config.getDatosDelTitular()) {
+		if (config.getDatosDelTitularInicializar()) {
 			model.setNombre("Thomas");
 			model.setApellido1("Anderson");
 			model.setTipoDeDocumentoDeIdentidadId(1);
@@ -78,7 +78,7 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 			model.setLocalidadTitular("CAPITAL CITY");
 			model.setProvinciaTitularId(2);
 		}
-		if (config.getDatosDeLaViviendaAAsegurar()) {
+		if (config.getDatosDeLaViviendaAAsegurarInicializar()) {
 			model.setTipoDeViaViviendaId(4);
 			model.setDomicilioVivienda("SION");
 			model.setNumeroYPisoVivienda("9/11");
@@ -86,7 +86,7 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 			model.setLocalidadVivienda("CAPITAL CITY");
 			model.setProvinciaViviendaId(2);
 		}
-		if (config.getDatosDePago()) {
+		if (config.getDatosDePagoInicializar()) {
 			model.setCuentaIBAN("ES76");
 			model.setCuentaEntidad("2001");
 			model.setCuentaOficina("0911");

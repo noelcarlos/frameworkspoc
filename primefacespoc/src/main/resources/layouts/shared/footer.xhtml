@@ -15,29 +15,32 @@
 	<h:form id="setupForm">
 		<div class="row">
 			<div class="col-md-6">
-				<h3>Información inicial</h3>
+				<h3>Datos a inicializar</h3>
+			</div>
+			<div class="col-md-6">
+				<h3>Pasos a externalizar</h3>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
 					<div class="col-md-6">
-						<ui:repeat id="checkLeft" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
+						<ui:repeat id="checkLeftInicializar" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
 							<ui:fragment rendered='#{result.valueOf("@name") lt 6}'>
 								<div class="checkbox checkbox-primary">
-									<h:selectBooleanCheckbox id="menu" value="#{seguroHogarFlowAction.config[result.valueOf('@view')]}"
-										styleClass="chkComponent" />
+									<h:selectBooleanCheckbox id="menu" value="#{seguroHogarFlowAction.config[result.valueOf('@view').concat('Inicializar')]}"
+										styleClass="chkComponentInicializar" />
 									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
 								</div>
 							</ui:fragment>
 						</ui:repeat>
 					</div>
 					<div class="col-md-6">
-						<ui:repeat id="checkRight" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
+						<ui:repeat id="checkRightInicializar" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
 							<ui:fragment rendered='#{!(result.valueOf("@name") lt 6)}'>
 								<div class="checkbox checkbox-primary">
-									<h:selectBooleanCheckbox id="menu" value="#{seguroHogarFlowAction.config[result.valueOf('@view')]}"
-										styleClass="chkComponent" />
+									<h:selectBooleanCheckbox id="menu" value="#{seguroHogarFlowAction.config[result.valueOf('@view').concat('Inicializar')]}"
+										styleClass="chkComponentInicializar" />
 									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
 								</div>
 							</ui:fragment>
@@ -47,18 +50,65 @@
 				<div class="form-group">
 					<div class="col-md-6">
 						<div class="checkbox checkbox-primary">
-							<input type="checkbox" id="all" name="all" onClick="selectAllSetupChecks();"></input>
-							<label for="all">TODO</label>
+							<input type="checkbox" id="allInicializar" name="allInicializar" onClick="selectAllSetupChecksInicializar();"></input>
+							<label for="allInicializar">TODO</label>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-2">
-				<label for="kbContrato">Longitud del contrato en KB:</label>
-				<p:inputText id="kbContrato" style="color:#000;" value="#{seguroHogarFlowAction.config.kbContrato}" 
-					styleClass="form-control" label="Longitud del contrato en KB"/>	
+			<div class="col-md-6">
+				<div class="form-group">
+					<div class="col-md-6">
+						<ui:repeat id="checkLeftExterno" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
+							<ui:fragment rendered='#{result.valueOf("@name") lt 6}'>
+								<div class="checkbox checkbox-primary">
+									<h:selectBooleanCheckbox id="menu" value="#{seguroHogarFlowAction.config[result.valueOf('@view').concat('Externo')]}"
+										styleClass="chkComponentExterno" />
+									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
+								</div>
+							</ui:fragment>
+						</ui:repeat>
+					</div>
+					<div class="col-md-6">
+						<ui:repeat id="checkRightExterno" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
+							<ui:fragment rendered='#{!(result.valueOf("@name") lt 6)}'>
+								<div class="checkbox checkbox-primary">
+									<h:selectBooleanCheckbox id="menu" value="#{seguroHogarFlowAction.config[result.valueOf('@view').concat('Externo')]}"
+										styleClass="chkComponentExterno" />
+									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
+								</div>
+							</ui:fragment>
+						</ui:repeat>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-6">
+						<div class="checkbox checkbox-primary">
+							<input type="checkbox" id="allExterno" name="allExterno" onClick="selectAllSetupChecksExterno();"></input>
+							<label for="allExterno">TODO</label>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-6">
+			<div class="form-group ">
+				<h:outputLabel for="kbContrato" styleClass="control-label">
+					Longitud del contrato en KB:
+				</h:outputLabel>
+				<p:inputText id="kbContrato" style="color:#000;" value="#{seguroHogarFlowAction.config.kbContrato}" 
+					styleClass="form-control" label="Longitud del contrato en KB"/>
+			</div>
+			</div>
+			<div class="col-md-6">
+				<div class="checkbox checkbox-primary">
+					<h:selectBooleanCheckbox id="useDistributedCache" value="#{seguroHogarFlowAction.config.useDistributedCache}" />
+					<p:outputLabel>Usar cache distribuido</p:outputLabel>
+				</div>
+			</div>
+		</div>
+		<div class="separator-sm"></div>
 		<div class="row">
 			<div class="form-group">
 				<div class="col-md-6">

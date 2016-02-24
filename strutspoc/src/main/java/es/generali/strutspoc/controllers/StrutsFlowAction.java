@@ -19,7 +19,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import es.generali.strutspoc.models.ConfiguracionBean;
+import es.generali.segurohogar.models.ConfiguracionBean;
 import es.generali.strutspoc.support.BaseAction;
 import es.generali.strutspoc.support.LazyValidatorForm;
 import es.generali.strutspoc.support.Utility;
