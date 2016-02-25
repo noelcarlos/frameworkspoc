@@ -26,7 +26,7 @@
 	    </div>
 	    <div id="navbar1" class="navbar-collapse collapse">
 	      <ul class="nav navbar-nav navbar-right">
-	        <li class="active"><a href="${pageContext.request.contextPath}/init.do?method=onEntry">Home</a></li>
+	        <li class="active"><a href="${pageContext.request.contextPath}/init.do?method=onEntry">Iniciar</a></li>
 	        <li><a href="${pageContext.request.contextPath}/seguroHogar.do?method=onEntry">Hogar</a></li>
 	        <li><a href="#">Coche</a></li>
 	        <li><a href="#">Vida</a></li>
