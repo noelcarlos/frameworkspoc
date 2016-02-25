@@ -11,4 +11,8 @@ public abstract class StrutsFlowAction implements Serializable {
 	public<T> T getBeanFromCache(String sessionId, String key) {
 		return (T)RedistPersistenceDataStore.getInstance().getAttribute(sessionId, key);
 	}
+	
+	public void putBeanToCache(String sessionId, String key, Object value) {
+		RedistPersistenceDataStore.getInstance().setAttribute(sessionId, key, value);
+	}
 }

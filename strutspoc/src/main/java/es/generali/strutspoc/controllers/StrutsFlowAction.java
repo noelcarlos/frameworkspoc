@@ -273,4 +273,37 @@ public abstract class StrutsFlowAction extends BaseAction {
 		
 		return null;
 	}
+	
+	public ActionForward onNavigate(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+		
+		HttpSession session = request.getSession();
+
+		Document flow = (Document)session.getAttribute("flow");
+		Node node = flow.selectSingleNode("//flow");
+		String flowName = node.valueOf("@name");
+		
+		String gotoState = request.getParameter("_gotoState");
+		
+		node = flow.selectSingleNode("//flow/step[@view='" + gotoState + "']");
+		int currentStep = Integer.parseInt(node.valueOf("@name").toString());
+		session.setAttribute("currentStep", currentStep);
+
+		String title = node.valueOf("@title");
+		request.setAttribute("currentPageTitle", title);
+		request.setAttribute("currentPageNumber", "" + currentStep);
+		session.setAttribute("currentStep", "" + currentStep); 
+
+		ActionErrors errors = new ActionErrors();
+		ActionMessages messages = new ActionMessages();
+
+		session.setAttribute("pageErrors", errors);
+		session.setAttribute("pageMessages", messages);
+		
+		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
+		
+		return null;
+	}
 }

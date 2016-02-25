@@ -45,7 +45,7 @@
 		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
 			<evaluate expression="generaliWebFlowEngine.onStep(flowRequestContext, 'goforward-next')" />
 		</transition>
-
+		
 		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
 		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
 		 	<evaluate expression="generaliWebFlowEngine.onStep(flowRequestContext, currentEvent.id)" />
@@ -232,12 +232,19 @@
 		</transition>
 	</view-state>
 	
+	<view-state id="_externalView" redirect="true" view="externalRedirect:serverRelative:#{flashScope._externalURL}"/>
+	
 	<global-transitions>
 		<transition on="setup" />
 
 		<transition on="#{currentEvent.id.startsWith('gobackward-')}" to="#{viewScope.nextView}" bind="false" validate="false">
 		 	<evaluate expression="generaliWebFlowEngine.onStep(flowRequestContext, currentEvent.id)" />
 		</transition>
+		
+		<transition on-exception="es.generali.primefacespoc.support.ExternalExit" to="_externalView" bind="false" validate="false">
+			<evaluate expression="generaliWebFlowEngine.onExternalLink(flowRequestContext, rootCauseException)" />
+		</transition>
+
 	</global-transitions>
 	
 </flow>

@@ -15,7 +15,7 @@ public class LocalizacionOnEntryAction implements Serializable {
 	@Autowired transient LookupService lookupService;
 
 	public void execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
-		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope(); 
+		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
 		
 		flowScope.put("provincias", lookupService.getProvincias());
 		flowScope.put("localizacionesViviendas", lookupService.getLocalizacionesViviendas());

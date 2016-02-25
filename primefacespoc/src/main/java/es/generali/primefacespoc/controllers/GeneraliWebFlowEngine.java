@@ -1,5 +1,10 @@
 package es.generali.primefacespoc.controllers;
 
+import java.lang.reflect.InvocationTargetException;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.IOUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -8,10 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
+import org.springframework.faces.webflow.FlowExternalContext;
 import org.springframework.webflow.core.collection.MutableAttributeMap;
+import org.springframework.webflow.execution.FlowExecutionKey;
+import org.springframework.webflow.execution.FlowSession;
 import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.support.ControlledExit;
+import es.generali.primefacespoc.support.ExternalExit;
 import es.generali.segurohogar.models.ConfiguracionBean;
 
 public class GeneraliWebFlowEngine extends StrutsFlowAction {
@@ -27,7 +36,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 	@Autowired transient ApplicationContext appContext;
 	
 	public GeneraliWebFlowEngine() {
-		
+		System.out.println("Creating WebFlow:" + this);
 	}
 
 	public void onInit(RequestContext requestContext) throws Exception {
@@ -40,6 +49,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 	}
 	
 	public String onUpdateState(RequestContext requestContext) throws ControlledExit {
+		FlowExecutionKey key = requestContext.getFlowExecutionContext().getKey();
 		Node node = flow.selectSingleNode("//flow/step[@view='" + currentView + "']");
 		currentStep = currentPageNumber = Integer.parseInt(node.valueOf("@name"));
 		currentPageTitle = node.valueOf("@title");
@@ -54,6 +64,22 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 			}
 		}
 		//System.out.println("Starting on:" + node.valueOf("@view"));
+		
+		ConfiguracionBean config = (ConfiguracionBean)requestContext.getFlowScope().get("config");
+		try {
+			String res = BeanUtils.getProperty(config, node.valueOf("@view") + "Externo"); // res = "true"
+			
+			if (res.equals("false")) {
+				String externalURL = flow.selectSingleNode("//flow/external-url").getText();
+				HttpServletRequest request = (HttpServletRequest)requestContext.getExternalContext().getNativeRequest();
+				throw new ExternalExit(externalURL + "&_gotoState=" + node.valueOf("@view")
+					+ "&_parentId=" + request.getSession().getId() + "&_flowId=" + requestContext.getActiveFlow().getId());
+			}		
+			
+		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		
 		return node.valueOf("@view");
 	}
 	
@@ -146,19 +172,36 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
 		String gotoState = flowScope.getString("_gotoState");
 		if (gotoState != null) {
-			Node node = flow.selectSingleNode("//flow/step[@view='" + gotoState + "']");
-			currentPageNumber = Integer.valueOf(node.valueOf("@name"));
-			currentView = node.valueOf("@view");
-			currentPageTitle = node.valueOf("@title");
-
 			flowScope.asMap().forEach((key, value) -> {
 				Object v = getBeanFromCache(flowScope.getString("_parentId"), key);
+				if (value instanceof GeneraliWebFlowEngine) {
+					return;
+				}
 				if (v != null && value != null && v.getClass().isInstance(value)) {
 					requestContext.getFlowExecutionContext().getDefinition();
 					flowScope.put(key, v);
 				}
 			});
+			
+			Node node = flow.selectSingleNode("//flow/step[@view='" + gotoState + "']");
+			currentStep = currentPageNumber = Integer.valueOf(node.valueOf("@name"));
+			currentView = node.valueOf("@view");
+			currentPageTitle = node.valueOf("@title");
 		}
+	}
+	
+	public void bindOutputParameters(RequestContext requestContext) throws Exception {
+		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
+		flowScope.asMap().forEach((key, value) -> {
+			Object v = flowScope.get(key);
+			if (value instanceof GeneraliWebFlowEngine) {
+				return;
+			}
+			if (v != null && value != null && v.getClass().isInstance(value)) {
+				requestContext.getFlowExecutionContext().getDefinition();
+				putBeanToCache(flowScope.getString("_parentId"), key, v);
+			}
+		});
 	}
 
 	public int getCurrentStep() {
@@ -169,4 +212,9 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 		this.currentStep = currentStep;
 	}
 
+	public void onExternalLink(RequestContext requestContext, ExternalExit info) throws Exception {
+		MutableAttributeMap<Object> flashScope = requestContext.getFlashScope();
+		flashScope.put("_externalURL", info.getUrl());
+		bindOutputParameters(requestContext);
+	}
 }

@@ -205,6 +205,18 @@ public class ConfiguracionBean implements Serializable {
 		datosDeLaViviendaAAsegurarInicializar = false;
 		datosDePagoInicializar = false;
 		resumenInicializar = false;
+		
+		queQuieresProtegerExterno = false;
+		localizacionExterno = false;
+		sobreLaConstruccionExterno = false;
+		caracteristicasDeLaViviendaExterno = false;
+		medidasDeSeguridadDeTuViviendaExterno = false;
+		personalizarPaqueteExterno = false;
+		datosDelTitularExterno = false;
+		datosDeLaViviendaAAsegurarExterno = false;
+		datosDePagoExterno = false;
+		resumenExterno = false;
+		
 		kbContrato = 100;
 		useDistributedCache = true;
 	}
