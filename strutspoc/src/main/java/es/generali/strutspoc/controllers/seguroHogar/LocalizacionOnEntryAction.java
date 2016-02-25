@@ -7,11 +7,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 import es.generali.segurohogar.models.SeguroViviendaBean;
 import es.generali.strutspoc.services.LookupService;
+import es.generali.strutspoc.support.OnEntryActionBase;
 
-public class LocalizacionOnEntryAction {
+public class LocalizacionOnEntryAction extends OnEntryActionBase<SeguroViviendaBean> {
 
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		log.info("Before Step 2");
 		
 		LookupService lookupService = new LookupService(context);
 		

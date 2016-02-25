@@ -6,11 +6,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 
 import es.generali.segurohogar.models.SeguroViviendaBean;
+import es.generali.strutspoc.support.OnEntryActionBase;
 
-public class DatosDePagoOnEntryAction {
+public class DatosDePagoOnEntryAction extends OnEntryActionBase<SeguroViviendaBean> {
 
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		log.info("Before Step 9");
 		
 		/*LookupService lookupService = new LookupService(context);
 		

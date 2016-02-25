@@ -8,11 +8,14 @@ import org.apache.struts.action.ActionErrors;
 import org.springframework.web.context.WebApplicationContext;
 
 import es.generali.segurohogar.models.SeguroViviendaBean;
+import es.generali.strutspoc.support.OnEntryActionBase;
+import es.generali.strutspoc.support.OnExitActionBase;
 
-public class CaracteristicasDeLaViviendaOnExitAction {
+public class CaracteristicasDeLaViviendaOnExitAction extends OnExitActionBase<SeguroViviendaBean> {
 
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
 			HttpServletRequest request, HttpServletResponse response, ActionErrors errors) throws Exception {
+		log.info("After Step 4");
 		
 		if (model.getMetrosCuadradosConstruidos() == null) {
     		errors.add("metrosCuadradosConstruidos", new ActionError("error.literal", "Debe de introducir los números de metros cuadrados construidos"));

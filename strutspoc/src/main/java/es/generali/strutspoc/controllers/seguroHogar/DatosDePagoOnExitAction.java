@@ -7,11 +7,13 @@ import org.apache.struts.action.ActionErrors;
 import org.springframework.web.context.WebApplicationContext;
 
 import es.generali.segurohogar.models.SeguroViviendaBean;
+import es.generali.strutspoc.support.OnExitActionBase;
 
-public class DatosDePagoOnExitAction {
+public class DatosDePagoOnExitAction extends OnExitActionBase<SeguroViviendaBean> {
 
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
 			HttpServletRequest request, HttpServletResponse response, ActionErrors errors) throws Exception {
+		log.info("After Step 9");
 		
 		/*
 		if (model.getProvinciaId() == null) {
