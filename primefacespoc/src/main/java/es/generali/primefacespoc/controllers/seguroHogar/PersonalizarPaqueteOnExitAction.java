@@ -11,6 +11,8 @@ public class PersonalizarPaqueteOnExitAction extends OnExitActionBase<SeguroVivi
 	private static final long serialVersionUID = 1L;
 	
 	public boolean execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
+		log.info("After Step 6");
+		
 		MessageContext messageContext = requestContext.getMessageContext();
 		
 		validationService.validate(model, PersonalizarPaquete.class);

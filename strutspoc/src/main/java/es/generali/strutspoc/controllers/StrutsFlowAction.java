@@ -281,7 +281,13 @@ public abstract class StrutsFlowAction extends BaseAction {
 		
 		HttpSession session = request.getSession();
 
+		if (session.getAttribute("flow") == null) {
+			response.sendRedirect(request.getContextPath() + "/" + getFlowDirectory() + ".do?method=onEntry");
+			return null;
+		}
+		
 		Document flow = (Document)session.getAttribute("flow");
+		
 		Node node = flow.selectSingleNode("//flow");
 		String flowName = node.valueOf("@name");
 		

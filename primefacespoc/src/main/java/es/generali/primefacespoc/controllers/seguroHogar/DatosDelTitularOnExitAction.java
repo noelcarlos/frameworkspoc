@@ -11,6 +11,8 @@ public class DatosDelTitularOnExitAction extends OnExitActionBase<SeguroVivienda
 	private static final long serialVersionUID = 1L;
 	
 	public boolean execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
+		log.info("After Step 7");
+
 		MessageContext messageContext = requestContext.getMessageContext();
 		
 		validationService.validate(model, DatosDelTitular.class);

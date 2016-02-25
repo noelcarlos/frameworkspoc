@@ -61,9 +61,9 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 			return null;
 		}
 		try {
-			if (res.length() > 1024*1024) {
-				System.out.println("GETTING Size = " + res.length());
-			}
+//			if (res.length() > 1024*1024) {
+//				System.out.println("GETTING Size = " + res.length());
+//			}
 			return serializeFromString(res);
 		} catch(Exception e) {
 			throw new RuntimeException(e);

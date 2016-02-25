@@ -60,9 +60,9 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 			return null;
 		}
 		try {
-			if (res.length() > 1024) {
-				System.out.println("GETTING Size = " + res.length());
-			}
+//			if (res.length() > 1024) {
+//				System.out.println("GETTING Size = " + res.length());
+//			}
 			return serializeFromString(res);
 		} catch(Exception e) {
 			throw new RuntimeException(e);
@@ -74,9 +74,9 @@ public class RedistPersistenceDataStore implements IPersistenceDataStore {
 		RedisCommands<String, String> syncCommands = connection.sync();
 		try {
 			String encodedValue = serializeToString((Serializable)value);
-			if (encodedValue.length() > 1024) {
-				System.out.println("PUTTING Size = " + encodedValue.length());
-			}
+//			if (encodedValue.length() > 1024) {
+//				System.out.println("PUTTING Size = " + encodedValue.length());
+//			}
 			syncCommands.set(id+":"+name, encodedValue);
 		} catch(Exception e) {
 			throw new RuntimeException(e);

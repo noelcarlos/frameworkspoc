@@ -55,6 +55,8 @@ public class CaracteristicasDeLaViviendaOnExitAction extends OnExitActionBase<Se
 	private static final long serialVersionUID = 1L;
 	
 	public boolean execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
+		log.info("After Step 4");
+
 		MessageContext messageContext = requestContext.getMessageContext();
 		
 		validationService.validate(model, CaracteristicasDeLaVivienda.class);

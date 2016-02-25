@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
-import org.springframework.faces.webflow.FlowExternalContext;
 import org.springframework.webflow.core.collection.MutableAttributeMap;
-import org.springframework.webflow.execution.FlowExecutionKey;
-import org.springframework.webflow.execution.FlowSession;
 import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.support.ControlledExit;
@@ -36,7 +33,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 	@Autowired transient ApplicationContext appContext;
 	
 	public GeneraliWebFlowEngine() {
-		System.out.println("Creating WebFlow:" + this);
+		//System.out.println("Creating WebFlow:" + this);
 	}
 
 	public void onInit(RequestContext requestContext) throws Exception {
@@ -49,7 +46,7 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 	}
 	
 	public String onUpdateState(RequestContext requestContext) throws ControlledExit {
-		FlowExecutionKey key = requestContext.getFlowExecutionContext().getKey();
+		//FlowExecutionKey key = requestContext.getFlowExecutionContext().getKey();
 		Node node = flow.selectSingleNode("//flow/step[@view='" + currentView + "']");
 		currentStep = currentPageNumber = Integer.parseInt(node.valueOf("@name"));
 		currentPageTitle = node.valueOf("@title");

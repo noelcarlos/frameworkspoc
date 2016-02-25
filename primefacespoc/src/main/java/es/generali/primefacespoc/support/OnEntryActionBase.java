@@ -6,16 +6,16 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.webflow.execution.RequestContext;
 
-public abstract class OnExitActionBase<T> implements Serializable {
+public abstract class OnEntryActionBase<T> implements Serializable {
 	private static final long serialVersionUID = 1641245228042874793L;
 	
 	protected static Logger log;
 
 	@Autowired protected transient ValidationService validationService;
 	
-	public OnExitActionBase() {
+	public OnEntryActionBase() {
 		 log = Logger.getLogger(this.getClass());
 	}
 	
-	abstract public boolean execute(RequestContext requestContext, T model) throws Exception;
+	abstract public void execute(RequestContext requestContext, T model) throws Exception;
 }
