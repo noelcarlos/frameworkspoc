@@ -3,10 +3,15 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 	
+	<!-- Controllers -->
 	<var name="generaliWebFlowEngine" class="es.generali.primefacespoc.controllers.GeneraliWebFlowEngine"/>
 	<var name="seguroHogarFlowAction" class="es.generali.primefacespoc.controllers.SeguroHogarFlowAction"/>
-	<var name="model" class="es.generali.segurohogar.models.SeguroViviendaBean" />
 	
+	<!-- Mapped model data -->
+	<var name="model" class="es.generali.segurohogar.models.SeguroViviendaBean" />
+	<var name="config" class="es.generali.segurohogar.models.ConfiguracionBean" />
+	
+	<!-- Flow internal variables -->
 	<input name="_gotoState" />
 	<input name="_parentId" />
 	<input name="_flowToView" />

@@ -26,8 +26,6 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 
 	@Autowired transient ApplicationContext appContext;
 	
-	private ConfiguracionBean config = new ConfiguracionBean();
-	
 	public GeneraliWebFlowEngine() {
 		
 	}
@@ -169,14 +167,6 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 
 	public void setCurrentStep(int currentStep) {
 		this.currentStep = currentStep;
-	}
-
-	public ConfiguracionBean getConfig() {
-		return config;
-	}
-
-	public void setConfig(ConfiguracionBean config) {
-		this.config = config;
 	}
 
 }

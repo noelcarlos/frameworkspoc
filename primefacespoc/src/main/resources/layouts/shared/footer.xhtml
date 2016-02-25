@@ -36,7 +36,7 @@
 							<ui:repeat id="checkLeftInicializar" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
 								<ui:fragment rendered='#{result.valueOf("@name") lt 6}'>
 									<div class="checkbox checkbox-primary">
-										<h:selectBooleanCheckbox id="menu" value="#{generaliWebFlowEngine.config[result.valueOf('@view').concat('Inicializar')]}"
+										<h:selectBooleanCheckbox id="menu" value="#{flowScope.config[result.valueOf('@view').concat('Inicializar')]}"
 											styleClass="chkComponentInicializar" />
 										<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
 									</div>
@@ -47,7 +47,7 @@
 							<ui:repeat id="checkRightInicializar" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
 								<ui:fragment rendered='#{!(result.valueOf("@name") lt 6)}'>
 									<div class="checkbox checkbox-primary">
-										<h:selectBooleanCheckbox id="menu" value="#{generaliWebFlowEngine.config[result.valueOf('@view').concat('Inicializar')]}"
+										<h:selectBooleanCheckbox id="menu" value="#{flowScope.config[result.valueOf('@view').concat('Inicializar')]}"
 											styleClass="chkComponentInicializar" />
 										<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
 									</div>
@@ -70,7 +70,7 @@
 							<ui:repeat id="checkLeftExterno" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
 								<ui:fragment rendered='#{result.valueOf("@name") lt 6}'>
 									<div class="checkbox checkbox-primary">
-										<h:selectBooleanCheckbox id="menu" value="#{generaliWebFlowEngine.config[result.valueOf('@view').concat('Externo')]}"
+										<h:selectBooleanCheckbox id="menu" value="#{flowScope.config[result.valueOf('@view').concat('Externo')]}"
 											styleClass="chkComponentExterno" />
 										<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
 									</div>
@@ -81,7 +81,7 @@
 							<ui:repeat id="checkRightExterno" var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}" varStatus="iter">
 								<ui:fragment rendered='#{!(result.valueOf("@name") lt 6)}'>
 									<div class="checkbox checkbox-primary">
-										<h:selectBooleanCheckbox id="menu" value="#{generaliWebFlowEngine.config[result.valueOf('@view').concat('Externo')]}"
+										<h:selectBooleanCheckbox id="menu" value="#{flowScope.config[result.valueOf('@view').concat('Externo')]}"
 											styleClass="chkComponentExterno" />
 										<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
 									</div>
@@ -105,13 +105,13 @@
 					<h:outputLabel for="kbContrato" styleClass="control-label">
 						Longitud del contrato en KB:
 					</h:outputLabel>
-					<p:inputText id="kbContrato" style="color:#000;" value="#{generaliWebFlowEngine.config.kbContrato}" 
+					<p:inputText id="kbContrato" style="color:#000;" value="#{flowScope.config.kbContrato}" 
 						styleClass="form-control" label="Longitud del contrato en KB"/>
 				</div>
 				</div>
 				<div class="col-md-6">
 					<div class="checkbox checkbox-primary">
-						<h:selectBooleanCheckbox id="useDistributedCache" value="#{generaliWebFlowEngine.config.useDistributedCache}" />
+						<h:selectBooleanCheckbox id="useDistributedCache" value="#{flowScope.config.useDistributedCache}" />
 						<p:outputLabel>Usar cache distribuido</p:outputLabel>
 					</div>
 				</div>
@@ -120,7 +120,7 @@
 			<div class="row">
 				<div class="form-group">
 					<div class="col-md-6">
-						<p:commandLink id="performSetup" action="#{seguroHogarFlowAction.setup(generaliWebFlowEngine.config)}" 
+						<p:commandLink id="performSetup" action="#{seguroHogarFlowAction.setup(flowScope.config)}" 
 							styleClass="btn btn-default" style="color:#000;" ajax="false">
 							Aplicar
 						</p:commandLink>

@@ -15,6 +15,7 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 	private static final long serialVersionUID = 6848148192857690277L;
 	
 	private SeguroViviendaBean model;
+	private ConfiguracionBean config;
 	
 	@Autowired transient ApplicationContext appContext;
 
@@ -22,6 +23,7 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
 		
 		model = (SeguroViviendaBean)flowScope.get("model");
+		config = (ConfiguracionBean)flowScope.get("config");
 	}
 	
 	public void setup(ConfiguracionBean config) {
@@ -103,6 +105,14 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 
 	public void setModel(SeguroViviendaBean model) {
 		this.model = model;
+	}
+
+	public ConfiguracionBean getConfig() {
+		return config;
+	}
+
+	public void setConfig(ConfiguracionBean config) {
+		this.config = config;
 	}
 
 }
