@@ -13,6 +13,7 @@
 	<context:annotation-config />
 
 	<context:component-scan base-package="es.generali.primefacespoc.services" />
+	<context:component-scan base-package="org.esmartpoint.jsfkarma" />
 
 	<!-- For global mail service configuration 
 	<bean id="mailsService" class="org.gen4gen.showcase.service.MailsService" />

@@ -11,7 +11,7 @@ import es.generali.primefacespoc.support.GeneratorHelper;
 import es.generali.segurohogar.models.ConfiguracionBean;
 import es.generali.segurohogar.models.SeguroViviendaBean;
 
-public class SeguroHogarFlowAction extends StrutsFlowAction {
+public class SeguroHogarFlowAction extends BaseWebFlowController {
 	private static final long serialVersionUID = 6848148192857690277L;
 	
 	private SeguroViviendaBean model;
@@ -24,6 +24,12 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 		
 		model = (SeguroViviendaBean)flowScope.get("model");
 		config = (ConfiguracionBean)flowScope.get("config");
+		
+		setup(config);
+	}
+	
+	public SeguroViviendaBean getModel() {
+		return model;
 	}
 	
 	public void setup(ConfiguracionBean config) {
@@ -97,11 +103,7 @@ public class SeguroHogarFlowAction extends StrutsFlowAction {
 		
 		model.setContrato(new GeneratorHelper().randomText(config.getKbContrato()*1024, config.getKbContrato()*1024, "\r\n\r\n", 256, 1024,
 				50, 200, 2, 10));
-	}
-
-	public SeguroViviendaBean getModel() {
-		return model;
-	}
+	}	
 
 	public void setModel(SeguroViviendaBean model) {
 		this.model = model;

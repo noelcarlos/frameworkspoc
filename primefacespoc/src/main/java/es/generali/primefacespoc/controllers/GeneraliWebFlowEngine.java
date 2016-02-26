@@ -20,7 +20,7 @@ import es.generali.primefacespoc.support.ControlledExit;
 import es.generali.primefacespoc.support.ExternalExit;
 import es.generali.segurohogar.models.ConfiguracionBean;
 
-public class GeneraliWebFlowEngine extends StrutsFlowAction {
+public class GeneraliWebFlowEngine extends BaseWebFlowController {
 	private static final long serialVersionUID = 6848148192857690277L;
 	
 	private Document flow;
@@ -32,10 +32,6 @@ public class GeneraliWebFlowEngine extends StrutsFlowAction {
 
 	@Autowired transient ApplicationContext appContext;
 	
-	public GeneraliWebFlowEngine() {
-		//System.out.println("Creating WebFlow:" + this);
-	}
-
 	public void onInit(RequestContext requestContext) throws Exception {
 		Resource resource = appContext.getResource("../seguroHogar/contratacion.xml");
 		flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
