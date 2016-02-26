@@ -25,7 +25,8 @@
 		
 		<action path="/init" type="es.generali.strutspoc.controllers.InitAction" 
 			name="flowForm" scope="request" validate="true" parameter="method" >
-  			<forward name="app.init" path="app.init" /> 
+  			<forward name="app.init" path="app.init" />
+  			<forward name="app.configAplicada" path="app.configAplicada" /> 
 		</action>
 		
 		<action path="/seguroHogar" type="es.generali.strutspoc.controllers.SeguroHogarFlowAction" 
