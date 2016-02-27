@@ -8,6 +8,4 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="flowVariablesControllerPostProcessor" class="org.esmartpoint.jsfkarma.web.FlowVariablesControllerPostProcessor" />
-	
 </beans>

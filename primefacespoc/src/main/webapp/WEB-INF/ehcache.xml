@@ -6,7 +6,7 @@
      | detailed information on how to configurigure caches in this file
      +-->
     <!-- Location of persistent caches on disk -->
-    <diskStore path="java.io.tmpdir/db4genshowcase" />
+    <diskStore path="java.io.tmpdir/primefacespoc" />
 
     <defaultCache eternal="false" maxElementsInMemory="1000" 
         overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"

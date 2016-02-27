@@ -9,10 +9,10 @@
 	<var name="config" class="es.generali.segurohogar.models.ConfiguracionBean" />
 	
 	<on-start>
-		<evaluate expression="mainController.onInit(flowRequestContext)" />
+		<evaluate expression="mainController.onInit()" />
 	</on-start>
 	
-	<view-state id="home">
+	<view-state id="home" redirect="true">
 		<transition on="aplicar" to="configuracionAplicada" >
 			<evaluate expression="mainController.setup(flowScope.config)" />
 		</transition>

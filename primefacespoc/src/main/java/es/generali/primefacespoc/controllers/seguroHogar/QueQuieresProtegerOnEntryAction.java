@@ -17,7 +17,7 @@ public class QueQuieresProtegerOnEntryAction extends OnEntryActionBase<SeguroViv
 	@Autowired transient LookupService lookupService;
 
 	public void execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
-		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope(); 
+		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
 		
 		flowScope.put("tiposUsosViviendas", lookupService.getTiposUsosViviendas());
 		

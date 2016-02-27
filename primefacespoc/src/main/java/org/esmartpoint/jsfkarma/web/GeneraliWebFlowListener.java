@@ -16,11 +16,15 @@
 package org.esmartpoint.jsfkarma.web;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.binding.expression.Expression;
 import org.springframework.binding.expression.support.FluentParserContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.webflow.action.EvaluateAction;
 import org.springframework.webflow.core.collection.MutableAttributeMap;
+import org.springframework.webflow.definition.FlowDefinition;
 import org.springframework.webflow.definition.StateDefinition;
 import org.springframework.webflow.definition.TransitionDefinition;
 import org.springframework.webflow.engine.Transition;
@@ -42,6 +46,19 @@ import org.springframework.webflow.expression.spel.WebFlowSpringELExpressionPars
  */
 public class GeneraliWebFlowListener extends FlowExecutionListenerAdapter {
 	private static Logger logger = Logger.getLogger(GeneraliWebFlowListener.class);
+	
+	//AAstatic ApplicationContext appContext;
+	
+	public void sessionCreating(RequestContext context, FlowDefinition definition) {
+		super.sessionCreating(context, definition);
+		AbstractApplicationContext appContext = (AbstractApplicationContext)definition.getApplicationContext();
+		ConfigurableListableBeanFactory factory = appContext.getBeanFactory();
+		if (factory.getSingleton("flowVariablesControllerPostProcessor") == null) {
+			factory.registerSingleton("flowVariablesControllerPostProcessor", FlowVariablesControllerPostProcessor.getInstance());
+			factory.addBeanPostProcessor(FlowVariablesControllerPostProcessor.getInstance());
+			logger.info("Binding Smart FlowVariables PostProcessor");
+		}
+	}
 	
 	@Override
 	@SuppressWarnings("rawtypes")

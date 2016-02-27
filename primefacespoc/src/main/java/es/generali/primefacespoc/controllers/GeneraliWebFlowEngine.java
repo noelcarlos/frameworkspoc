@@ -9,9 +9,7 @@ import org.apache.commons.io.IOUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageContext;
-import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.webflow.core.collection.MutableAttributeMap;
 import org.springframework.webflow.execution.RequestContext;
@@ -30,8 +28,6 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 	private int lastPageNumber;
 	private String currentPageTitle;
 
-	@Autowired transient ApplicationContext appContext;
-	
 	public void onInit(RequestContext requestContext) throws Exception {
 		Resource resource = appContext.getResource("../seguroHogar/contratacion.xml");
 		flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
@@ -42,7 +38,6 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 	}
 	
 	public String onUpdateState(RequestContext requestContext) throws ControlledExit {
-		//FlowExecutionKey key = requestContext.getFlowExecutionContext().getKey();
 		Node node = flow.selectSingleNode("//flow/step[@view='" + currentView + "']");
 		currentStep = currentPageNumber = Integer.parseInt(node.valueOf("@name"));
 		currentPageTitle = node.valueOf("@title");

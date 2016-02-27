@@ -2,12 +2,11 @@ package es.generali.primefacespoc.controllers;
 
 import java.io.Serializable;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.webflow.core.collection.MutableAttributeMap;
 import org.springframework.webflow.execution.RequestContext;
-import org.springframework.webflow.execution.RequestContextHolder;
 
 import es.generali.primefacespoc.support.cache.RedistPersistenceDataStore;
 
@@ -15,6 +14,8 @@ import es.generali.primefacespoc.support.cache.RedistPersistenceDataStore;
 public abstract class BaseWebFlowController implements Serializable {
 	public transient RequestContext requestContext;
 	public transient HttpSession session;
+	public transient MutableAttributeMap<Object> flowScope;
+	public transient ApplicationContext appContext;
 	
 	@SuppressWarnings("unchecked")
 	public<T> T getBeanFromCache(String sessionId, String key) {

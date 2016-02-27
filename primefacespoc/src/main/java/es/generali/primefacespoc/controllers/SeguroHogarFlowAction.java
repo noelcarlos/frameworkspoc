@@ -17,11 +17,8 @@ public class SeguroHogarFlowAction extends BaseWebFlowController {
 	private SeguroViviendaBean model;
 	private ConfiguracionBean config;
 	
-	@Autowired transient ApplicationContext appContext;
-
 	public void onInit(RequestContext requestContext) throws Exception {
-		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
-		
+
 		model = (SeguroViviendaBean)flowScope.get("model");
 		config = (ConfiguracionBean)flowScope.get("config");
 		
