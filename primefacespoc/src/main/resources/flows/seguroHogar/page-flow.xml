@@ -17,11 +17,11 @@
 	<input name="_flowToView" />
 	
 	<on-start>
-		<evaluate expression="generaliWebFlowEngine.onInit(flowRequestContext)" />
+		<evaluate expression="generaliWebFlowEngine.bindInputParameters(flowRequestContext)" />
 	</on-start>
 	
 	<action-state id="startCheck">
-		<evaluate expression="generaliWebFlowEngine.bindInputParameters(flowRequestContext)" />
+		<evaluate expression="generaliWebFlowEngine.onInit(flowRequestContext)" />
 		<transition on="#{flowScope._gotoState != null}" to="#{flowScope._gotoState}" />
 		<transition to="queQuieresProteger" />
 		<on-exit>
@@ -235,7 +235,6 @@
 	<view-state id="_externalView" redirect="true" view="externalRedirect:serverRelative:#{flashScope._externalURL}"/>
 	
 	<global-transitions>
-		<transition on="setup" />
 
 		<transition on="#{currentEvent.id.startsWith('gobackward-')}" to="#{viewScope.nextView}" bind="false" validate="false">
 		 	<evaluate expression="generaliWebFlowEngine.onStep(flowRequestContext, currentEvent.id)" />

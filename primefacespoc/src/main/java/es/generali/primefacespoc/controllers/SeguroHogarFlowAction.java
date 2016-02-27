@@ -2,9 +2,6 @@ package es.generali.primefacespoc.controllers;
 
 import java.util.GregorianCalendar;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.webflow.core.collection.MutableAttributeMap;
 import org.springframework.webflow.execution.RequestContext;
 
 import es.generali.primefacespoc.support.GeneratorHelper;
@@ -15,12 +12,29 @@ public class SeguroHogarFlowAction extends BaseWebFlowController {
 	private static final long serialVersionUID = 6848148192857690277L;
 	
 	private SeguroViviendaBean model;
-	private ConfiguracionBean config;
 	
 	public void onInit(RequestContext requestContext) throws Exception {
-
 		model = (SeguroViviendaBean)flowScope.get("model");
-		config = (ConfiguracionBean)flowScope.get("config");
+		
+		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
+		
+		if (session.getAttribute("config") == null) {
+			config = new ConfiguracionBean();
+			
+			config.setQueQuieresProtegerExterno(true);
+			config.setLocalizacionExterno(true);
+			config.setSobreLaConstruccionExterno(true);
+			config.setCaracteristicasDeLaViviendaExterno(true);
+			config.setMedidasDeSeguridadDeTuViviendaExterno(true);
+			config.setPersonalizarPaqueteExterno(true);
+			config.setDatosDelTitularExterno(true);
+			config.setDatosDeLaViviendaAAsegurarExterno(true);
+			config.setDatosDePagoExterno(true);
+			config.setResumenExterno(true);
+			
+			session.setAttribute("config", config);
+			flowScope.put("config", config);
+		} 
 		
 		setup(config);
 	}
@@ -104,14 +118,6 @@ public class SeguroHogarFlowAction extends BaseWebFlowController {
 
 	public void setModel(SeguroViviendaBean model) {
 		this.model = model;
-	}
-
-	public ConfiguracionBean getConfig() {
-		return config;
-	}
-
-	public void setConfig(ConfiguracionBean config) {
-		this.config = config;
 	}
 
 }

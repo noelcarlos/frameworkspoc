@@ -31,10 +31,22 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 	public void onInit(RequestContext requestContext) throws Exception {
 		Resource resource = appContext.getResource("../seguroHogar/contratacion.xml");
 		flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
+		
 		lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
 		currentStep = currentPageNumber = 1;
 		Node node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		currentView = node.valueOf("@view");
+		
+		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
+		flowScope.put("config", config);
+		
+		String gotoState = flowScope.getString("_gotoState");
+		if (gotoState != null) {
+			node = flow.selectSingleNode("//flow/step[@view='" + gotoState + "']");
+			currentStep = currentPageNumber = Integer.valueOf(node.valueOf("@name"));
+			currentView = node.valueOf("@view");
+			currentPageTitle = node.valueOf("@title");
+		}
 	}
 	
 	public String onUpdateState(RequestContext requestContext) throws ControlledExit {
@@ -53,7 +65,7 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 		}
 		//System.out.println("Starting on:" + node.valueOf("@view"));
 		
-		ConfiguracionBean config = (ConfiguracionBean)requestContext.getFlowScope().get("config");
+		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
 		try {
 			String res = BeanUtils.getProperty(config, node.valueOf("@view") + "Externo"); // res = "true"
 			
@@ -162,19 +174,17 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 		if (gotoState != null) {
 			flowScope.asMap().forEach((key, value) -> {
 				Object v = getBeanFromCache(flowScope.getString("_parentId"), key);
-				if (value instanceof GeneraliWebFlowEngine) {
+				if (key.equals("_gotoState")) {
 					return;
 				}
-				if (v != null && value != null && v.getClass().isInstance(value)) {
+				if (value != null && value instanceof BaseWebFlowController) {
+					return;
+				}
+				if (value != null && v.getClass().isInstance(value)) {
 					requestContext.getFlowExecutionContext().getDefinition();
 					flowScope.put(key, v);
 				}
 			});
-			
-			Node node = flow.selectSingleNode("//flow/step[@view='" + gotoState + "']");
-			currentStep = currentPageNumber = Integer.valueOf(node.valueOf("@name"));
-			currentView = node.valueOf("@view");
-			currentPageTitle = node.valueOf("@title");
 		}
 	}
 	
