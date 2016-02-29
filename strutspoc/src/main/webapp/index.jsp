@@ -4,4 +4,4 @@
 <%@ taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<jsp:forward page="/init.do?method=onEntry" /> 
+<c:redirect url="/init.do?method=onEntry" />
