@@ -168,16 +168,33 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 		this.lastPageNumber = lastPageNumber;
 	}
 	
+	private boolean isInternalParam(String key) {
+		if (key.equals("_gotoState")) 
+			return true;
+		if (key.equals("_parentId")) 
+			return true;
+		if (key.equals("_flowToView")) 
+			return true;
+		return false;
+	}
+	
+	private boolean isInternalObject(Object value) {
+		if (value != null && value instanceof BaseWebFlowController) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void bindInputParameters(RequestContext requestContext) throws Exception {
 		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
 		String gotoState = flowScope.getString("_gotoState");
 		if (gotoState != null) {
 			flowScope.asMap().forEach((key, value) -> {
 				Object v = getBeanFromCache(flowScope.getString("_parentId"), key);
-				if (key.equals("_gotoState")) {
+				if (isInternalParam(key)) {
 					return;
 				}
-				if (value != null && value instanceof BaseWebFlowController) {
+				if (isInternalObject(value)) {
 					return;
 				}
 				if (value != null && v.getClass().isInstance(value)) {
@@ -192,7 +209,10 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
 		flowScope.asMap().forEach((key, value) -> {
 			Object v = flowScope.get(key);
-			if (value instanceof GeneraliWebFlowEngine) {
+			if (isInternalParam(key)) {
+				return;
+			}
+			if (isInternalObject(value)) {
 				return;
 			}
 			if (v != null && value != null && v.getClass().isInstance(value)) {
