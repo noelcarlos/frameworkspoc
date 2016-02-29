@@ -26,220 +26,77 @@
 		<transition to="queQuieresProteger" />
 		<on-exit>
 			<evaluate expression="seguroHogarFlowAction.onInit(flowRequestContext)" />
-			<!-- 
-			<evaluate expression="seguroHogarFlowAction.model" result="flowScope.model" />
-			 -->
 		</on-exit>
 	</action-state>
 	
-	<view-state id="queQuieresProteger">
+	<view-state id="GeneraliFlowViewState">
+	
+		<on-entry>
+			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
+			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
+		</on-entry>
+		
+		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
+		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
+		</transition>
+		
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
+		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
+		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
+		</transition>
+	
+	</view-state>
+	
+	<view-state id="queQuieresProteger" parent="#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnExitAction"/>
-	
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-		
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
 	</view-state>
 
-	<view-state id="localizacion" >
+	<view-state id="localizacion" parent="#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.LocalizacionOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.LocalizacionOnExitAction"/>
-
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
 	</view-state>
 	
-	<view-state id="sobreLaConstruccion" >
+	<view-state id="sobreLaConstruccion" parent="#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.SobreLaConstruccionOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.SobreLaConstruccionOnExitAction"/>
-
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
 	</view-state>
 	
-	<view-state id="caracteristicasDeLaVivienda" >
+	<view-state id="caracteristicasDeLaVivienda" parent="#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnExitAction"/>
-
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
 	</view-state>
 	
-	<view-state id="medidasDeSeguridadDeTuVivienda" >
+	<view-state id="medidasDeSeguridadDeTuVivienda" parent="#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnExitAction"/>
-		
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
 	</view-state>
 	
-	<view-state id="personalizarPaquete" >
+	<view-state id="personalizarPaquete" parent="#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.PersonalizarPaqueteOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.PersonalizarPaqueteOnExitAction"/>
-
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
 	</view-state>
 	
-	<view-state id="datosDelTitular" >
+	<view-state id="datosDelTitular" parent="#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDelTitularOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDelTitularOnExitAction"/>
-
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
 	</view-state>
 	
-	<view-state id="datosDeLaViviendaAAsegurar" >
+	<view-state id="datosDeLaViviendaAAsegurar" parent="#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnExitAction"/>
-
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
 	</view-state>
 	
-	<view-state id="datosDePago" >
+	<view-state id="datosDePago" parent="#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDePagoOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDePagoOnExitAction"/>
-
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
 	</view-state>
 	
-	<view-state id="resumen" >
+	<view-state id="resumen" parent="#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.ResumenOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.ResumenOnExitAction"/>
-
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
 	</view-state>
 	
 	<view-state id="_externalView" redirect="true" view="externalRedirect:serverRelative:#{flashScope._externalURL}"/>
