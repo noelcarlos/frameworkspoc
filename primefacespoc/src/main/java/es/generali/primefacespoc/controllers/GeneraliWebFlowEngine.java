@@ -28,7 +28,7 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 	private int lastPageNumber;
 	private String currentPageTitle;
 
-	public void onInit(RequestContext requestContext) throws Exception {
+	public void onInit() throws Exception {
 		Resource resource = appContext.getResource("../seguroHogar/contratacion.xml");
 		flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
 		
@@ -53,7 +53,7 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 		}
 	}
 	
-	public String onUpdateState(RequestContext requestContext) throws ControlledExit {
+	public String afterOnEntryEvaluations() throws ControlledExit {
 		Node node = flow.selectSingleNode("//flow/step[@view='" + currentView + "']");
 		currentStep = currentPageNumber = Integer.parseInt(node.valueOf("@name"));
 		currentPageTitle = node.valueOf("@title");
@@ -67,27 +67,35 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 				requestContext.getFlowScope().remove("_flowToView");
 			}
 		}
-		//System.out.println("Starting on:" + node.valueOf("@view"));
-		
-		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
-		try {
-			String res = BeanUtils.getProperty(config, node.valueOf("@view") + "Externo"); // res = "true"
-			
-			if (res.equals("false")) {
-				String externalURL = flow.selectSingleNode("//flow/external-url").getText();
-				HttpServletRequest request = (HttpServletRequest)requestContext.getExternalContext().getNativeRequest();
-				throw new ExternalExit(externalURL + "&_gotoState=" + node.valueOf("@view")
-					+ "&_parentId=" + request.getSession().getId() + "&_flowId=" + requestContext.getActiveFlow().getId());
-			}		
-			
-		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-			e.printStackTrace();
-		}
-		
+
 		return node.valueOf("@view");
 	}
 	
-	public String onStep(RequestContext requestContext, String flowEvent) throws Exception {
+	public String beforeOnEntryEvaluations() throws ExternalExit {
+		Node node = flow.selectSingleNode("//flow/step[@view='" + currentView + "']");
+		
+		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
+		try {
+			boolean res = Boolean.valueOf(BeanUtils.getProperty(config, node.valueOf("@view") + "Externo")); 
+			
+			if (!res) {
+				String externalURL = flow.selectSingleNode("//flow/external-url").getText();
+				HttpServletRequest request = (HttpServletRequest)requestContext.getExternalContext().getNativeRequest();
+				String newUrl = externalURL + "&_gotoState=" + node.valueOf("@view")
+					+ "&_parentId=" + request.getSession().getId() + "&_flowId=" + requestContext.getActiveFlow().getId();
+				if (flowScope.get("_flowToView") != null) {
+					newUrl += "&_flowToView=" + flowScope.get("_flowToView");
+				}
+				throw new ExternalExit(newUrl);
+			}		
+		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
+		
+		return node.valueOf("@view");
+	}	
+	
+	public String onStep(String flowEvent) throws Exception {
 		MessageContext messageContext = requestContext.getMessageContext();
 		Node node = flow.selectSingleNode("//flow");
 		String _flowToView = requestContext.getFlowScope().getString("_flowToView");
@@ -234,7 +242,7 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 		this.currentStep = currentStep;
 	}
 
-	public void onExternalLink(RequestContext requestContext, ExternalExit info) throws Exception {
+	public void executeExternalLink(RequestContext requestContext, ExternalExit info) throws Exception {
 		MutableAttributeMap<Object> flashScope = requestContext.getFlashScope();
 		flashScope.put("_externalURL", info.getUrl());
 		bindOutputParameters(requestContext);

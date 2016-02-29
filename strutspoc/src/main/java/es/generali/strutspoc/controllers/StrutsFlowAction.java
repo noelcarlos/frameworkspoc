@@ -1,7 +1,10 @@
 package es.generali.strutspoc.controllers;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -164,7 +167,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 		}
 		
 		String flowEvent = request.getParameter("_flowEvent").toString();
-		int currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
+		Integer currentStep = Integer.parseInt(session.getAttribute("currentStep").toString());
 		Integer nextStep = null;
 		
 		if (flowEvent.startsWith("go-")) {
@@ -218,48 +221,9 @@ public abstract class StrutsFlowAction extends BaseAction {
 				}
 				if (currentStep < nextStep) {
 					currentStep++;
-					String externalURL = flow.selectSingleNode("//flow/external-url").getText();
-					ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
-
-					while (currentStep < nextStep) {
-						node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
-						
-						String res = BeanUtils.getProperty(config, node.valueOf("@view") + "Externo");
-						
-						if (res == null || res.equals("false")) {
-							String preActionClass = node.valueOf("on-entry");
-							Class<?> cl = Class.forName(preActionClass);
-							Object action = cl.newInstance();
-							Method m = Utility.findFirst(cl, "execute");
-							//model = session.getAttribute("model");
-							m.invoke(action, context, model, request, response);
-							
-							int code = response.getStatus();
-							if (code == 302) {
-								String url = response.getHeader("Location");
-								System.out.println("go to heaven" + url);
-								return null;
-							}
-						} else {
-							String flowToView = flow.selectSingleNode("//flow/step[@name='" + nextStep + "']").valueOf("@view");
-							response.sendRedirect(externalURL + "?_gotoState=" + node.valueOf("@view")
-								+ "&_parentId=" + request.getSession().getId() + "&_flowToView=" + flowToView);
-							return null;
-						}
-						
-						//session.setAttribute("model", formModel);
-						//model = session.getAttribute("model");
-						
-						String postActionClass = node.valueOf("on-exit");
-						Class<?> cl = Class.forName(postActionClass);
-						Object action = cl.newInstance();
-						Method m = Utility.findFirst(cl, "execute");
-						m.invoke(action, context, model, request, response, errors);
-						
-						if (errors.size() > 0) {
-							break;
-						}
-						currentStep++;
+					currentStep = proccessFlow(request, response, session, flow, currentStep, nextStep, model, errors);
+					if (currentStep == null) {
+						return null;
 					}
 				} else {
 					currentStep = nextStep;
@@ -281,6 +245,46 @@ public abstract class StrutsFlowAction extends BaseAction {
 		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
 		
 		return null;
+	}
+
+	private Integer proccessFlow(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Document flow, Integer currentStep, Integer nextStep, Object model, ActionErrors errors)
+					throws IllegalAccessException, InvocationTargetException, NoSuchMethodException,
+					ClassNotFoundException, InstantiationException, IOException {
+		Node node;
+		String externalURL = flow.selectSingleNode("//flow/external-url").getText();
+		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
+
+		while (currentStep < nextStep) {
+			node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+			
+			String res = BeanUtils.getProperty(config, node.valueOf("@view") + "Externo");
+			
+			if (res == null || res.equals("false")) {
+				String preActionClass = node.valueOf("on-entry");
+				Class<?> cl = Class.forName(preActionClass);
+				Object action = cl.newInstance();
+				Method m = Utility.findFirst(cl, "execute");
+				m.invoke(action, context, model, request, response);
+			} else {
+				String flowToView = flow.selectSingleNode("//flow/step[@name='" + nextStep + "']").valueOf("@view");
+				response.sendRedirect(externalURL + "?_gotoState=" + node.valueOf("@view")
+					+ "&_parentId=" + request.getSession().getId() + "&_flowToView=" + flowToView);
+				return null;
+			}
+			
+			String postActionClass = node.valueOf("on-exit");
+			Class<?> cl = Class.forName(postActionClass);
+			Object action = cl.newInstance();
+			Method m = Utility.findFirst(cl, "execute");
+			m.invoke(action, context, model, request, response, errors);
+			
+			if (errors.size() > 0) {
+				break;
+			}
+			currentStep++;
+		}
+		return currentStep;
 	}
 	
 	private boolean isInternalParam(String key) {
@@ -314,26 +318,19 @@ public abstract class StrutsFlowAction extends BaseAction {
 		String flowName = node.valueOf("@name");
 		
 		String gotoState = request.getParameter("_gotoState");
+		String flowToView = request.getParameter("_flowToView");
 		
 		node = flow.selectSingleNode("//flow/step[@view='" + gotoState + "']");
 		int currentStep = Integer.parseInt(node.valueOf("@name").toString());
-		session.setAttribute("currentStep", currentStep);
-
-		String title = node.valueOf("@title");
-		request.setAttribute("currentPageTitle", title);
-		request.setAttribute("currentPageNumber", "" + currentStep);
-		session.setAttribute("currentStep", "" + currentStep); 
 
 		ActionErrors errors = new ActionErrors();
 		ActionMessages messages = new ActionMessages();
 
-		session.setAttribute("pageErrors", errors);
-		session.setAttribute("pageMessages", messages);
-		
 		String parentId = request.getParameter("_parentId");
 		if (parentId != null) {
-			while(session.getAttributeNames().hasMoreElements()) {
-				String key = session.getAttributeNames().nextElement();
+			Enumeration<String> names = session.getAttributeNames();
+			while(names.hasMoreElements()) {
+				String key = names.nextElement();
 				if (isInternalParam(key)) {
 					continue;
 				}
@@ -346,6 +343,23 @@ public abstract class StrutsFlowAction extends BaseAction {
 		
 		session.setAttribute("model", RedistPersistenceDataStore.getInstance().getAttribute(parentId, "model"));
 		session.setAttribute("config", RedistPersistenceDataStore.getInstance().getAttribute(parentId, "config"));
+
+		Object model = session.getAttribute("model");
+		
+		Node flowToNode = flow.selectSingleNode("//flow/step[@view='" + flowToView + "']");
+		Integer nextStep = Integer.parseInt(flowToNode.valueOf("@name").toString());
+
+		currentStep = proccessFlow(request, response, session, flow, currentStep, nextStep, model, errors);
+
+		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
+		
+		String title = node.valueOf("@title");
+		request.setAttribute("currentPageTitle", title);
+		request.setAttribute("currentPageNumber", "" + currentStep);
+		session.setAttribute("currentStep", "" + currentStep); 
+		
+		session.setAttribute("pageErrors", errors);
+		session.setAttribute("pageMessages", messages);
 		
 		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
 		

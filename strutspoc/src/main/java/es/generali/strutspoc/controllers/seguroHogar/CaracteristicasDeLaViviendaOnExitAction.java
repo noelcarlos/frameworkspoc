@@ -8,7 +8,6 @@ import org.apache.struts.action.ActionErrors;
 import org.springframework.web.context.WebApplicationContext;
 
 import es.generali.segurohogar.models.SeguroViviendaBean;
-import es.generali.strutspoc.support.OnEntryActionBase;
 import es.generali.strutspoc.support.OnExitActionBase;
 
 public class CaracteristicasDeLaViviendaOnExitAction extends OnExitActionBase<SeguroViviendaBean> {
