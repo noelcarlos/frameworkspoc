@@ -321,7 +321,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 		String flowToView = request.getParameter("_flowToView");
 		
 		node = flow.selectSingleNode("//flow/step[@view='" + gotoState + "']");
-		int currentStep = Integer.parseInt(node.valueOf("@name").toString());
+		Integer currentStep = Integer.parseInt(node.valueOf("@name").toString());
 
 		ActionErrors errors = new ActionErrors();
 		ActionMessages messages = new ActionMessages();
@@ -344,12 +344,15 @@ public abstract class StrutsFlowAction extends BaseAction {
 		session.setAttribute("model", RedistPersistenceDataStore.getInstance().getAttribute(parentId, "model"));
 		session.setAttribute("config", RedistPersistenceDataStore.getInstance().getAttribute(parentId, "config"));
 
-		Object model = session.getAttribute("model");
-		
-		Node flowToNode = flow.selectSingleNode("//flow/step[@view='" + flowToView + "']");
-		Integer nextStep = Integer.parseInt(flowToNode.valueOf("@name").toString());
-
-		currentStep = proccessFlow(request, response, session, flow, currentStep, nextStep, model, errors);
+		if (flowToView != null) {
+			Object model = session.getAttribute("model");
+			Node flowToNode = flow.selectSingleNode("//flow/step[@view='" + flowToView + "']");
+			Integer nextStep = Integer.parseInt(flowToNode.valueOf("@name").toString());
+			currentStep = proccessFlow(request, response, session, flow, currentStep, nextStep, model, errors);
+			if (currentStep == null) {
+				return null;
+			}
+		}
 
 		node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		

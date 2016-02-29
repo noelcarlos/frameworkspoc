@@ -41,14 +41,4 @@
 	<!-- Installs a listener that creates and releases the FacesContext for each request. -->
 	<bean id="facesContextListener" class="org.springframework.faces.webflow.FlowFacesContextLifecycleListener"/>
 
-	<!-- Installs a listener that manages JPA persistence contexts for flows that require them 
-	<bean id="jpaFlowExecutionListener" class="org.springframework.webflow.persistence.JpaFlowExecutionListener">
-		<constructor-arg ref="entityManagerFactory" />
-		<constructor-arg ref="transactionManager" />
-	</bean>
-	-->
-	
-	<!-- Install global exception handler 
-	<bean id="customFlowExceptionHandler" class="org.esmartpoint.jsfkarma.web.CustomFlowExceptionHandler" />
-	-->
 </beans>

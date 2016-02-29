@@ -24,40 +24,4 @@
 		<constructor-arg ref="dataSource" />
 	</bean>
 	
-	<!-- Drives transactions using local JPA APIs 
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean> -->
-
-	<!-- 	
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-	-->
- 		
-	<!-- Creates a EntityManagerFactory for use with the Hibernate JPA provider 
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="persistenceUnitName" value="mainPersistenceUnit" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" >
-				<property name="showSql" value="true" />
-				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-			</bean>
-		</property>
-	</bean> -->
-
-    <!-- Direct JDBC connection 
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
-		<property name="url" value="jdbc:mysql://localhost:3306/gen4g_showcase" />
-		<property name="username" value="root" />
-		<property name="password" value="wwwwww" />
-	</bean>
-	-->
-	
-	<!-- JNDI Connection    
-    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="jdbc/gen4g_showcase" />
-        <property name="resourceRef" value="true" />
-    </bean>	-->
-	
 </beans>

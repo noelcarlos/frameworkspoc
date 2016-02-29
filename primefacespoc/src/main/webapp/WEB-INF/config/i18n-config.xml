@@ -9,16 +9,6 @@
 	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
         <property name="paramName" value="lang" />
     </bean>
-    
-	<!-- Configures Handler Interceptors 
-    <bean id="localeChangeInterceptor" class="org.esmartpoint.jsfkarma.web.LocaleChangeFromURLInterceptor" >
-       	<property name="acceptedLocales" value="es,en"/>
-    </bean>
-    
-	<mvc:interceptors>
-		<ref bean="localeChangeInterceptor" />  	
-	</mvc:interceptors>
-    -->
 	
 	<!-- Saves a locale change using a cookie --> 
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
@@ -42,22 +32,6 @@
 		<property name="validationMessageSource" ref="messageSource" />
 	</bean>
 	
-	<!-- Reloadable bundle message source 
-	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-	    <property name="basenames">
-			<list>
-				<value>/WEB-INF/messages/customMessages</value>
-				<value>/WEB-INF/messages/globalMessages</value>
-				<value>/WEB-INF/messages/coreMessages</value>
-				<value>/WEB-INF/messages/entityMessages</value>
-			</list>
-		</property> 
-	    <property name="useCodeAsDefaultMessage" value="true" />
-	    <property name="cacheSeconds" value="1"/>
-	</bean>
-	
-	<bean id="msg" parent="messageSource" />
-	-->
 	<bean id="msg" parent="messageSource" />
 
 </beans>
