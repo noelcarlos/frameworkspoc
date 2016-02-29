@@ -46,7 +46,7 @@ public class SeguroHogarFlowAction extends BaseWebFlowController {
 	public void setup(ConfiguracionBean config) {
 		if (config.getQueQuieresProtegerInicializar()) {
 			model.setTipoDeUsoViviendaId(1);
-			model.setNumPersonasQueVivenEnLaVivienda(4);
+			model.setNumPersonasQueVivenEnLaVivienda(8);
 		}
 		if (config.getLocalizacionInicializar()) {
 			model.setProvinciaId(2);
@@ -58,10 +58,10 @@ public class SeguroHogarFlowAction extends BaseWebFlowController {
 			model.setTipologiaDeLaViviendaId(1);
 		}
 		if (config.getCaracteristicasDeLaViviendaInicializar()) {
-			model.setMetrosCuadradosConstruidos(120.0);
-			model.setNumeroDeDormitorios(4);
-			model.setAnyoDeConstruccion(1990);
-			model.setAnyoDeLaUltimaRehabilitacion(2014);
+			model.setMetrosCuadradosConstruidos(250.0);
+			model.setNumeroDeDormitorios(6);
+			model.setAnyoDeConstruccion(2012);
+			model.setAnyoDeLaUltimaRehabilitacion(2012);
 		}
 		if (config.getMedidasDeSeguridadDeTuViviendaInicializar()) {
 			model.setRejasEnVentanasOSimilares(true);

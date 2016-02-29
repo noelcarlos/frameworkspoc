@@ -37,8 +37,12 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 		Node node = flow.selectSingleNode("//flow/step[@name='" + currentStep + "']");
 		currentView = node.valueOf("@view");
 		
-		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
-		flowScope.put("config", config);
+		if (flowScope.get("_parentId") != null) {
+			session.setAttribute("config", flowScope.get("config"));
+		} else {
+			ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
+			flowScope.put("config", config);
+		}
 		
 		String gotoState = flowScope.getString("_gotoState");
 		if (gotoState != null) {
@@ -217,7 +221,7 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 			}
 			if (v != null && value != null && v.getClass().isInstance(value)) {
 				requestContext.getFlowExecutionContext().getDefinition();
-				putBeanToCache(flowScope.getString("_parentId"), key, v);
+				putBeanToCache(session.getId(), key, v);
 			}
 		});
 	}

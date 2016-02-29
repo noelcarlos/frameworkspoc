@@ -23,13 +23,13 @@ import es.generali.segurohogar.models.ConfiguracionBean;
 import es.generali.strutspoc.support.BaseAction;
 import es.generali.strutspoc.support.LazyValidatorForm;
 import es.generali.strutspoc.support.Utility;
+import es.generali.strutspoc.support.cache.RedistPersistenceDataStore;
 
 public abstract class StrutsFlowAction extends BaseAction {
 	
 	abstract public void onEntry(HttpServletRequest request) throws Exception;
 		
-	public ActionForward onEntry(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	protected void initialize(HttpServletRequest request) throws Exception {
 		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
 		
 		HttpSession session = request.getSession();
@@ -40,16 +40,23 @@ public abstract class StrutsFlowAction extends BaseAction {
 		String xml = request.getServletContext().getRealPath("/WEB-INF/flows/" + flowDirectory + "/contratacion.xml");
 		session.setAttribute("flow", DocumentHelper.parseText(FileUtils.readFileToString(new File(xml), "UTF-8")));
 
-		Document flow = (Document)session.getAttribute("flow");
-		Node node = flow.selectSingleNode("//flow");
-		String flowName = node.valueOf("@name");
-		
-		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=1");
-		
 		saveErrors(request, null);
 		saveMessages(request, null);
 		session.removeAttribute("pageErrors");
 		session.removeAttribute("pageMessages");
+	}
+	
+	public ActionForward onEntry(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		initialize(request);
+		
+		HttpSession session = request.getSession();
+		
+		Document flow = (Document)session.getAttribute("flow");
+		Node node = flow.selectSingleNode("//flow");
+
+		String flowName = node.valueOf("@name");
 
 		onEntry(request);
 		
@@ -61,6 +68,8 @@ public abstract class StrutsFlowAction extends BaseAction {
 
 		int lastPageNumber = ((Double)flow.selectObject("count(//flow/step)")).intValue();
 		session.setAttribute("lastPageNumber", "" + lastPageNumber);
+		
+		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=1");
 		
 		return null;
 	}
@@ -274,6 +283,20 @@ public abstract class StrutsFlowAction extends BaseAction {
 		return null;
 	}
 	
+	private boolean isInternalParam(String key) {
+		if (key.equals("currentStep")) 
+			return true;
+		if (key.equals("flow")) 
+			return true;
+		if (key.equals("lastPageNumber")) 
+			return true;
+		if (key.equals("pageErrors")) 
+			return true;
+		if (key.equals("pageMessages")) 
+			return true;
+		return false;
+	}
+	
 	public ActionForward onNavigate(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -282,8 +305,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 		HttpSession session = request.getSession();
 
 		if (session.getAttribute("flow") == null) {
-			response.sendRedirect(request.getContextPath() + "/" + getFlowDirectory() + ".do?method=onEntry");
-			return null;
+			initialize(request);
 		}
 		
 		Document flow = (Document)session.getAttribute("flow");
@@ -307,6 +329,23 @@ public abstract class StrutsFlowAction extends BaseAction {
 
 		session.setAttribute("pageErrors", errors);
 		session.setAttribute("pageMessages", messages);
+		
+		String parentId = request.getParameter("_parentId");
+		if (parentId != null) {
+			while(session.getAttributeNames().hasMoreElements()) {
+				String key = session.getAttributeNames().nextElement();
+				if (isInternalParam(key)) {
+					continue;
+				}
+				Object value = RedistPersistenceDataStore.getInstance().getAttribute(parentId, key);
+				if (value != null) {
+					session.setAttribute(key, RedistPersistenceDataStore.getInstance().getAttribute(parentId, key));
+				}
+			}
+		}
+		
+		session.setAttribute("model", RedistPersistenceDataStore.getInstance().getAttribute(parentId, "model"));
+		session.setAttribute("config", RedistPersistenceDataStore.getInstance().getAttribute(parentId, "config"));
 		
 		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
 		
