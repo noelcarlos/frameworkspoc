@@ -194,6 +194,21 @@ public class ConfiguracionBean implements Serializable {
 		return serialVersionUID;
 	}
 
+	public Integer getKbContrato() {
+		return kbContrato;
+	}
+	public void setKbContrato(Integer kbContrato) {
+		this.kbContrato = kbContrato;
+	}
+
+	public Boolean getUseDistributedCache() {
+		return useDistributedCache;
+	}
+
+	public void setUseDistributedCache(Boolean useDistributedCache) {
+		this.useDistributedCache = useDistributedCache;
+	}
+	
 	public ConfiguracionBean() {
 		queQuieresProtegerInicializar = false;
 		localizacionInicializar = false;
@@ -218,21 +233,6 @@ public class ConfiguracionBean implements Serializable {
 		resumenExterno = false;
 		
 		kbContrato = 100;
-		useDistributedCache = true;
-	}
-	
-	public Integer getKbContrato() {
-		return kbContrato;
-	}
-	public void setKbContrato(Integer kbContrato) {
-		this.kbContrato = kbContrato;
-	}
-
-	public Boolean getUseDistributedCache() {
-		return useDistributedCache;
-	}
-
-	public void setUseDistributedCache(Boolean useDistributedCache) {
-		this.useDistributedCache = useDistributedCache;
+		useDistributedCache = false;
 	}
 }

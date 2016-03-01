@@ -14,7 +14,7 @@ public class MyHttpServletSessionWrapper implements HttpSession {
 	HttpSession delegate;
 	static IPersistenceDataStore dataStore;
 	static boolean useDistributedCache = true;
-	static ThreadLocal<HashMap<String, Object>> cacheValues = new ThreadLocal<HashMap<String, Object>>(); 
+	static ThreadLocal<HashMap<String, Object>> cacheValues = new ThreadLocal<HashMap<String, Object>>();
 	
 	public MyHttpServletSessionWrapper(HttpSession original) {
 		delegate = original;

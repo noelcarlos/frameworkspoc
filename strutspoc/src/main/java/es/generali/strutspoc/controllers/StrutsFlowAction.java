@@ -1,8 +1,6 @@
 package es.generali.strutspoc.controllers;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Enumeration;
 
@@ -111,8 +109,11 @@ public abstract class StrutsFlowAction extends BaseAction {
 		
 		if (!(res == null || res.equals("false"))) {
 			String externalURL = flow.selectSingleNode("//flow/external-url").getText();
+
+			bindInputParameters(request, request.getSession().getId());
 			response.sendRedirect(externalURL + "?_gotoState=" + node.valueOf("@view")
 				+ "&_parentId=" + request.getSession().getId());
+			
 			return null;
 		}		
 
@@ -249,8 +250,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 
 	private Integer proccessFlow(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Document flow, Integer currentStep, Integer nextStep, Object model, ActionErrors errors)
-					throws IllegalAccessException, InvocationTargetException, NoSuchMethodException,
-					ClassNotFoundException, InstantiationException, IOException {
+					throws Exception {
 		Node node;
 		String externalURL = flow.selectSingleNode("//flow/external-url").getText();
 		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");
@@ -268,6 +268,7 @@ public abstract class StrutsFlowAction extends BaseAction {
 				m.invoke(action, context, model, request, response);
 			} else {
 				String flowToView = flow.selectSingleNode("//flow/step[@name='" + nextStep + "']").valueOf("@view");
+				bindInputParameters(request, request.getSession().getId());
 				response.sendRedirect(externalURL + "?_gotoState=" + node.valueOf("@view")
 					+ "&_parentId=" + request.getSession().getId() + "&_flowToView=" + flowToView);
 				return null;
@@ -328,21 +329,11 @@ public abstract class StrutsFlowAction extends BaseAction {
 
 		String parentId = request.getParameter("_parentId");
 		if (parentId != null) {
-			Enumeration<String> names = session.getAttributeNames();
-			while(names.hasMoreElements()) {
-				String key = names.nextElement();
-				if (isInternalParam(key)) {
-					continue;
-				}
-				Object value = RedistPersistenceDataStore.getInstance().getAttribute(parentId, key);
-				if (value != null) {
-					session.setAttribute(key, RedistPersistenceDataStore.getInstance().getAttribute(parentId, key));
-				}
-			}
+			bindOutputParameters(request, parentId);
 		}
 		
-		session.setAttribute("model", RedistPersistenceDataStore.getInstance().getAttribute(parentId, "model"));
-		session.setAttribute("config", RedistPersistenceDataStore.getInstance().getAttribute(parentId, "config"));
+//		session.setAttribute("model", RedistPersistenceDataStore.getInstance().getAttribute(parentId, "model"));
+//		session.setAttribute("config", RedistPersistenceDataStore.getInstance().getAttribute(parentId, "config"));
 
 		if (flowToView != null) {
 			Object model = session.getAttribute("model");
@@ -367,5 +358,34 @@ public abstract class StrutsFlowAction extends BaseAction {
 		response.sendRedirect(request.getContextPath() + "/" + flowName + ".do?method=onStep&step=" + currentStep);		
 		
 		return null;
+	}
+	
+	public void bindInputParameters(HttpServletRequest request, String parentId) throws Exception {
+		HttpSession session = request.getSession();
+
+		Enumeration<String> names = session.getAttributeNames();
+		while(names.hasMoreElements()) {
+			String key = names.nextElement();
+			if (isInternalParam(key)) {
+				continue;
+			}
+			RedistPersistenceDataStore.getInstance().setAttribute(parentId, key, session.getAttribute(key));
+		}
+	}
+	
+	public void bindOutputParameters(HttpServletRequest request, String parentId) throws Exception {
+		HttpSession session = request.getSession();
+
+		Enumeration<String> names = session.getAttributeNames();
+		while(names.hasMoreElements()) {
+			String key = names.nextElement();
+			if (isInternalParam(key)) {
+				continue;
+			}
+			Object value = RedistPersistenceDataStore.getInstance().getAttribute(parentId, key);
+			if (value != null) {
+				session.setAttribute(key, RedistPersistenceDataStore.getInstance().getAttribute(parentId, key));
+			}
+		}
 	}
 }

@@ -33,9 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SessionCacheWebFilter implements Filter {
 
-	/******************/
-	/* FILTER METHODS */ 
-	/******************/
+	static boolean inmediateSynchronization = false;
 
 	public void init(FilterConfig config) throws ServletException {
 	}
@@ -44,16 +42,20 @@ public class SessionCacheWebFilter implements Filter {
 		HttpServletRequest hsrHttpServletRequest = (HttpServletRequest) req;
 		
 		// Wrap request
-		HttpServletRequest hsrConvertedParamRequest = new MyHttpServletRequestWrapper(hsrHttpServletRequest);
-		((MyHttpServletSessionWrapper)hsrConvertedParamRequest.getSession()).createSecondCache();
+		if (inmediateSynchronization) {
+			hsrHttpServletRequest = new MyHttpServletRequestWrapper(hsrHttpServletRequest);
+			((MyHttpServletSessionWrapper)hsrHttpServletRequest.getSession()).createSecondCache();
+		}
 		
 		// Continue filter chain with filtered request
 		HttpServletResponse httpResponse = (HttpServletResponse) resp;
 		
 		try {
-			chain.doFilter(hsrConvertedParamRequest, httpResponse);
+			chain.doFilter(hsrHttpServletRequest, httpResponse);
 		} finally {
-			((MyHttpServletSessionWrapper)hsrConvertedParamRequest.getSession()).releaseSecondCache();
+			if (inmediateSynchronization) {
+				((MyHttpServletSessionWrapper)hsrHttpServletRequest.getSession()).releaseSecondCache();
+			}
 		}
 	}
 	
