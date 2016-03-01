@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.esmartpoint.jsfkarma.web;
+package es.generali.primefacespoc.support.web;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

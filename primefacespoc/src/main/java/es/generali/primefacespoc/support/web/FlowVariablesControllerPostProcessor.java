@@ -1,4 +1,4 @@
-package org.esmartpoint.jsfkarma.web;
+package es.generali.primefacespoc.support.web;
 
 import java.beans.PropertyDescriptor;
 
@@ -30,14 +30,12 @@ public class FlowVariablesControllerPostProcessor extends AutowiredAnnotationBea
      @Override
      @SuppressWarnings("rawtypes")
      public Object postProcessBeforeInstantiation(Class beanClass, String beanName) throws BeansException {
-         //System.out.println("InstantiationAwareBeanPostProcessor calls the postProcessBeforeInstantiation method:" + beanName);
          return null;
      }
  
      // After the call, instantiate the Bean interface method
      @Override
      public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-         //System.out.println("InstantiationAwareBeanPostProcessor calls the postProcessAfterInitialization method:" + beanName);
          return bean;
      }
  
@@ -45,8 +43,6 @@ public class FlowVariablesControllerPostProcessor extends AutowiredAnnotationBea
      @Override
      public PropertyValues postProcessPropertyValues(PropertyValues pvs,
              PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
-         //System.out.println("InstantiationAwareBeanPostProcessor calls the postProcessPropertyValues method:" + beanName);
-         
          if (bean instanceof BaseWebFlowController) {
         	 BaseWebFlowController bfc = (BaseWebFlowController)bean;
         	 bfc.requestContext = RequestContextHolder.getRequestContext();

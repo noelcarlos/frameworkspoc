@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.esmartpoint.jsfkarma.web;
+package es.generali.primefacespoc.support.web;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -79,9 +79,6 @@ public class CustomFlowHandlerMapping extends FlowHandlerMapping {
 		flowId = flowId.replaceAll("/[0-9]+", "");
 		while (true) { 
 			if (getFlowRegistry().containsFlowDefinition(flowId)) {
-				if (logger.isDebugEnabled()) {
-					logger.debug("Mapping request with URI '" + request.getRequestURI() + "' to flow with id '" + flowId + "'");
-				}
 				FlowHandler res = createDefaultFlowHandler(flowId);
 				
 				/* Allows the flows xhtml views to be loaded from the classpath */

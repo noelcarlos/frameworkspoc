@@ -1,4 +1,4 @@
-package org.esmartpoint.jsfkarma.web;
+package es.generali.primefacespoc.support.web;
 
 import java.net.URL;
 

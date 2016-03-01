@@ -13,6 +13,6 @@
 	<context:annotation-config />
 
 	<context:component-scan base-package="es.generali.primefacespoc.services" />
-	<context:component-scan base-package="org.esmartpoint.jsfkarma" />
+	<context:component-scan base-package="es.generali.primefacespoc.support" />
 
 </beans>

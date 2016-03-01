@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.esmartpoint.jsfkarma.message;
+package es.generali.primefacespoc.support.message;
 
 /*
  * Copyright 2002-2005 the original author or authors.

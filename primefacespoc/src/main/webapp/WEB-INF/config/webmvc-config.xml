@@ -19,7 +19,7 @@
 	<mvc:resources mapping="/resources/**" location="/static/, /resources/, classpath:/resources/" order="1" />
 
 	<!-- Maps request paths to flows in the flowRegistry; e.g. a path of /hotels/booking looks for a flow with id "hotels/booking" -->
-	<bean class="org.esmartpoint.jsfkarma.web.CustomFlowHandlerMapping">
+	<bean class="es.generali.primefacespoc.support.web.CustomFlowHandlerMapping">
 		<property name="order" value="3"/>
 		<property name="flowRegistry" ref="flowRegistry" />
 		<property name="defaultHandler">

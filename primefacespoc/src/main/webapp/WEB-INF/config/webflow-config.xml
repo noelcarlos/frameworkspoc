@@ -23,7 +23,7 @@
     	</webflow:flow-execution-attributes>
 	</webflow:flow-executor>
 	
-	<bean id="generaliWebFlowListener" class="org.esmartpoint.jsfkarma.web.GeneraliWebFlowListener" />
+	<bean id="generaliWebFlowListener" class="es.generali.primefacespoc.support.web.GeneraliWebFlowListener" />
 	
 	<!-- The registry of executable flow definitions -->
 	

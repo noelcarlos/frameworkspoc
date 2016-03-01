@@ -1,4 +1,4 @@
-package org.esmartpoint.jsfkarma.message;
+package es.generali.primefacespoc.support.message;
 
 import java.util.Enumeration;
 import java.util.Locale;
