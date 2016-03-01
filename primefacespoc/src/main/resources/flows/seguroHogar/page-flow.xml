@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      parent="generaliBaseWebFlow">
 	
 	<!-- Controllers -->
-	<var name="generaliWebFlowEngine" class="es.generali.primefacespoc.controllers.GeneraliWebFlowEngine"/>
 	<var name="seguroHogarFlowAction" class="es.generali.primefacespoc.controllers.SeguroHogarFlowAction"/>
 	
 	<!-- Mapped model data -->
 	<var name="model" class="es.generali.segurohogar.models.SeguroViviendaBean" />
 	<var name="config" class="es.generali.segurohogar.models.ConfiguracionBean" />
-	
-	<!-- Flow internal variables -->
-	<input name="_gotoState" />
-	<input name="_parentId" />
-	<input name="_flowToView" />
-	
-	<on-start>
-		<evaluate expression="generaliWebFlowEngine.bindInputParameters(flowRequestContext)" />
-	</on-start>
 	
 	<action-state id="startCheck">
 		<evaluate expression="generaliWebFlowEngine.onInit()" />
@@ -29,88 +20,54 @@
 		</on-exit>
 	</action-state>
 	
-	<view-state id="GeneraliFlowViewState">
-	
-		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
-			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
-		</on-entry>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
-		</transition>
-		
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}">
-		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
-	
-	</view-state>
-	
-	<view-state id="queQuieresProteger" parent="#GeneraliFlowViewState">
+	<view-state id="queQuieresProteger" parent="generaliBaseWebFlow#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnExitAction"/>
 	</view-state>
 
-	<view-state id="localizacion" parent="#GeneraliFlowViewState">
+	<view-state id="localizacion" parent="generaliBaseWebFlow#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.LocalizacionOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.LocalizacionOnExitAction"/>
 	</view-state>
 	
-	<view-state id="sobreLaConstruccion" parent="#GeneraliFlowViewState">
+	<view-state id="sobreLaConstruccion" parent="generaliBaseWebFlow#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.SobreLaConstruccionOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.SobreLaConstruccionOnExitAction"/>
 	</view-state>
 	
-	<view-state id="caracteristicasDeLaVivienda" parent="#GeneraliFlowViewState">
+	<view-state id="caracteristicasDeLaVivienda" parent="generaliBaseWebFlow#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnExitAction"/>
 	</view-state>
 	
-	<view-state id="medidasDeSeguridadDeTuVivienda" parent="#GeneraliFlowViewState">
+	<view-state id="medidasDeSeguridadDeTuVivienda" parent="generaliBaseWebFlow#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnExitAction"/>
 	</view-state>
 	
-	<view-state id="personalizarPaquete" parent="#GeneraliFlowViewState">
+	<view-state id="personalizarPaquete" parent="generaliBaseWebFlow#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.PersonalizarPaqueteOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.PersonalizarPaqueteOnExitAction"/>
 	</view-state>
 	
-	<view-state id="datosDelTitular" parent="#GeneraliFlowViewState">
+	<view-state id="datosDelTitular" parent="generaliBaseWebFlow#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDelTitularOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDelTitularOnExitAction"/>
 	</view-state>
 	
-	<view-state id="datosDeLaViviendaAAsegurar" parent="#GeneraliFlowViewState">
+	<view-state id="datosDeLaViviendaAAsegurar" parent="generaliBaseWebFlow#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnExitAction"/>
 	</view-state>
 	
-	<view-state id="datosDePago" parent="#GeneraliFlowViewState">
+	<view-state id="datosDePago" parent="generaliBaseWebFlow#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDePagoOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDePagoOnExitAction"/>
 	</view-state>
 	
-	<view-state id="resumen" parent="#GeneraliFlowViewState">
+	<view-state id="resumen" parent="generaliBaseWebFlow#GeneraliFlowViewState">
 		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.ResumenOnEntryAction"/>
 		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.ResumenOnExitAction"/>
 	</view-state>
-	
-	<view-state id="_externalView" redirect="true" view="externalRedirect:serverRelative:#{flashScope._externalURL}"/>
-	
-	<global-transitions>
-
-		<transition on="#{currentEvent.id.startsWith('gobackward-')}" to="#{viewScope.nextView}" bind="false" validate="false">
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
-		</transition>
-		
-		<transition on-exception="es.generali.primefacespoc.support.ExternalExit" to="_externalView" bind="false" validate="false">
-			<evaluate expression="generaliWebFlowEngine.executeExternalLink(flowRequestContext, rootCauseException)" />
-		</transition>
-
-	</global-transitions>
 	
 </flow>
