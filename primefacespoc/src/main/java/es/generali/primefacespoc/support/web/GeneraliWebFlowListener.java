@@ -47,8 +47,6 @@ import org.springframework.webflow.expression.spel.WebFlowSpringELExpressionPars
 public class GeneraliWebFlowListener extends FlowExecutionListenerAdapter {
 	private static Logger logger = Logger.getLogger(GeneraliWebFlowListener.class);
 	
-	//AAstatic ApplicationContext appContext;
-	
 	public void sessionCreating(RequestContext context, FlowDefinition definition) {
 		super.sessionCreating(context, definition);
 		AbstractApplicationContext appContext = (AbstractApplicationContext)definition.getApplicationContext();
@@ -56,7 +54,7 @@ public class GeneraliWebFlowListener extends FlowExecutionListenerAdapter {
 		if (factory.getSingleton("flowVariablesControllerPostProcessor") == null) {
 			factory.registerSingleton("flowVariablesControllerPostProcessor", FlowVariablesControllerPostProcessor.getInstance());
 			factory.addBeanPostProcessor(FlowVariablesControllerPostProcessor.getInstance());
-			logger.info("Binding Smart FlowVariables PostProcessor");
+			logger.debug("Binding Smart FlowVariables PostProcessor");
 		}
 	}
 	
