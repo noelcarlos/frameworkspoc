@@ -15,7 +15,10 @@
  */
 package es.generali.primefacespoc.support.cache;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.Enumeration;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -25,6 +28,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /* This filter allows the mapping of SEA control flow variable 'action' to 
  * SWF control variable '_eventId' on request scope. With the help of this filter
@@ -52,11 +56,37 @@ public class SessionCacheWebFilter implements Filter {
 		
 		try {
 			chain.doFilter(hsrHttpServletRequest, httpResponse);
+			
+			System.out.println("PRIMEFACES Session size:" + getSessionSize(hsrHttpServletRequest.getSession()));
+			
 		} finally {
 			if (inmediateSynchronization) {
 				((MyHttpServletSessionWrapper)hsrHttpServletRequest.getSession()).releaseSecondCache();
 			}
 		}
+	}
+	
+	protected long getSessionSize(HttpSession hsSession) {
+		Enumeration<String> aNames = hsSession.getAttributeNames();
+		long size = 0;
+		while (aNames.hasMoreElements()) {
+			String key = aNames.nextElement();
+			Object obj = hsSession.getAttribute(key);
+			
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos;
+			try {
+				oos = new ObjectOutputStream(baos);
+				oos.writeObject(obj);
+				oos.flush();
+				oos.close();
+				size += baos.size();
+				System.out.println("\t" + key + "=" + baos.size());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return size;
 	}
 	
 	public void destroy() {

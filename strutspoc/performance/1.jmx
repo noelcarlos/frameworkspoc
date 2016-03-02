@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.7" jmeter="2.12 r1636949">
+  <hashTree>
+    <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Fragmento de Prueba" enabled="true"/>
+    <hashTree>
+      <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Controlador Only Once" enabled="true"/>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Entry" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables definidas por el Usuario" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/primefacespoc/es/home/</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HtmlExtractor guiclass="HtmlExtractorGui" testclass="HtmlExtractor" testname="getExecutionUrl" enabled="true">
+            <stringProp name="HtmlExtractor.refname">executionUrl</stringProp>
+            <stringProp name="HtmlExtractor.expr">#setupForm</stringProp>
+            <stringProp name="HtmlExtractor.attribute">action</stringProp>
+            <stringProp name="HtmlExtractor.default"></stringProp>
+            <stringProp name="HtmlExtractor.match_number">1</stringProp>
+            <stringProp name="HtmlExtractor.extractor_impl">JSOUP</stringProp>
+            <stringProp name="Sample.scope">all</stringProp>
+          </HtmlExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="getExecutionId" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">executionId</stringProp>
+            <stringProp name="RegexExtractor.regex">execution\=(.+)</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Sample.scope">variable</stringProp>
+            <stringProp name="Scope.variable">executionUrl</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Setup" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables definidas por el Usuario" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="setupForm" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">setupForm</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkLeftInicializar:0:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkLeftInicializar:0:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkLeftInicializar:1:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkLeftInicializar:1:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkLeftInicializar:2:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkLeftInicializar:2:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkLeftInicializar:3:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkLeftInicializar:3:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkLeftInicializar:4:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkLeftInicializar:4:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkRightInicializar:5:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkRightInicializar:5:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkRightInicializar:6:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkRightInicializar:6:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkRightInicializar:7:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkRightInicializar:7:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkRightInicializar:8:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkRightInicializar:8:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkRightInicializar:9:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkRightInicializar:9:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkLeftExterno:0:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkLeftExterno:0:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkLeftExterno:1:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkLeftExterno:1:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkLeftExterno:2:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkLeftExterno:2:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkLeftExterno:3:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkLeftExterno:3:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkLeftExterno:4:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkLeftExterno:4:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkRightExterno:5:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkRightExterno:5:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkRightExterno:6:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkRightExterno:6:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkRightExterno:7:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkRightExterno:7:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkRightExterno:8:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkRightExterno:8:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:checkRightExterno:9:menu" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">on</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:checkRightExterno:9:menu</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:kbContrato" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">100</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:kbContrato</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="javax.faces.ViewState" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${executionId}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">javax.faces.ViewState</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+              <elementProp name="setupForm:performSetup" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">setupForm:performSetup</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">setupForm:performSetup</stringProp>
+                <stringProp name="Argument.desc">false</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${executionUrl}</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HtmlExtractor guiclass="HtmlExtractorGui" testclass="HtmlExtractor" testname="getExecutionUrl" enabled="true">
+            <stringProp name="HtmlExtractor.refname">executionUrl</stringProp>
+            <stringProp name="HtmlExtractor.expr">#dataForm</stringProp>
+            <stringProp name="HtmlExtractor.attribute">action</stringProp>
+            <stringProp name="HtmlExtractor.default"></stringProp>
+            <stringProp name="HtmlExtractor.match_number">1</stringProp>
+            <stringProp name="HtmlExtractor.extractor_impl">JSOUP</stringProp>
+            <stringProp name="Sample.scope">all</stringProp>
+          </HtmlExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="getExecutionId" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">executionId</stringProp>
+            <stringProp name="RegexExtractor.regex">execution\=(.+)</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Sample.scope">variable</stringProp>
+            <stringProp name="Scope.variable">executionUrl</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
