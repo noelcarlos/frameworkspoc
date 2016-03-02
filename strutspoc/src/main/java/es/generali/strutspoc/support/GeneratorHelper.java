@@ -1,12 +1,5 @@
 package es.generali.strutspoc.support;
 
-import java.text.MessageFormat;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.stereotype.Component;
-
-@Component
 public class GeneratorHelper {
 	private static final String ALPHA_NUMERIC_STRING = "abcdefghijklmnopqrstuvwxyz0123456789";
 	private static final String ALPHA_STRING = "abcdefghijklmnopqrstuvwxyz";
@@ -168,94 +161,4 @@ public class GeneratorHelper {
 			return res.trim();
 	}
 	
-	public String randomAlphaWithSpaces(int minLength, int maxLength, int minWordLength, int maxWordLength) {
-		StringBuilder builder = new StringBuilder();
-		int count = randomNumber(minLength, maxLength);
-		int wordLength = randomNumber(minWordLength, maxWordLength);
-		for (int i = 0; i < count; i++) {
-			if (i != wordLength) {
-				int character = (int)(Math.random()*ALPHA_STRING.length());
-				builder.append(ALPHA_STRING.charAt(character));
-			} else {
-				wordLength = i + randomNumber(minWordLength, maxWordLength);
-				builder.append(' ');
-			}
-		}
-		return builder.toString();
-	}
-	
-	public String randomIP() {
-		int a = randomNumber(10, 255);
-		int b = randomNumber(0, 255);
-		int c = randomNumber(0, 255);
-		int d = randomNumber(2, 255);
-		return MessageFormat.format("{0}.{1}.{2}.{3}", a,b,c,d);
-	}
-
-	public String randomFirstName() {
-		return StringUtils.capitalize(randomAlpha(4,12).toLowerCase());
-	}
-	
-	public String randomLastName() {
-		return StringUtils.capitalize(randomAlpha(5,12).toLowerCase());
-	}
-	
-	public String randomFullName() {
-		return randomFirstName() + " " + randomLastName();
-	}
-	
-	public String randomEnumerateElement(List<?> elements) {
-		return randomFirstName() + " " + randomLastName();
-	}
-	
-	public String randomObjectId() {
-		//TODO: Missing implentation
-		return "55d4a28a9c9cc583415bb8d1";
-	}
-	
-	public String randomGUID() {
-		//TODO: Missing implentation
-		return "58798caf-6850-466d-9549-d16b8e769dc8";
-	}
-
-	public String randomPhone() {
-		//TODO: Missing implentation
-		return "+1 (842) 467-3358";
-	}
-
-	public String randomAddress() {
-		//{integer(100, 999)}} {{street()}}, {{city()}}, {{state()}
-		//TODO: Missing implentation
-		return "463 Empire Boulevard, Highland, Virginia, 8787";
-	}
-
-	public double randomLatitude() {
-		//floating(-90.000001, 90)
-		//TODO: Missing implentation
-		return -86.297376;
-	}
-
-	public double randomLongitude() {
-		//'{{floating(-180.000001, 180)
-		//TODO: Missing implentation
-		return 132.149959;
-	}
-	
-	public int randomAge() {
-		//'{{floating(-180.000001, 180)
-		//TODO: Missing implentation
-		return randomNumber(18, 90);
-	}
-	
-	public int randomDni() {
-		//'{{floating(-180.000001, 180)
-		//TODO: Missing implentation
-		return randomNumber(18, 90);
-	}
-	
-	public int randomIBAN() {
-		//'{{floating(-180.000001, 180)
-		//TODO: Missing implentation
-		return randomNumber(18, 90);
-	}
 }

@@ -11,7 +11,7 @@
 	<title>GENERALI Seguros: Seguro de coche online, seguros de hogar y seguros de decesos. Contrata tu seguro</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
-		<link rel="shortcut icon" href="${pageContext.request.contextPath}/static/icons/favicon.ico">
+		<link rel="shortcut icon" href="${pageContext.request.contextPath}/static/icons/favicon.ico?v4">
 		
 	    <link href="${pageContext.request.contextPath}/static/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="${pageContext.request.contextPath}/static/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
