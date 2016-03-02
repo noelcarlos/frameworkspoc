@@ -19,7 +19,7 @@
 		</webflow:flow-execution-listeners>
 		<webflow:flow-execution-attributes>
         	<!-- without execution param -->
-        	<webflow:always-redirect-on-pause value="false" />
+        	<webflow:always-redirect-on-pause value="true" />
     	</webflow:flow-execution-attributes>
 	</webflow:flow-executor>
 	
