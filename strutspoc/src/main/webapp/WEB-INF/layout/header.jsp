@@ -28,8 +28,6 @@
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><a href="${pageContext.request.contextPath}/init.do?method=onEntry">Iniciar</a></li>
 	        <li><a href="${pageContext.request.contextPath}/seguroHogar.do?method=onEntry">Hogar</a></li>
-	        <li><a href="#">Coche</a></li>
-	        <li><a href="#">Vida</a></li>
 	      </ul>
 	    </div>
 	    <!--/.nav-collapse -->
