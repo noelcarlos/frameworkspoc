@@ -54,7 +54,7 @@ public class SessionCacheWebFilter implements Filter {
 		// Continue filter chain with filtered request
 		HttpServletResponse httpResponse = (HttpServletResponse) resp;
 		
-		System.out.println("STRUTS Session size:" + getSessionSize(hsrHttpServletRequest.getSession()));
+		//System.out.println("STRUTS Session size:" + getSessionSize(hsrHttpServletRequest.getSession()));
 		
 		try {
 			chain.doFilter(hsrHttpServletRequest, httpResponse);

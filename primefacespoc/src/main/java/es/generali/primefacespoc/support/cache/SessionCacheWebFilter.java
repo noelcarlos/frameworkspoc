@@ -57,7 +57,7 @@ public class SessionCacheWebFilter implements Filter {
 		try {
 			chain.doFilter(hsrHttpServletRequest, httpResponse);
 			
-			System.out.println("PRIMEFACES Session size:" + getSessionSize(hsrHttpServletRequest.getSession()));
+			//System.out.println("PRIMEFACES Session size:" + getSessionSize(hsrHttpServletRequest.getSession()));
 			
 		} finally {
 			if (inmediateSynchronization) {
