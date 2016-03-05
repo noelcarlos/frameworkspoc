@@ -51,10 +51,12 @@ public class GeneraliWebFlowListener extends FlowExecutionListenerAdapter {
 		super.sessionCreating(context, definition);
 		AbstractApplicationContext appContext = (AbstractApplicationContext)definition.getApplicationContext();
 		ConfigurableListableBeanFactory factory = appContext.getBeanFactory();
-		if (factory.getSingleton("flowVariablesControllerPostProcessor") == null) {
-			factory.registerSingleton("flowVariablesControllerPostProcessor", FlowVariablesControllerPostProcessor.getInstance());
-			factory.addBeanPostProcessor(FlowVariablesControllerPostProcessor.getInstance());
-			logger.debug("Binding Smart FlowVariables PostProcessor");
+		synchronized (factory) {
+			if (factory.getSingleton("flowVariablesControllerPostProcessor") == null) {
+				factory.registerSingleton("flowVariablesControllerPostProcessor", FlowVariablesControllerPostProcessor.getInstance());
+				factory.addBeanPostProcessor(FlowVariablesControllerPostProcessor.getInstance());
+				logger.debug("Binding Smart FlowVariables PostProcessor");
+			}
 		}
 	}
 	
@@ -92,23 +94,6 @@ public class GeneraliWebFlowListener extends FlowExecutionListenerAdapter {
 
 	public void transitionExecuting(RequestContext context, TransitionDefinition transition) {
 		super.transitionExecuting(context, transition);
-		
-		if (transition.getAttributes().get("_AOP_ON_STEP_ACTION") != null) {
-			transition.getAttributes().put("_AOP_ON_STEP_ACTION", true);
-			FluentParserContext evaluateExpressionParserContext = new FluentParserContext().evaluate(RequestContext.class);
-			
-			SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
-			WebFlowSpringELExpressionParser parser = new WebFlowSpringELExpressionParser(spelExpressionParser);
-			Expression expr = parser.parseExpression("generaliWebFlowEngine.onStep(flowRequestContext, currentEvent.id)", evaluateExpressionParserContext);
-			
-			Transition tx = (Transition)transition;
-			TransitionCriteriaChain txCriteriaChain = (TransitionCriteriaChain)tx.getExecutionCriteria();
-			EvaluateAction evaluateAction = new EvaluateAction(expr, null);
-			AnnotatedAction action = new AnnotatedAction(evaluateAction);
-			ActionTransitionCriteria criteria = new ActionTransitionCriteria(action);
-			txCriteriaChain.add(criteria);
-		}
-		
 		//System.out.println("transitionExecuting");
 	}
 	

@@ -56,7 +56,7 @@
 	</logger>
 
 	<logger name="es.generali.strutspoc">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 	
 	<!-- Root Logger -->
