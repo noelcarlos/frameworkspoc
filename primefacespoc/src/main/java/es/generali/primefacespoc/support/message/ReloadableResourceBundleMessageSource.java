@@ -16,8 +16,12 @@ public class ReloadableResourceBundleMessageSource extends ResourceBundle {
 	@Override
 	protected Object handleGetObject(String key) {
 		if (context == null) {
-			HttpServletRequest request = (HttpServletRequest)RequestContextHolder.getRequestContext().getExternalContext().getNativeRequest();
-			context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+			if (RequestContextHolder.getRequestContext() != null) {
+				HttpServletRequest request = (HttpServletRequest)RequestContextHolder.getRequestContext().getExternalContext().getNativeRequest();
+				context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+			} else {
+				return null;
+			}
 		}
 		return context.getMessage(key, null, null, new Locale("es"));
 	}
