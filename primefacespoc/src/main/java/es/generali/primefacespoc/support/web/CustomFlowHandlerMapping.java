@@ -81,9 +81,9 @@ public class CustomFlowHandlerMapping extends FlowHandlerMapping {
 			if (getFlowRegistry().containsFlowDefinition(flowId)) {
 				FlowHandler res = createDefaultFlowHandler(flowId);
 				
-				/* Allows the flows xhtml views to be loaded from the classpath */
+				/* Allows the flows xhtml views to be loaded from the classpath 
 				ApplicationContext ctx = getFlowRegistry().getFlowDefinition(flowId).getApplicationContext();
-	            overrideResourceLoader((GenericApplicationContext) ctx, flowId);
+	            overrideResourceLoader((GenericApplicationContext) ctx, flowId);*/
 				
 				return res;
 			}

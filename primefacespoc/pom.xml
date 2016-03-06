@@ -14,8 +14,8 @@
 		<org.springframework-version>4.1.6.RELEASE</org.springframework-version>
 		<org.springsecurity-version>3.2.7.RELEASE</org.springsecurity-version>
         <org.springwebflow-version>2.4.2.RELEASE</org.springwebflow-version>
-        <jsf-version>2.1.29</jsf-version>
-        <primefaces-version>4.0</primefaces-version>
+        <jsf-version>2.2.5</jsf-version>
+        <primefaces-version>5.3</primefaces-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 		<java.source.version>1.8</java.source.version>
         <java.target.version>1.8</java.target.version>
@@ -222,6 +222,11 @@
 			<artifactId>jsf-impl</artifactId>
 			<version>${jsf-version}</version>
 		</dependency>
+		<dependency>
+            <groupId>org.ow2.spec.ee</groupId>
+            <artifactId>ow2-cdi-1.0-spec</artifactId>
+            <version>1.0.13</version>
+        </dependency>
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>

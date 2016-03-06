@@ -13,11 +13,11 @@
 	</on-start>
 	
 	<view-state id="home">
-		<transition on="aplicar" to="configuracionAplicada" >
+		<transition on="aplicar" to="configuracionAplicada" history="discard">
 			<evaluate expression="mainController.setup(flowScope.config)" />
 		</transition>
 	</view-state>
 	
-	<view-state id="configuracionAplicada" />
+	<end-state id="configuracionAplicada" view="configuracionAplicada.xhtml" />
 	
 </flow>

@@ -15,11 +15,12 @@
 		<param-value>false</param-value>
 	</context-param>
 	
-	<!-- To load flows and pages from JARs, use this resolver --> 
+	<!-- To load flows and pages from JARs, use this resolver  
 	<context-param>
 	      <param-name>facelets.RESOURCE_RESOLVER</param-name>
 	      <param-value>es.generali.primefacespoc.support.web.ClassPathResourceResolver</param-value>
 	</context-param>
+	-->
 		
     <context-param>
 		<description>
