@@ -264,7 +264,7 @@ public class SeguroViviendaBean implements Serializable {
 		map.put("documentoIdentidad", documentoIdentidad);
 	}
 	@NotNull(groups={DatosDelTitular.class})
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getFechaDeNacimiento() {
 		return (Date)map.get("fechaDeNacimiento");
 	}
@@ -393,7 +393,7 @@ public class SeguroViviendaBean implements Serializable {
 	public interface DatosDePago {};
 	
 	@NotNull(groups={DatosDePago.class})
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getFechaDeEfecto() {
 		return (Date)map.get("fechaDeEfecto");
 	}

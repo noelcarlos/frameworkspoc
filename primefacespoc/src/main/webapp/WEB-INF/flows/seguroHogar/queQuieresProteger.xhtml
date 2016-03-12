@@ -16,10 +16,10 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<h:outputLabel for="tipoDeUsoViviendaId" styleClass="control-label">
+					<label for="tipoDeUsoViviendaId" class="control-label">
 						#{msg['seguroViviendaBean.edit.tipoDeUsoViviendaId']}:
 						<span class="glyphicon glyphicon-mandatory" />
-					</h:outputLabel>
+					</label>
 					<h:selectOneMenu id="tipoDeUsoViviendaId" value="#{model.tipoDeUsoViviendaId}" 
 						label="#{msg['seguroViviendaBean.edit.tipoDeUsoViviendaId']}" styleClass="form-control">
 						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
@@ -27,9 +27,9 @@
 					</h:selectOneMenu>
 				</div>			 
 				<div class="form-group">
-					<h:outputLabel for="numPersonasQueVivenEnLaVivienda" styleClass="control-label">
+					<label for="numPersonasQueVivenEnLaVivienda" class="control-label">
 						#{msg['seguroViviendaBean.edit.numPersonasQueVivenEnLaVivienda']}: <span class="glyphicon glyphicon-mandatory" />
-					</h:outputLabel>
+					</label>
 					<p:inputText id="numPersonasQueVivenEnLaVivienda" value="#{model.numPersonasQueVivenEnLaVivienda}" 
 						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.numPersonasQueVivenEnLaVivienda']}"/>	
 				</div>			

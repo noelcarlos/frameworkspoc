@@ -12,7 +12,7 @@
 		<evaluate expression="mainController.onInit()" />
 	</on-start>
 	
-	<view-state id="home">
+	<view-state id="home" redirect="false">
 		<transition on="aplicar" to="configuracionAplicada" history="discard">
 			<evaluate expression="mainController.setup(flowScope.config)" />
 		</transition>

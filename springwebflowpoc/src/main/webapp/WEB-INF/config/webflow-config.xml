@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd
+           http://www.springframework.org/schema/faces http://www.springframework.org/schema/faces/spring-faces-2.2.xsd">
+
+
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor"/>
+	</bean>
+	
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+		<property name="order" value="-1"/>
+		<property name="flowRegistry" ref="flowRegistry" />
+	</bean> 
+	
+	<!-- Executes flows: the central entry point into the Spring Web Flow system -->
+	<webflow:flow-executor id="flowExecutor">
+		<webflow:flow-execution-listeners>
+			<webflow:listener ref="generaliWebFlowListener" />
+			<!-- 
+			<webflow:listener ref="jpaFlowExecutionListener" />
+			 -->
+		</webflow:flow-execution-listeners>
+
+		<webflow:flow-execution-attributes>
+        	<!-- without execution param -->
+        	<webflow:always-redirect-on-pause value="true" />
+        	<!-- 
+			<webflow:redirect-in-same-state value="false" />
+			 -->
+    	</webflow:flow-execution-attributes>
+	</webflow:flow-executor>
+	
+	<bean id="generaliWebFlowListener" class="es.generali.primefacespoc.support.web.GeneraliWebFlowListener" />
+	
+	<!-- The registry of executable flow definitions -->
+	
+	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices" base-path="/WEB-INF/flows/">
+		<webflow:flow-location-pattern value="/**/*-flow.xml"  />
+	</webflow:flow-registry>
+	
+	<!-- Plugs in a custom creator for Web Flow views -->
+	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" development="false" validator="validator" />
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+</beans>

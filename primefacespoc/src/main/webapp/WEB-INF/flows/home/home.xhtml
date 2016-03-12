@@ -32,7 +32,7 @@
 								<div class="checkbox checkbox-primary">
 									<h:selectBooleanCheckbox id="menu" value="#{flowScope.config[result.valueOf('@view').concat('Inicializar')]}"
 										styleClass="chkComponentInicializar" />
-									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
+									<label>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</label>
 								</div>
 							</ui:fragment>
 						</ui:repeat>
@@ -43,7 +43,7 @@
 								<div class="checkbox checkbox-primary">
 									<h:selectBooleanCheckbox id="menu" value="#{flowScope.config[result.valueOf('@view').concat('Inicializar')]}"
 										styleClass="chkComponentInicializar" />
-									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
+									<label>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</label>
 								</div>
 							</ui:fragment>
 						</ui:repeat>
@@ -66,7 +66,7 @@
 								<div class="checkbox checkbox-primary">
 									<h:selectBooleanCheckbox id="menu" value="#{flowScope.config[result.valueOf('@view').concat('Externo')]}"
 										styleClass="chkComponentExterno" />
-									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
+									<label>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</label>
 								</div>
 							</ui:fragment>
 						</ui:repeat>
@@ -77,7 +77,7 @@
 								<div class="checkbox checkbox-primary">
 									<h:selectBooleanCheckbox id="menu" value="#{flowScope.config[result.valueOf('@view').concat('Externo')]}"
 										styleClass="chkComponentExterno" />
-									<p:outputLabel>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</p:outputLabel>
+									<label>#{result.valueOf("@name")} - #{result.valueOf("@menu")}</label>
 								</div>
 							</ui:fragment>
 						</ui:repeat>
@@ -96,9 +96,9 @@
 		<div class="row">
 			<div class="col-md-6">
 			<div class="form-group ">
-				<h:outputLabel for="kbContrato" styleClass="control-label">
+				<label for="kbContrato" class="control-label">
 					Longitud del contrato en KB:
-				</h:outputLabel>
+				</label>
 				<p:inputText id="kbContrato" style="color:#000;" value="#{flowScope.config.kbContrato}" 
 					styleClass="form-control" label="Longitud del contrato en KB"/>
 			</div>
@@ -106,7 +106,7 @@
 			<div class="col-md-6">
 				<div class="checkbox checkbox-primary">
 					<h:selectBooleanCheckbox id="useDistributedCache" value="#{flowScope.config.useDistributedCache}" />
-					<p:outputLabel>Usar cache distribuido</p:outputLabel>
+					<label>Usar cache distribuido</label>
 				</div>
 			</div>
 		</div>

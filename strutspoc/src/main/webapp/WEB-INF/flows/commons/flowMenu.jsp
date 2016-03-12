@@ -31,3 +31,9 @@
 	</div>
 </div>
 
+	    <SCRIPT type="text/javascript">
+	    	function sendEvent(eventName) {
+	    		$('#_flowEvent').val(eventName);
+	    		flowForm.submit();
+	    	}
+	    </SCRIPT>

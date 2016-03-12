@@ -18,31 +18,31 @@
 			<div class="col-md-12">
 				<div class="row clearfix">
 					<div class="form-group col-md-4">
-						<h:outputLabel for="nombre" styleClass="control-label">
+						<label for="nombre" class="control-label">
 							#{msg['seguroViviendaBean.edit.nombre']}: <span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<p:inputText id="nombre" value="#{model.nombre}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.nombre']}"/>	
 					</div>			
 					<div class="form-group col-md-3">
-						<h:outputLabel for="apellido1" styleClass="control-label">
+						<label for="apellido1" class="control-label">
 							#{msg['seguroViviendaBean.edit.apellido1']}: <span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<p:inputText id="apellido1" value="#{model.apellido1}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.apellido1']}"/>	
 					</div>	
 					<div class="form-group col-md-3">
-						<h:outputLabel for="apellido2" styleClass="control-label">
+						<label for="apellido2" class="control-label">
 							#{msg['seguroViviendaBean.edit.apellido2']}: 
-						</h:outputLabel>
+						</label>
 						<p:inputText id="apellido2" value="#{model.apellido2}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.apellido2']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<h:outputLabel for="sexoId" styleClass="control-label">
+						<label for="sexoId" class="control-label">
 							#{msg['seguroViviendaBean.edit.sexoId']}:
 							<span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<h:selectOneMenu id="sexoId" value="#{model.sexoId}" 
 							label="#{msg['seguroViviendaBean.edit.sexoId']}" styleClass="form-control">
 							<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
@@ -52,10 +52,10 @@
 				</div>			
 				<div class="row clearfix">
 					<div class="form-group col-md-2">
-						<h:outputLabel for="tipoDeDocumentoDeIdentidadId" styleClass="control-label">
+						<label for="tipoDeDocumentoDeIdentidadId" class="control-label">
 							#{msg['seguroViviendaBean.edit.tipoDeDocumentoDeIdentidadId']}:
 							<span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<h:selectOneMenu id="tipoDeDocumentoDeIdentidadId" value="#{model.tipoDeDocumentoDeIdentidadId}" 
 							label="#{msg['seguroViviendaBean.edit.tipoDeDocumentoDeIdentidadId']}" styleClass="form-control">
 							<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
@@ -63,41 +63,41 @@
 						</h:selectOneMenu>
 					</div>
 					<div class="form-group col-md-3">
-						<h:outputLabel for="documentoIdentidad" styleClass="control-label">
+						<label for="documentoIdentidad" class="control-label">
 							#{msg['seguroViviendaBean.edit.documentoIdentidad']}: <span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<p:inputText id="documentoIdentidad" value="#{model.documentoIdentidad}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.documentoIdentidad']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<h:outputLabel for="fechaDeNacimiento" styleClass="control-label">
+						<label for="fechaDeNacimiento" class="control-label">
 							#{msg['seguroViviendaBean.edit.fechaDeNacimiento']}: <span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<p:calendar id="fechaDeNacimiento" label="#{msg['seguroViviendaBean.edit.fechaDeNacimiento']}"  
 							value="#{model.fechaDeNacimiento}" pattern="dd/MM/yyyy" 
 							styleClass="form-control" />
 					</div>
 					<div class="form-group col-md-2">
-						<h:outputLabel for="telefonoMovil" styleClass="control-label">
+						<label for="telefonoMovil" class="control-label">
 							#{msg['seguroViviendaBean.edit.telefonoMovil']}: <span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<p:inputText id="telefonoMovil" value="#{model.telefonoMovil}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.telefonoMovil']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<h:outputLabel for="email" styleClass="control-label">
+						<label for="email" class="control-label">
 							#{msg['seguroViviendaBean.edit.email']}: <span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<p:inputText id="email" value="#{model.email}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.email']}"/>
 					</div>
 				</div>
 				<div class="row clearfix">
 					<div class="form-group col-md-2">
-						<h:outputLabel for="tipoDeViaTitularId" styleClass="control-label">
+						<label for="tipoDeViaTitularId" class="control-label">
 							#{msg['seguroViviendaBean.edit.tipoDeViaTitularId']}:
 							<span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<h:selectOneMenu id="tipoDeViaTitularId" value="#{model.tipoDeViaTitularId}" 
 							label="#{msg['seguroViviendaBean.edit.tipoDeViaTitularId']}" styleClass="form-control">
 							<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
@@ -105,38 +105,38 @@
 						</h:selectOneMenu>
 					</div>
 					<div class="form-group col-md-2">
-						<h:outputLabel for="domicilioTitular" styleClass="control-label">
+						<label for="domicilioTitular" class="control-label">
 							#{msg['seguroViviendaBean.edit.domicilioTitular']}: <span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<p:inputText id="domicilioTitular" value="#{model.domicilioTitular}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.domicilioTitular']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<h:outputLabel for="numeroYPisoTitular" styleClass="control-label">
+						<label for="numeroYPisoTitular" class="control-label">
 							#{msg['seguroViviendaBean.edit.numeroYPisoTitular']}: <span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<p:inputText id="numeroYPisoTitular" value="#{model.numeroYPisoTitular}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.numeroYPisoTitular']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<h:outputLabel for="codigoPostalTitular" styleClass="control-label">
+						<label for="codigoPostalTitular" class="control-label">
 							#{msg['seguroViviendaBean.edit.codigoPostalTitular']}: <span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<p:inputText id="codigoPostalTitular" value="#{model.codigoPostalTitular}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.codigoPostalTitular']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<h:outputLabel for="localidadTitular" styleClass="control-label">
+						<label for="localidadTitular" class="control-label">
 							#{msg['seguroViviendaBean.edit.localidadTitular']}: <span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<p:inputText id="localidadTitular" value="#{model.localidadTitular}" 
 							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.localidadTitular']}"/>
 					</div>
 					<div class="form-group col-md-2">
-						<h:outputLabel for="provinciaTitularId" styleClass="control-label">
+						<label for="provinciaTitularId" class="control-label">
 							#{msg['seguroViviendaBean.edit.provinciaTitularId']}:
 							<span class="glyphicon glyphicon-mandatory" />
-						</h:outputLabel>
+						</label>
 						<h:selectOneMenu id="provinciaTitularId" value="#{model.provinciaTitularId}" 
 							label="#{msg['seguroViviendaBean.edit.provinciaTitularId']}" styleClass="form-control">
 							<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
@@ -150,9 +150,9 @@
 					<div class="checkbox checkbox-primary">
 						<h:selectBooleanCheckbox id="laViviendaAsegurarCoincideConLaDelTitular" 
 							value="#{model.laViviendaAsegurarCoincideConLaDelTitular}" />
-						<h:outputLabel for="laViviendaAsegurarCoincideConLaDelTitular" styleClass="control-label">
+						<label for="laViviendaAsegurarCoincideConLaDelTitular" class="control-label">
 							#{msg['seguroViviendaBean.edit.laViviendaAsegurarCoincideConLaDelTitular']}
-						</h:outputLabel>
+						</label>
 					</div>
 				</div>
 			</div>
