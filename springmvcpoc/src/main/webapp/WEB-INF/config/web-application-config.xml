@@ -19,7 +19,6 @@
 	<import resource="i18n-config.xml" />
 	<!-- Imports the configurations of the different infrastructure systems of the application -->
 	<import resource="webmvc-config.xml" />
-	<import resource="webflow-config.xml" />
 	<import resource="data-access-config.xml" />
     <!-- Application beans -->
     <import resource="bean-config.xml" />

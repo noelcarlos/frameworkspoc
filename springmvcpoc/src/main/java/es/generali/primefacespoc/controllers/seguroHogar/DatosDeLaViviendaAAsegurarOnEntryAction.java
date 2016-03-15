@@ -1,8 +1,7 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.webflow.core.collection.MutableAttributeMap;
-import org.springframework.webflow.execution.RequestContext;
+import org.springframework.web.servlet.support.RequestContext;
 
 import es.generali.primefacespoc.services.LookupService;
 import es.generali.primefacespoc.support.OnEntryActionBase;

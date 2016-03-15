@@ -29,17 +29,6 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<!-- Dispatches requests mapped to flows to FlowHandler implementations -->
-	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
-		<property name="flowExecutor" ref="flowExecutor"/>
-		<property name="useExpiresHeader" value="false"/>
-		<property name="useCacheControlHeader" value="false"/>
-	</bean>	
-	
-	<!-- 
-	<bean id="applicationContextProvider" class="com.atsistemas.spring.ApplicationContextProvider"/> 
-	 -->
-	 
 	<!-- Tiles configuration -->
     <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <property name="definitions">
@@ -49,9 +38,4 @@
         </property>
     </bean>
     
-	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator"> 
-		<property name="viewResolvers" ref="viewResolver"/>
-		<property name="useSpringBeanBinding" value="true" />
-	</bean>  
-	
 </beans>

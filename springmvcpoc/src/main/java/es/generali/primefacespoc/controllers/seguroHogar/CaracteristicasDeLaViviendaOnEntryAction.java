@@ -1,6 +1,6 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import org.springframework.webflow.execution.RequestContext;
+import org.springframework.web.servlet.support.RequestContext;
 
 import es.generali.primefacespoc.support.OnEntryActionBase;
 import es.generali.segurohogar.models.SeguroViviendaBean;

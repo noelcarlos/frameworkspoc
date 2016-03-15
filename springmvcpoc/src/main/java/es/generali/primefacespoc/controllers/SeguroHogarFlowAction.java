@@ -2,18 +2,30 @@ package es.generali.primefacespoc.controllers;
 
 import java.util.GregorianCalendar;
 
-import org.springframework.webflow.execution.RequestContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.generali.primefacespoc.support.GeneratorHelper;
 import es.generali.segurohogar.models.ConfiguracionBean;
 import es.generali.segurohogar.models.SeguroViviendaBean;
 
+@Controller
+@RequestMapping(value="/seguroHogar")
 public class SeguroHogarFlowAction extends BaseWebFlowController {
 	private static final long serialVersionUID = 6848148192857690277L;
 	
+	@Autowired public transient ApplicationContext appContext;
 	private SeguroViviendaBean model;
 	
-	public void onInit(RequestContext requestContext) throws Exception {
+	@RequestMapping(value="/init")
+	public void onInit(HttpServletRequest request) throws Exception {
+		flowScope = FlowScope.createOrResume(request);
+		session = request.getSession();
+		
 		model = (SeguroViviendaBean)flowScope.get("model");
 		
 		ConfiguracionBean config = (ConfiguracionBean)session.getAttribute("config");

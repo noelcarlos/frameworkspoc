@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.webflow.execution.RequestContext;
+import org.springframework.web.servlet.support.RequestContext;
 
 public abstract class OnEntryActionBase<T> implements Serializable {
 	private static final long serialVersionUID = 1641245228042874793L;

@@ -13,7 +13,7 @@
 			</div>
 		</div>
 		
-		<form:form id="setupForm" method="POST" commandName="config">
+		<form:form id="setupForm" method="POST" commandName="config" action="${pageContext.request.contextPath}/web/${executionUrl}">
 			<form:errors path="*" cssClass="errorblock" element="div" />
 			
 			<input type="hidden" name="_eventId" value="aplicar"/>			
@@ -31,7 +31,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<div class="col-md-6">
-							<c:forEach var="result" items="${mainController.flow.selectNodes('//flow/step')}" varStatus="iter">
+							<c:forEach var="result" items="${flow.selectNodes('//flow/step')}" varStatus="iter">
 								<c:if test='${result.valueOf("@name") <= 5}'>
 									<div class="checkbox checkbox-primary">
 										<input type="checkbox" id='${result.valueOf("@view").concat('Inicializar')}' value="true"
@@ -45,7 +45,7 @@
 							</c:forEach>
 						</div>
 						<div class="col-md-6">
-							<c:forEach var="result" items="${mainController.flow.selectNodes('//flow/step')}" varStatus="iter">
+							<c:forEach var="result" items="${flow.selectNodes('//flow/step')}" varStatus="iter">
 								<c:if test='${result.valueOf("@name") > 5}'>
 									<div class="checkbox checkbox-primary">
 										<input type="checkbox" id='${result.valueOf("@view").concat('Inicializar')}' value="on"
@@ -71,7 +71,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<div class="col-md-6">
-							<c:forEach var="result" items="${mainController.flow.selectNodes('//flow/step')}" varStatus="iter">
+							<c:forEach var="result" items="${flow.selectNodes('//flow/step')}" varStatus="iter">
 								<c:if test='${result.valueOf("@name") <= 5}'>
 									<div class="checkbox checkbox-primary">
 										<input type="checkbox" id='${result.valueOf("@view").concat('Externo')}' value="on"
@@ -85,7 +85,7 @@
 							</c:forEach>
 						</div>
 						<div class="col-md-6">
-							<c:forEach var="result" items="${mainController.flow.selectNodes('//flow/step')}" varStatus="iter">
+							<c:forEach var="result" items="${flow.selectNodes('//flow/step')}" varStatus="iter">
 								<c:if test='${result.valueOf("@name") > 5}'>
 									<div class="checkbox checkbox-primary">
 										<input type="checkbox" id='${result.valueOf("@view").concat('Externo')}' value="on"
@@ -114,14 +114,14 @@
 					<div class="form-group">
 						<label for="kbContrato">Longitud del contrato en KB:</label>
 						<input type="text" id="kbContrato" name="kbContrato" style="color:#000;" 
-							value="${sessionScope.config.kbContrato}"></input>
+							value="${config.kbContrato}"></input>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">	
 						<div class="checkbox checkbox-primary">
 							<input type="checkbox" id='useDistributedCache' value="on" name='useDistributedCache'
-								${sessionScope.config.useDistributedCache ? "checked='checked'" : ""} >
+								${config.useDistributedCache ? "checked='checked'" : ""} >
 							</input>
 							<label for='useDistributedCache'>Usar cache distribuido</label>
 							<input type="hidden" value="false" name='useDistributedCache' />

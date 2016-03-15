@@ -10,8 +10,7 @@ import org.springframework.context.ApplicationContext;
 public abstract class BaseWebFlowController implements Serializable {
 	//public transient RequestContext requestContext;
 	public transient HttpSession session;
-	//public transient MutableAttributeMap<Object> flowScope;
-	public transient ApplicationContext appContext;
+	public transient FlowScope flowScope;
 	
 	/*
 	@SuppressWarnings("unchecked")

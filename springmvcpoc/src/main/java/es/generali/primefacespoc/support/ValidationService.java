@@ -36,7 +36,6 @@ import org.springframework.webflow.execution.RequestContextHolder;
  * SpringValidatorAdapter This class should be delete when WebFlow will be
  * compatible with Bean Validation.
  */
-@Service
 @SuppressWarnings("serial")
 public class ValidationService implements Serializable {
 	/**
