@@ -1,0 +1,203 @@
+Periodo de contratacion (Anual, Bienal, Trienal)
+Tipo de cobertura (Nacional, Internacional)
+Datos del titular 
+Datos de pago
+
+Que quieres proteger (vivienda)
+	(Tipo de uso de la vivienda) Vivienda habitual, Segunda residencia, Alquilada a terceros, Desocupada
+	# de personas que viven en la vivienda
+Localizacion
+		Provincia
+		Donde se encuentra la vivienda (Nucleo urbano, Urbanizacion, Despoblado)
+Sobre la construcción
+	    Tipo de construcción (De ladrillo o piedra, Con vigas de madera en estructura o cubierta, De madera, Adobe o prefabricada)
+		Calidad de la construccion (Estandar, Alta)
+		Tipologia de la vivienda (Piso intermedio, Atico o bajo, Adosado o pareado, Chalet individual)
+Datos de la vivienda
+		Metros cuadrados construidos
+		Número de dormitorios
+		Año de construcción
+		Año de última rehabilitación (opcional)
+Medidas de seguridad de tu vivienda		
+		Rejas en Ventanas o similares
+		Puerta de seguridad
+		Alarma conectada a central de seguridad o vigilancia 24h
+		Caja fuerte
+Personalizar paquete
+		CAPITALES ASEGURADOS
+			VIVIENDA (xxx)
+			ENSERES (xxx)
+			PRECIO  XXX
+		Responsabilidad civil (100000, 150000, 200000,	300000)
+		Que incluye
+			xxx, xxx, xxx
+		Mas opciones 
+			(checks) Roturas, Robo, Defensa Juridica, Inhabilidad, Asistencia informatica
+			Joyas
+			Objeto de valor especial
+			Recomposicion estetica
+Datos del titular	
+		Nombre
+		Apellido 1,
+		Apellido 2
+		Tipo de documento de identidad
+		Documento identidad
+		Fecha de Nacimiento
+		Sexo
+		Telefono Movil
+		Email
+		Tipo de vía
+		Domicilio
+		Número,Piso
+		Código Postal
+		Localidad
+		Provincia
+Si La vivienda a asegurar no coincide con la del titular
+		Tipo de vía
+		Domicilio
+		Número,Piso
+		Código Postal
+		Localidad
+		Provincia
+Datos de pago
+		Fecha de efecto
+		Numero de cuenta (Iban, Entidad, Oficina, Digito control, Cuenta)
+		Entidad beneficiaria
+			(Check) Tengo un préstamo hipotecario asociado a esta vivienda
+			Entidad beneficiaria
+			Nº de préstamo
+			
+			
+					
+
+	
+
+
+Seguros de coche 
+
+http://segurosdecoche.caser.es/presupuesto
+	
+Datos del vehiculo.
+	Marca de tu vehiculo (Audi, BMW, Citroen, Ford, Opel, Peugeot, Renault, Seat, Toyota, VOLKSWAGEN)
+	Modelo (SERIE 1, SERIE 3, SERIE 5, SERIE 6, SERIE 7, SERIE 8, X1, X3, X5, Z4)
+	Tipo de combustible (Diesel, Gasolina, Otros)
+	Potencia (143 - 313)
+	Cilindrada (1995 - 2996)
+	Año de la primera matriculación (Antigüedad del vehículo)
+	Código postal (por donde circulas habitualmente)
+Datos del conductor	
+	Fecha de nacimiento del conductor
+	Fecha emisión carnet
+	Sexo del conductor
+Calculo de bonificacion	
+	¿Tienes actualmente un seguro de vehículo a tu nombre? (No tengo seguro, Allianz, Axa Aurora Iberica, Direct Seguros - Hilo Direct, Fenix Directo, Fiatc, Genesis, Groupama Plus Ultra, Liberty Insurance, Linea Directa Aseguradora, Mapfre Familar, Mutua Madrileña Automovilista, Pelayo, Reale,  Zurich)
+	¿Cuanto tiempo llevas en tu compañía aseguradora?
+	
+Precios de tu seguro
+	coberturas (Asistencia en viajeOcupantesRc voluntaria hasta 50 mill. eRespons. civil obligatoriaProtec.jurid.hastaCochexcocheRobo sin franquiciaIncendioAvería mecánica inmovilizadoraLunasDanos con franquicia)
+	
+	Terceros básico (RC + ASI + OCU + DEF)
+	254,61 €	
+	Contratar
+	Terceros (RC + ASI + OCU + DEF + INC)
+	275,55 €	
+	Contratar
+	Terceros + Lunas
+	292,3 €	
+	Contratar
+	Terceros + Lunas + Robo
+	312,06 €	
+	Contratar
+	Terceros + Lunas + CochexCoche
+	323,28 €	
+	Contratar
+	Terceros + Lunas + Robo + CochexCoche
+	343,04 €	
+	Contratar
+	Todo riesgo con franquicia 900 €
+	357,73 €	
+	Contratar
+	Todo riesgo con franquicia 600 €
+	368,55 €	
+	Contratar
+	Todo riesgo con franquicia 360 €
+	389,44 €	
+	Contratar
+	Todo riesgo con franquicia 300 €
+	399,03 €	
+	Contratar
+	Todo riesgo con franquicia 200 €
+Contratacion
+Tus datos
+	Conductor principal (Tiene nif, Tiene nie)
+	Segundo conductor (no hay mas conductores, es otra persona con nif, es otra persona con nie)
+	Tomador del Seguro (Es el conductor, Es el segundo conductor, Es una empresa, Es otra persona con Nif, Es otra persona con Nie)
+	Propietario del Vehículo (Es el conductor, Es el segundo conductor, Es el tomador, Es una empresa, Es otra persona con Nif, Es otra persona con Nie)
+Datos del vehiculo
+	Marca, 
+	Modelo,
+	Versión,
+	Matrícula,
+	Fecha primera matriculación,
+	Código postal circulación,
+	Cuando compraste el vehículo
+	Va a utilizar remolque
+	Duerme en garaje
+	Color
+	Accesorios del fabricante ()
+	Otros accesorios () 
+Datos del Conductor / Tomador/ Propietario
+	NIF
+	Nombre
+	Primer apellido
+	Segundo apellido
+	Fecha de nacimiento
+	Fecha emisión carnet
+	Sexo
+	Dirección
+	Número
+	Piso
+	Código Postal
+	Localidad
+	Teléfono
+	Correo Electrónico
+Datos para Calcular Tu Bonificación
+	Compañía de Procedencia
+	Antiguedad en tu compañía (años)
+	Ultimos dígitos de tu póliza anterior
+
+Personaliza tu seguro
+	Accidentes conductor (Capital invalidez) (18.000 €)
+	Accidentes conductor (Capital muerte)  (18.000 €)
+	Retirada de carnet (si, no)
+	Modalidad (Terceros (RC + ASI + OCU + DEF + INC) (385,68)
+
+Terceros + Lunas (402,43)
+
+Terceros + Lunas + Robo (420,38)
+
+Terceros + Lunas + CochexCoche (452,88)
+
+Terceros + Lunas + Robo + CochexCoche (470,83)
+
+Todo riesgo con franquicia 900 €(498,3)
+
+Todo riesgo con franquicia 600 €(516,43)
+
+Todo riesgo con franquicia 360 €(551,46)
+
+Todo riesgo con franquicia 300 €(567,54)
+
+Todo riesgo con franquicia 200 €(601,33))
+	
+Datos del cobro y fecha de efecto (Indícanos tus datos de pago)
+	Fecha de efecto
+	Titular de la cuenta bancaria
+	IBAN
+	Número cuenta bancaria
+
+Tu seguro
+    
+
+	
+			

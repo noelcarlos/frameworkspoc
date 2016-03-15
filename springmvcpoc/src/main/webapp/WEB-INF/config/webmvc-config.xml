@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       	http://www.springframework.org/schema/faces http://www.springframework.org/schema/faces/spring-faces-2.2.xsd">
+
+	<mvc:annotation-driven />
+	
+	<mvc:default-servlet-handler />
+	 
+	<mvc:resources mapping="/jquery/**" location="/jquery/" order="1" />
+	<mvc:resources mapping="/styles/**" location="/styles/" order="1" />
+	<mvc:resources mapping="/images/**" location="/images/" order="1" />
+	<mvc:resources mapping="/js/**" location="/js/" order="1" />
+	<mvc:resources mapping="/resources/**" location="/static/, /resources/" order="1" />
+
+<!-- 
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="order" value="0"/>
+	</bean> -->
+
+	<!-- Maps logical view names to .jsp templates in /WEB-INF/flows -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/flows/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- Dispatches requests mapped to flows to FlowHandler implementations -->
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor"/>
+		<property name="useExpiresHeader" value="false"/>
+		<property name="useCacheControlHeader" value="false"/>
+	</bean>	
+	
+	<!-- 
+	<bean id="applicationContextProvider" class="com.atsistemas.spring.ApplicationContextProvider"/> 
+	 -->
+	 
+	<!-- Tiles configuration -->
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles/tiles-definitions.xml</value>
+            </list>
+        </property>
+    </bean>
+    
+	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator"> 
+		<property name="viewResolvers" ref="viewResolver"/>
+		<property name="useSpringBeanBinding" value="true" />
+	</bean>  
+	
+</beans>

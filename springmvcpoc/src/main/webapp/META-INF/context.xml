@@ -1,0 +1,8 @@
+<!-- DEVELOPMENT -->	
+<Context path="/springmvcpoc" crossContext="false" reloadable="false" >
+	<ResourceLink global='jdbc/springmvcpoc' name='jdbc/springmvcpoc' type="javax.sql.Datasource"/>
+	<Resource name="BeanManager" 
+	    auth="Container"
+	    type="javax.enterprise.inject.spi.BeanManager"
+	    factory="org.jboss.weld.resources.ManagerObjectFactory" />
+</Context>
