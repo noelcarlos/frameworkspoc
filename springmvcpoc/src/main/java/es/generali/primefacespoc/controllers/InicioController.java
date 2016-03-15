@@ -51,7 +51,7 @@ public class InicioController extends BaseWebFlowController {
 		
 		flowScope.put("config", config);
 		flowScope.put("flow", flow);
-		flowScope.put("executionUrl", "/setup?" + flowScope.getExecutionId());
+		flowScope.put("executionUrl", "setup?execution=" + flowScope.getExecutionId());
 		
 		return new ModelAndView("home/home", flowScope);
 	}
