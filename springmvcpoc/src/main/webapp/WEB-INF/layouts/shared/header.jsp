@@ -17,15 +17,15 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="${pageContext.request.contextPath}/es/home">
+	      <a class="navbar-brand" href="${pageContext.request.contextPath}/es/home/init">
 			<img class="logo" src='${pageContext.request.contextPath}/web/resources/images/logo.jpg' />
-			<h1>Spring WebFlow POC</h1>
+			<h1>Spring MVC POC</h1>
 	      </a>
 	    </div>
 	    <div id="navbar1" class="navbar-collapse collapse">
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><a href="${pageContext.request.contextPath}/es/home">Inicio</a></li>
-	        <li><a href="${pageContext.request.contextPath}/es/seguroHogar">Hogar</a></li>
+	        <li><a href="${pageContext.request.contextPath}/es/seguroHogar/init">Hogar</a></li>
 	      </ul>
 	    </div>
 	    <!--/.nav-collapse -->

@@ -7,11 +7,10 @@
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="content">
 
-		<form:form id="dataForm" commandName="model" name="dataForm">
+		<form:form id="dataForm" commandName="model" name="dataForm" action="${pageContext.request.contextPath}/web/${executionUrl}">
 			<jsp:include page="../../commons/flowMenu.jsp" />
 			<jsp:include page="../../commons/flowFormErrors.jsp"  />
 			
-			<form:errors path="*" cssClass="errorBlock" element="div" />
 			<input type="hidden" id="_eventId" name="_eventId" value=""/>	
 	
 			<div class="row">

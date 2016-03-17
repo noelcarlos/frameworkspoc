@@ -6,7 +6,11 @@
  
 	<div class="row">
 		<div class="col-md-12">
-			
+			<spring:hasBindErrors name="model">
+				<div class="alert alert-danger">
+					<form:errors path="*" cssClass="errorBlock" element="div" />
+				</div>
+			</spring:hasBindErrors>
 		</div>
 	</div>
 

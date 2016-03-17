@@ -26,9 +26,8 @@ public class InicioController extends BaseWebFlowController {
 		session = request.getSession();
 		
 		ConfiguracionBean config;
-		Document flow;
 		Resource resource = appContext.getResource("classpath:contratacion.xml");
-		flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
+		Document flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
 
 		if (session.getAttribute("config") == null) {
 			config = new ConfiguracionBean();

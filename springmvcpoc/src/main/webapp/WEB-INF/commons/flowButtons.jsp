@@ -10,19 +10,19 @@
 		<div class="btn-group" role="group" aria-label="...">
 		
 			<button type="button" class="btn btn-default" onclick="sendEvent('gobackward-first');" 
-				${(generaliWebFlowEngine.currentStep != 1) ? '' : 'disabled="disabled"'}>
+				${(currentStep != 1) ? '' : 'disabled="disabled"'}>
 				Inicio
 			</button>
 			<button type="button" class="btn btn-default" onclick="sendEvent('gobackward-previous');"
-				${(generaliWebFlowEngine.currentStep != 1) ? '' : 'disabled="disabled"'}>
+				${(currentStep != 1) ? '' : 'disabled="disabled"'}>
 				Anterior
 			</button>
 			<button type="button" class="btn btn-primary" onclick="sendEvent('goforward-next');"
-				${(generaliWebFlowEngine.currentStep != generaliWebFlowEngine.lastPageNumber) ? '' : 'disabled="disabled"'}>
+				${(currentStep == lastPageNumber) ? '' : 'disabled="disabled"'}>
 				Siguiente
 			</button>
 			<button type="button" class="btn btn-default" onclick="sendEvent('goforward-last');"
-				${(generaliWebFlowEngine.currentStep != generaliWebFlowEngine.lastPageNumber) ? '' : 'disabled="disabled"'}>
+				${(currentStep != lastPageNumber) ? '' : 'disabled="disabled"'}>
 				Última
 			</button>
 			

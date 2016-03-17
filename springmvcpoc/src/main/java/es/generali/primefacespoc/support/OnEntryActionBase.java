@@ -14,13 +14,13 @@ public abstract class OnEntryActionBase<T> implements Serializable {
 	
 	protected static Logger log;
 
-	@Autowired protected transient ValidationService validationService;
+	//@Autowired protected transient ValidationService validationService;
 	
 	public OnEntryActionBase() {
 		 log = Logger.getLogger(this.getClass());
 	}
 	
-	abstract public void execute(RequestContext requestContext, T model) throws Exception;
+	//abstract public void execute(RequestContext requestContext, T model) throws Exception;
 	
 	public HashMap<String, String> mapListToSelect(List<Map<String, Object>> src) {
 		HashMap<String, String> res = new HashMap<String, String>();

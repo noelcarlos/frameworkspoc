@@ -24,12 +24,10 @@ import javax.validation.Validator;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.binding.message.MessageBuilder;
-import org.springframework.binding.message.MessageContext;
-import org.springframework.binding.validation.ValidationContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
-import org.springframework.webflow.execution.RequestContextHolder;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 /**
  * Simple validation utility class. Inspired from Spring's
@@ -37,6 +35,7 @@ import org.springframework.webflow.execution.RequestContextHolder;
  * compatible with Bean Validation.
  */
 @SuppressWarnings("serial")
+@Service
 public class ValidationService implements Serializable {
 	/**
 	 * Validator reference.
@@ -52,7 +51,7 @@ public class ValidationService implements Serializable {
 	 * @param entity Entity reference to apply hibernate validator
 	 * @param context UI validation context instance
 	 */
-	public void validate(final String formId, final Object entity, final ValidationContext context) {
+	public void validate(final String formId, final Object entity) {
 		validate(formId, entity);
 	}
 	
@@ -77,21 +76,22 @@ public class ValidationService implements Serializable {
 	 * @param entity Entity reference to apply hibernate validator
 	 * @param messageContext UI message context
 	 */
-	public Boolean validate(final String formId, final Object entity, Class<?>... groups) {
-		MessageContext messageContext = RequestContextHolder.getRequestContext().getMessageContext();
+	public Boolean validate(final String formId, final Object entity, BindingResult binding,  Class<?>... groups) {
+		//MessageContext messageContext = RequestContextHolder.getRequestContext().getMessageContext();
 		Set<ConstraintViolation<Object>> violations = this.validator.validate(entity, groups);
 		for (ConstraintViolation<Object> violation : violations) {
 			String jsfFieldPath = prepareJsfPath(formId, violation.getPropertyPath().toString());
-			MessageBuilder messageBuilder = new MessageBuilder().error().source(jsfFieldPath);
+			//MessageBuilder messageBuilder = new MessageBuilder().error().source(jsfFieldPath);
 			String fieldResourceKey = prepareFieldResourceKey(entity, violation.getPropertyPath().toString());
 			String msgText = appContext.getMessage(fieldResourceKey, null, new Locale("es"));
-			messageBuilder.defaultText(msgText + ": " + violation.getMessage());
-			messageContext.addMessage(messageBuilder.build());
+			//messageBuilder.defaultText(msgText + ": " + violation.getMessage());
+			//messageContext.addMessage(messageBuilder.build());
+			binding.addError(new FieldError(jsfFieldPath, violation.getPropertyPath().toString(), msgText + ": " + violation.getMessage()));
 		}
-		return !messageContext.hasErrorMessages();
+		return !binding.hasErrors();
 	}
 	
-	public Boolean validate(final Object entity, Class<?>... groups) {
-		return validate("form", entity, groups);
+	public Boolean validate(final Object entity, BindingResult binding, Class<?>... groups) {
+		return validate("form", entity, binding, groups);
 	}
 }

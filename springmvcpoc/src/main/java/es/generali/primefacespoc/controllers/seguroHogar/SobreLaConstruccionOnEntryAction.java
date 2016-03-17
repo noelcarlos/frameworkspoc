@@ -1,25 +1,34 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.webflow.core.collection.MutableAttributeMap;
-import org.springframework.webflow.execution.RequestContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import es.generali.primefacespoc.controllers.FlowScope;
 import es.generali.primefacespoc.services.LookupService;
 import es.generali.primefacespoc.support.OnEntryActionBase;
 import es.generali.segurohogar.models.SeguroViviendaBean;
 
+@Controller
 @SuppressWarnings("serial")
+@RequestMapping(value="/seguroHogar")
 public class SobreLaConstruccionOnEntryAction extends OnEntryActionBase<SeguroViviendaBean>  {
 	@Autowired LookupService lookupService;
 
-	public void execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
+	@RequestMapping(value="/sobreLaConstruccion/entry")
+	public ModelAndView entry(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		FlowScope flowScope = FlowScope.createOrResume(request);
 		log.info("Before Step 3");
 
-		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
-		
 		flowScope.put("tiposDeConstrucciones", mapListToSelect(lookupService.getTiposDeConstrucciones()));
 		flowScope.put("calidadesDeLasConstrucciones", mapListToSelect(lookupService.getCalidadesDeLasConstrucciones()));
 		flowScope.put("tipologiasDeLasViviendas", mapListToSelect(lookupService.getTipologiasDeLasViviendas()));
-		
+
+		flowScope.put("executionUrl", "seguroHogar/sobreLaConstruccion/submit?execution=" + flowScope.getExecutionId());
+		return new ModelAndView("/seguroHogar/sobreLaConstruccion", flowScope);
 	}
 }

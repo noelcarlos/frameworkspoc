@@ -1,40 +1,43 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import org.apache.log4j.Logger;
-import org.springframework.binding.message.MessageBuilder;
-import org.springframework.binding.message.MessageContext;
-import org.springframework.webflow.execution.RequestContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import es.generali.primefacespoc.controllers.FlowScope;
 import es.generali.primefacespoc.support.OnExitActionBase;
 import es.generali.segurohogar.models.SeguroViviendaBean;
 import es.generali.segurohogar.models.SeguroViviendaBean.QueQuieresProteger;
 
+@Controller
+@RequestMapping(value="/seguroHogar")
 public class QueQuieresProtegerOnExitAction extends OnExitActionBase<SeguroViviendaBean> {
-	private static final Logger log = Logger.getLogger(QueQuieresProtegerOnExitAction.class);
 	private static final long serialVersionUID = 1L;
 
-	public boolean execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
-		MessageContext messageContext = requestContext.getMessageContext();
+	@RequestMapping(value="/queQuieresProteger/submit")
+	public ModelAndView submit(@ModelAttribute("model") SeguroViviendaBean model, BindingResult result, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		FlowScope flowScope = FlowScope.createOrResume(request);
 		
-		validationService.validate(model, QueQuieresProteger.class);
+		//SeguroViviendaBean model = (SeguroViviendaBean)flowScope.get("model");
+		validationService.validate(model, result, QueQuieresProteger.class);
 		
-//		if (model.getNumPersonasQueVivenEnLaVivienda() == null || model.getNumPersonasQueVivenEnLaVivienda() < 1) {
-//    		messageContext.addMessage(new MessageBuilder()
-//				.error().code("error.literal").arg("El numero de personas que viven en la vivienda debe de ser mayor o igual a 1")
-//				.build());
-//		}
-//		
-//		if (model.getTipoDeUsoViviendaId() == null) {
-//    		messageContext.addMessage(new MessageBuilder()
-//				.error().code("error.literal").arg("El tipo de uso de la vivienda debe de estar informado")
-//				.build());
-//		}
-		
-//		if (messageContext != null)
-//			throw new es.generali.primefacespoc.support.ControlledExit("crka");
 		log.info("After Step 1");
 		
-		return !messageContext.hasErrorMessages();
+		//return !messageContext.hasErrorMessages();
+
+		flowScope.put("model", model);
+		
+		if (result.hasErrors()) {
+			flowScope.put("executionUrl", "seguroHogar/queQuieresProteger/submit?execution=" + flowScope.getExecutionId());
+			return new ModelAndView("/seguroHogar/queQuieresProteger", flowScope);
+		} else {
+			return new ModelAndView("redirect:/es/seguroHogar/localizacion/entry?execution=" + flowScope.getExecutionId());
+		}
 	}
 	
 }

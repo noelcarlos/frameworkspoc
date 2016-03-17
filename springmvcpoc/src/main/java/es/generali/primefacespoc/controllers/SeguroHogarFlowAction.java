@@ -3,11 +3,17 @@ package es.generali.primefacespoc.controllers;
 import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import es.generali.primefacespoc.support.GeneratorHelper;
 import es.generali.segurohogar.models.ConfiguracionBean;
@@ -22,9 +28,11 @@ public class SeguroHogarFlowAction extends BaseWebFlowController {
 	private SeguroViviendaBean model;
 	
 	@RequestMapping(value="/init")
-	public void onInit(HttpServletRequest request) throws Exception {
+	public ModelAndView onInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		flowScope = FlowScope.createOrResume(request);
 		session = request.getSession();
+		
+		flowScope.put("model", new SeguroViviendaBean());
 		
 		model = (SeguroViviendaBean)flowScope.get("model");
 		
@@ -49,6 +57,15 @@ public class SeguroHogarFlowAction extends BaseWebFlowController {
 		} 
 		
 		setup(config);
+		
+		Resource resource = appContext.getResource("classpath:contratacion.xml");
+		Document flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
+		
+		flowScope.put("config", config);
+		flowScope.put("flow", flow);
+		//flowScope.put("executionUrl", "setup?execution=" + flowScope.getExecutionId());
+		
+		return new ModelAndView("redirect:/es/seguroHogar/queQuieresProteger/entry?execution=" + flowScope.getExecutionId());
 	}
 	
 	public SeguroViviendaBean getModel() {

@@ -9,16 +9,16 @@
 		<div class="separator-sm"></div>
 		<div class="btn-group" role="group" aria-label="..."> 
 		
-			<c:forEach var="result" items="${generaliWebFlowEngine.flow.selectNodes('//flow/step')}">
-				<c:if test="${!(generaliWebFlowEngine.currentStep lt result.valueOf('@name'))}">
-					<button type="button" class="btn ${generaliWebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}
+			<c:forEach var="result" items="${flow.selectNodes('//flow/step')}">
+				<c:if test="${!(currentStep lt result.valueOf('@name'))}">
+					<button type="button" class="btn ${currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}
 							${!config[result.valueOf('@view').concat('Externo')] ? ' external-step' : ' internal-step'}"
 						onClick="sendEvent('gobackward-${ result.valueOf('@name')}');">
 						${result.valueOf("@menu")}
 					</button>
 				</c:if>
-				<c:if test="${generaliWebFlowEngine.currentStep lt result.valueOf('@name')}">
-					<button type="button" class="btn ${generaliWebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}
+				<c:if test="${currentStep lt result.valueOf('@name')}">
+					<button type="button" class="btn ${currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}
 							${!config[result.valueOf('@view').concat('Externo')] ? ' external-step' : ' internal-step'}"
 						onClick="sendEvent('goforward-${ result.valueOf('@name')}');">
 						${result.valueOf("@menu")}
@@ -27,7 +27,7 @@
 			</c:forEach>
 		</div>
 		<div class="separator-sm"></div>
-		<h2>${generaliWebFlowEngine.currentPageNumber} - ${generaliWebFlowEngine.currentPageTitle}</h2>
+		<h2>${currentPageNumber} - ${currentPageTitle}</h2>
 		<div class="separator-sm"></div>
 	</div>
 </div>

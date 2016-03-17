@@ -17,5 +17,5 @@ public abstract class OnExitActionBase<T> implements Serializable {
 		 log = Logger.getLogger(this.getClass());
 	}
 	
-	abstract public boolean execute(RequestContext requestContext, T model) throws Exception;
+	//abstract public boolean execute(RequestContext requestContext, T model) throws Exception;
 }
