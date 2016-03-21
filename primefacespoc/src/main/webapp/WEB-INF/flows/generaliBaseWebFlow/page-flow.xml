@@ -29,7 +29,7 @@
 			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
 		</transition>
 		
-		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}" history="invalidate">
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}" >
 		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
 		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
 		</transition>

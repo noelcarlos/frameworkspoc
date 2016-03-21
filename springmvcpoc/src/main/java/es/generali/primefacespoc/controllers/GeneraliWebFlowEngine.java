@@ -1,22 +1,6 @@
 package es.generali.primefacespoc.controllers;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.io.IOUtils;
 import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Node;
-import org.springframework.binding.message.MessageContext;
-import org.springframework.core.io.Resource;
-import org.springframework.webflow.core.collection.MutableAttributeMap;
-import org.springframework.webflow.execution.RequestContext;
-
-import es.generali.primefacespoc.support.ControlledExit;
-import es.generali.primefacespoc.support.ExternalExit;
-import es.generali.segurohogar.models.ConfiguracionBean;
 
 public class GeneraliWebFlowEngine extends BaseWebFlowController {
 	private static final long serialVersionUID = 6848148192857690277L;
@@ -28,6 +12,7 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 	private int lastPageNumber;
 	private String currentPageTitle;
 
+	/*
 	public void onInit() throws Exception {
 		Resource resource = appContext.getResource("../seguroHogar/contratacion.xml");
 		flow = DocumentHelper.parseText(IOUtils.toString(resource.getInputStream(), "UTF-8"));
@@ -246,5 +231,5 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 		MutableAttributeMap<Object> flashScope = requestContext.getFlashScope();
 		flashScope.put("_externalURL", info.getUrl());
 		bindOutputParameters(requestContext);
-	}
+	}*/
 }

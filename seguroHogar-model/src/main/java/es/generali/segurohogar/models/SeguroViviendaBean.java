@@ -14,6 +14,9 @@ public class SeguroViviendaBean implements Serializable {
 	
 	private static final long serialVersionUID = 705547732312798668L;
 	
+	public SeguroViviendaBean() {
+	}
+	
 	/* Que quieres proteger */
 	public interface QueQuieresProteger {};
 	

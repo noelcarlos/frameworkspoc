@@ -1,14 +1,30 @@
 package es.generali.primefacespoc.controllers.seguroHogar;
 
-import org.springframework.webflow.execution.RequestContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+
+import es.generali.primefacespoc.controllers.FlowScope;
 import es.generali.primefacespoc.support.OnEntryActionBase;
 import es.generali.segurohogar.models.SeguroViviendaBean;
 
-@SuppressWarnings("serial")
+@Controller
+@RequestMapping(value="/seguroHogar")
+@SessionAttributes("model")
 public class MedidasDeSeguridadDeTuViviendaOnEntryAction extends OnEntryActionBase<SeguroViviendaBean> {
+	private static final long serialVersionUID = 1L;
 
-	public void execute(RequestContext requestContext, SeguroViviendaBean model) throws Exception {
+	@RequestMapping(value="/medidasDeSeguridadDeTuVivienda/entry")
+	public ModelAndView entry(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		FlowScope flowScope = FlowScope.createOrResume(request);
+		
 		log.info("Before Step 5");
+
+		flowScope.put("executionUrl", "seguroHogar/medidasDeSeguridadDeTuVivienda/submit?execution=" + flowScope.getExecutionId());
+		return new ModelAndView("/seguroHogar/medidasDeSeguridadDeTuVivienda", flowScope);
 	}
 }

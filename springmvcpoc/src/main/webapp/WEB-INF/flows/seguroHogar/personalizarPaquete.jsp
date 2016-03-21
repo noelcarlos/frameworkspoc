@@ -12,7 +12,7 @@
 			<jsp:include page="../../commons/flowFormErrors.jsp"  />
 			
 			<input type="hidden" id="_eventId" name="_eventId" value=""/>	
-	
+	        <h1>${model.precio}</h1>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">

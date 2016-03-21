@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.generali.primefacespoc.controllers.FlowScope;
@@ -15,6 +16,7 @@ import es.generali.segurohogar.models.SeguroViviendaBean;
 
 @Controller
 @RequestMapping(value="/seguroHogar")
+@SessionAttributes("model")
 public class LocalizacionOnEntryAction extends OnEntryActionBase<SeguroViviendaBean> {
 	private static final long serialVersionUID = 1L;
 	@Autowired transient LookupService lookupService;
