@@ -97,28 +97,4 @@ public class CustomFlowHandlerMapping extends FlowHandlerMapping {
 		}
 		return null;
 	}
-    
-    /**
-    * Override the ResourceLoader:
-    * We know our flow is always defined as "flows/module1".
-    * From the context we can derive the name of the flow (module1)
-    * So we build up the ClassPathResource base as:
-    * "flows/"+ ctx.getResource("")+ "/"
-    * 
-    * @param ctx
-    */
-    protected void overrideResourceLoader(GenericApplicationContext ctx, String flowId) {
-    	final ClassPathResource cpr = new ClassPathResource("flows/"+ flowId + "/");
-
-    	ctx.setResourceLoader(new ResourceLoader() {
-        	
-        	public ClassLoader getClassLoader() {
-        		return cpr.getClassLoader();
-        	}
-
-        	public Resource getResource(String location) {
-        		return new CustomClassPathContextResource(cpr.getPath() + location, getClassLoader());
-        	}
-        });
-    }
 }

@@ -69,7 +69,7 @@
   	<!-- PERFORMANCE: -1 for production 1 for Development -->
   	<context-param>
   		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
-  		<param-value>-1</param-value>
+  		<param-value>1</param-value>
   	</context-param>
   	
 	<context-param>
