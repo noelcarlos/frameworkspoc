@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      abstract="true">
+	
+	<!-- Controllers -->
+	<var name="esmartpointWebFlowEngine" class="es.esmartpoint.primefacespoc.controllers.EsmartpointWebFlowEngine"/>
+	
+	<!-- Flow internal variables -->
+	<input name="_gotoState" />
+	<input name="_parentId" />
+	<input name="_flowToView" />
+	
+	<on-start>
+		<evaluate expression="esmartpointWebFlowEngine.bindInputParameters(flowRequestContext)" />
+	</on-start>
+	
+	<view-state id="esmartpointFlowViewState">
+	
+		<on-entry>
+			<evaluate expression="esmartpointWebFlowEngine.beforeOnEntryEvaluations()" />
+			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="esmartpointWebFlowEngine.afterOnEntryEvaluations()" />
+		</on-entry>
+		
+		<transition on-exception="es.esmartpoint.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}" history="invalidate">
+		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="esmartpointWebFlowEngine.onStep('goforward-next')" />
+		</transition>
+		
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}" >
+		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
+		 	<evaluate expression="esmartpointWebFlowEngine.onStep(currentEvent.id)" />
+		</transition>
+	
+		<transition on="#{currentEvent.id.startsWith('gobackward-')}" to="#{viewScope.nextView}" bind="false" validate="false" history="invalidate">
+		 	<evaluate expression="esmartpointWebFlowEngine.onStep(currentEvent.id)" />
+		</transition>
+		
+		<transition on-exception="es.esmartpoint.primefacespoc.support.ExternalExit" to="_externalView" bind="false" validate="false" history="invalidate">
+			<evaluate expression="esmartpointWebFlowEngine.executeExternalLink(flowRequestContext, rootCauseException)" />
+		</transition>
+
+	</view-state>
+	
+	<end-state id="_externalView" view="externalRedirect:serverRelative:#{flashScope._externalURL}"/>
+
+</flow>

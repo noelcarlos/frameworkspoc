@@ -10,8 +10,8 @@
 
 	<!-- Scans for application @Components to deploy -->
 	
-	<context:component-scan base-package="es.generali.primefacespoc.controllers" />
-	<context:component-scan base-package="es.generali.primefacespoc.support" />
+	<context:component-scan base-package="es.esmartpoint.primefacespoc.controllers" />
+	<context:component-scan base-package="es.esmartpoint.primefacespoc.support" />
 	
 	<!-- Services configuration -->
 	<import resource="services-config.xml" />

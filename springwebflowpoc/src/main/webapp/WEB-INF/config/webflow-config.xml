@@ -20,7 +20,7 @@
 	<!-- Executes flows: the central entry point into the Spring Web Flow system -->
 	<webflow:flow-executor id="flowExecutor">
 		<webflow:flow-execution-listeners>
-			<webflow:listener ref="generaliWebFlowListener" />
+			<webflow:listener ref="esmartpointWebFlowListener" />
 			<!-- 
 			<webflow:listener ref="jpaFlowExecutionListener" />
 			 -->
@@ -35,7 +35,7 @@
     	</webflow:flow-execution-attributes>
 	</webflow:flow-executor>
 	
-	<bean id="generaliWebFlowListener" class="es.generali.primefacespoc.support.web.GeneraliWebFlowListener" />
+	<bean id="esmartpointWebFlowListener" class="es.esmartpoint.primefacespoc.support.web.EsmartpointWebFlowListener" />
 	
 	<!-- The registry of executable flow definitions -->
 	

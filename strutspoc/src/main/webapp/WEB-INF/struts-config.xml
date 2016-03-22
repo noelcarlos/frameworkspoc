@@ -5,7 +5,7 @@
 <struts-config>
 
 	<form-beans>
-		<form-bean name="flowForm" type="es.generali.strutspoc.support.LazyValidatorForm" />
+		<form-bean name="flowForm" type="es.esmartpoint.strutspoc.support.LazyValidatorForm" />
 	</form-beans>
 
 	<!-- Excepciones globales -->
@@ -23,13 +23,13 @@
 	<action-mappings>
 		<!-- PROCESS -->
 		
-		<action path="/init" type="es.generali.strutspoc.controllers.InitAction" 
+		<action path="/init" type="es.esmartpoint.strutspoc.controllers.InitAction" 
 			name="flowForm" scope="request" validate="true" parameter="method" >
   			<forward name="app.init" path="app.init" />
   			<forward name="app.configAplicada" path="app.configAplicada" /> 
 		</action>
 		
-		<action path="/seguroHogar" type="es.generali.strutspoc.controllers.SeguroHogarFlowAction" 
+		<action path="/seguroHogar" type="es.esmartpoint.strutspoc.controllers.SeguroHogarFlowAction" 
 			name="flowForm" scope="request" validate="true" parameter="method" >
   			<forward name="seguroHogar.queQuieresProteger" path="seguroHogar.queQuieresProteger" />
   			<forward name="seguroHogar.localizacion" path="seguroHogar.localizacion" /> 

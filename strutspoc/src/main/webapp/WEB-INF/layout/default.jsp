@@ -8,7 +8,7 @@
 <%@ taglib uri="http://jakarta.apache.org/struts/tags-tiles" prefix="tiles" %>
 <html>
 	<head>
-	<title>GENERALI Seguros: Seguro de coche online, seguros de hogar y seguros de decesos. Contrata tu seguro</title>
+	<title>esmartpoint Seguros: Seguro de coche online, seguros de hogar y seguros de decesos. Contrata tu seguro</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 		<link rel="shortcut icon" href="${pageContext.request.contextPath}/static/icons/favicon.ico?v4">

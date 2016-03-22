@@ -5,7 +5,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="h3 text-center"><strong>Generali Struts POC</strong></div>
+		<div class="h3 text-center"><strong>esmartpoint Struts POC</strong></div>
 	</div>
 </div>	
 

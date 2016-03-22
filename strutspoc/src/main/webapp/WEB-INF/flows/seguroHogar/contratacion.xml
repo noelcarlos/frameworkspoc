@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow name="seguroHogar">
-	<on-entry>es.generali.strutspoc.controllers.seguroHogar.InitFlowAction</on-entry>
+	<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.InitFlowAction</on-entry>
 	<external-url>/primefacespoc/es/seguroHogar</external-url>
 	
 	<step name="1" view="queQuieresProteger" menu="Que quieres proteger" title="¿Que quieres proteger?">
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.QueQuieresProtegerOnExitAction</on-exit>
+		<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction</on-entry>
+		<on-exit>es.esmartpoint.strutspoc.controllers.seguroHogar.QueQuieresProtegerOnExitAction</on-exit>
 	</step>
 	<step name="2" view="localizacion" menu="Localizacion" title="Datos de la ubicación de la vivienda">
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.LocalizacionOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.LocalizacionOnExitAction</on-exit>
+		<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.LocalizacionOnEntryAction</on-entry>
+		<on-exit>es.esmartpoint.strutspoc.controllers.seguroHogar.LocalizacionOnExitAction</on-exit>
 	</step>
 	<step name="3" view="sobreLaConstruccion" menu="Sobre la construcción" title="Sobre la construcción">
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.SobreLaConstruccionOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.SobreLaConstruccionOnExitAction</on-exit>
+		<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.SobreLaConstruccionOnEntryAction</on-entry>
+		<on-exit>es.esmartpoint.strutspoc.controllers.seguroHogar.SobreLaConstruccionOnExitAction</on-exit>
 	</step>
 	<step name="4" view="caracteristicasDeLaVivienda" menu="Características" title="Caracteristicas de la vivienda" >
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnExitAction</on-exit>
+		<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnEntryAction</on-entry>
+		<on-exit>es.esmartpoint.strutspoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnExitAction</on-exit>
 	</step>
 	<step name="5" view="medidasDeSeguridadDeTuVivienda" menu="Medidas de seguridad" title="Medidas de seguridad">
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnExitAction</on-exit>
+		<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnEntryAction</on-entry>
+		<on-exit>es.esmartpoint.strutspoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnExitAction</on-exit>
 	</step>
 	<step name="6" view="personalizarPaquete" menu="Personalizar" title="Personalizar paquete">
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.PersonalizarPaqueteOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.PersonalizarPaqueteOnExitAction</on-exit>
+		<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.PersonalizarPaqueteOnEntryAction</on-entry>
+		<on-exit>es.esmartpoint.strutspoc.controllers.seguroHogar.PersonalizarPaqueteOnExitAction</on-exit>
 	</step>
 	<step name="7" view="datosDelTitular" menu="Datos del titular" title="Personalizar datos del titular">
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.DatosDelTitularOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.DatosDelTitularOnExitAction</on-exit>
+		<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.DatosDelTitularOnEntryAction</on-entry>
+		<on-exit>es.esmartpoint.strutspoc.controllers.seguroHogar.DatosDelTitularOnExitAction</on-exit>
 	</step>
 	<step name="8" view="datosDeLaViviendaAAsegurar" menu="Datos de la vivienda" title="Datos de la vivienda">
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnExitAction</on-exit>
+		<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnEntryAction</on-entry>
+		<on-exit>es.esmartpoint.strutspoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnExitAction</on-exit>
 	</step>
 	<step name="9" view="datosDePago" menu="Pago" title="Datos de pago" >
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.DatosDePagoOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.DatosDePagoOnExitAction</on-exit>
+		<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.DatosDePagoOnEntryAction</on-entry>
+		<on-exit>es.esmartpoint.strutspoc.controllers.seguroHogar.DatosDePagoOnExitAction</on-exit>
 	</step>
 	<step name="10" view="resumen" menu="Resumen" title="Resumen del producto contratado" >
-		<on-entry>es.generali.strutspoc.controllers.seguroHogar.ResumenOnEntryAction</on-entry>
-		<on-exit>es.generali.strutspoc.controllers.seguroHogar.ResumenOnExitAction</on-exit>
+		<on-entry>es.esmartpoint.strutspoc.controllers.seguroHogar.ResumenOnEntryAction</on-entry>
+		<on-exit>es.esmartpoint.strutspoc.controllers.seguroHogar.ResumenOnExitAction</on-exit>
 	</step>
 					
 </flow>

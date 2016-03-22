@@ -9,18 +9,18 @@
 	<div class="col-md-12">
 		<div class="separator-sm"></div>
 		<div class="btn-group" role="group" aria-label="..."> 
-			<ui:repeat var="result" value="#{generaliWebFlowEngine.flow.selectNodes('//flow/step')}">
-				<ui:fragment rendered="#{!(generaliWebFlowEngine.currentStep lt result.valueOf('@name'))}" >
+			<ui:repeat var="result" value="#{esmartpointWebFlowEngine.flow.selectNodes('//flow/step')}">
+				<ui:fragment rendered="#{!(esmartpointWebFlowEngine.currentStep lt result.valueOf('@name'))}" >
 					<p:commandLink action="#{'gobackward-'.concat(result.valueOf('@view'))}" 
-						styleClass="btn #{generaliWebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}
+						styleClass="btn #{esmartpointWebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}
 						 #{!flowScope.config[result.valueOf('@view').concat('Externo')] ? 'external-step' : 'internal-step'}"
 						ajax="false" process="@this" immediate="true">
 						#{result.valueOf("@menu")}
 					</p:commandLink>
 				</ui:fragment>
-				<ui:fragment rendered="#{generaliWebFlowEngine.currentStep lt result.valueOf('@name')}" >
+				<ui:fragment rendered="#{esmartpointWebFlowEngine.currentStep lt result.valueOf('@name')}" >
 					<p:commandLink action="#{'goforward-'.concat(result.valueOf('@view'))}" 
-						styleClass="btn #{generaliWebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}
+						styleClass="btn #{esmartpointWebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}
 						 #{!flowScope.config[result.valueOf('@view').concat('Externo')] ? 'external-step' : 'internal-step'}"
 						ajax="false">
 						#{result.valueOf("@menu")}
@@ -29,7 +29,7 @@
 			</ui:repeat>
 		</div>
 		<div class="separator-sm"></div>
-		<h2>#{generaliWebFlowEngine.currentPageNumber} - #{generaliWebFlowEngine.currentPageTitle}</h2>
+		<h2>#{esmartpointWebFlowEngine.currentPageNumber} - #{esmartpointWebFlowEngine.currentPageTitle}</h2>
 		<div class="separator-sm"></div>
 	</div>
 </div>

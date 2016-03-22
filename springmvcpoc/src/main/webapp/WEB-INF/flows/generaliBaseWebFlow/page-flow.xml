@@ -5,7 +5,7 @@
       abstract="true">
 	
 	<!-- Controllers -->
-	<var name="generaliWebFlowEngine" class="es.generali.primefacespoc.controllers.GeneraliWebFlowEngine"/>
+	<var name="esmartpointWebFlowEngine" class="es.esmartpoint.primefacespoc.controllers.esmartpointWebFlowEngine"/>
 	
 	<!-- Flow internal variables -->
 	<input name="_gotoState" />
@@ -13,33 +13,33 @@
 	<input name="_flowToView" />
 	
 	<on-start>
-		<evaluate expression="generaliWebFlowEngine.bindInputParameters(flowRequestContext)" />
+		<evaluate expression="esmartpointWebFlowEngine.bindInputParameters(flowRequestContext)" />
 	</on-start>
 	
-	<view-state id="GeneraliFlowViewState">
+	<view-state id="esmartpointFlowViewState">
 	
 		<on-entry>
-			<evaluate expression="generaliWebFlowEngine.beforeOnEntryEvaluations()" />
+			<evaluate expression="esmartpointWebFlowEngine.beforeOnEntryEvaluations()" />
 			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.afterOnEntryEvaluations()" />
+			<evaluate expression="esmartpointWebFlowEngine.afterOnEntryEvaluations()" />
 		</on-entry>
 		
-		<transition on-exception="es.generali.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}" history="invalidate">
+		<transition on-exception="es.esmartpoint.primefacespoc.support.ControlledExit"  to="#{viewScope.nextView}" history="invalidate">
 		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-			<evaluate expression="generaliWebFlowEngine.onStep('goforward-next')" />
+			<evaluate expression="esmartpointWebFlowEngine.onStep('goforward-next')" />
 		</transition>
 		
 		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}" history="invalidate">
 		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
+		 	<evaluate expression="esmartpointWebFlowEngine.onStep(currentEvent.id)" />
 		</transition>
 	
 		<transition on="#{currentEvent.id.startsWith('gobackward-')}" to="#{viewScope.nextView}" bind="false" validate="false" history="invalidate">
-		 	<evaluate expression="generaliWebFlowEngine.onStep(currentEvent.id)" />
+		 	<evaluate expression="esmartpointWebFlowEngine.onStep(currentEvent.id)" />
 		</transition>
 		
-		<transition on-exception="es.generali.primefacespoc.support.ExternalExit" to="_externalView" bind="false" validate="false" history="invalidate">
-			<evaluate expression="generaliWebFlowEngine.executeExternalLink(flowRequestContext, rootCauseException)" />
+		<transition on-exception="es.esmartpoint.primefacespoc.support.ExternalExit" to="_externalView" bind="false" validate="false" history="invalidate">
+			<evaluate expression="esmartpointWebFlowEngine.executeExternalLink(flowRequestContext, rootCauseException)" />
 		</transition>
 
 	</view-state>

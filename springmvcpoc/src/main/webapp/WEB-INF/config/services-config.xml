@@ -12,7 +12,7 @@
 
 	<context:annotation-config />
 
-	<context:component-scan base-package="es.generali.primefacespoc.services" />
-	<context:component-scan base-package="es.generali.primefacespoc.support" />
+	<context:component-scan base-package="es.esmartpoint.primefacespoc.services" />
+	<context:component-scan base-package="es.esmartpoint.primefacespoc.support" />
 
 </beans>

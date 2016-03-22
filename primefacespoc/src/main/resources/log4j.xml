@@ -55,7 +55,7 @@
 		<level value="warn" />
 	</logger>
 
-	<logger name="es.generali.primefacespoc">
+	<logger name="es.esmartpoint.primefacespoc">
 		<level value="warn" />
 	</logger>
 	

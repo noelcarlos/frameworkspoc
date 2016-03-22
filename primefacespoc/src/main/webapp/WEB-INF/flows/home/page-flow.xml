@@ -4,9 +4,9 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<!-- Controllers -->
-	<var name="mainController" class="es.generali.primefacespoc.controllers.InicioController"/>
+	<var name="mainController" class="es.esmartpoint.primefacespoc.controllers.InicioController"/>
 
-	<var name="config" class="es.generali.segurohogar.models.ConfiguracionBean" />
+	<var name="config" class="es.esmartpoint.segurohogar.models.ConfiguracionBean" />
 	
 	<on-start>
 		<evaluate expression="mainController.onInit()" />

@@ -51,7 +51,7 @@
 		<level value="warn" />
 	</logger>
 
-	<logger name="es.generali.springmvcpoc">
+	<logger name="es.esmartpoint.springmvcpoc">
 		<level value="warn" />
 	</logger>
 	

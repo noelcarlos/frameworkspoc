@@ -10,19 +10,19 @@
 		<div class="separator-sm"></div>
 		<div class="btn-group" role="group" aria-label="...">
 			<p:commandLink id="goforwardFirst" action="gobackward-first" styleClass="btn btn-default" ajax="false"  
-				disabled="#{generaliWebFlowEngine.currentStep == 1}" immediate="true">
+				disabled="#{esmartpointWebFlowEngine.currentStep == 1}" immediate="true">
 				Inicio
 			</p:commandLink>
 			<p:commandLink id="goforwardPrevious" action="gobackward-previous" styleClass="btn btn-default" ajax="false"
-				disabled="#{generaliWebFlowEngine.currentStep == 1}" immediate="true">
+				disabled="#{esmartpointWebFlowEngine.currentStep == 1}" immediate="true">
 				Anterior
 			</p:commandLink>
 			<p:commandLink id="goforwardNext" action="goforward-next" styleClass="btn btn-primary" ajax="false"
-				disabled="#{generaliWebFlowEngine.currentStep == generaliWebFlowEngine.lastPageNumber}">
+				disabled="#{esmartpointWebFlowEngine.currentStep == esmartpointWebFlowEngine.lastPageNumber}">
 				Siguiente
 			</p:commandLink>
 			<p:commandLink id="goforwardLast"  action="goforward-last" styleClass="btn btn-default" ajax="false"
-				disabled="#{generaliWebFlowEngine.currentStep == generaliWebFlowEngine.lastPageNumber}">
+				disabled="#{esmartpointWebFlowEngine.currentStep == esmartpointWebFlowEngine.lastPageNumber}">
 				Última
 			</p:commandLink>
 		</div>

@@ -2,17 +2,17 @@
 <flow xmlns="http://www.springframework.org/schema/webflow"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
-      parent="generaliBaseWebFlow">
+      parent="esmartpointBaseWebFlow">
 	
 	<!-- Controllers -->
-	<var name="seguroHogarFlowAction" class="es.generali.primefacespoc.controllers.SeguroHogarFlowAction"/>
+	<var name="seguroHogarFlowAction" class="es.esmartpoint.primefacespoc.controllers.SeguroHogarFlowAction"/>
 	
 	<!-- Mapped model data -->
-	<var name="model" class="es.generali.segurohogar.models.SeguroViviendaBean" />
-	<var name="config" class="es.generali.segurohogar.models.ConfiguracionBean" />
+	<var name="model" class="es.esmartpoint.segurohogar.models.SeguroViviendaBean" />
+	<var name="config" class="es.esmartpoint.segurohogar.models.ConfiguracionBean" />
 	
 	<action-state id="startCheck">
-		<evaluate expression="generaliWebFlowEngine.onInit()" />
+		<evaluate expression="esmartpointWebFlowEngine.onInit()" />
 		<transition on="#{flowScope._gotoState != null}" to="#{flowScope._gotoState}" />
 		<transition to="queQuieresProteger" />
 		<on-exit>
@@ -20,54 +20,54 @@
 		</on-exit>
 	</action-state>
 	
-	<view-state id="queQuieresProteger" parent="generaliBaseWebFlow#GeneraliFlowViewState" view="seguroHogar/queQuieresProteger" model="flowScope.model" >
-		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction"/>
-		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnExitAction"/>
+	<view-state id="queQuieresProteger" parent="esmartpointBaseWebFlow#esmartpointFlowViewState" view="seguroHogar/queQuieresProteger" model="flowScope.model" >
+		<var name="onEntryAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnEntryAction"/>
+		<var name="onExitAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.QueQuieresProtegerOnExitAction"/>
 	</view-state>
 
-	<view-state id="localizacion" parent="generaliBaseWebFlow#GeneraliFlowViewState" view="seguroHogar/localizacion" model="flowScope.model">
-		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.LocalizacionOnEntryAction"/>
-		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.LocalizacionOnExitAction"/>
+	<view-state id="localizacion" parent="esmartpointBaseWebFlow#esmartpointFlowViewState" view="seguroHogar/localizacion" model="flowScope.model">
+		<var name="onEntryAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.LocalizacionOnEntryAction"/>
+		<var name="onExitAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.LocalizacionOnExitAction"/>
 	</view-state>
 	
-	<view-state id="sobreLaConstruccion" parent="generaliBaseWebFlow#GeneraliFlowViewState" view="seguroHogar/sobreLaConstruccion" model="flowScope.model">
-		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.SobreLaConstruccionOnEntryAction"/>
-		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.SobreLaConstruccionOnExitAction"/>
+	<view-state id="sobreLaConstruccion" parent="esmartpointBaseWebFlow#esmartpointFlowViewState" view="seguroHogar/sobreLaConstruccion" model="flowScope.model">
+		<var name="onEntryAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.SobreLaConstruccionOnEntryAction"/>
+		<var name="onExitAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.SobreLaConstruccionOnExitAction"/>
 	</view-state>
 	
-	<view-state id="caracteristicasDeLaVivienda" parent="generaliBaseWebFlow#GeneraliFlowViewState" view="seguroHogar/caracteristicasDeLaVivienda" model="flowScope.model">
-		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnEntryAction"/>
-		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnExitAction"/>
+	<view-state id="caracteristicasDeLaVivienda" parent="esmartpointBaseWebFlow#esmartpointFlowViewState" view="seguroHogar/caracteristicasDeLaVivienda" model="flowScope.model">
+		<var name="onEntryAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnEntryAction"/>
+		<var name="onExitAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.CaracteristicasDeLaViviendaOnExitAction"/>
 	</view-state>
 	
-	<view-state id="medidasDeSeguridadDeTuVivienda" parent="generaliBaseWebFlow#GeneraliFlowViewState" view="seguroHogar/medidasDeSeguridadDeTuVivienda" model="flowScope.model">
-		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnEntryAction"/>
-		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnExitAction"/>
+	<view-state id="medidasDeSeguridadDeTuVivienda" parent="esmartpointBaseWebFlow#esmartpointFlowViewState" view="seguroHogar/medidasDeSeguridadDeTuVivienda" model="flowScope.model">
+		<var name="onEntryAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnEntryAction"/>
+		<var name="onExitAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnExitAction"/>
 	</view-state>
 	
-	<view-state id="personalizarPaquete" parent="generaliBaseWebFlow#GeneraliFlowViewState" view="seguroHogar/personalizarPaquete" model="flowScope.model">
-		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.PersonalizarPaqueteOnEntryAction"/>
-		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.PersonalizarPaqueteOnExitAction"/>
+	<view-state id="personalizarPaquete" parent="esmartpointBaseWebFlow#esmartpointFlowViewState" view="seguroHogar/personalizarPaquete" model="flowScope.model">
+		<var name="onEntryAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.PersonalizarPaqueteOnEntryAction"/>
+		<var name="onExitAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.PersonalizarPaqueteOnExitAction"/>
 	</view-state>
 	
-	<view-state id="datosDelTitular" parent="generaliBaseWebFlow#GeneraliFlowViewState" view="seguroHogar/datosDelTitular" model="flowScope.model">
-		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDelTitularOnEntryAction"/>
-		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDelTitularOnExitAction"/>
+	<view-state id="datosDelTitular" parent="esmartpointBaseWebFlow#esmartpointFlowViewState" view="seguroHogar/datosDelTitular" model="flowScope.model">
+		<var name="onEntryAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.DatosDelTitularOnEntryAction"/>
+		<var name="onExitAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.DatosDelTitularOnExitAction"/>
 	</view-state>
 	
-	<view-state id="datosDeLaViviendaAAsegurar" parent="generaliBaseWebFlow#GeneraliFlowViewState" view="seguroHogar/datosDeLaViviendaAAsegurar" model="flowScope.model">
-		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnEntryAction"/>
-		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnExitAction"/>
+	<view-state id="datosDeLaViviendaAAsegurar" parent="esmartpointBaseWebFlow#esmartpointFlowViewState" view="seguroHogar/datosDeLaViviendaAAsegurar" model="flowScope.model">
+		<var name="onEntryAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnEntryAction"/>
+		<var name="onExitAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnExitAction"/>
 	</view-state>
 	
-	<view-state id="datosDePago" parent="generaliBaseWebFlow#GeneraliFlowViewState" view="seguroHogar/datosDePago" model="flowScope.model">
-		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDePagoOnEntryAction"/>
-		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.DatosDePagoOnExitAction"/>
+	<view-state id="datosDePago" parent="esmartpointBaseWebFlow#esmartpointFlowViewState" view="seguroHogar/datosDePago" model="flowScope.model">
+		<var name="onEntryAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.DatosDePagoOnEntryAction"/>
+		<var name="onExitAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.DatosDePagoOnExitAction"/>
 	</view-state>
 	
-	<view-state id="resumen" parent="generaliBaseWebFlow#GeneraliFlowViewState" view="seguroHogar/resumen" model="flowScope.model">
-		<var name="onEntryAction" class="es.generali.primefacespoc.controllers.seguroHogar.ResumenOnEntryAction"/>
-		<var name="onExitAction" class="es.generali.primefacespoc.controllers.seguroHogar.ResumenOnExitAction"/>
+	<view-state id="resumen" parent="esmartpointBaseWebFlow#esmartpointFlowViewState" view="seguroHogar/resumen" model="flowScope.model">
+		<var name="onEntryAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.ResumenOnEntryAction"/>
+		<var name="onExitAction" class="es.esmartpoint.primefacespoc.controllers.seguroHogar.ResumenOnExitAction"/>
 	</view-state>
 	
 </flow>

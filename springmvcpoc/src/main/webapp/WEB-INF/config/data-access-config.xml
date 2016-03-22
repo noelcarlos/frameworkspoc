@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<context:component-scan base-package="es.generali.strutspoc" />
+	<context:component-scan base-package="es.esmartpoint.strutspoc" />
 	
 	<!-- jdbc:hsqldb:mem:dataSource -->
 	<jdbc:embedded-database id="dataSource" type="H2">

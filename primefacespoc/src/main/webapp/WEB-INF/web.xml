@@ -18,7 +18,7 @@
 	<!-- To load flows and pages from JARs, use this resolver  
 	<context-param>
 	      <param-name>facelets.RESOURCE_RESOLVER</param-name>
-	      <param-value>es.generali.primefacespoc.support.web.ClassPathResourceResolver</param-value>
+	      <param-value>es.esmartpoint.primefacespoc.support.web.ClassPathResourceResolver</param-value>
 	</context-param>
 	-->
 		
@@ -118,7 +118,7 @@
 
 	<filter>
 		<filter-name>SessionCacheWebFilter</filter-name>
-		<filter-class>es.generali.primefacespoc.support.cache.SessionCacheWebFilter</filter-class>
+		<filter-class>es.esmartpoint.primefacespoc.support.cache.SessionCacheWebFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>SessionCacheWebFilter</filter-name>
