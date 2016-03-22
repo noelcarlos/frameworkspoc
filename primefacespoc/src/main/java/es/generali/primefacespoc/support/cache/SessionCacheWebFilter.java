@@ -37,19 +37,11 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionCacheWebFilter implements Filter {
 
-	static boolean inmediateSynchronization = false;
-
 	public void init(FilterConfig config) throws ServletException {
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest hsrHttpServletRequest = (HttpServletRequest) req;
-		
-		// Wrap request
-		if (inmediateSynchronization) {
-			hsrHttpServletRequest = new MyHttpServletRequestWrapper(hsrHttpServletRequest);
-			((MyHttpServletSessionWrapper)hsrHttpServletRequest.getSession()).createSecondCache();
-		}
 		
 		// Continue filter chain with filtered request
 		HttpServletResponse httpResponse = (HttpServletResponse) resp;
@@ -60,9 +52,6 @@ public class SessionCacheWebFilter implements Filter {
 			//System.out.println("PRIMEFACES Session size:" + getSessionSize(hsrHttpServletRequest.getSession()));
 			
 		} finally {
-			if (inmediateSynchronization) {
-				((MyHttpServletSessionWrapper)hsrHttpServletRequest.getSession()).releaseSecondCache();
-			}
 		}
 	}
 	

@@ -433,8 +433,8 @@
 		</repository>
 		<!-- PrimeFaces -->
 		<repository>
-			<id>primefaces</id>
-			<name>Prime Technology Maven Repository</name>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
 			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
