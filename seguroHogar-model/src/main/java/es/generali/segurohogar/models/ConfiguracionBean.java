@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class ConfiguracionBean implements Serializable {
 	private static final long serialVersionUID = 6707938793386834406L;
 	
+	/* Comentario */
 	Boolean queQuieresProtegerInicializar;
 	Boolean localizacionInicializar;
 	Boolean sobreLaConstruccionInicializar;
