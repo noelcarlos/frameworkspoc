@@ -14,8 +14,8 @@
 		<org.springframework-version>4.1.6.RELEASE</org.springframework-version>
 		<org.springsecurity-version>3.2.7.RELEASE</org.springsecurity-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
-		<java.source.version>1.8</java.source.version>
-        <java.target.version>1.8</java.target.version>
+		<java.source.version>1.7</java.source.version>
+        <java.target.version>1.7</java.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <tiles.version>3.0.3</tiles.version>
         

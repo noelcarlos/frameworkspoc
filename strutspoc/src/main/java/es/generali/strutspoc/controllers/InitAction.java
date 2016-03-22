@@ -16,7 +16,6 @@ import org.dom4j.DocumentHelper;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import es.generali.segurohogar.models.ConfiguracionBean;
-import es.generali.strutspoc.support.cache.MyHttpServletSessionWrapper;
 
 public class InitAction extends es.generali.strutspoc.support.BaseAction {
 	
@@ -55,8 +54,6 @@ public class InitAction extends es.generali.strutspoc.support.BaseAction {
 		
 		convertAndValidate(request, config, errors, messages);
 		session.setAttribute("config", config);
-		
-		MyHttpServletSessionWrapper.setUseDistributedCache(config.getUseDistributedCache());
 		
 		return mapping.findForward("app.configAplicada");
 	}

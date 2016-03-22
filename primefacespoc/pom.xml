@@ -17,8 +17,8 @@
         <jsf-version>2.2.5</jsf-version>
         <primefaces-version>5.3</primefaces-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
-		<java.source.version>1.8</java.source.version>
-        <java.target.version>1.8</java.target.version>
+		<java.source.version>1.7</java.source.version>
+        <java.target.version>1.7</java.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
 	</properties>
@@ -235,7 +235,7 @@
 		<dependency>
 	 		<groupId>org.primefaces.themes</groupId>
 	 		<artifactId>bootstrap</artifactId>
-	 		<version>1.0.9</version>
+	 		<version>1.0.10</version>
 		</dependency>
 		<!-- JAXEN -->
 		<dependency>

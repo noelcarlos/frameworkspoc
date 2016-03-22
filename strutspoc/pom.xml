@@ -10,8 +10,8 @@
 	<properties>
 		<projectName>strutspoc</projectName>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
-		<java.source.version>1.8</java.source.version>
-        <java.target.version>1.8</java.target.version>
+		<java.source.version>1.7</java.source.version>
+        <java.target.version>1.7</java.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <h2.version>1.4.187</h2.version>
         <spring.version>4.1.6.RELEASE</spring.version>

@@ -198,40 +198,11 @@ public class GeneraliWebFlowEngine extends BaseWebFlowController {
 	}
 	
 	public void bindInputParameters(RequestContext requestContext) throws Exception {
-		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
-		String gotoState = flowScope.getString("_gotoState");
-		if (gotoState != null) {
-			flowScope.asMap().forEach((key, value) -> {
-				Object v = getBeanFromCache(flowScope.getString("_parentId"), key);
-				if (isInternalParam(key)) {
-					return;
-				}
-				if (isInternalObject(value)) {
-					return;
-				}
-				if (value != null && v.getClass().isInstance(value)) {
-					requestContext.getFlowExecutionContext().getDefinition();
-					flowScope.put(key, v);
-				}
-			});
-		}
+		
 	}
 	
 	public void bindOutputParameters(RequestContext requestContext) throws Exception {
-		MutableAttributeMap<Object> flowScope = requestContext.getFlowScope();
-		flowScope.asMap().forEach((key, value) -> {
-			Object v = flowScope.get(key);
-			if (isInternalParam(key)) {
-				return;
-			}
-			if (isInternalObject(value)) {
-				return;
-			}
-			if (v != null && value != null && v.getClass().isInstance(value)) {
-				requestContext.getFlowExecutionContext().getDefinition();
-				putBeanToCache(session.getId(), key, v);
-			}
-		});
+		
 	}
 
 	public int getCurrentStep() {

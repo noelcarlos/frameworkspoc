@@ -10,11 +10,12 @@ import org.springframework.web.context.WebApplicationContext;
 import es.generali.segurohogar.models.SeguroViviendaBean;
 import es.generali.strutspoc.support.OnExitActionBase;
 import es.generali.strutspoc.support.Validator;
+import es.generali.strutspoc.support.Validator.ErrorFunction;
 
 public class DatosDeLaViviendaAAsegurarOnExitAction extends OnExitActionBase<SeguroViviendaBean> {
 
 	public void execute(WebApplicationContext context, SeguroViviendaBean model, 
-			HttpServletRequest request, HttpServletResponse response, ActionErrors errors) throws Exception {
+			HttpServletRequest request, HttpServletResponse response, final ActionErrors errors) throws Exception {
 		log.info("After Step 8");
 		
 		new Validator()
@@ -25,10 +26,12 @@ public class DatosDeLaViviendaAAsegurarOnExitAction extends OnExitActionBase<Seg
 			.mandatory("codigoPostalVivienda")
 			.mandatory("localidadVivienda")
 			.mandatory("provinciaViviendaId")
-			.validate(request, (fieldName, message)-> {
-	    		errors.add(fieldName, new ActionError("error.literal", message));
-			}
-		);
+			.validate(request, new ErrorFunction() {
+				@Override
+				public void onError(String fieldname, String message) {
+		    		errors.add(fieldname, new ActionError("error.literal", message));
+				}
+		});
 		
 	}
 	
