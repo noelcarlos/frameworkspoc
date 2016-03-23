@@ -1,0 +1,37 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui">
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="separator-sm"></div>
+		<div class="btn-group" role="group" aria-label="..."> 
+			<ui:repeat var="result" value="#{drdc24WebFlowEngine.flow.selectNodes('//flow/step')}">
+				<ui:fragment rendered="#{!(drdc24WebFlowEngine.currentStep lt result.valueOf('@name'))}" >
+					<p:commandLink action="#{'gobackward-'.concat(result.valueOf('@view'))}" 
+						styleClass="btn #{drdc24WebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-default'}
+						 #{!flowScope.config[result.valueOf('@view').concat('Externo')] ? 'external-step' : 'internal-step'}"
+						ajax="false" process="@this" immediate="true">
+						#{result.valueOf("@menu")}
+					</p:commandLink>
+				</ui:fragment>
+				<ui:fragment rendered="#{drdc24WebFlowEngine.currentStep lt result.valueOf('@name')}" >
+					<p:commandLink action="#{'goforward-'.concat(result.valueOf('@view'))}" 
+						styleClass="btn #{drdc24WebFlowEngine.currentStep.toString().equals(result.valueOf('@name')) ? 'btn-success' : 'btn-primary'}
+						 #{!flowScope.config[result.valueOf('@view').concat('Externo')] ? 'external-step' : 'internal-step'}"
+						ajax="false">
+						#{result.valueOf("@menu")}
+					</p:commandLink>
+				</ui:fragment>			
+			</ui:repeat>
+		</div>
+		<div class="separator-sm"></div>
+		<h2>#{drdc24WebFlowEngine.currentPageNumber} - #{drdc24WebFlowEngine.currentPageTitle}</h2>
+		<div class="separator-sm"></div>
+	</div>
+</div>
+
+</ui:composition>

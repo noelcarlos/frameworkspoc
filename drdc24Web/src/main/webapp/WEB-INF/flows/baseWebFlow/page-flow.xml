@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      abstract="true">
+	
+	<!-- Controllers -->
+	<var name="drdc24WebFlowEngine" class="com.allianz.drdc24.controllers.Drdc24WebFlowEngine"/>
+	
+	<!-- Flow internal variables -->
+	<input name="_gotoState" />
+	<input name="_parentId" />
+	<input name="_flowToView" />
+	
+	<on-start>
+		<evaluate expression="drdc24WebFlowEngine.bindInputParameters(flowRequestContext)" />
+	</on-start>
+	
+	<view-state id="drdc24FlowViewState">
+	
+		<on-entry>
+			<evaluate expression="drdc24WebFlowEngine.beforeOnEntryEvaluations()" />
+			<evaluate expression="onEntryAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="drdc24WebFlowEngine.afterOnEntryEvaluations()" />
+		</on-entry>
+		
+		<transition on-exception="com.allianz.drdc24.support.ControlledExit"  to="#{viewScope.nextView}" history="invalidate">
+		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
+			<evaluate expression="drdc24WebFlowEngine.onStep('goforward-next')" />
+		</transition>
+		
+		<transition on="#{currentEvent.id.startsWith('goforward-')}" to="#{viewScope.nextView}" >
+		 	<evaluate expression="onExitAction.execute(flowRequestContext, flowScope.model)" />
+		 	<evaluate expression="drdc24WebFlowEngine.onStep(currentEvent.id)" />
+		</transition>
+	
+		<transition on="#{currentEvent.id.startsWith('gobackward-')}" to="#{viewScope.nextView}" bind="false" validate="false" history="invalidate">
+		 	<evaluate expression="drdc24WebFlowEngine.onStep(currentEvent.id)" />
+		</transition>
+		
+		<transition on-exception="com.allianz.drdc24.support.ExternalExit" to="_externalView" bind="false" validate="false" history="invalidate">
+			<evaluate expression="drdc24WebFlowEngine.executeExternalLink(flowRequestContext, rootCauseException)" />
+		</transition>
+
+	</view-state>
+	
+	<end-state id="_externalView" view="externalRedirect:serverRelative:#{flashScope._externalURL}"/>
+
+</flow>

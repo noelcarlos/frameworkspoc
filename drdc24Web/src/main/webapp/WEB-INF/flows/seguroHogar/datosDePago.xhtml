@@ -1,0 +1,76 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="../../layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>
+	
+		<div class="row">
+			<div class="col-md-7">
+				<div class="row clearfix">
+					<div class="form-group col-md-2">
+						<h:outputLabel for="cuentaIBAN" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cuentaIBAN']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="cuentaIBAN" value="#{model.cuentaIBAN}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.cuentaIBAN']}"/>
+					</div>	
+					<div class="form-group col-md-2">
+						<h:outputLabel for="cuentaEntidad" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cuentaEntidad']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="cuentaEntidad" value="#{model.cuentaEntidad}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.cuentaEntidad']}"/>
+					</div>
+					<div class="form-group col-md-2">
+						<h:outputLabel for="cuentaOficina" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cuentaOficina']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="cuentaOficina" value="#{model.cuentaOficina}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.cuentaOficina']}"/>
+					</div>
+					<div class="form-group col-md-2">
+						<h:outputLabel for="cuentaDigitoControl" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cuentaDigitoControl']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="cuentaDigitoControl" value="#{model.cuentaDigitoControl}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.cuentaDigitoControl']}"/>
+					</div>
+					<div class="form-group col-md-3">
+						<h:outputLabel for="cuentaNumero" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.cuentaNumero']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:inputText id="cuentaNumero" value="#{model.cuentaNumero}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.cuentaNumero']}"/>
+					</div>
+				</div>			
+				
+				<div class="row clearfix">
+					<div class="form-group col-md-4">
+						<h:outputLabel for="fechaDeEfecto" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.fechaDeEfecto']}: <span class="glyphicon glyphicon-mandatory" />
+						</h:outputLabel>
+						<p:calendar id="fechaDeEfecto" label="#{msg['seguroViviendaBean.edit.fechaDeEfecto']}"  
+							value="#{model.fechaDeEfecto}" pattern="dd/MM/yyyy" 
+							styleClass="form-control" />
+					</div>			
+				</div>
+				
+			</div>	
+		</div>
+	
+		<ui:include src="../../commons/flowButtons.xhtml" />
+	</h:form>
+	
+</ui:define>
+
+</ui:composition> 

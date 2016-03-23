@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      parent="baseWebFlow">
+	
+	<!-- Controllers -->
+	<var name="seguroHogarFlowAction" class="com.allianz.drdc24.controllers.SeguroHogarFlowAction"/>
+	
+	<!-- Mapped model data -->
+	<var name="model" class="com.allianz.drdc24.models.SeguroViviendaBean" />
+	<var name="config" class="com.allianz.drdc24.models.ConfiguracionBean" />
+	
+	<action-state id="startCheck">
+		<evaluate expression="drdc24WebFlowEngine.onInit()" />
+		<transition on="#{flowScope._gotoState != null}" to="#{flowScope._gotoState}" />
+		<transition to="queQuieresProteger" />
+		<on-exit>
+			<evaluate expression="seguroHogarFlowAction.onInit(flowRequestContext)" />
+		</on-exit>
+	</action-state>
+	
+	<view-state id="queQuieresProteger" parent="baseWebFlow#drdc24FlowViewState">
+		<var name="onEntryAction" class="com.allianz.drdc24.controllers.seguroHogar.QueQuieresProtegerOnEntryAction"/>
+		<var name="onExitAction" class="com.allianz.drdc24.controllers.seguroHogar.QueQuieresProtegerOnExitAction"/>
+	</view-state>
+
+	<view-state id="localizacion" parent="baseWebFlow#drdc24FlowViewState">
+		<var name="onEntryAction" class="com.allianz.drdc24.controllers.seguroHogar.LocalizacionOnEntryAction"/>
+		<var name="onExitAction" class="com.allianz.drdc24.controllers.seguroHogar.LocalizacionOnExitAction"/>
+	</view-state>
+	
+	<view-state id="sobreLaConstruccion" parent="baseWebFlow#drdc24FlowViewState">
+		<var name="onEntryAction" class="com.allianz.drdc24.controllers.seguroHogar.SobreLaConstruccionOnEntryAction"/>
+		<var name="onExitAction" class="com.allianz.drdc24.controllers.seguroHogar.SobreLaConstruccionOnExitAction"/>
+	</view-state>
+	
+	<view-state id="caracteristicasDeLaVivienda" parent="baseWebFlow#drdc24FlowViewState">
+		<var name="onEntryAction" class="com.allianz.drdc24.controllers.seguroHogar.CaracteristicasDeLaViviendaOnEntryAction"/>
+		<var name="onExitAction" class="com.allianz.drdc24.controllers.seguroHogar.CaracteristicasDeLaViviendaOnExitAction"/>
+	</view-state>
+	
+	<view-state id="medidasDeSeguridadDeTuVivienda" parent="baseWebFlow#drdc24FlowViewState">
+		<var name="onEntryAction" class="com.allianz.drdc24.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnEntryAction"/>
+		<var name="onExitAction" class="com.allianz.drdc24.controllers.seguroHogar.MedidasDeSeguridadDeTuViviendaOnExitAction"/>
+	</view-state>
+	
+	<view-state id="personalizarPaquete" parent="baseWebFlow#drdc24FlowViewState">
+		<var name="onEntryAction" class="com.allianz.drdc24.controllers.seguroHogar.PersonalizarPaqueteOnEntryAction"/>
+		<var name="onExitAction" class="com.allianz.drdc24.controllers.seguroHogar.PersonalizarPaqueteOnExitAction"/>
+	</view-state>
+	
+	<view-state id="datosDelTitular" parent="baseWebFlow#drdc24FlowViewState">
+		<var name="onEntryAction" class="com.allianz.drdc24.controllers.seguroHogar.DatosDelTitularOnEntryAction"/>
+		<var name="onExitAction" class="com.allianz.drdc24.controllers.seguroHogar.DatosDelTitularOnExitAction"/>
+	</view-state>
+	
+	<view-state id="datosDeLaViviendaAAsegurar" parent="baseWebFlow#drdc24FlowViewState">
+		<var name="onEntryAction" class="com.allianz.drdc24.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnEntryAction"/>
+		<var name="onExitAction" class="com.allianz.drdc24.controllers.seguroHogar.DatosDeLaViviendaAAsegurarOnExitAction"/>
+	</view-state>
+	
+	<view-state id="datosDePago" parent="baseWebFlow#drdc24FlowViewState">
+		<var name="onEntryAction" class="com.allianz.drdc24.controllers.seguroHogar.DatosDePagoOnEntryAction"/>
+		<var name="onExitAction" class="com.allianz.drdc24.controllers.seguroHogar.DatosDePagoOnExitAction"/>
+	</view-state>
+	
+	<view-state id="resumen" parent="baseWebFlow#drdc24FlowViewState">
+		<var name="onEntryAction" class="com.allianz.drdc24.controllers.seguroHogar.ResumenOnEntryAction"/>
+		<var name="onExitAction" class="com.allianz.drdc24.controllers.seguroHogar.ResumenOnExitAction"/>
+	</view-state>
+	
+</flow>

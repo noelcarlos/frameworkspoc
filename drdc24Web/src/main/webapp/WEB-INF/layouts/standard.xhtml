@@ -1,0 +1,82 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" lang="en">
+
+<f:view contentType="text/html">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Primefaces/SWF POC</title>
+	
+	<link rel="shortcut icon" href="${request.contextPath}/resources/icons/favicon.ico?v2" />
+	
+    <link href="${request.contextPath}/web/resources/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="${request.contextPath}/web/resources/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="${request.contextPath}/web/resources/plugins/awesome-bootstrap/awesome-bootstrap-checkbox.css" rel="stylesheet" />
+	
+ 	<!-- App Style -->
+	<link href="${request.contextPath}/web/resources/style.css" rel="stylesheet" />
+	<link href="${request.contextPath}/web/resources/app.css" rel="stylesheet" />
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
+    <script src="${request.contextPath}/web/resources/jquery-1.11.3/jquery-1.11.3.min.js"></script>
+    -->
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="${request.contextPath}/web/resources/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+
+	<SCRIPT type="text/javascript">
+    	function selectAllSetupChecksInicializar() {
+   			$( ".chkComponentInicializar" ).each(function() {
+    			if ($("#allInicializar").is(':checked')) {
+    			 	$(this).prop('checked', true);
+    			} else {
+    			  	$(this).prop('checked', false);
+    			}
+    		});
+    	}
+    	function selectAllSetupChecksExterno() {
+   			$( ".chkComponentExterno" ).each(function() {
+    			if ($("#allExterno").is(':checked')) {
+    			 	$(this).prop('checked', true);
+    			} else {
+    			  	$(this).prop('checked', false);
+    			}
+    		});
+    	}
+    </SCRIPT>	
+	
+</h:head>
+<h:body>
+
+	<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" style="dark-gray-back">
+		<div class="header-block allianz-back">
+			<div class="container">
+				<ui:include src="shared/header.xhtml"></ui:include>
+			</div>
+		</div>
+	
+		<div class="container" style="background: #fff;min-height: 600px;">
+			<ui:insert name="content"/>
+		</div>
+		
+		<div class="footer-block allianz-back">
+			<div class="container">
+				<ui:include src="shared/footer.xhtml"></ui:include>
+			</div>
+		</div>
+	</body>
+	
+</h:body>
+</f:view>
+</html>

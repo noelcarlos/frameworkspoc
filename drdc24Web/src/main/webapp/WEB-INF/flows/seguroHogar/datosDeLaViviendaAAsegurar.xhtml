@@ -1,0 +1,79 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="../../layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>
+	
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row clearfix">
+					<div class="form-group col-md-2">
+						<label for="tipoDeViaViviendaId" class="control-label">
+							#{msg['seguroViviendaBean.edit.tipoDeViaViviendaId']}:
+							<span class="glyphicon glyphicon-mandatory" />
+						</label>
+						<h:selectOneMenu id="tipoDeViaViviendaId" value="#{model.tipoDeViaViviendaId}" 
+							label="#{msg['seguroViviendaBean.edit.tipoDeViaViviendaId']}" styleClass="form-control">
+							<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
+							<f:selectItems value="#{tiposDeVias}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
+						</h:selectOneMenu>
+					</div>
+					<div class="form-group col-md-2">
+						<label for="domicilioVivienda" class="control-label">
+							#{msg['seguroViviendaBean.edit.domicilioVivienda']}: <span class="glyphicon glyphicon-mandatory" />
+						</label>
+						<p:inputText id="domicilioVivienda" value="#{model.domicilioVivienda}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.domicilioVivienda']}"/>
+					</div>
+					<div class="form-group col-md-2">
+						<label for="numeroYPisoVivienda" class="control-label">
+							#{msg['seguroViviendaBean.edit.numeroYPisoVivienda']}: <span class="glyphicon glyphicon-mandatory" />
+						</label>
+						<p:inputText id="numeroYPisoVivienda" value="#{model.numeroYPisoVivienda}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.numeroYPisoVivienda']}"/>
+					</div>
+					<div class="form-group col-md-2">
+						<label for="codigoPostalVivienda" class="control-label">
+							#{msg['seguroViviendaBean.edit.codigoPostalVivienda']}: <span class="glyphicon glyphicon-mandatory" />
+						</label>
+						<p:inputText id="codigoPostalVivienda" value="#{model.codigoPostalVivienda}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.codigoPostalVivienda']}"/>
+					</div>
+					<div class="form-group col-md-2">
+						<label for="localidadVivienda" class="control-label">
+							#{msg['seguroViviendaBean.edit.localidadVivienda']}: <span class="glyphicon glyphicon-mandatory" />
+						</label>
+						<p:inputText id="localidadVivienda" value="#{model.localidadVivienda}" 
+							styleClass="form-control" label="#{msg['seguroViviendaBean.edit.localidadVivienda']}"/>
+					</div>
+					<div class="form-group col-md-2">
+						<label for="provinciaViviendaId" class="control-label">
+							#{msg['seguroViviendaBean.edit.provinciaViviendaId']}:
+							<span class="glyphicon glyphicon-mandatory" />
+						</label>
+						<h:selectOneMenu id="provinciaViviendaId" value="#{model.provinciaViviendaId}" 
+							label="#{msg['seguroViviendaBean.edit.provinciaViviendaId']}" styleClass="form-control">
+							<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
+							<f:selectItems value="#{provincias}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
+						</h:selectOneMenu>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<ui:include src="../../commons/flowButtons.xhtml" />
+	</h:form>
+	
+</ui:define>
+
+</ui:composition>

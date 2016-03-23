@@ -1,0 +1,55 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="../../layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>
+	
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="metrosCuadradosConstruidos" class="control-label">
+						#{msg['seguroViviendaBean.edit.metrosCuadradosConstruidos']}: <span class="glyphicon glyphicon-mandatory" />
+					</label>
+					<p:inputText id="metrosCuadradosConstruidos" value="#{model.metrosCuadradosConstruidos}" 
+						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.metrosCuadradosConstruidos']}"/>	
+				</div>			
+				<div class="form-group">
+					<label for="numeroDeDormitorios" class="control-label">
+						#{msg['seguroViviendaBean.edit.numeroDeDormitorios']}: <span class="glyphicon glyphicon-mandatory" />
+					</label>
+					<p:inputText id="numeroDeDormitorios" value="#{model.numeroDeDormitorios}" 
+						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.numeroDeDormitorios']}"/>	
+				</div>	
+				<div class="form-group">
+					<label for="anyoDeConstruccion" class="control-label">
+						#{msg['seguroViviendaBean.edit.anyoDeConstruccion']}: <span class="glyphicon glyphicon-mandatory" />
+					</label>
+					<p:inputText id="anyoDeConstruccion" value="#{model.anyoDeConstruccion}" 
+						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.anyoDeConstruccion']}"/>	
+				</div>			
+				<div class="form-group">
+					<label for="anyoDeLaUltimaRehabilitacion" class="control-label">
+						#{msg['seguroViviendaBean.edit.anyoDeLaUltimaRehabilitacion']}: <span class="glyphicon glyphicon-mandatory" />
+					</label>
+					<p:inputText id="anyoDeLaUltimaRehabilitacion" value="#{model.anyoDeLaUltimaRehabilitacion}" 
+						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.anyoDeLaUltimaRehabilitacion']}"/>	
+				</div>
+			</div>	
+		</div>
+	
+		<ui:include src="../../commons/flowButtons.xhtml" />
+	</h:form>
+	
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,33 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui">
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="separator-sm"></div>
+		<div class="btn-group" role="group" aria-label="...">
+			<p:commandLink id="goforwardFirst" action="gobackward-first" styleClass="btn btn-default" ajax="false"  
+				disabled="#{drdc24WebFlowEngine.currentStep == 1}" immediate="true">
+				Inicio
+			</p:commandLink>
+			<p:commandLink id="goforwardPrevious" action="gobackward-previous" styleClass="btn btn-default" ajax="false"
+				disabled="#{drdc24WebFlowEngine.currentStep == 1}" immediate="true">
+				Anterior
+			</p:commandLink>
+			<p:commandLink id="goforwardNext" action="goforward-next" styleClass="btn btn-primary" ajax="false"
+				disabled="#{drdc24WebFlowEngine.currentStep == drdc24WebFlowEngine.lastPageNumber}">
+				Siguiente
+			</p:commandLink>
+			<p:commandLink id="goforwardLast"  action="goforward-last" styleClass="btn btn-default" ajax="false"
+				disabled="#{drdc24WebFlowEngine.currentStep == drdc24WebFlowEngine.lastPageNumber}">
+				Última
+			</p:commandLink>
+		</div>
+		<div class="separator-sm"></div>
+	</div>
+</div>
+
+</ui:composition>

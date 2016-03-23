@@ -1,0 +1,61 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="../../layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>  
+	
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="tipoDeConstruccionId" class="control-label">
+						#{msg['seguroViviendaBean.edit.tipoDeConstruccionId']}:
+						<span class="glyphicon glyphicon-mandatory" />
+					</label>
+					<h:selectOneMenu id="tipoDeConstruccionId" value="#{model.tipoDeConstruccionId}" 
+						label="#{msg['seguroViviendaBean.edit.tipoDeConstruccionId']}" styleClass="form-control">
+						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
+						<f:selectItems value="#{tiposDeConstrucciones}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
+					</h:selectOneMenu>					
+				</div>	
+				<div class="form-group">
+					<label for="calidadDeLaConstruccionId" class="control-label">
+						#{msg['seguroViviendaBean.edit.calidadDeLaConstruccionId']}:
+						<span class="glyphicon glyphicon-mandatory" />
+					</label>
+					<h:selectOneMenu id="calidadDeLaConstruccionId" value="#{model.calidadDeLaConstruccionId}" 
+						label="#{msg['seguroViviendaBean.edit.calidadDeLaConstruccionId']}" styleClass="form-control">
+						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
+						<f:selectItems value="#{calidadesDeLasConstrucciones}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
+					</h:selectOneMenu>					
+				</div>
+				<div class="form-group">
+					<label for="tipologiaDeLaViviendaId" class="control-label">
+						#{msg['seguroViviendaBean.edit.tipologiaDeLaViviendaId']}:
+						<span class="glyphicon glyphicon-mandatory" />
+					</label>
+					<h:selectOneMenu id="tipologiaDeLaViviendaId" value="#{model.tipologiaDeLaViviendaId}" 
+						label="#{msg['seguroViviendaBean.edit.tipologiaDeLaViviendaId']}" styleClass="form-control">
+						<f:selectItem itemValue="" itemLabel="" ></f:selectItem>
+						<f:selectItems value="#{tipologiasDeLasViviendas}" var="item" itemLabel="#{item.ID} - #{item.NOMBRE}" itemValue="#{item.ID}" />
+					</h:selectOneMenu>					
+				</div>		 			
+			</div>	
+		</div>
+	
+		<ui:include src="../../commons/flowButtons.xhtml" />
+	</h:form>
+	
+</ui:define>
+
+</ui:composition>	
+ 

@@ -1,0 +1,111 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="../../layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<h:form id="dataForm">
+		<ui:include src="../../commons/flowMenu.xhtml" />
+		<ui:include src="../../commons/flowFormErrors.xhtml"  />
+		
+		<p:messages showDetail="false" showSummary="true"/>
+	
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<h:outputLabel for="capitalAseguradoVivienda" styleClass="control-label">
+						#{msg['seguroViviendaBean.edit.capitalAseguradoVivienda']}: <span class="glyphicon glyphicon-mandatory" />
+					</h:outputLabel>
+					<p:inputText id="capitalAseguradoVivienda" value="#{model.capitalAseguradoVivienda}" 
+						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.capitalAseguradoVivienda']}"/>	
+				</div>			
+				<div class="form-group">
+					<h:outputLabel for="capitalAseguradoEnseres" styleClass="control-label">
+						#{msg['seguroViviendaBean.edit.capitalAseguradoEnseres']}: <span class="glyphicon glyphicon-mandatory" />
+					</h:outputLabel>
+					<p:inputText id="capitalAseguradoEnseres" value="#{model.capitalAseguradoEnseres}" 
+						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.capitalAseguradoEnseres']}"/>	
+				</div>			
+				<div class="form-group">
+					<h:outputLabel for="valorResponsabilidadCivil" styleClass="control-label">
+						#{msg['seguroViviendaBean.edit.valorResponsabilidadCivil']}: <span class="glyphicon glyphicon-mandatory" />
+					</h:outputLabel>
+					<p:inputText id="valorResponsabilidadCivil" value="#{model.valorResponsabilidadCivil}" 
+						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.valorResponsabilidadCivil']}"/>	
+				</div>
+						
+				<div class="form-group">
+					<label class="control-label">Opciones</label>
+					<div class="checkbox checkbox-primary">
+						<h:selectBooleanCheckbox id="opcionRotura" 
+							value="#{model.opcionRotura}" />
+						<h:outputLabel for="opcionRotura" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.opcionRotura']}
+						</h:outputLabel>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<h:selectBooleanCheckbox id="opcionRobo" 
+							value="#{model.opcionRobo}" />
+						<h:outputLabel for="opcionRobo" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.opcionRobo']}
+						</h:outputLabel>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<h:selectBooleanCheckbox id="opcionDefensaJuridica" 
+							value="#{model.opcionDefensaJuridica}" />
+						<h:outputLabel for="opcionDefensaJuridica" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.opcionDefensaJuridica']}
+						</h:outputLabel>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<h:selectBooleanCheckbox id="opcionInhabilidad" 
+							value="#{model.opcionInhabilidad}" />
+						<h:outputLabel for="opcionInhabilidad" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.opcionInhabilidad']}
+						</h:outputLabel>
+					</div>
+					<div class="checkbox checkbox-primary">
+						<h:selectBooleanCheckbox id="opcionAsistenciaInformatica" 
+							value="#{model.opcionAsistenciaInformatica}" />
+						<h:outputLabel for="opcionAsistenciaInformatica" styleClass="control-label">
+							#{msg['seguroViviendaBean.edit.opcionAsistenciaInformatica']}
+						</h:outputLabel>
+					</div>
+				</div>	
+				
+				<div class="form-group">
+					<h:outputLabel for="capitalAseguradoJoyas" styleClass="control-label">
+						#{msg['seguroViviendaBean.edit.capitalAseguradoJoyas']}: <span class="glyphicon glyphicon-mandatory" />
+					</h:outputLabel>
+					<p:inputText id="capitalAseguradoJoyas" value="#{model.capitalAseguradoJoyas}" 
+						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.capitalAseguradoJoyas']}"/>	
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="capitalAseguradoObjetosDeValor" styleClass="control-label">
+						#{msg['seguroViviendaBean.edit.capitalAseguradoObjetosDeValor']}: <span class="glyphicon glyphicon-mandatory" />
+					</h:outputLabel>
+					<p:inputText id="capitalAseguradoObjetosDeValor" value="#{model.capitalAseguradoObjetosDeValor}" 
+						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.capitalAseguradoObjetosDeValor']}"/>	
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="capitalAseguradoRecomposicionEstetica" styleClass="control-label">
+						#{msg['seguroViviendaBean.edit.capitalAseguradoRecomposicionEstetica']}: <span class="glyphicon glyphicon-mandatory" />
+					</h:outputLabel>
+					<p:inputText id="capitalAseguradoRecomposicionEstetica" value="#{model.capitalAseguradoRecomposicionEstetica}" 
+						styleClass="form-control" label="#{msg['seguroViviendaBean.edit.capitalAseguradoRecomposicionEstetica']}"/>	
+				</div>
+						
+			</div>	
+		</div>
+	
+		<ui:include src="../../commons/flowButtons.xhtml" />
+	</h:form>
+	
+</ui:define>
+
+</ui:composition>
+ 
