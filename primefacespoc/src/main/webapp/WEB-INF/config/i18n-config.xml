@@ -26,7 +26,7 @@
 	    <property name="defaultEncoding" value="UTF-8" />
 	    <property name="useCodeAsDefaultMessage" value="true" />
 	    <!-- PERFORMANCE: Use -1 for production and 1 for Development -->
-	    <property name="cacheSeconds" value="-1"/>
+	    <property name="cacheSeconds" value="1"/>
 	</bean>
 	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" >
