@@ -1,0 +1,138 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:p="http://primefaces.org/ui"
+				template="../../layouts/standard.xhtml">
+
+<ui:define name="content">
+
+	<div class="row">
+		<div class="col-md-6">
+			<h2>DASHBOARD</h2>
+		</div>
+	</div>
+	<h:form id="setupForm">
+		<p:messages showDetail="false" showSummary="true"/>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="h3">ACTIVITY</div>
+					</div>
+				</div>
+				<div class="separator-sm"/> 
+				<ul class="list-group clear-list m-t no-box">
+					<li class="list-group-item fist-item">
+						<span class="label label-default">1</span>
+						&nbsp;Total requests
+						<span class="pull-right">51,238,438</span>
+					</li>
+					<li class="list-group-item fist-item">
+						<span class="label label-warning">1</span>
+						&nbsp;Ignored requests
+						<span class="pull-right">50,581,123</span>
+					</li>
+					<li class="list-group-item fist-item">
+						<span class="label label-success">1</span>
+						&nbsp;Allowed requests
+						<span class="pull-right">1,581,123</span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="h3">
+							APP List
+							<span class="pull-right">
+								<p:commandLink id="saveButton" action="save" update="@form" ajax="true" styleClass="btn btn-primary">
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
+								</p:commandLink>
+							</span>
+							<span class="pull-right">
+								<p:inputText value="#{flowScope.searchText}" styleClass="form-control" />
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="separator-sm"/> 
+				<p:dataTable var="p" value="#{appDataModel}" rowKey="#{p.id}"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {CurrentPageReport}"
+					currentPageReportTemplate="Showing {startRecord}-{endRecord} / Page {currentPage}"
+					paginator="true" rows="10" lazy="true" paginatorPosition="bottom">
+					<p:column headerText="ID" >
+						<h:outputText value="#{p.id}" />
+					</p:column>
+					<p:column headerText="NAME" >
+						<h:outputText value="#{p.name}" />
+					</p:column>
+					<p:column headerText="LOCAL" >
+						<ui:fragment rendered="#{p.loc_action_id == 1}">
+							<span class="label label-success">Allowed</span>
+						</ui:fragment>
+						<ui:fragment rendered="#{p.loc_action_id == 2}">
+							<span class="label label-danger">Ignored</span>
+						</ui:fragment>
+					</p:column>
+					<p:column headerText="DEV" >
+						<ui:fragment rendered="#{p.dev_action_id == 1}">
+							<span class="label label-success">Allowed</span>
+						</ui:fragment>
+						<ui:fragment rendered="#{p.dev_action_id == 2}">
+							<span class="label label-danger">Ignored</span>
+						</ui:fragment>
+					</p:column>
+					<p:column headerText="INT" >
+						<ui:fragment rendered="#{p.int_action_id == 1}">
+							<span class="label label-success">Allowed</span>
+						</ui:fragment>
+						<ui:fragment rendered="#{p.int_action_id == 2}">
+							<span class="label label-danger">Ignored</span>
+						</ui:fragment>
+					</p:column>
+					<p:column headerText="FDG" >
+						<ui:fragment rendered="#{p.fdg_action_id == 1}">
+							<span class="label label-success">Allowed</span>
+						</ui:fragment>
+						<ui:fragment rendered="#{p.fdg_action_id == 2}">
+							<span class="label label-danger">Ignored</span>
+						</ui:fragment>
+					</p:column>
+					<p:column headerText="PRE" >
+						<ui:fragment rendered="#{p.pre_action_id == 1}">
+							<span class="label label-success">Allowed</span>
+						</ui:fragment>
+						<ui:fragment rendered="#{p.pre_action_id == 2}">
+							<span class="label label-danger">Ignored</span>
+						</ui:fragment>
+					</p:column>
+					<p:column headerText="PRO" >
+						<ui:fragment rendered="#{p.pro_action_id == 1}">
+							<span class="label label-success">Allowed</span>
+						</ui:fragment>
+						<ui:fragment rendered="#{p.pro_action_id == 2}">
+							<span class="label label-danger">Ignored</span>
+						</ui:fragment>
+					</p:column>
+				</p:dataTable>
+			</div>
+		</div>
+		
+		<p:dataTable var="p" value="#{userList}" rowKey="#{p.id}"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {CurrentPageReport}"
+					currentPageReportTemplate="Showing {startRecord}-{endRecord} / Page {currentPage}"
+					paginator="true" rows="10" lazy="false" paginatorPosition="bottom">
+					<p:column headerText="ID" >
+						<h:outputText value="#{p.id}" />
+					</p:column>
+					<p:column headerText="NAME" >
+						<h:outputText value="#{p.name}" />
+					</p:column>
+		</p:dataTable>
+	</h:form>
+		
+</ui:define>
+
+</ui:composition>

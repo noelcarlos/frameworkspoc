@@ -37,7 +37,7 @@
 	
 	<!-- Configures the Spring Web Flow JSF integration -->
 	<!-- PERFORMANCE: Set development = false in production -->
-	<faces:flow-builder-services id="facesFlowBuilderServices" development="false" />
+	<faces:flow-builder-services id="facesFlowBuilderServices" development="true" />
 	
 	<!-- Installs a listener that creates and releases the FacesContext for each request. -->
 	<bean id="facesContextListener" class="org.springframework.faces.webflow.FlowFacesContextLifecycleListener"/>

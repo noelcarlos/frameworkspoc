@@ -1,60 +1,53 @@
-CREATE TABLE usuarios (
+CREATE TABLE users (
   id INTEGER PRIMARY KEY,
-  nombre VARCHAR(30),
-  mail VARCHAR(50)
+  name VARCHAR(30),
+  uid VARCHAR(50)
 );
 
-CREATE TABLE lk_tipos_usos_viviendas (
+CREATE TABLE apps (
   id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
+  name VARCHAR(30),
+  loc_action_id INTEGER DEFAULT 2,
+  dev_action_id INTEGER DEFAULT 2,
+  int_action_id INTEGER DEFAULT 1,
+  fdg_action_id INTEGER DEFAULT 2,
+  pre_action_id INTEGER DEFAULT 2,
+  pro_action_id INTEGER DEFAULT 2,
+  is_active BOOLEAN
 );
 
-CREATE TABLE lk_provincias (
+CREATE TABLE lk_action_types (
   id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
+  name VARCHAR(30),
+  is_active BOOLEAN
 );
 
-CREATE TABLE lk_localizaciones_viviendas (
+CREATE TABLE lk_environments (
   id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
+  name VARCHAR(30),
+  is_active BOOLEAN
 );
 
-CREATE TABLE lk_tipos_construcciones (
+CREATE TABLE lk_companies (
   id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
+  name VARCHAR(30),
+  is_active BOOLEAN
 );
 
-CREATE TABLE lk_calidades_construcciones (
+CREATE TABLE app_rules (
   id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
+  app_id INTEGER,
+  action_type_id INTEGER,
+  environments_id INTEGER,
+  company_id INTEGER
 );
 
-CREATE TABLE lk_tipologias_viviendas (
+CREATE TABLE app_rule_logs (
   id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
+  app_id INTEGER,
+  action_type_id INTEGER,
+  environments_id INTEGER,
+  user_id INTEGER,
+  creation_date TIMESTAMP
 );
 
-CREATE TABLE lk_opciones_personalizacion_seguro_vivienda (
-  id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
-);
-
-CREATE TABLE lk_periodos_contrataciones (
-  id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
-);
-
-CREATE TABLE lk_sexos (
-  id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
-);
-
-CREATE TABLE lk_tipos_documentos_identidad (
-  id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
-);
-
-CREATE TABLE lk_tipos_vias (
-  id INTEGER PRIMARY KEY,
-  nombre VARCHAR(64)
-);
