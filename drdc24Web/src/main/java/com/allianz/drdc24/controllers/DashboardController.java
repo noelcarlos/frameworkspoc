@@ -3,12 +3,15 @@ package com.allianz.drdc24.controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.allianz.drdc24.models.App;
-import com.allianz.drdc24.models.ConfiguracionBean;
 import com.allianz.drdc24.services.LookupService;
 
 public class DashboardController extends BaseWebFlowController {
@@ -17,11 +20,7 @@ public class DashboardController extends BaseWebFlowController {
 	@Autowired LookupService lookupService;
 	
 	public void onInit() throws Exception {
-		List<Map<String, Object>> userList = lookupService.userList();
-		flowScope.put("userList", userList);
-		List<Map<String, Object>> appList = lookupService.appList(null, 0, 10, null, true);
-		flowScope.put("appList", appList);
-		
+
 		LazyDataModel<App> appDataModel = new LazyDataModel<App>() {
 			private static final long serialVersionUID = 1L;
 			
@@ -31,17 +30,22 @@ public class DashboardController extends BaseWebFlowController {
 				List<App> res = lookupService.appListAll(
 					flowScope.getString("searchText"), first, pageSize*10+1, 
 					sortField, sortOrder == SortOrder.ASCENDING);
-				this.setRowCount(first + res.size());
-				
+				this.setRowCount(lookupService.appCount(flowScope.getString("searchText")));
 				return res;
 			}
 		};
 		
 		flowScope.put("appDataModel", appDataModel);
 	}
+	
+    @SuppressWarnings("unchecked")
+	public static <T extends UIComponent> T getComponent(String componentName) {
+        return (T)FacesContext.getCurrentInstance().getViewRoot().findComponent(componentName);
+    }
 
-	public boolean setup(ConfiguracionBean config) { 
-		session.setAttribute("config", config);
-		return true;
+	public void search() { 
+		DataTable dataTable = getComponent("form:dataList"); 
+		dataTable.setFirst(0);
+		dataTable.loadLazyData();
 	}	
 }

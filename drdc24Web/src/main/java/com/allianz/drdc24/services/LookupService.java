@@ -6,14 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -100,11 +99,35 @@ public class LookupService implements Serializable {
 	 
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = false)
-	public List<App> appListAll(String searchStr, int first, int size, String sortField, boolean sortAscending) {
+	public List<App> appListAll(String searchStr, Integer firstResult, Integer maxResults, String orderBy, Boolean isAscending) {
 		Criteria c = getSession().createCriteria(App.class);
 		if (searchStr != null && searchStr.trim().length() > 0) {
     		c.add(Restrictions.ilike("name", searchStr, MatchMode.ANYWHERE));
 		}
+		if (orderBy != null && isAscending != null) {
+			if (isAscending) {
+				c.addOrder(Order.asc(orderBy));
+			} else {
+				c.addOrder(Order.desc(orderBy));
+			}
+		}
+		if (firstResult != null) {
+			c.setFirstResult(firstResult);
+		}
+		if (maxResults != null) {
+			c.setMaxResults(maxResults);
+		}
 		return (List<App>)c.list();
+	}
+	
+	@Transactional(readOnly = false)
+	public Integer appCount(String searchStr) {
+		Criteria c = getSession().createCriteria(App.class);
+		if (searchStr != null && searchStr.trim().length() > 0) {
+    		c.add(Restrictions.ilike("name", searchStr, MatchMode.ANYWHERE));
+		}
+		c.setProjection(Projections.rowCount());
+		Number count = (Number) c.uniqueResult();
+		return count.intValue();
 	}
 }

@@ -12,7 +12,7 @@
 			<h2>DASHBOARD</h2>
 		</div>
 	</div>
-	<h:form id="setupForm">
+	<h:form id="form">
 		<p:messages showDetail="false" showSummary="true"/>
 
 		<div class="row">
@@ -45,9 +45,9 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="h3">
-							APP List
+							APP LIST
 							<span class="pull-right">
-								<p:commandLink id="saveButton" action="save" update="@form" ajax="true" styleClass="btn btn-primary">
+								<p:commandLink id="saveButton" action="search" update="@form" ajax="true" styleClass="btn btn-primary">
 									<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
 								</p:commandLink>
 							</span>
@@ -58,79 +58,67 @@
 					</div>
 				</div>
 				<div class="separator-sm"/> 
-				<p:dataTable var="p" value="#{appDataModel}" rowKey="#{p.id}"
-					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {CurrentPageReport}"
+				<p:dataTable id="dataList" var="p" value="#{appDataModel}" rowKey="#{p.id}"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
 					currentPageReportTemplate="Showing {startRecord}-{endRecord} / Page {currentPage}"
 					paginator="true" rows="10" lazy="true" paginatorPosition="bottom">
 					<p:column headerText="ID" >
 						<h:outputText value="#{p.id}" />
 					</p:column>
-					<p:column headerText="NAME" >
+					<p:column headerText="NAME" sortBy="#{p.name}">
 						<h:outputText value="#{p.name}" />
 					</p:column>
 					<p:column headerText="LOCAL" >
-						<ui:fragment rendered="#{p.loc_action_id == 1}">
+						<ui:fragment rendered="#{p.locActionId == 1}">
 							<span class="label label-success">Allowed</span>
 						</ui:fragment>
-						<ui:fragment rendered="#{p.loc_action_id == 2}">
+						<ui:fragment rendered="#{p.locActionId == 2}">
 							<span class="label label-danger">Ignored</span>
 						</ui:fragment>
 					</p:column>
 					<p:column headerText="DEV" >
-						<ui:fragment rendered="#{p.dev_action_id == 1}">
+						<ui:fragment rendered="#{p.devActionId == 1}">
 							<span class="label label-success">Allowed</span>
 						</ui:fragment>
-						<ui:fragment rendered="#{p.dev_action_id == 2}">
+						<ui:fragment rendered="#{p.devActionId == 2}">
 							<span class="label label-danger">Ignored</span>
 						</ui:fragment>
 					</p:column>
 					<p:column headerText="INT" >
-						<ui:fragment rendered="#{p.int_action_id == 1}">
+						<ui:fragment rendered="#{p.intActionId == 1}">
 							<span class="label label-success">Allowed</span>
 						</ui:fragment>
-						<ui:fragment rendered="#{p.int_action_id == 2}">
+						<ui:fragment rendered="#{p.intActionId == 2}">
 							<span class="label label-danger">Ignored</span>
 						</ui:fragment>
 					</p:column>
 					<p:column headerText="FDG" >
-						<ui:fragment rendered="#{p.fdg_action_id == 1}">
+						<ui:fragment rendered="#{p.fdgActionId == 1}">
 							<span class="label label-success">Allowed</span>
 						</ui:fragment>
-						<ui:fragment rendered="#{p.fdg_action_id == 2}">
+						<ui:fragment rendered="#{p.fdgActionId == 2}">
 							<span class="label label-danger">Ignored</span>
 						</ui:fragment>
 					</p:column>
 					<p:column headerText="PRE" >
-						<ui:fragment rendered="#{p.pre_action_id == 1}">
+						<ui:fragment rendered="#{p.preActionId == 1}">
 							<span class="label label-success">Allowed</span>
 						</ui:fragment>
-						<ui:fragment rendered="#{p.pre_action_id == 2}">
+						<ui:fragment rendered="#{p.preActionId == 2}">
 							<span class="label label-danger">Ignored</span>
 						</ui:fragment>
 					</p:column>
 					<p:column headerText="PRO" >
-						<ui:fragment rendered="#{p.pro_action_id == 1}">
+						<ui:fragment rendered="#{p.proActionId == 1}">
 							<span class="label label-success">Allowed</span>
 						</ui:fragment>
-						<ui:fragment rendered="#{p.pro_action_id == 2}">
+						<ui:fragment rendered="#{p.proActionId == 2}">
 							<span class="label label-danger">Ignored</span>
 						</ui:fragment>
 					</p:column>
 				</p:dataTable>
 			</div>
 		</div>
-		
-		<p:dataTable var="p" value="#{userList}" rowKey="#{p.id}"
-					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {CurrentPageReport}"
-					currentPageReportTemplate="Showing {startRecord}-{endRecord} / Page {currentPage}"
-					paginator="true" rows="10" lazy="false" paginatorPosition="bottom">
-					<p:column headerText="ID" >
-						<h:outputText value="#{p.id}" />
-					</p:column>
-					<p:column headerText="NAME" >
-						<h:outputText value="#{p.name}" />
-					</p:column>
-		</p:dataTable>
 	</h:form>
 		
 </ui:define>

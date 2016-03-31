@@ -207,11 +207,6 @@ public class App implements java.io.Serializable {
 		return locAction;
 	}
 	
-	/**
-	 * Setter for field product.
-	 *
-	 * @param productNew the new product field value
-	 */ 	
 	public void setLocAction(LkActionType locAction) {
 		this.locAction = locAction;
         if (locAction != null) {
@@ -226,12 +221,133 @@ public class App implements java.io.Serializable {
 		return locActionId;
 	}
 
-	/**
-	 * Setter for field product.
-	 *
-	 * @param productNew the new product field value
-	 */ 	
 	public void setLocActionId(Integer locActionId) {
 		this.locActionId = locActionId;
 	}
+	
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dev_action_id", nullable = false)
+	public LkActionType getDevAction() {
+		return devAction;
+	}
+	
+	public void setDevAction(LkActionType devAction) {
+		this.devAction = devAction;
+        if (devAction != null) {
+            setDevActionId(devAction.getId());
+        } else {
+            setDevActionId(null);
+        }
+	}
+	
+	@Column(name = "dev_action_id", insertable = false, updatable = false)
+	public Integer getDevActionId() {
+		return devActionId;
+	}
+
+	public void setDevActionId(Integer devActionId) {
+		this.devActionId = devActionId;
+	}
+	
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "int_action_id", nullable = false)
+	public LkActionType getIntAction() {
+		return intAction;
+	}
+	
+	public void setIntAction(LkActionType intAction) {
+		this.intAction = intAction;
+        if (intAction != null) {
+            setIntActionId(intAction.getId());
+        } else {
+        	setIntActionId(null);
+        }
+	}
+	
+	@Column(name = "int_action_id", insertable = false, updatable = false)
+	public Integer getIntActionId() {
+		return intActionId;
+	}
+
+	public void setIntActionId(Integer intActionId) {
+		this.intActionId = intActionId;
+	}
+	
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fdg_action_id", nullable = false)
+	public LkActionType getFdgAction() {
+		return fdgAction;
+	}
+	
+	public void setFdgAction(LkActionType fdgAction) {
+		this.fdgAction = fdgAction;
+        if (fdgAction != null) {
+            setFdgActionId(fdgAction.getId());
+        } else {
+        	setFdgActionId(null);
+        }
+	}
+	
+	@Column(name = "fdg_action_id", insertable = false, updatable = false)
+	public Integer getFdgActionId() {
+		return fdgActionId;
+	}
+
+	public void setFdgActionId(Integer fdgActionId) {
+		this.fdgActionId = fdgActionId;
+	}
+	
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pre_action_id", nullable = false)
+	public LkActionType getPreAction() {
+		return preAction;
+	}
+	
+	public void setPreAction(LkActionType preAction) {
+		this.preAction = preAction;
+        if (preAction != null) {
+            setPreActionId(preAction.getId());
+        } else {
+        	setPreActionId(null);
+        }
+	}
+	
+	@Column(name = "pre_action_id", insertable = false, updatable = false)
+	public Integer getPreActionId() {
+		return preActionId;
+	}
+
+	public void setPreActionId(Integer preActionId) {
+		this.preActionId = preActionId;
+	}
+	
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pro_action_id", nullable = false)
+	public LkActionType getProAction() {
+		return proAction;
+	}
+	
+	public void setProAction(LkActionType proAction) {
+		this.proAction = proAction;
+        if (proAction != null) {
+            setProActionId(proAction.getId());
+        } else {
+        	setProActionId(null);
+        }
+	}
+	
+	@Column(name = "pro_action_id", insertable = false, updatable = false)
+	public Integer getProActionId() {
+		return proActionId;
+	}
+
+	public void setProActionId(Integer proActionId) {
+		this.proActionId = proActionId;
+	}
+
 }

@@ -11,8 +11,8 @@
 	</on-start>
 	
 	<view-state id="dashboard" redirect="false">
-		<transition on="aplicar" to="configuracionAplicada" history="discard">
-			<evaluate expression="mainController.setup(flowScope.config)" />
+		<transition on="search">
+			<evaluate expression="mainController.search()" />
 		</transition>
 	</view-state>
 	
