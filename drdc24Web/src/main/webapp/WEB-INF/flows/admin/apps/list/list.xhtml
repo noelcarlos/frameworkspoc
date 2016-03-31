@@ -16,32 +16,7 @@
 		<p:messages showDetail="false" showSummary="true"/>
 
 		<div class="row">
-			<div class="col-md-4">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="h3">ACTIVITY</div>
-					</div>
-				</div>
-				<div class="separator-sm"/> 
-				<ul class="list-group clear-list m-t no-box">
-					<li class="list-group-item fist-item">
-						<span class="label label-default">1</span>
-						&nbsp;Total requests
-						<span class="pull-right">51,238,438</span>
-					</li>
-					<li class="list-group-item fist-item">
-						<span class="label label-warning">1</span>
-						&nbsp;Ignored requests
-						<span class="pull-right">50,581,123</span>
-					</li>
-					<li class="list-group-item fist-item">
-						<span class="label label-success">1</span>
-						&nbsp;Allowed requests
-						<span class="pull-right">1,581,123</span>
-					</li>
-				</ul>
-			</div>
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="h3">
@@ -66,7 +41,9 @@
 						<h:outputText value="#{p.id}" />
 					</p:column>
 					<p:column headerText="NAME" sortBy="#{p.name}">
-						<h:outputText value="#{p.name}" />
+						<h:outputLink value="#{request.contextPath}/es/admin/apps/edit/#{p.id}">
+						 	<h:outputText value="#{p.name}" />
+						</h:outputLink>
 					</p:column>
 					<p:column headerText="LOCAL" >
 						<ui:fragment rendered="#{p.locActionId == 1}">
