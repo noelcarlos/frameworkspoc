@@ -49,63 +49,46 @@ public class App implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private Long id;
 	private String name;
 	private Boolean isActive;
 
 	private LkActionType locAction;
-	private Integer locActionId;
+	private Long locActionId;
 	
 	private LkActionType devAction;
-	private Integer devActionId;
+	private Long devActionId;
 	
 	private LkActionType intAction;
-	private Integer intActionId;
+	private Long intActionId;
 	
 	private LkActionType fdgAction;
-	private Integer fdgActionId;
+	private Long fdgActionId;
 	
 	private LkActionType preAction;
-	private Integer preActionId;
+	private Long preActionId;
 	
 	private LkActionType proAction;
-	private Integer proActionId;
+	private Long proActionId;
 	
 	//// BEGIN CUSTOM BLOCK ////
 	//// END CUSTOM BLOCK ////
-
 	
 	// Constructor
 	public App() {
 	}
 
-	
-	/**
-	 * Getter for field userId.
-	 *
-	 * @return the userId field value
-	 */ 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	/**
-	 * Setter for field userId.
-	 *
-	 * @param userIdNew the new userId field value
-	 */ 	
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
-	/**
-	 * Getter for field screenName.
-	 *
-	 * @return the screenName field value
-	 */ 
 	@NotEmpty
 	@Length(max = 64)
 	@Column(name = "name", nullable = false, length = 64)
@@ -113,15 +96,9 @@ public class App implements java.io.Serializable {
 		return name;
 	}
 	
-	/**
-	 * Setter for field screenName.
-	 *
-	 * @param screenNameNew the new screenName field value
-	 */ 	
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 	
 	@NotNull
 	@Column(name = "is_active", nullable = false)
@@ -133,12 +110,6 @@ public class App implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	/**
-	 * The equal method must be correctly overriden.
-	 *
-	 * @param obj foreign object
-	 * @return true if obj and this ave equal content 
-	 */ 	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
@@ -154,11 +125,6 @@ public class App implements java.io.Serializable {
 		return true;
 	}
 	
-	/**
-	 * The hash method must be correctly overriden.
-	 *
-	 * @return hash the entity value 
-	 */ 	
 	@Override
 	public int hashCode() {
 		int result = 17;
@@ -177,7 +143,7 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Transient
-	public Integer getEntityPrimaryKeyId() {
+	public Long getEntityPrimaryKeyId() {
 		return getId();
 	}
 
@@ -217,11 +183,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "loc_action_id", insertable = false, updatable = false)
-	public Integer getLocActionId() {
+	public Long getLocActionId() {
 		return locActionId;
 	}
 
-	public void setLocActionId(Integer locActionId) {
+	public void setLocActionId(Long locActionId) {
 		this.locActionId = locActionId;
 	}
 	
@@ -242,11 +208,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "dev_action_id", insertable = false, updatable = false)
-	public Integer getDevActionId() {
+	public Long getDevActionId() {
 		return devActionId;
 	}
 
-	public void setDevActionId(Integer devActionId) {
+	public void setDevActionId(Long devActionId) {
 		this.devActionId = devActionId;
 	}
 	
@@ -267,11 +233,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "int_action_id", insertable = false, updatable = false)
-	public Integer getIntActionId() {
+	public Long getIntActionId() {
 		return intActionId;
 	}
 
-	public void setIntActionId(Integer intActionId) {
+	public void setIntActionId(Long intActionId) {
 		this.intActionId = intActionId;
 	}
 	
@@ -292,11 +258,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "fdg_action_id", insertable = false, updatable = false)
-	public Integer getFdgActionId() {
+	public Long getFdgActionId() {
 		return fdgActionId;
 	}
 
-	public void setFdgActionId(Integer fdgActionId) {
+	public void setFdgActionId(Long fdgActionId) {
 		this.fdgActionId = fdgActionId;
 	}
 	
@@ -317,11 +283,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "pre_action_id", insertable = false, updatable = false)
-	public Integer getPreActionId() {
+	public Long getPreActionId() {
 		return preActionId;
 	}
 
-	public void setPreActionId(Integer preActionId) {
+	public void setPreActionId(Long preActionId) {
 		this.preActionId = preActionId;
 	}
 	
@@ -342,11 +308,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "pro_action_id", insertable = false, updatable = false)
-	public Integer getProActionId() {
+	public Long getProActionId() {
 		return proActionId;
 	}
 
-	public void setProActionId(Integer proActionId) {
+	public void setProActionId(Long proActionId) {
 		this.proActionId = proActionId;
 	}
 

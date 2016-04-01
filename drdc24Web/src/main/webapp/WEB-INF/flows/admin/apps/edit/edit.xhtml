@@ -3,6 +3,7 @@
 	    		xmlns:ui="http://java.sun.com/jsf/facelets"
 	  			xmlns:h="http://java.sun.com/jsf/html"
 	  			xmlns:p="http://primefaces.org/ui"
+	  			xmlns:f="http://java.sun.com/jsf/core"
 				template="/WEB-INF/layouts/standard.xhtml">
 
 <ui:define name="content">
@@ -20,10 +21,10 @@
 					<div class="col-md-12">
 						<ul class="list-unstyled">
 		                    <li class="pull-left">
-								<h2>#{msg[(userEditController.formModel.userId != null) ? 'global.breadcrumb.users.edit.edit' : 'global.breadcrumb.users.edit.create']}</h2>
+								<h2>#{(appEditController.formModel.id != null) ? 'Edit' : 'Create New'}</h2>
 		                    </li>
 		                    <li class="pull-right">
-								<h2>&nbsp;<small>#{msg['user.edit.userId']} : #{userEditController.formModel.userId}</small></h2>
+								<h2>&nbsp;<small>Id : #{appEditController.formModel.id}</small></h2>
 		                    </li>
 		                </ul>
 					</div>
@@ -35,63 +36,96 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<h:outputLabel for="fieldScreenName" styleClass="control-label">
-									Id  <span class="glyphicon glyphicon-mandatory" />
+									Name  <span class="glyphicon glyphicon-mandatory" />
 								</h:outputLabel>
-								<p:inputText id="fieldScreenName" value="#{userEditController.formModel.screenName}" 
-									styleClass="form-control" label="#{msg['user.edit.screenName']}"/>
+								<p:inputText id="fieldScreenName" value="#{appEditController.formModel.name}" 
+									styleClass="form-control" label="Name"/>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<h:outputLabel for="fieldFirstName" styleClass="control-label">
-									Name  <span class="glyphicon glyphicon-mandatory" /> 
-								</h:outputLabel>
-								<p:inputText id="fieldFirstName" value="#{userEditController.formModel.firstName}" 
-									styleClass="form-control" label="#{msg['user.edit.firstName']}"/>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<h:outputLabel for="fieldLastName" styleClass="control-label">
-									#{msg['user.edit.lastName']}  <span class="glyphicon glyphicon-mandatory" />
-								</h:outputLabel>
-								<p:inputText id="fieldLastName" value="#{userEditController.formModel.lastName}" 
-									styleClass="form-control" label="#{msg['user.edit.lastName']}"/>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<h:outputLabel for="fieldEmail" styleClass="control-label">
-									#{msg['user.edit.email']} <span class="glyphicon glyphicon-mandatory" />
-								</h:outputLabel>
-								<p:inputText id="fieldEmail" value="#{userEditController.formModel.email}" 
-									styleClass="form-control" label="#{msg['user.edit.email']}"/>
+								<h:outputLabel for="fieldisActive" styleClass="control-label">Enabled</h:outputLabel>
+								<p:selectBooleanCheckbox id="fieldisActive" value="#{appEditController.formModel.isActive}" 
+									styleClass="form-control" label="Is active" />
 							</div>
 						</div>
 					</div>
+					
 					<div class="row">
 						<div class="col-md-3">
 							<div class="form-group">
-								<h:outputLabel for="fieldIsEnabled" styleClass="control-label">Enabled</h:outputLabel>
-								<p:selectBooleanCheckbox id="fieldIsEnabled" value="#{userEditController.formModel.isEnabled}" 
-									styleClass="form-control" label="#{msg['user.edit.isEnabled']}" />
+								<h:outputLabel for="fieldLocActionId" styleClass="control-label">
+									Local  <span class="glyphicon glyphicon-mandatory" />
+								</h:outputLabel>
+								<h:selectOneMenu id="fieldLocActionId" value="#{appEditController.formModel.locActionId}" 
+									label="Local" styleClass="form-control">
+									<f:selectItems value="#{lkActionTypes}" var="item" itemLabel="#{item.id} - #{item.name}" itemValue="#{item.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<h:outputLabel for="fieldDevActionId" styleClass="control-label">
+									Dev  <span class="glyphicon glyphicon-mandatory" />
+								</h:outputLabel>
+								<h:selectOneMenu id="fieldDevActionId" value="#{appEditController.formModel.devActionId}" 
+									label="Local" styleClass="form-control">
+									<f:selectItems value="#{lkActionTypes}" var="item" itemLabel="#{item.id} - #{item.name}" itemValue="#{item.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<h:outputLabel for="fieldIntActionId" styleClass="control-label">
+									Int  <span class="glyphicon glyphicon-mandatory" />
+								</h:outputLabel>
+								<h:selectOneMenu id="fieldIntActionId" value="#{appEditController.formModel.intActionId}" 
+									label="Local" styleClass="form-control">
+									<f:selectItems value="#{lkActionTypes}" var="item" itemLabel="#{item.id} - #{item.name}" itemValue="#{item.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<h:outputLabel for="fieldProActionId" styleClass="control-label">
+									Pro  <span class="glyphicon glyphicon-mandatory" />
+								</h:outputLabel>
+								<h:selectOneMenu id="fieldProActionId" value="#{appEditController.formModel.proActionId}" 
+									label="Local" styleClass="form-control">
+									<f:selectItems value="#{lkActionTypes}" var="item" itemLabel="#{item.id} - #{item.name}" itemValue="#{item.id}" />
+								</h:selectOneMenu>
 							</div>
 						</div>
 					</div>
 
 					<div class="row">
+					
+						<div class="col-md-3">
+							&nbsp;
+						</div>
+						<div class="col-md-3">
+							&nbsp;
+						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<h:outputLabel for="fieldCountryId" styleClass="control-label">
-									Local 
+								<h:outputLabel for="fieldFdgActionId" styleClass="control-label">
+									Full digital  <span class="glyphicon glyphicon-mandatory" />
 								</h:outputLabel>
-								<p:autoComplete id="fieldCountryId" dropdown="true" value="#{userEditController.formModel.userDetail.country}" 
-									converter="#{JPAUserInterfaceConverter}" completeMethod="#{userEditController.autoCompleteCountry}" 
-									var="p" itemLabel="#{p.name}" itemValue="#{p}"  forceSelection="true" 
-									styleClass="form-control">
-									<p:column>#{p.countryId}</p:column>
-									<p:column>#{p.name}</p:column>
-								</p:autoComplete>
+								<h:selectOneMenu id="fieldFdgActionId" value="#{appEditController.formModel.fdgActionId}" 
+									label="Local" styleClass="form-control">
+									<f:selectItems value="#{lkActionTypes}" var="item" itemLabel="#{item.id} - #{item.name}" itemValue="#{item.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<h:outputLabel for="fieldPreActionId" styleClass="control-label">
+									Pre  <span class="glyphicon glyphicon-mandatory" />
+								</h:outputLabel>
+								<h:selectOneMenu id="fieldPreActionId" value="#{appEditController.formModel.preActionId}" 
+									label="Local" styleClass="form-control">
+									<f:selectItems value="#{lkActionTypes}" var="item" itemLabel="#{item.id} - #{item.name}" itemValue="#{item.id}" />
+								</h:selectOneMenu>
 							</div>
 						</div>
 					</div>
@@ -102,12 +136,12 @@
 						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save
 					</p:commandLink>
 					&nbsp;
-					<h:outputLink id="listButton" styleClass="btn btn-default" value="#{request.contextPath}/#{externalContext.locale}/users/list/">
+					<h:outputLink id="listButton" styleClass="btn btn-default" value="#{request.contextPath}/#{externalContext.locale}/admin/apps/list">
 						<span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> App List
 					</h:outputLink>
 					&nbsp;
-					<ui:fragment rendered="#{mainEntityController.selected.userId != null}">
-						<h:outputLink id="viewButton" styleClass="btn btn-default" value="#{request.contextPath}/#{externalContext.locale}/users/view/#{mainEntityController.selected.userId}/">
+					<ui:fragment rendered="#{mainEntityController.selected.id != null}">
+						<h:outputLink id="viewButton" styleClass="btn btn-default" value="#{request.contextPath}/#{externalContext.locale}/admin/apps/list">
 							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Cancel
 						</h:outputLink>
 					</ui:fragment>

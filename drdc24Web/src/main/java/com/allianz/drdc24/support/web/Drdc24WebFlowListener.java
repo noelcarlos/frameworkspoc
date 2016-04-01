@@ -15,6 +15,8 @@
  */
 package com.allianz.drdc24.support.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -23,6 +25,7 @@ import org.springframework.webflow.definition.FlowDefinition;
 import org.springframework.webflow.definition.StateDefinition;
 import org.springframework.webflow.definition.TransitionDefinition;
 import org.springframework.webflow.execution.Event;
+import org.springframework.webflow.execution.FlowExecutionException;
 import org.springframework.webflow.execution.FlowExecutionListenerAdapter;
 import org.springframework.webflow.execution.FlowSession;
 import org.springframework.webflow.execution.RequestContext;
@@ -54,6 +57,21 @@ public class Drdc24WebFlowListener extends FlowExecutionListenerAdapter {
 	@SuppressWarnings("rawtypes")
 	public void sessionStarting(RequestContext context, final FlowSession session, final MutableAttributeMap input) {
 		super.sessionStarting(context, session, input);
+		FlowDefinition flowDefinition = session.getDefinition();
+		// Read the attribute path and extract parameters from pattern 
+		String path = (String)flowDefinition.getAttributes().get("path");
+		if (path != null) {
+			String[] pathArray = path.split(" ");
+			for (String thePath : pathArray) {
+				if (WebHelper.extractParamsFromURL(context.getFlowScope(), thePath))
+					return;
+			}
+			HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getNativeRequest();
+			String realURI = request.getRequestURI();
+			String currentURI = realURI.substring(request.getContextPath().length());
+			throw new FlowExecutionException(flowDefinition.getId(), null,
+				"WebFlow 'path' attribute mismatch, URI [" + currentURI + "] does not match flow path pattern [" + path + "]");
+		}
 	}
 
 	@Override

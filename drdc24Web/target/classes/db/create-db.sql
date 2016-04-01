@@ -5,19 +5,19 @@ CREATE TABLE users (
 );
 
 CREATE TABLE apps (
-  id INTEGER PRIMARY KEY,
+  id IDENTITY PRIMARY KEY,
   name VARCHAR(30),
-  loc_action_id INTEGER DEFAULT 2,
-  dev_action_id INTEGER DEFAULT 2,
-  int_action_id INTEGER DEFAULT 1,
-  fdg_action_id INTEGER DEFAULT 2,
-  pre_action_id INTEGER DEFAULT 2,
-  pro_action_id INTEGER DEFAULT 2,
+  loc_action_id BIGINT DEFAULT 2,
+  dev_action_id BIGINT DEFAULT 2,
+  int_action_id BIGINT DEFAULT 1,
+  fdg_action_id BIGINT DEFAULT 2,
+  pre_action_id BIGINT DEFAULT 2,
+  pro_action_id BIGINT DEFAULT 2,
   is_active BOOLEAN
 );
 
 CREATE TABLE lk_action_types (
-  id INTEGER PRIMARY KEY,
+  id IDENTITY PRIMARY KEY,
   name VARCHAR(30),
   is_active BOOLEAN
 );

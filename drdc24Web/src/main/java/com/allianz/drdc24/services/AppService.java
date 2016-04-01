@@ -19,6 +19,7 @@ import com.allianz.drdc24.models.App;
 
 @Service
 @SuppressWarnings("serial")
+@Transactional(readOnly = true)
 public class AppService implements Serializable {
 	@PersistenceContext(unitName="mainPersistenceUnit") protected EntityManager entityManager;
 	
@@ -63,7 +64,7 @@ public class AppService implements Serializable {
 	@SuppressWarnings("unchecked")
 	public App loadFull(Serializable id) {
 		Criteria c = getSession().createCriteria(App.class);
-		c.add(Restrictions.eq("userId", id));
+		c.add(Restrictions.eq("id", id));
 
 		List<App> res = c.list();
 		if (res.size() != 1)

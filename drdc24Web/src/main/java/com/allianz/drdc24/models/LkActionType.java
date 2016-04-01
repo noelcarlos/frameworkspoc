@@ -55,7 +55,7 @@ public class LkActionType implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private Long id;
 	private String name;
 	private Boolean isActive;
 
@@ -76,7 +76,7 @@ public class LkActionType implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 	
@@ -85,7 +85,7 @@ public class LkActionType implements java.io.Serializable {
 	 *
 	 * @param userIdNew the new userId field value
 	 */ 	
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -174,7 +174,7 @@ public class LkActionType implements java.io.Serializable {
 	}
 	
 	@Transient
-	public Integer getEntityPrimaryKeyId() {
+	public Long getEntityPrimaryKeyId() {
 		return getId();
 	}
 

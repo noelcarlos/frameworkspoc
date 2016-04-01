@@ -3,17 +3,36 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-	<!-- Controllers -->
-	<var name="mainController" class="com.allianz.drdc24.controllers.DashboardController"/>
+    <attribute name="path" value="/{locale}/admin/apps/edit/{*id}"/>
 
-	<on-start>
-		<evaluate expression="mainController.onInit()" />
-	</on-start>
-	
-	<view-state id="edit" redirect="false">
-		<transition on="search">
-			<evaluate expression="mainController.search()" />
+	<!-- Main entity controller -->
+	<var name="appEditController" class="com.allianz.drdc24.controllers.app.AppEditController" />
+
+	<!-- Lookups controllers -->
+
+    <input name="refEntity" />
+    
+    <on-start>
+		<evaluate expression="appEditController.onStart(flowScope.refEntity, flowScope.id)" />
+    </on-start>
+        
+	<view-state id="edit" model="appEditController.formModel" redirect="false">
+		<transition on="save" to="end" >
+			<evaluate expression="appEditController.onSave()" />
 		</transition>
+		<transition on="cancel" to="cancel" bind="false"/>
 	</view-state>
+	
+	<end-state id="end" commit="true" view="externalRedirect:#{flowScope.locale}/admin/apps/list" >
+		<output name="refEntity" value="appEditController.formModel"/>
+	</end-state>	
+
+	<end-state id="cancel" commit="false" view="externalRedirect:#{flowScope.locale}/admin/apps/list" />
+	
+	<global-transitions>
+		<transition on="end" to="end" />
+		<transition on="cancel" to="cancel" />
+		<transition on="back" to="back" />
+	</global-transitions>
 	
 </flow>

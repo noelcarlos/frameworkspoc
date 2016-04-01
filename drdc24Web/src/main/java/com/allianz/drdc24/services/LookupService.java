@@ -21,9 +21,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.allianz.drdc24.models.App;
+import com.allianz.drdc24.models.LkActionType;
 
 @Service
 @SuppressWarnings("serial")
+@Transactional(readOnly = true)
 public class LookupService implements Serializable {
 	@Autowired transient NamedParameterJdbcTemplate jdbcTemplate;
 	@PersistenceContext(unitName="mainPersistenceUnit") protected EntityManager entityManager;
@@ -129,5 +131,11 @@ public class LookupService implements Serializable {
 		c.setProjection(Projections.rowCount());
 		Number count = (Number) c.uniqueResult();
 		return count.intValue();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<LkActionType> listLkActionTypes() {
+		Criteria c = getSession().createCriteria(LkActionType.class);
+		return (List<LkActionType>)c.list();
 	}
 }
