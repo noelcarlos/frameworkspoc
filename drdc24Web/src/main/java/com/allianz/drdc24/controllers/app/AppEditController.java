@@ -68,7 +68,7 @@ public class AppEditController extends BaseWebFlowController implements Serializ
 	 * @param refEntity when the flow is entered from a subflow, indicates the form model to be edited otherwise is null
 	 * @param id when the flow is entered from a URL, indicates the form model id to be read from the persistence layer. Null to allows entity creation from defaults.
 	 */ 
-	public void onStart(App refEntity, Long id) throws IOException {
+	public void onStart(App refEntity, Integer id) throws IOException {
 		if (refEntity != null)
 			formModel = refEntity;
 		else if (id != null)
@@ -97,8 +97,13 @@ public class AppEditController extends BaseWebFlowController implements Serializ
 		if (!crossValidation(formModel)) {
 			return false;
 		}
-		appService.save(formModel);
+		appService.saveOrMerge(formModel);
 		
+		return true;
+	}
+	
+	public Boolean onDeleteSelected() throws IOException {
+		appService.delete(formModel.getId());
 		return true;
 	}
 	

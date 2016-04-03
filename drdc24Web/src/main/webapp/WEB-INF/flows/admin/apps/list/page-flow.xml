@@ -11,9 +11,11 @@
 	</on-start>
 	
 	<view-state id="list" redirect="false">
-		<transition on="search">
+		<transition on="search" to="#{flowScope.nextView}" >
 			<evaluate expression="mainController.search()" />
 		</transition>
 	</view-state>
+	
+	<end-state id="edit" commit="false" view="externalRedirect:#{flowScope.locale}/admin/apps/edit/#{flowScope.selecedItem}" />
 	
 </flow>

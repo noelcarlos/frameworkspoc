@@ -4,7 +4,7 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
     <attribute name="path" value="/{locale}/admin/apps/edit/{*id}"/>
-
+    
 	<!-- Main entity controller -->
 	<var name="appEditController" class="com.allianz.drdc24.controllers.app.AppEditController" />
 
@@ -20,6 +20,11 @@
 		<transition on="save" to="end" >
 			<evaluate expression="appEditController.onSave()" />
 		</transition>
+
+		<transition on="delete" to="end" >
+			<evaluate expression="appEditController.onDeleteSelected()" />
+		</transition>
+		
 		<transition on="cancel" to="cancel" bind="false"/>
 	</view-state>
 	

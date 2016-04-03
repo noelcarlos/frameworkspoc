@@ -15,26 +15,17 @@
  */
 package com.allianz.drdc24.models;
 
-import java.util.Date;
-import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.GenerationType;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
-import javax.persistence.OrderBy;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 //// BEGIN CUSTOM BLOCK ////
 //// END CUSTOM BLOCK ////
@@ -51,11 +42,11 @@ import javax.persistence.Transient;
 @Table(name = "lk_action_types")
 public class LkActionType implements java.io.Serializable {
 	/**
-	 * Serial version ID.
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
+
+	private Integer id;
 	private String name;
 	private Boolean isActive;
 
@@ -76,7 +67,7 @@ public class LkActionType implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 	
@@ -85,7 +76,7 @@ public class LkActionType implements java.io.Serializable {
 	 *
 	 * @param userIdNew the new userId field value
 	 */ 	
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -174,7 +165,7 @@ public class LkActionType implements java.io.Serializable {
 	}
 	
 	@Transient
-	public Long getEntityPrimaryKeyId() {
+	public Integer getEntityPrimaryKeyId() {
 		return getId();
 	}
 

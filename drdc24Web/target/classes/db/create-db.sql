@@ -5,7 +5,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE apps (
-  id IDENTITY PRIMARY KEY,
+  id IDENTITY,
   name VARCHAR(30),
   loc_action_id BIGINT DEFAULT 2,
   dev_action_id BIGINT DEFAULT 2,
@@ -17,7 +17,7 @@ CREATE TABLE apps (
 );
 
 CREATE TABLE lk_action_types (
-  id IDENTITY PRIMARY KEY,
+  id IDENTITY,
   name VARCHAR(30),
   is_active BOOLEAN
 );

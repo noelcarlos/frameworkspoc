@@ -1,5 +1,6 @@
 package com.allianz.drdc24.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,10 @@ public class DashboardController extends BaseWebFlowController {
 			@Override
 			public List<App> load(int first, int pageSize, String sortField, 
 				SortOrder sortOrder, Map<String, Object> filters) {
+				String searchText = flowScope.getString("searchText");
+				System.out.println(searchText);
 				List<App> res = lookupService.appListAll(
-					flowScope.getString("searchText"), first, pageSize*10+1, 
+					searchText, first, pageSize*10+1, 
 					sortField, sortOrder == SortOrder.ASCENDING);
 				this.setRowCount(lookupService.appCount(flowScope.getString("searchText")));
 				return res;
@@ -43,9 +46,25 @@ public class DashboardController extends BaseWebFlowController {
         return (T)FacesContext.getCurrentInstance().getViewRoot().findComponent(componentName);
     }
 
+	@SuppressWarnings("unchecked")
 	public void search() { 
 		DataTable dataTable = getComponent("form:dataList"); 
 		dataTable.setFirst(0);
 		dataTable.loadLazyData();
-	}	
+		
+		if (dataTable.getRowCount() == 1) {
+			LazyDataModel<App> appDataModel = (LazyDataModel<App>)flowScope.get("appDataModel");
+			flowScope.put("nextView", "edit");
+			flowScope.put("selecedItem", ((List<App>)appDataModel.getWrappedData()).get(0).getId());
+		}
+		
+	}
+	
+	public List<String> appAutoComplete(String query) {
+		List<String> res = new ArrayList<String>();
+		for (App a : lookupService.appListAll(query, 0, 20, null, true)) {
+			res.add(a.getName());
+		}
+		return res;
+    }
 }

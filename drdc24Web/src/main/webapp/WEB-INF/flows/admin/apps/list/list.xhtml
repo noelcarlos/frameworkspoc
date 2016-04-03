@@ -6,7 +6,7 @@
 				template="/WEB-INF/layouts/standard.xhtml">
 
 <ui:define name="content">
-
+	<div class="separator-sm"/> 
 	<div class="row">
 		<div class="col-md-6">
 			<h2>DASHBOARD</h2>
@@ -22,13 +22,17 @@
 						<div class="h3">
 							APP LIST
 							<span class="pull-right">
-								<p:commandLink id="saveButton" action="search" update="@form" ajax="true" styleClass="btn btn-primary">
+								<p:commandLink id="searchButton" action="search" update="@form" ajax="true" styleClass="btn btn-primary">
 									<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
 								</p:commandLink>
 							</span>
 							<span class="pull-right">
-								<p:inputText value="#{flowScope.searchText}" styleClass="form-control" />
+								<p:autoComplete id="fieldSearchText" value="#{flowScope.searchText}" 
+									completeMethod="#{mainController.appAutoComplete}" autoHighlight="false"
+									styleClass="form-control">
+								</p:autoComplete>
 							</span>
+							<p:defaultCommand target="searchButton" />
 						</div>
 					</div>
 				</div>
@@ -96,8 +100,18 @@
 				</p:dataTable>
 			</div>
 		</div>
+		<div class="separator-sm"/> 
+		<div class="row">
+			<div class="col-md-12">
+				<h:outputLink id="listButton" styleClass="btn btn-default" value="#{request.contextPath}/#{externalContext.locale}/admin/apps/edit">
+					<span class="glyphicon" aria-hidden="true"></span> Add new
+				</h:outputLink>
+			</div>
+		</div>	 	 
 	</h:form>
-		
+	<div class="separator-sm"/>
+	
+	 		
 </ui:define>
 
 </ui:composition>

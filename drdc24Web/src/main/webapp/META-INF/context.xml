@@ -1,6 +1,6 @@
 <!-- DEVELOPMENT -->	
-<Context path="/primefacespoc" crossContext="false" reloadable="false" >
-	<ResourceLink global='jdbc/primefacespoc' name='jdbc/primefacespoc' type="javax.sql.Datasource"/>
+<Context path="/drdc24" crossContext="false" reloadable="false" >
+	<ResourceLink global='jdbc/drdc24' name='jdbc/drdc24' type="javax.sql.Datasource"/>
 	<Resource name="BeanManager" 
 	    auth="Container"
 	    type="javax.enterprise.inject.spi.BeanManager"

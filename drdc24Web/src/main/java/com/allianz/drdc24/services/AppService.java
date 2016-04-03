@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -75,6 +76,10 @@ public class AppService implements Serializable {
 		}
 	}
 	
+	public App load(Serializable id) {
+		return (App)getSession().load(App.class, id);
+	}
+	
 	public App createNew() {
 		App formModel = new App();
 		return formModel;
@@ -99,6 +104,23 @@ public class AppService implements Serializable {
 		} else {
 			return (App)getSession().merge(app);
 		}
+	}
+	
+	@Transactional(readOnly = false)
+	public void delete(App p) {
+		getSession().delete(p);
+		getSession().flush();
+	}
+
+	@Transactional(readOnly = false)
+	public boolean delete(Serializable id) {
+		try {
+			getSession().delete(load(id));
+			getSession().flush();
+		} catch (ConstraintViolationException e) {
+			return false;
+		}
+		return true;
 	}
 
 }

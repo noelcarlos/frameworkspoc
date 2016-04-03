@@ -6,12 +6,10 @@
 	<persistence-unit name="mainPersistenceUnit" transaction-type="RESOURCE_LOCAL">
 	    <provider>org.hibernate.ejb.HibernatePersistence</provider>
 	    <properties>
-	        <property name="hibernate.connection.driver_class" value="org.h2.Driver" />
-	        <property name="hibernate.connection.url" value="jdbc:h2:~/data/db/repository;MODE=MSSQLServer" />
-	        <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-	        <property name="hibernate.hbm2ddl.auto" value="validate" />
-	        <property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.hbm2ddl.import_files" value="initial_data.sql" />
+      		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+         	<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+         	<property name="hibernate.show_sql" value="true"/>
+         	<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
 	    </properties>
 	</persistence-unit>
 </persistence>

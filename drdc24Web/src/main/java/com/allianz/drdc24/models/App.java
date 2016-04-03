@@ -49,27 +49,27 @@ public class App implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private Integer id;
 	private String name;
 	private Boolean isActive;
 
 	private LkActionType locAction;
-	private Long locActionId;
+	private Integer locActionId;
 	
 	private LkActionType devAction;
-	private Long devActionId;
+	private Integer devActionId;
 	
 	private LkActionType intAction;
-	private Long intActionId;
+	private Integer intActionId;
 	
 	private LkActionType fdgAction;
-	private Long fdgActionId;
+	private Integer fdgActionId;
 	
 	private LkActionType preAction;
-	private Long preActionId;
+	private Integer preActionId;
 	
 	private LkActionType proAction;
-	private Long proActionId;
+	private Integer proActionId;
 	
 	//// BEGIN CUSTOM BLOCK ////
 	//// END CUSTOM BLOCK ////
@@ -79,13 +79,13 @@ public class App implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -136,34 +136,6 @@ public class App implements java.io.Serializable {
 		return result;
 	}	
 
-
-	@Transient
-	public Object getEntityPrimaryKey() {
-		return getId();
-	}
-	
-	@Transient
-	public Long getEntityPrimaryKeyId() {
-		return getId();
-	}
-
-	//// BEGIN CUSTOM BLOCK ////
-	
-	@Transient
-	public String getUIName() {
-		return getName();
-	}
-	
-	@Transient
-	public String getUIURL() {
-		return "/apps/view/" + getId();
-	}
-	
-	@Transient
-	public String getUITitle() {
-		return getName();
-	}
-	
 	//// END CUSTOM BLOCK ////
 	
 	@NotNull
@@ -183,11 +155,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "loc_action_id", insertable = false, updatable = false)
-	public Long getLocActionId() {
+	public Integer getLocActionId() {
 		return locActionId;
 	}
 
-	public void setLocActionId(Long locActionId) {
+	public void setLocActionId(Integer locActionId) {
 		this.locActionId = locActionId;
 	}
 	
@@ -208,11 +180,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "dev_action_id", insertable = false, updatable = false)
-	public Long getDevActionId() {
+	public Integer getDevActionId() {
 		return devActionId;
 	}
 
-	public void setDevActionId(Long devActionId) {
+	public void setDevActionId(Integer devActionId) {
 		this.devActionId = devActionId;
 	}
 	
@@ -233,11 +205,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "int_action_id", insertable = false, updatable = false)
-	public Long getIntActionId() {
+	public Integer getIntActionId() {
 		return intActionId;
 	}
 
-	public void setIntActionId(Long intActionId) {
+	public void setIntActionId(Integer intActionId) {
 		this.intActionId = intActionId;
 	}
 	
@@ -258,11 +230,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "fdg_action_id", insertable = false, updatable = false)
-	public Long getFdgActionId() {
+	public Integer getFdgActionId() {
 		return fdgActionId;
 	}
 
-	public void setFdgActionId(Long fdgActionId) {
+	public void setFdgActionId(Integer fdgActionId) {
 		this.fdgActionId = fdgActionId;
 	}
 	
@@ -283,11 +255,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "pre_action_id", insertable = false, updatable = false)
-	public Long getPreActionId() {
+	public Integer getPreActionId() {
 		return preActionId;
 	}
 
-	public void setPreActionId(Long preActionId) {
+	public void setPreActionId(Integer preActionId) {
 		this.preActionId = preActionId;
 	}
 	
@@ -308,11 +280,11 @@ public class App implements java.io.Serializable {
 	}
 	
 	@Column(name = "pro_action_id", insertable = false, updatable = false)
-	public Long getProActionId() {
+	public Integer getProActionId() {
 		return proActionId;
 	}
 
-	public void setProActionId(Long proActionId) {
+	public void setProActionId(Integer proActionId) {
 		this.proActionId = proActionId;
 	}
 
